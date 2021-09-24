@@ -229,11 +229,18 @@ html {
 
 /* Navbar */
 
-.background {
+.bg--indigo {
   background-color: var(--indigo);
 }
+.border-custom {
+  border: none;
+  border-left: 1px solid rgb(189, 186, 186);
+  border-right: 1px solid rgb(189, 186, 186);
+  border-radius: 0;
+  height: 1.3rem;
+}
 
-.col {
-  border: 1px solid red;
-  color: white;
+.icon_style {
+  position: absolute;
+  right: 20%;
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./NavBar.css";
+import { Link } from "react-router-dom";
 import {
   Container,
   Row,
@@ -9,73 +10,96 @@ import {
   DropdownToggle,
   DropdownMenu,
   Input,
-  FormGroup,
+  Card,
   DropdownItem,
   InputGroupAddon,
   Button,
+  Form,
+  Nav,
 } from "reactstrap";
 import logo1 from "../../assets/MKTFY_wordmark.svg";
+import search_icon from "../../assets/search_icon.svg";
 
 const NavBar = () => {
   //DropDown logic
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const toggleDropdown = () => setDropdownOpen((prevState) => !prevState);
+
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   return (
-    <div className="background">
-      <Container fluid>
-        <Row>
-          <Col className="col" xs={2}>
-            <NavbarBrand href="/">
-              <img src={logo1} alt="logo of the company" />
-            </NavbarBrand>
-          </Col>
-          <Col className="col" xs={6}>
-            <FormGroup>
-              <Input
-                type="search"
-                name="search"
-                id="exampleSearch"
-                placeholder="Search on MKTFY"
-              >
-                <InputGroupAddon>
-                  <Button>sad</Button>
-                </InputGroupAddon>
-              </Input>
-            </FormGroup>
-          </Col>
-          <Col className="col"></Col>
-          <Col className="col">
-            <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
-              <DropdownToggle caret>
-                <span> Welcome back</span>
-              </DropdownToggle>
-              <DropdownMenu className="smth smth1">
-                <DropdownItem>George Calson</DropdownItem>
-                <DropdownItem header>Settings</DropdownItem>
-                <DropdownItem>Account information</DropdownItem>
-                <DropdownItem>Change Password</DropdownItem>
-                <DropdownItem>My purchases</DropdownItem>
-                <DropdownItem>My listings</DropdownItem>
-                <DropdownItem header>Help</DropdownItem>
-                <DropdownItem>FAQ</DropdownItem>
-                <DropdownItem>Contact us</DropdownItem>
-                <DropdownItem>Sign out</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </Col>
-        </Row>
-        <Row>
-          <Col className="col" xs="2">
-            1 of 3
-          </Col>
-          <Col className="col" sm>
-            2 of 3 wider
-          </Col>
-          <Col className="col" sm>
-            3 of 3
-          </Col>
-        </Row>
+    <div>
+      <Container fluid className="bg--indigo ">
+        <Nav>
+          <Row className="w-100">
+            <Col lg="1">
+              <NavbarBrand href="/">
+                <img src={logo1} alt="logo of MKTFY" />
+              </NavbarBrand>
+            </Col>
+            <Col lg="7">
+              <Card>
+                <Row>
+                  <Col lg="2" className="smth">
+                    <Button
+                      outline
+                      color="secondary "
+                      className="w-100 border-0"
+                    >
+                      All
+                    </Button>
+                  </Col>
+                  <Col lg="8">
+                    <Form className="m-2">
+                      <img
+                        className="position-absolute icon_style"
+                        src={search_icon}
+                        alt="/"
+                      />
+                      <Input
+                        className="border-custom"
+                        type="search"
+                        name="search"
+                        id="exampleSearch"
+                        placeholder="Search on MKTFY "
+                      />
+                    </Form>
+                  </Col>
+                  <Col lg="2">
+                    <Dropdown
+                      isOpen={dropdownOpen}
+                      toggle={toggle}
+                      className="m-1"
+                    >
+                      <DropdownToggle
+                        tag="span"
+                        data-toggle="dropdown"
+                        aria-expanded={dropdownOpen}
+                      >
+                        City
+                      </DropdownToggle>
+                      <DropdownMenu>
+                        <div onClick={toggle}>
+                          <Input
+                            className=""
+                            type="search"
+                            name="search"
+                            id="exampleSearch"
+                            placeholder="Search city "
+                          />
+                        </div>
+                        <div onClick={toggle}>Brooks</div>
+                        <div onClick={toggle}>Camrose</div>
+                        <div onClick={toggle}>Calgary</div>
+                      </DropdownMenu>
+                    </Dropdown>
+                  </Col>
+                </Row>
+              </Card>
+            </Col>
+
+            <Col lg="3"></Col>
+          </Row>
+        </Nav>
       </Container>
     </div>
   );

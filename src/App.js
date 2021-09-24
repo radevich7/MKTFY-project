@@ -1,8 +1,8 @@
-import "./App.css";
 import React from "react";
-// import ReactDOM from "react-dom";
-import AppRouter from "./Router/AppRouter";
 import "./assets/mktfy.css";
+import AppRouter from "./Router/AppRouter";
+import "./App.css";
+// import ReactDOM from "react-dom";
 
 const App = () => {
   return (
