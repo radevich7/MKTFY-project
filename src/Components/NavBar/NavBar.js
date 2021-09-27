@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./NavBar.css";
-import { Link } from "react-router-dom";
+
 import {
   Container,
   Row,
@@ -19,6 +19,7 @@ import {
 } from "reactstrap";
 import logo1 from "../../assets/MKTFY_wordmark.svg";
 import search_icon from "../../assets/search_icon.svg";
+import blackCaretDown from "../../assets/blackCaretDown.svg";
 
 const NavBar = () => {
   //DropDown logic
@@ -28,12 +29,12 @@ const NavBar = () => {
 
   return (
     <div>
-      <Container fluid className="bg--indigo ">
+      <Container fluid className="app_container">
         <Nav>
-          <Row className="w-100">
-            <Col lg="1">
+          <Row className="w-100 nav_bar ">
+            <Col lg="2">
               <NavbarBrand href="/">
-                <img src={logo1} alt="logo of MKTFY" />
+                <img src={logo1} alt="logo of MKTFY" id="logo1" />
               </NavbarBrand>
             </Col>
             <Col lg="7">
@@ -48,13 +49,9 @@ const NavBar = () => {
                       All
                     </Button>
                   </Col>
-                  <Col lg="8">
-                    <Form className="m-2">
-                      <img
-                        className="position-absolute icon_style"
-                        src={search_icon}
-                        alt="/"
-                      />
+                  <Col lg="7">
+                    <Form>
+                      <img className="icon_style1" src={search_icon} alt="/" />
                       <Input
                         className="border-custom"
                         type="search"
@@ -69,27 +66,40 @@ const NavBar = () => {
                       isOpen={dropdownOpen}
                       toggle={toggle}
                       className="m-1"
+                      // direction="left"
                     >
                       <DropdownToggle
                         tag="span"
                         data-toggle="dropdown"
                         aria-expanded={dropdownOpen}
                       >
+                        <img src={blackCaretDown} alt="/" />
                         City
                       </DropdownToggle>
-                      <DropdownMenu>
-                        <div onClick={toggle}>
+                      <DropdownMenu className="dropDownCustom">
+                        <DropdownItem onClick={toggle} className="arrow">
+                          <img
+                            src={search_icon}
+                            alt="/"
+                            className="icon_style2"
+                          />
                           <Input
-                            className=""
+                            className="dropDown_search_input2"
                             type="search"
                             name="search"
                             id="exampleSearch"
-                            placeholder="Search city "
+                            placeholder="Search city"
                           />
-                        </div>
-                        <div onClick={toggle}>Brooks</div>
-                        <div onClick={toggle}>Camrose</div>
-                        <div onClick={toggle}>Calgary</div>
+                        </DropdownItem>
+                        <DropdownItem onClick={toggle} className="dropDownItem">
+                          Brooks{" "}
+                        </DropdownItem>
+                        <DropdownItem onClick={toggle} className="dropDownItem">
+                          Camrose
+                        </DropdownItem>
+                        <DropdownItem onClick={toggle} className="dropDownItem">
+                          Calgary
+                        </DropdownItem>
                       </DropdownMenu>
                     </Dropdown>
                   </Col>

@@ -227,20 +227,95 @@ html {
   overflow: hidden;
 }
 
+body {
+  font-size: 1rem;
+}
+
 /* Navbar */
 
-.bg--indigo {
+.app_container {
+  height: 191px;
   background-color: var(--indigo);
 }
+
+.nav_bar {
+  margin-top: 63px;
+}
+
+/* Search Card */
+
 .border-custom {
   border: none;
   border-left: 1px solid rgb(189, 186, 186);
   border-right: 1px solid rgb(189, 186, 186);
   border-radius: 0;
-  height: 1.3rem;
 }
 
-.icon_style {
+.card {
+  height: 60px;
+  padding: 10px 0px;
+  margin-top: -10px;
+}
+#logo1 {
+  margin-top: 5px;
+  margin-left: 142px;
+  width: 117.94px;
+}
+
+.icon_style1 {
   position: absolute;
-  right: 20%;
+  left: 70%;
+  top: 30%;
+}
+.icon_style2 {
+  position: absolute;
+  left: 9%;
+  top: 11%;
+}
+
+.arrow:before {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: 100%;
+  right: 13px;
+  border-width: 0 8px 8px 8px;
+  border-style: solid;
+  border-color: rgb(221, 217, 217) transparent;
+}
+
+.arrow:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: 100%;
+  right: 15px;
+  border-width: 0 6px 6px 6px;
+  border-style: solid;
+  border-color: #fff transparent;
+}
+
+.dropDownCustom.dropdown-menu.show {
+  margin-top: 40px;
+  width: 250px;
+  transform: translate3d(-89%, 21px, 0px) !important;
+  box-shadow: 0px 3px 6px #00000029;
+  opacity: 1;
+}
+
+.dropdown img {
+  margin-right: 5%;
+}
+
+.dropDownItem {
+  padding: 0.8rem 1rem;
+}
+.dropDownItem:hover {
+  color: #9349de;
+}
+
+.dropDown_search_input2 {
+  padding-left: 15%;
 }
