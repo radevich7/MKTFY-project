@@ -1,0 +1,340 @@
+.app_container {
+  height: 191px;
+  padding: 0;
+  background-color: var(--indigo);
+}
+
+.border_document {
+  max-width: 1636px;
+  margin: auto;
+}
+
+.nav_bar {
+  margin-top: 63px;
+}
+.dropdown-item:active {
+  background-color: none;
+}
+/* Search Card + DropDown City*/
+
+.border-custom {
+  border: none;
+  border-left: 1px solid rgb(189, 186, 186);
+  border-right: 1px solid rgb(189, 186, 186);
+  border-radius: 0;
+}
+
+.card {
+  height: 60px;
+  padding: 10px 0px;
+  /* margin-top: -10px; */
+}
+#logo1 {
+  margin-top: 15px;
+
+  width: 117.94px;
+}
+
+.icon_style1 {
+  position: absolute;
+  left: 78%;
+  top: 30%;
+}
+.icon_style2 {
+  position: absolute;
+  left: 9%;
+  top: 11%;
+}
+.btn-outline-secondary:hover {
+  color: black;
+  background-color: white;
+  border-color: white;
+}
+.btn-outline-secondary:focus:active {
+  box-shadow: 0 0 0 0;
+}
+
+.arrow_city_search:before {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: 100%;
+  right: 13px;
+  border-width: 0 8px 8px 8px;
+  border-style: solid;
+  border-color: rgb(221, 217, 217) transparent;
+}
+
+.arrow_city_search:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: 100%;
+  right: 15px;
+  border-width: 0 6px 6px 6px;
+  border-style: solid;
+  border-color: #fff transparent;
+}
+.dropdown {
+  font-size: 2em;
+}
+.dropDownCustom_search_card {
+  margin-top: 40px;
+  width: 315px;
+  transform: translate3d(-91%, 21px, 0px) !important;
+  box-shadow: 0px 3px 6px #00000029;
+  opacity: 1;
+  font-size: 0.7em;
+}
+.dropDownToggle_search_card h3 {
+  font-size: 20px;
+  display: inline-block;
+  margin: 0 7%;
+  color: #4d4d4d;
+}
+
+.dropdown span {
+  margin-right: 10%;
+}
+
+.dropDownItem {
+  padding: 0.8rem 1rem;
+}
+
+.dropDownItem:hover {
+  color: #9349de;
+}
+
+.dropDown_search_input2 {
+  padding-left: 15%;
+}
+
+/* Category LINKS */
+.nav-link {
+  color: #ffffff;
+  font-size: 1.7em;
+  margin: 12px 10px;
+}
+.nav-link:hover {
+  color: white;
+}
+.nav-link:focus {
+  color: white;
+}
+
+/* DropDown Profile */
+.dropDownCustom_profile {
+  margin-top: 40px;
+  width: 315px;
+  /* height: 656px; */
+  transform: translate3d(-3%, 31px, 0px) !important;
+  box-shadow: 0px 3px 6px #00000029;
+  opacity: 1;
+  font-size: 0.7em;
+}
+
+.dropDownToggle_profile h3 {
+  font-size: 20px;
+  color: #ffba00;
+  line-height: 0.8;
+}
+.dropDownToggle_profile h4 {
+  margin-top: 5px;
+  font-size: 14px;
+  margin-left: 15%;
+  line-height: 0.8;
+  color: #e2e2e2;
+}
+.arrow_profile:before {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: 100%;
+  left: 13px;
+  border-width: 0 8px 8px 8px;
+  border-style: solid;
+  border-color: rgb(221, 217, 217) transparent;
+}
+.arrow_profile:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: 100%;
+  left: 15px;
+  border-width: 0 6px 6px 6px;
+  border-style: solid;
+  border-color: #fff transparent;
+}
+.dropdown_user_name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 7%;
+  display: flex;
+  align-items: center;
+}
+.dropdown-item:active {
+  background-color: white;
+  color: black;
+}
+.dropdown_settings_header {
+  font-size: 14px;
+  font-weight: bold;
+  color: black;
+  margin-top: 5%;
+}
+
+.dropdown_help_header {
+  font-size: 14px;
+  font-weight: bold;
+  color: black;
+  margin-top: 40%;
+}
+.dropDownItem_profile {
+  padding: 8% 16px;
+}
+.dropDownItem_profile:hover {
+  color: #9349de;
+}
+.sign_out_button {
+  margin-top: 25%;
+  margin-bottom: ;
+  color: #ff2c2c;
+}
+#exit_logo {
+  position: absolute;
+  right: 5%;
+  bottom: 3.5%;
+}
+
+.dropdown-item:active {
+  color: none;
+  background-color: none;
+}
+
+.name_logo {
+  width: 50px;
+  height: 50px;
+  background-color: #6318af;
+  border-radius: 50%;
+  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.letter_logo {
+  color: #ffffff;
+  font-size: 16px;
+}
+
+/* Dropdown NOTIFICATION */
+.dropdown_notification_header {
+  font-size: 1em;
+  color: black;
+  font-weight: bold;
+  margin-bottom: 30px;
+  margin-top: 15px;
+}
+
+.dropDownCustom_notification {
+  width: 375px;
+  transform: translate3d(-91%, 14%, 0px) !important;
+  box-shadow: 0px 3px 6px #00000029;
+  opacity: 1;
+  font-size: 0.7em;
+}
+.arrow_notification:before {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: 100%;
+  right: 13px;
+  border-width: 0 8px 8px 8px;
+  border-style: solid;
+  border-color: rgb(221, 217, 217) transparent;
+}
+
+.arrow_notification:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: 100%;
+  right: 15px;
+  border-width: 0 6px 6px 6px;
+  border-style: solid;
+  border-color: #fff transparent;
+}
+
+.profile_notification_container {
+  display: flex;
+  justify-content: space-around;
+}
+#notification_bell_logo {
+  position: absolute;
+  top: 12%;
+}
+
+.notification_brand_logo {
+  width: 60px;
+  height: 60px;
+  background-color: var(--indigo);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 4%;
+}
+.notification_brand_logo span {
+  font-size: 14px;
+  color: #ffffff;
+  margin-right: 0;
+}
+.notification_dropdown_item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  padding: 25px 16px;
+}
+.notification_message {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Button CREATE LISTING */
+.button_create_listing {
+  max-width: 152px;
+  height: 50px;
+  border-radius: 37px;
+  border: none;
+  box-shadow: 0;
+  background-color: #ffba00;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  box-shadow: 0px 5px 20px #0000007e;
+}
+#container {
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding-bottom: 2px;
+}
+#container span {
+  font-size: 18px;
+}

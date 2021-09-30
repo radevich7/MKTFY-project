@@ -12,188 +12,275 @@ import {
   Input,
   Card,
   DropdownItem,
-  InputGroupAddon,
   Button,
   Form,
   Nav,
+  NavLink,
+  Navbar,
 } from "reactstrap";
-import logo1 from "../../assets/MKTFY_wordmark.svg";
-import search_icon from "../../assets/search_icon.svg";
-import blackCaretDown from "../../assets/blackCaretDown.svg";
-import gold_caret from "../../assets/gold_caret.svg";
-import exit_app from "../../assets/exit_to_app-24px.svg";
-import notification_bell from "../../assets/notification_bell_main.svg";
+import logo1 from "../../assets/img/MKTFY_wordmark.svg";
+import search_icon from "../../assets/img/search_icon.svg";
+import blackCaretDown from "../../assets/img/blackCaretDown.svg";
+import gold_caret from "../../assets/img/gold_caret.svg";
+import exit_app from "../../assets/img/exit_to_app-24px.svg";
+import notification_bell from "../../assets/img/notification_bell_main.svg";
 
 const NavBar = () => {
-  //DropDown logic
+  // toggle effect of the dropdown menus
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownOpen2, setDropdownOpen2] = useState(false);
   const [dropdownOpen3, setDropdownOpen3] = useState(false);
-
   const toggle3 = () => setDropdownOpen3((prevState) => !prevState);
   const toggle2 = () => setDropdownOpen2((prevState) => !prevState);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
+  //
+  // get first letter from the name
+  const getLetterForLogo = () => {
+    return "George Carlson".charAt(0);
+  };
+  const letterLogo = getLetterForLogo();
+  //
 
+  //Categories collapse hamburger
+  const [collapsed, setCollapsed] = useState(true);
+
+  const toggleNavbar = () => setCollapsed(!collapsed);
   return (
+    //
     <div>
       <Container fluid className="app_container">
-        <Nav>
+        <Navbar className="  app_container" fixed="top">
           {/* ROW LINE */}
-          <Row className="w-100 nav_bar ">
-            {/* LOGO */}
-            <Col lg="2" md="1">
-              <NavbarBrand href="/">
-                <img src={logo1} alt="logo of MKTFY" id="logo1" />
-              </NavbarBrand>
-            </Col>
-            {/* CARD for the SEARCH BAR */}
-            <Col>
-              <Card>
-                <Row>
-                  {/* BUTTON ALL */}
-                  <Col lg="2" className="smth">
-                    <Button
-                      outline
-                      color="secondary "
-                      className="w-100 border-0"
-                    >
-                      All
-                    </Button>
-                  </Col>
-                  {/* SEARCH INPUT */}
-                  <Col>
-                    <Form>
-                      <img className="icon_style1" src={search_icon} alt="/" />
-                      <Input
-                        className="border-custom"
-                        type="search"
-                        name="search"
-                        id="exampleSearch"
-                        placeholder="Search on MKTFY "
-                      />
-                    </Form>
-                  </Col>
-                  {/* DROPDOWN CITY */}
-                  <Col lg="2">
-                    <Dropdown
-                      isOpen={dropdownOpen}
-                      toggle={toggle}
-                      className="m-1"
-                    >
-                      <DropdownToggle
-                        tag="span"
-                        data-toggle="dropdown"
-                        aria-expanded={dropdownOpen}
-                        className="dropDownToggle_search_card"
+          <Nav className="w-100 border_document app_container">
+            <Row className="w-100 nav_bar ">
+              {/* LOGO */}
+              <Col lg="1">
+                <NavbarBrand href="/">
+                  <img src={logo1} alt="logo of MKTFY" id="logo1" />
+                </NavbarBrand>
+              </Col>
+              {/* CARD for the SEARCH BAR */}
+              <Col lg="7">
+                <Card>
+                  <Row>
+                    {/* BUTTON ALL */}
+                    <Col lg="2" className="smth">
+                      <Button
+                        outline
+                        color="secondary "
+                        className="w-100 border-0"
                       >
-                        <img src={blackCaretDown} alt="/" />
-                        <h3>City</h3>
-                      </DropdownToggle>
-                      <DropdownMenu className="dropDownCustom_search_card arrow_city_search">
-                        <DropdownItem>
-                          <img
-                            src={search_icon}
-                            alt="/"
-                            className="icon_style2"
-                          />
-                          <Input
-                            className="dropDown_search_input2"
-                            type="search"
-                            name="search"
-                            id="exampleSearch"
-                            placeholder="Search city"
-                          />
-                        </DropdownItem>
-                        <DropdownItem className="dropDownItem">
-                          Brooks{" "}
-                        </DropdownItem>
-                        <DropdownItem className="dropDownItem">
-                          Camrose
-                        </DropdownItem>
-                        <DropdownItem className="dropDownItem">
-                          Calgary
-                        </DropdownItem>
-                      </DropdownMenu>
-                    </Dropdown>
-                  </Col>
-                </Row>
-              </Card>
-            </Col>
-            {/* DROPDOWN USER */}
-            <Col lg="2">
-              <Dropdown isOpen={dropdownOpen2} toggle={toggle2} className="m-1">
-                <DropdownToggle
-                  tag="span"
-                  data-toggle="dropdown"
-                  aria-expanded={dropdownOpen2}
-                  className="dropDownToggle_profile"
-                >
-                  <h4> Welcome back,</h4>
-                  <h3>
-                    <img src={gold_caret} alt="/" />
-                    George Carlson
-                  </h3>
-                </DropdownToggle>
-                <DropdownMenu className="dropDownCustom_profile arrow_profile">
-                  <DropdownItem className="dropdown_user_name">
-                    LOGO, George Carlson
-                  </DropdownItem>
+                        All
+                      </Button>
+                    </Col>
+                    {/* SEARCH INPUT */}
 
-                  <DropdownItem header className="dropdown_settings_header ">
-                    Settings
-                  </DropdownItem>
-                  <DropdownItem className="dropDownItem_profile">
-                    Account Information
-                  </DropdownItem>
-                  <DropdownItem className="dropDownItem_profile">
-                    Change Password
-                  </DropdownItem>
-                  <DropdownItem className="dropDownItem_profile">
-                    My purchases
-                  </DropdownItem>
-                  <DropdownItem className="dropDownItem_profile">
-                    My Listings
-                  </DropdownItem>
-                  <DropdownItem header className="dropdown_help_header">
-                    Help
-                  </DropdownItem>
-                  <DropdownItem className="dropDownItem_profile">
-                    FAQ
-                  </DropdownItem>
-                  <DropdownItem className="dropDownItem_profile">
-                    Contact Us
-                  </DropdownItem>
-                  <DropdownItem className="dropDownItem_profile sign_out_button">
-                    Sign Out
-                    <img src={exit_app} alt="/icon" id="exit_logo" />
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </Col>
-            <Col lg="1">
-              <Dropdown isOpen={dropdownOpen3} toggle={toggle3} className="m">
-                <DropdownToggle
-                  tag="span"
-                  data-toggle="dropdown"
-                  aria-expanded={dropdownOpen3}
+                    <Col className="border-custom">
+                      <Form>
+                        <img
+                          className="icon_style1"
+                          src={search_icon}
+                          alt="/"
+                        />
+                        <Input
+                          className="border-0"
+                          type="search"
+                          name="search"
+                          id="exampleSearch"
+                          placeholder="Search on MKTFY "
+                        />
+                      </Form>
+                    </Col>
+                    {/* DROPDOWN CITY */}
+                    <Col lg="2">
+                      <Dropdown
+                        isOpen={dropdownOpen}
+                        toggle={toggle}
+                        className="m-1"
+                      >
+                        <DropdownToggle
+                          tag="span"
+                          data-toggle="dropdown"
+                          aria-expanded={dropdownOpen}
+                          className="dropDownToggle_search_card"
+                        >
+                          <img src={blackCaretDown} alt="/" />
+                          <h3>City</h3>
+                        </DropdownToggle>
+                        <DropdownMenu className="dropDownCustom_search_card arrow_city_search">
+                          <DropdownItem>
+                            <img
+                              src={search_icon}
+                              alt="/"
+                              className="icon_style2"
+                            />
+                            <Input
+                              className="dropDown_search_input2"
+                              type="search"
+                              name="search"
+                              id="exampleSearch"
+                              placeholder="Search city"
+                            />
+                          </DropdownItem>
+                          <DropdownItem className="dropDownItem">
+                            Brooks{" "}
+                          </DropdownItem>
+                          <DropdownItem className="dropDownItem">
+                            Camrose
+                          </DropdownItem>
+                          <DropdownItem className="dropDownItem">
+                            Calgary
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </Dropdown>
+                    </Col>
+                  </Row>
+                </Card>
+                {/* Categories/links */}
+                <Nav className="category_links">
+                  {/* <NavbarToggler onClick={toggleNavbar} className="mr-2" /> */}
+                  {/* <Collapse isOpen={!collapsed} navbar> */}
+                  <NavLink href="#">Categories</NavLink>
+                  <NavLink href="#">Deals</NavLink>
+                  <NavLink href="#">Cars & Vehicles </NavLink>
+                  <NavLink href="#">Furniture</NavLink>
+                  <NavLink href="#">Electronics</NavLink>
+                  <NavLink href="#">Real Estate</NavLink>
+                  {/* </Collapse> */}
+                </Nav>
+              </Col>
+              {/* DROPDOWN USER PROFILE and NOTIFICATION */}
+              <Col lg="2" className="profile_notification_container">
+                {/* DROPDOWN USER PROFILE */}
+                <Dropdown
+                  isOpen={dropdownOpen2}
+                  toggle={toggle2}
+                  className="m-1"
                 >
-                  <img src={notification_bell} alt="/" />
-                </DropdownToggle>
-                <DropdownMenu className="dropDownCustom_notification arrow_notification">
-                  <DropdownItem header className="dropdown_notification_header">
-                    News for you
-                  </DropdownItem>
-                  <DropdownItem>notification</DropdownItem>
-                  <DropdownItem header className="dropdown_notification_header">
-                    Previously Seen
-                  </DropdownItem>
-                  <DropdownItem>notification</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </Col>
-            <Col lg="2"></Col>
-          </Row>
-        </Nav>
+                  <DropdownToggle
+                    tag="span"
+                    data-toggle="dropdown"
+                    aria-expanded={dropdownOpen2}
+                    className="dropDownToggle_profile"
+                  >
+                    <h4> Welcome back,</h4>
+                    <h3>
+                      <img src={gold_caret} alt="/" />
+                      George Carlson
+                    </h3>
+                  </DropdownToggle>
+                  <DropdownMenu className="dropDownCustom_profile arrow_profile">
+                    <DropdownItem className="dropdown_user_name">
+                      <div className="name_logo">
+                        <div className="letter_logo">{letterLogo}</div>
+                      </div>
+                      <span> George Carlson</span>
+                    </DropdownItem>
+
+                    <DropdownItem header className="dropdown_settings_header ">
+                      Settings
+                    </DropdownItem>
+                    <DropdownItem className="dropDownItem_profile">
+                      Account Information
+                    </DropdownItem>
+                    <DropdownItem className="dropDownItem_profile">
+                      Change Password
+                    </DropdownItem>
+                    <DropdownItem className="dropDownItem_profile">
+                      My purchases
+                    </DropdownItem>
+                    <DropdownItem className="dropDownItem_profile">
+                      My Listings
+                    </DropdownItem>
+                    <DropdownItem header className="dropdown_help_header">
+                      Help
+                    </DropdownItem>
+                    <DropdownItem className="dropDownItem_profile">
+                      FAQ
+                    </DropdownItem>
+                    <DropdownItem className="dropDownItem_profile">
+                      Contact Us
+                    </DropdownItem>
+                    <DropdownItem className="dropDownItem_profile sign_out_button">
+                      Sign Out
+                      <img src={exit_app} alt="/icon" id="exit_logo" />
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+                {/* NOTIFICATION */}
+                <Dropdown isOpen={dropdownOpen3} toggle={toggle3}>
+                  <DropdownToggle
+                    tag="span"
+                    data-toggle="dropdown"
+                    aria-expanded={dropdownOpen3}
+                  >
+                    <img
+                      src={notification_bell}
+                      alt="/"
+                      id="notification_bell_logo"
+                    />
+                  </DropdownToggle>
+                  <DropdownMenu className="dropDownCustom_notification arrow_notification">
+                    <DropdownItem
+                      header
+                      className="dropdown_notification_header"
+                    >
+                      News for you
+                    </DropdownItem>
+                    <DropdownItem className="notification_dropdown_item">
+                      <div className="notification_brand_logo">
+                        <span>MKTFY</span>
+                      </div>
+                      <div className="notification_message">
+                        <span> Hey George, welcome to MKTFY</span>
+                        <span style={{ fontSize: "12px" }}>
+                          {" "}
+                          September 02, 2020
+                        </span>
+                      </div>
+                    </DropdownItem>
+                    <DropdownItem
+                      header
+                      className="dropdown_notification_header"
+                    >
+                      Previously Seen
+                    </DropdownItem>
+                    <DropdownItem className="notification_dropdown_item">
+                      <div className="notification_brand_logo">
+                        <span>MKTFY</span>
+                      </div>
+                      <div className="notification_message">
+                        <span> Let's create your first offer!</span>
+                        <span style={{ fontSize: "12px" }}>
+                          September 05, 2020
+                        </span>
+                      </div>
+                    </DropdownItem>
+                    <DropdownItem className="notification_dropdown_item">
+                      <div className="notification_brand_logo">
+                        <span>MKTFY</span>
+                      </div>
+                      <div className="notification_message">
+                        <span> Our Terms of Service has been updated</span>
+                        <span style={{ fontSize: "12px" }}>
+                          September 03, 2020
+                        </span>
+                      </div>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </Col>
+              <Col lg="2" className="m">
+                <button className="button_create_listing w-100">
+                  <span id="container">
+                    <span>+</span>
+                  </span>
+                  Create Listing
+                </button>
+              </Col>
+            </Row>
+          </Nav>
+        </Navbar>
       </Container>
     </div>
   );
