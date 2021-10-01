@@ -15,19 +15,31 @@ import "../Dashboard.css";
 const Deals = (props) => {
   return (
     <React.Fragment>
-      <Col lg="12" className="">
+      <Col lg="12">
         <Card>
-          <CardBody className="">
-            <span>Deals for you</span>
+          <CardBody>
+            <span className="container_title">Deals for you</span>
             <Row className="scroll_effect">
               {props.items.map((item) => (
-                <Col lg="2" key={item.id} className="column_categories">
-                  <Card className="mt-0 border-0">
-                    <CardBody className="deals_card p-0">
-                      <CardTitle tag="h5">{item.name}</CardTitle>
-                      <CardSubtitle tag="h6" className="mb-2 ">
-                        {item.price}
+                <Col lg="2" key={item.id} className="column_deals">
+                  <Card className="mt-0 border-0 ">
+                    <CardBody className="deals_card p-0 border-0">
+                      {/* Content of the card */}
+                      <div className="image_deals_container">
+                        <CardImg
+                          top
+                          src={item.image}
+                          alt={`The image shows ${item.title}`}
+                          className="image_deals"
+                        />
+                      </div>
+                      <CardTitle tag="h5" className="deals_title">
+                        {item.title}
+                      </CardTitle>
+                      <CardSubtitle tag="h6" className="deals_price">
+                        $ {item.price.toFixed(2)}
                       </CardSubtitle>
+                      {/* end card */}
                     </CardBody>
                   </Card>
                 </Col>

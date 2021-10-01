@@ -61,7 +61,7 @@ const NavBar = () => {
               </Col>
               {/* CARD for the SEARCH BAR */}
               <Col lg="7">
-                <Card className="search_card_padding">
+                <Card className="search_card_padding border-0">
                   <Row>
                     {/* BUTTON ALL */}
                     <Col lg="2" className="smth">

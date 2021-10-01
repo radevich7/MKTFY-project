@@ -7,6 +7,7 @@ import iwatch from "../../assets/imagesForDahsboard/iwatch.webp";
 import playstation from "../../assets/imagesForDahsboard/playstation.png";
 import samsung from "../../assets/imagesForDahsboard/samsung.webp";
 import "./Dashboard.css";
+import useDragging from "../../assets/customHooks/useDragging";
 
 const dummy_data = [
   {
@@ -68,25 +69,29 @@ const dummy_data = [
 ];
 
 const Dashboard = () => {
+  // Deals for the deals section
   const [deals, setDeals] = useState([]);
   useEffect(() => {
     setDeals(dummy_data);
   }, []);
+  // deals for the categories section
+  const [categoriesDeals, setcategoriesDeals] = useState([]);
+  useEffect(() => {
+    setcategoriesDeals(dummy_data.filter((val) => val.id < 4));
+  }, []);
 
   return (
     <Container fluid className="dashboard_container">
-      <Row className="border_document_dashboard row ">
+      <Row className="border_document_dashboard row">
         <Deals items={deals} />
-        <Categories />
+        <Categories items={categoriesDeals} />
 
-        <Categories />
+        <Categories items={categoriesDeals} />
 
         <Deals items={deals} />
-        <Categories />
-        <Categories />
-        <Deals items={deals} />
-        <Categories />
-        <Categories />
+        <Categories items={categoriesDeals} />
+        <Categories items={categoriesDeals} />
+
         {/* another elementfor the picture and waves */}
       </Row>
     </Container>
