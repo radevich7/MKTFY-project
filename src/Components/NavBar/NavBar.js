@@ -52,7 +52,7 @@ const NavBar = () => {
         <Navbar className="  app_container" fixed="top">
           {/* ROW LINE */}
           <Nav className="w-100 border_document app_container">
-            <Row className="w-100 nav_bar ">
+            <Row className="w-100 mx-0 nav_bar ">
               {/* LOGO */}
               <Col lg="1">
                 <NavbarBrand href="/">
@@ -61,7 +61,7 @@ const NavBar = () => {
               </Col>
               {/* CARD for the SEARCH BAR */}
               <Col lg="7">
-                <Card>
+                <Card className="search_card_padding">
                   <Row>
                     {/* BUTTON ALL */}
                     <Col lg="2" className="smth">
@@ -270,7 +270,7 @@ const NavBar = () => {
                   </DropdownMenu>
                 </Dropdown>
               </Col>
-              <Col lg="2" className="m">
+              <Col lg="2" className="button_column">
                 <button className="button_create_listing w-100">
                   <span id="container">
                     <span>+</span>

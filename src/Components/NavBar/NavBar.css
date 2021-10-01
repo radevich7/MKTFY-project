@@ -12,6 +12,7 @@
 .nav_bar {
   margin-top: 63px;
 }
+
 .dropdown-item:active {
   background-color: none;
 }
@@ -24,10 +25,8 @@
   border-radius: 0;
 }
 
-.card {
-  height: 60px;
+.search_card_padding {
   padding: 10px 0px;
-  /* margin-top: -10px; */
 }
 #logo1 {
   margin-top: 15px;
@@ -307,6 +306,10 @@
 }
 
 /* Button CREATE LISTING */
+.button_column {
+  display: flex;
+  justify-content: center;
+}
 .button_create_listing {
   max-width: 152px;
   height: 50px;
@@ -322,6 +325,7 @@
   color: #ffffff;
   box-shadow: 0px 5px 20px #0000007e;
 }
+
 #container {
   border: 3px solid #ffffff;
   border-radius: 50%;

@@ -14,9 +14,9 @@ import {
 const Categories = () => {
   return (
     <React.Fragment>
-      <Col lg="6" className="p-0 my-3">
-        <Card>
-          <CardBody></CardBody>
+      <Col lg="6" className="mb-3 mt-3 p-1">
+        <Card className="">
+          <CardBody>Categories</CardBody>
         </Card>
       </Col>
     </React.Fragment>
