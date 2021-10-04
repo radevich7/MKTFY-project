@@ -27,6 +27,7 @@ div.card {
   overflow-x: auto;
   /* margin: 0; */
 }
+
 ::-webkit-scrollbar-thumb {
   background: none;
 }
@@ -44,10 +45,10 @@ div.card {
   box-shadow: 0px 4px 15px #00000024;
 }
 
-.row > * {
+/* .row > * {
   padding-right: 0;
   padding-left: 0;
-}
+} */
 .column_deals {
   margin: 24px 12px 48px 12px;
   width: 236px;
@@ -83,10 +84,19 @@ div.card {
   width: 236px;
   border-radius: 10px;
   box-shadow: 0px 4px 15px #00000024;
+  display: flex;
+  justify-content: space-between;
 }
 .column_categories {
-  margin: 51px 10px 12px 20px;
+  width: 100%;
+  margin-top: 51px;
+  margin-bottom: 12px;
+
   width: 236px;
+}
+.space-between {
+  display: flex;
+  justify-content: space-around;
 }
 
 /*  */

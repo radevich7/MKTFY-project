@@ -7,7 +7,6 @@ import iwatch from "../../assets/imagesForDahsboard/iwatch.webp";
 import playstation from "../../assets/imagesForDahsboard/playstation.png";
 import samsung from "../../assets/imagesForDahsboard/samsung.webp";
 import "./Dashboard.css";
-import useDragging from "../../assets/customHooks/useDragging";
 
 const dummy_data = [
   {
@@ -84,9 +83,9 @@ const Dashboard = () => {
     <Container fluid className="dashboard_container">
       <Row className="border_document_dashboard row">
         <Deals items={deals} />
-        <Categories items={categoriesDeals} />
+        <Categories items={categoriesDeals} gutter="pr-1" />
 
-        <Categories items={categoriesDeals} />
+        <Categories items={categoriesDeals} gutter="pl-1" />
 
         <Deals items={deals} />
         <Categories items={categoriesDeals} />

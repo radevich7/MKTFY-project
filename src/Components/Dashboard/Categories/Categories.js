@@ -15,14 +15,13 @@ import {
 const Categories = (props) => {
   return (
     <React.Fragment>
-      <Col lg="6" className="mb-3 mt-3 p-1">
-        <Card className="">
-          <CardBody>
-            {" "}
+      <Col lg="6" className={"mb-4 mt-4 " + props.gutter}>
+        <Card>
+          <CardBody className="">
             <span className="container_title">Shop Electronics</span>
-            <Row className="scroll_effect">
+            <Row className="scroll_effect space-between">
               {props.items.map((item) => (
-                <Col lg="4" key={item.id} className="column_categories">
+                <Col lg="4" key={item.id} className="column_categories p-0 ">
                   <Card className="mt-0 border-0 ">
                     <CardBody className="categories_card p-0 border-0">
                       {/* Content of the card */}
