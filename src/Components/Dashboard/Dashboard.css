@@ -24,8 +24,21 @@ div.card {
 /* Scroll effect */
 .scroll_effect {
   flex-wrap: nowrap;
-  overflow-x: auto;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  transition: all 1s;
+  /* transform: scale(0.98); */
+  will-change: transform;
+  user-select: none;
+  cursor: pointer;
   /* margin: 0; */
+}
+.scroll_effect.active {
+  /* background: rgba(255, 255, 255, 0.3); */
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+  transform: scale(1);
 }
 
 ::-webkit-scrollbar-thumb {

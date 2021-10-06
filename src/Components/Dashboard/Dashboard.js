@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 import Categories from "./Categories/Categories";
+import Banner from "./Banner/Banner";
 import Deals from "./Deals/Deals";
 import ipad from "../../assets/imagesForDahsboard/ipad.jpeg";
 import iwatch from "../../assets/imagesForDahsboard/iwatch.webp";
@@ -90,8 +91,7 @@ const Dashboard = () => {
         <Deals items={deals} />
         <Categories items={categoriesDeals} />
         <Categories items={categoriesDeals} />
-
-        {/* another elementfor the picture and waves */}
+        <Banner />
       </Row>
     </Container>
   );
