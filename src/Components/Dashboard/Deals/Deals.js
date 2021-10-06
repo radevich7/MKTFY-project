@@ -14,7 +14,7 @@ import "../Dashboard.css";
 
 const Deals = (props) => {
   // //click and drag scroll effect
-  const slider = useRef();
+  const sliderRef = useRef();
   let isDown = false;
   let startX;
   let scrollLeft;
@@ -22,25 +22,25 @@ const Deals = (props) => {
 
   useEffect(() => {
     //MouseDown
-    slider.current.addEventListener("mousedown", handleMouseDown);
-    slider.current.addEventListener("mouseleave", handleMouseLeave);
-    slider.current.addEventListener("mouseup", handleMouseUp);
-    slider.current.addEventListener("mousemove", handleMouseMove);
+    sliderRef.current.addEventListener("mousedown", handleMouseDown);
+    sliderRef.current.addEventListener("mouseleave", handleMouseLeave);
+    sliderRef.current.addEventListener("mouseup", handleMouseUp);
+    sliderRef.current.addEventListener("mousemove", handleMouseMove);
 
     return () => {
       // clean up function to remove event listener
-      slider.current.removeEventListener("mousedown", handleMouseDown);
-      slider.current.removeEventListener("mouseleave", handleMouseLeave);
-      slider.current.removeEventListener("mouseup", handleMouseUp);
-      slider.current.removeEventListener("mousemove", handleMouseMove);
+      sliderRef.current.removeEventListener("mousedown", handleMouseDown);
+      sliderRef.current.removeEventListener("mouseleave", handleMouseLeave);
+      sliderRef.current.removeEventListener("mouseup", handleMouseUp);
+      sliderRef.current.removeEventListener("mousemove", handleMouseMove);
     };
   });
   // MOUSE DOWN
   const handleMouseDown = (e) => {
     isDown = true;
     sliderClasses = "items" + " active";
-    startX = e.pageX - slider.current.offsetLeft;
-    scrollLeft = slider.current.scrollLeft;
+    startX = e.pageX - sliderRef.current.offsetLeft;
+    scrollLeft = sliderRef.current.scrollLeft;
   };
 
   //MOUSE LEAVE
@@ -60,9 +60,9 @@ const Deals = (props) => {
   const handleMouseMove = (e) => {
     if (!isDown) return;
     e.preventDefault();
-    const x = e.pageX - slider.current.offsetLeft;
+    const x = e.pageX - sliderRef.current.offsetLeft;
     const walk = (x - startX) * 1; //scroll fast (1)
-    slider.current.scrollLeft = scrollLeft - walk;
+    sliderRef.current.scrollLeft = scrollLeft - walk;
   };
 
   return (
@@ -71,11 +71,12 @@ const Deals = (props) => {
         <Card>
           <CardBody>
             <span className="container_title">Deals for you</span>
+
             <Row>
               <div
-                style={{ display: "flex" }}
                 className={sliderClasses}
-                ref={slider}
+                ref={sliderRef}
+                style={{ display: "flex" }}
               >
                 {props.items.map((item) => (
                   <Col lg="2" key={item.id} className="column_deals">

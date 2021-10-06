@@ -1,11 +1,16 @@
 .app_container {
   height: 191px;
+  width: 100vw;
   padding: 0;
   background-color: var(--indigo);
 }
+/* .row > * {
+  padding-right: 0;
+  padding-left: 0;
+} */
 
 .border_document {
-  max-width: 1636px;
+  max-width: 1660px;
   margin: auto;
 }
 
@@ -30,7 +35,7 @@
 }
 #logo1 {
   margin-top: 15px;
-
+  padding: 0;
   width: 117.94px;
 }
 
@@ -114,6 +119,7 @@
 .nav-link {
   color: #ffffff;
   font-size: 1.7em;
+  font-weight: 600;
   margin: 12px 10px;
 }
 .nav-link:hover {
@@ -138,6 +144,7 @@
   font-size: 20px;
   color: #ffba00;
   line-height: 0.8;
+  font-weight: 600;
 }
 .dropDownToggle_profile h4 {
   margin-top: 5px;

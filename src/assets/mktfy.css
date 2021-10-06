@@ -206,6 +206,7 @@ html {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  background-color: #f4f4f5;
 }
 
 *,
@@ -229,6 +230,7 @@ html {
 
 body {
   font-size: 10px;
+  width: 100vw;
 }
 
 /* Navbar */

@@ -48,7 +48,7 @@ const NavBar = () => {
   return (
     //
     <div>
-      <Container fluid className="app_container">
+      <Container fluid>
         <Navbar className="  app_container" fixed="top">
           {/* ROW LINE */}
           <Nav className="w-100 border_document app_container">
