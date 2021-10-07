@@ -1,6 +1,6 @@
 import "./Footer.css";
 import footerImg from "../../assets/imagesFooter/background_begin.svg";
-import { Container, Row, Col, Nav, NavLink, CopyrightNotice } from "reactstrap";
+import { Container, Row, Col, Nav, NavLink } from "reactstrap";
 import logo from "../../assets/img/MKTFY_wordmark.svg";
 const Footer = () => {
   return (
@@ -28,7 +28,7 @@ const Footer = () => {
             <Col lg="6">
               <Nav vertical>
                 <NavLink className="footer_navlink_header">Jump to</NavLink>
-                <NavLink classnamehref="#">Account Information</NavLink>
+                <NavLink href="#">Account Information</NavLink>
                 <NavLink href="#">Terms & Services</NavLink>
                 <NavLink href="#">Privacy Policy</NavLink>
                 <NavLink href="#">FAQ</NavLink>

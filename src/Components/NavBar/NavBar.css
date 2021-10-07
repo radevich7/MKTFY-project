@@ -16,12 +16,23 @@
 
 .nav_bar {
   margin-top: 63px;
+  /* margin-top: 221px; */
 }
 
 .dropdown-item:active {
   background-color: none;
 }
 /* Search Card + DropDown City*/
+.smth {
+  padding-right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.output_categories_span {
+  font-size: 1.4em;
+  opacity: 0.7;
+}
 
 .border-custom {
   border: none;
@@ -348,4 +359,18 @@
 }
 #container span {
   font-size: 18px;
+}
+.category_header {
+  display: flex;
+  margin-left: 0;
+  padding-left: 0;
+}
+.hamburger_button {
+  margin-right: 5px;
+}
+.hamburger_button div {
+  width: 24px;
+  height: 0.1px;
+  background-color: #ffffff;
+  margin: 6px 0;
 }

@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 import "./NavBar.css";
+import logo1 from "../../assets/img/MKTFY_wordmark.svg";
+import search_icon from "../../assets/img/search_icon.svg";
+import blackCaretDown from "../../assets/img/blackCaretDown.svg";
+import gold_caret from "../../assets/img/gold_caret.svg";
+import exit_app from "../../assets/img/exit_to_app-24px.svg";
+import notification_bell from "../../assets/img/notification_bell_main.svg";
 
 import {
   Container,
@@ -12,18 +18,11 @@ import {
   Input,
   Card,
   DropdownItem,
-  Button,
   Form,
   Nav,
   NavLink,
   Navbar,
 } from "reactstrap";
-import logo1 from "../../assets/img/MKTFY_wordmark.svg";
-import search_icon from "../../assets/img/search_icon.svg";
-import blackCaretDown from "../../assets/img/blackCaretDown.svg";
-import gold_caret from "../../assets/img/gold_caret.svg";
-import exit_app from "../../assets/img/exit_to_app-24px.svg";
-import notification_bell from "../../assets/img/notification_bell_main.svg";
 
 const NavBar = () => {
   // toggle effect of the dropdown menus
@@ -42,14 +41,12 @@ const NavBar = () => {
   //
 
   //Categories collapse hamburger
-  const [collapsed, setCollapsed] = useState(true);
 
-  const toggleNavbar = () => setCollapsed(!collapsed);
   return (
     //
     <div>
       <Container fluid>
-        <Navbar className="  app_container" fixed="top">
+        <Navbar className="app_container" fixed="top">
           {/* ROW LINE */}
           <Nav className="w-100 border_document app_container">
             <Row className="w-100 mx-0 nav_bar ">
@@ -65,13 +62,7 @@ const NavBar = () => {
                   <Row>
                     {/* BUTTON ALL */}
                     <Col lg="2" className="smth">
-                      <Button
-                        outline
-                        color="secondary "
-                        className="w-100 border-0"
-                      >
-                        All
-                      </Button>
+                      <span className="output_categories_span">All</span>
                     </Col>
                     {/* SEARCH INPUT */}
 
@@ -140,7 +131,14 @@ const NavBar = () => {
                 <Nav className="category_links">
                   {/* <NavbarToggler onClick={toggleNavbar} className="mr-2" /> */}
                   {/* <Collapse isOpen={!collapsed} navbar> */}
-                  <NavLink href="#">Categories</NavLink>
+                  <NavLink href="#" className="category_header">
+                    <div className="hamburger_button">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                    Categories
+                  </NavLink>
                   <NavLink href="#">Deals</NavLink>
                   <NavLink href="#">Cars & Vehicles </NavLink>
                   <NavLink href="#">Furniture</NavLink>

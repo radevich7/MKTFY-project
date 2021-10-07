@@ -1,12 +1,13 @@
 import React, { useRef, useEffect } from "react";
+
+import { Link } from "react-router-dom";
+
 import {
   Card,
   CardImg,
-  CardText,
   CardBody,
   CardTitle,
   CardSubtitle,
-  Button,
   Col,
   Row,
 } from "reactstrap";
@@ -21,6 +22,7 @@ const Deals = (props) => {
   let sliderClasses = "scroll_effect";
 
   useEffect(() => {
+    let currentSliderRef = sliderRef.current;
     //MouseDown
     sliderRef.current.addEventListener("mousedown", handleMouseDown);
     sliderRef.current.addEventListener("mouseleave", handleMouseLeave);
@@ -29,10 +31,10 @@ const Deals = (props) => {
 
     return () => {
       // clean up function to remove event listener
-      sliderRef.current.removeEventListener("mousedown", handleMouseDown);
-      sliderRef.current.removeEventListener("mouseleave", handleMouseLeave);
-      sliderRef.current.removeEventListener("mouseup", handleMouseUp);
-      sliderRef.current.removeEventListener("mousemove", handleMouseMove);
+      currentSliderRef.removeEventListener("mousedown", handleMouseDown);
+      currentSliderRef.removeEventListener("mouseleave", handleMouseLeave);
+      currentSliderRef.removeEventListener("mouseup", handleMouseUp);
+      currentSliderRef.removeEventListener("mousemove", handleMouseMove);
     };
   });
   // MOUSE DOWN
@@ -80,26 +82,28 @@ const Deals = (props) => {
               >
                 {props.items.map((item) => (
                   <Col lg="2" key={item.id} className="column_deals">
-                    <Card className="mt-0 border-0 ">
-                      <CardBody className="deals_card p-0 border-0">
-                        {/* Content of the card */}
-                        <div className="image_deals_container">
-                          <CardImg
-                            top
-                            src={item.image}
-                            alt={`The image shows ${item.title}`}
-                            className="image_deals"
-                          />
-                        </div>
-                        <CardTitle tag="h5" className="deals_title">
-                          {item.title}
-                        </CardTitle>
-                        <CardSubtitle tag="h6" className="deals_price">
-                          $ {item.price.toFixed(2)}
-                        </CardSubtitle>
-                        {/* end card */}
-                      </CardBody>
-                    </Card>
+                    <Link to={`/home/${item.id}`}>
+                      <Card className="mt-0 border-0 ">
+                        <CardBody className="deals_card p-0 border-0">
+                          {/* Content of the card */}
+                          <div className="image_deals_container">
+                            <CardImg
+                              top
+                              src={item.image}
+                              alt={`The image shows ${item.title}`}
+                              className="image_deals"
+                            />
+                          </div>
+                          <CardTitle tag="h5" className="deals_title">
+                            {item.title}
+                          </CardTitle>
+                          <CardSubtitle tag="h6" className="deals_price">
+                            $ {item.price.toFixed(2)}
+                          </CardSubtitle>
+                          {/* end card */}
+                        </CardBody>
+                      </Card>
+                    </Link>
                   </Col>
                 ))}
               </div>

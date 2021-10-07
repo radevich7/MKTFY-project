@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "reactstrap";
+import { useRouteMatch, Switch, Route } from "react-router-dom";
+import { Container, Row } from "reactstrap";
+import Footer from "../Footer/Footer";
 import Categories from "./Categories/Categories";
 import Banner from "./Banner/Banner";
 import Deals from "./Deals/Deals";
@@ -74,6 +76,7 @@ const Dashboard = () => {
   useEffect(() => {
     setDeals(dummy_data);
   }, []);
+
   // deals for the categories section
   const [categoriesDeals, setcategoriesDeals] = useState([]);
   useEffect(() => {
@@ -84,6 +87,7 @@ const Dashboard = () => {
     <Container fluid className="dashboard_container">
       <Row className="border_document_dashboard row">
         <Deals items={deals} />
+
         <Categories items={categoriesDeals} gutter="pr-1" />
 
         <Categories items={categoriesDeals} gutter="pl-1" />
@@ -93,6 +97,7 @@ const Dashboard = () => {
         <Categories items={categoriesDeals} />
         <Banner />
       </Row>
+      <Footer />
     </Container>
   );
 };

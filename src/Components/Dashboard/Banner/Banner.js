@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Row, Col } from "reactstrap";
+import { Card } from "reactstrap";
 import appStoreLogo from "../../../assets/banner/appStoreImg.svg";
 import googlePlayLogo from "../../../assets/banner/googlePlayImg.svg";
 import banner from "../../../assets/banner/banner.png";

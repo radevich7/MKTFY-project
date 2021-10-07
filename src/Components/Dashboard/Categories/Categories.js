@@ -1,17 +1,7 @@
 import React from "react";
 
 import "../Dashboard.css";
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button,
-  Col,
-  Row,
-} from "reactstrap";
+import { Card, CardImg, CardBody, Col, Row } from "reactstrap";
 const Categories = (props) => {
   return (
     <React.Fragment>

@@ -1,6 +1,11 @@
 .dashboard_container {
-  background-color: #f4f4f5;
   height: 100%;
+  margin-top: 221px;
+  background-image: url("/Users/Julian/PROJECT/mktfy_web_app/src/assets/imgBackgoundGreyWaves.svg");
+  background-attachment: fixed;
+  background-position: 50% 50%;
+  background-color: #f4f4f5;
+
   /* margin: 0 auto; */
   /* width: 100vw; */
 }
