@@ -5,7 +5,7 @@
   background-image: url("/Users/Julian/PROJECT/mktfy_web_app/src/assets/imgBackgoundGreyWaves.svg");
   background-attachment: fixed;
   background-position: 50% 50%;
-  margin-top: 312px;
+  padding-top: 312px;
   /* margin-bottom: 210px; */
   background-color: #f4f4f5;
 }
@@ -35,14 +35,9 @@
 }
 .item_details_button {
   width: 100%;
-  border-radius: 37px;
-  border: none;
-  padding: 19px 0px;
   background-color: #6318af;
   font-size: 20px;
   font-weight: bold;
-  color: #ffffff;
-  box-shadow: 0px 5px 20px #00000024;
   margin-bottom: 53px;
   margin-top: 5px;
 }
@@ -95,4 +90,22 @@
 .sellers_number_of_listings div {
   display: flex;
   justify-content: space-between;
+}
+.link_home {
+  color: #000000;
+  text-decoration: none;
+}
+.link_home:hover {
+  color: #6318af;
+}
+
+.page_path {
+  font-size: 14px;
+  position: absolute;
+  top: -5%;
+}
+.arrow_path {
+  color: #9349de;
+  font-weight: bold;
+  padding: 5px;
 }

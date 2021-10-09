@@ -1,9 +1,12 @@
 import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 import "./AppRouter.css";
-import NavBar from "../Components/NavBar/NavBar";
-import Dashboard from "../Components/Dashboard/Dashboard";
-import Footer from "../Components/Footer/Footer";
-import Listing from "../Components/Listing/Listing";
+import NavBar from "../pages/NavBar/NavBar";
+import Dashboard from "../pages/Dashboard/Dashboard";
+
+import Listing from "../pages/Listing/Listing";
+import Checkout from "../pages/Checkout/Checkout";
+import Pickup from "../pages/Pickup/Pickup";
+
 const AppRouter = () => {
   return (
     <BrowserRouter>
@@ -17,9 +20,19 @@ const AppRouter = () => {
           render={(props) => <Dashboard {...props} />}
         />
         <Route
-          path="/home/:lisningId"
+          path="/post/:lisningId"
           exact
           render={(props) => <Listing {...props} />}
+        />
+        <Route
+          path="/post/:lisningId/checkout"
+          exact
+          render={(props) => <Checkout {...props} />}
+        />
+        <Route
+          path="/post/:lisningId/checkout/pickupConfirmation"
+          exact
+          render={(props) => <Pickup {...props} />}
         />
       </Switch>
     </BrowserRouter>

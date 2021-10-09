@@ -40,7 +40,7 @@ const Deals = (props) => {
   // MOUSE DOWN
   const handleMouseDown = (e) => {
     isDown = true;
-    sliderClasses = "items" + " active";
+    sliderClasses = "items active";
     startX = e.pageX - sliderRef.current.offsetLeft;
     scrollLeft = sliderRef.current.scrollLeft;
   };
@@ -82,7 +82,7 @@ const Deals = (props) => {
               >
                 {props.items.map((item) => (
                   <Col lg="2" key={item.id} className="column_deals">
-                    <Link to={`/home/${item.id}`}>
+                    <Link to={{ pathname: `/post/${item.id}`, data: item }}>
                       <Card className="mt-0 border-0 ">
                         <CardBody className="deals_card p-0 border-0">
                           {/* Content of the card */}

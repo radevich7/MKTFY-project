@@ -1,9 +1,7 @@
 .reusable_button {
   border-radius: 37px;
   border: none;
-  background-color: #ffba00;
-  font-size: 20px;
-  font-weight: bold;
   color: #ffffff;
+  padding: 19px 0px;
   box-shadow: 0px 5px 20px #0000007e;
 }

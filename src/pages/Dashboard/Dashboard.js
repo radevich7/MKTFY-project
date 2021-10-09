@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useRouteMatch, Switch, Route } from "react-router-dom";
 import { Container, Row } from "reactstrap";
-import Footer from "../Footer/Footer";
+import Footer from "./Footer/Footer";
 import Categories from "./Categories/Categories";
 import Banner from "./Banner/Banner";
 import Deals from "./Deals/Deals";

@@ -1,0 +1,151 @@
+.pickup_container {
+  height: 100vh;
+  background-image: url("/Users/Julian/PROJECT/mktfy_web_app/src/assets/imgBackgoundGreyWaves.svg");
+  background-attachment: fixed;
+  background-position: 50% 50%;
+  padding-top: 312px;
+  background-color: #f4f4f5;
+}
+.border_document_pickup {
+  max-width: 1636px;
+  margin: 0 auto;
+  background-color: transparent;
+}
+.pickup_card {
+  max-width: 532px;
+  background-color: #ffffff;
+}
+
+.card-body {
+  padding: 2rem 2rem;
+}
+
+.link_home {
+  color: #000000;
+  text-decoration: none;
+}
+.link_home:hover {
+  color: #6318af;
+}
+
+.page_path {
+  font-size: 14px;
+  position: absolute;
+  top: -5%;
+}
+.arrow_path {
+  color: #9349de;
+  font-weight: bold;
+  padding: 5px;
+}
+.pickup_card h4 {
+  font-size: 40px;
+  font-weight: bold;
+  color: #9349de;
+  margin-bottom: 30px;
+  padding-top: 44px;
+}
+.confirm_button {
+  width: 100%;
+  background-color: #6318af;
+  font-size: 20px;
+  font-weight: bold;
+}
+.contact_seller_button {
+  color: #9349de;
+  font-weight: bold;
+  width: 91.5%;
+  margin: 0 auto;
+  display: block;
+  margin-top: 64px;
+  margin-bottom: 49px;
+  background-color: #9349de33;
+}
+
+.pickup_seller_information {
+  width: 100%;
+  height: 108px;
+  /* margin-top: 15px; */
+  margin-bottom: 30px;
+  border-top: 2px solid #e0dcdc;
+
+  padding: 35px 0 28px 15px;
+}
+
+.seller_logo {
+  width: 50px;
+  height: 50px;
+  background-color: #6318af;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+.seller_logo span {
+  color: white;
+  font-size: 1.6em;
+  font-weight: bold;
+}
+.sellers_info {
+  position: relative;
+}
+.pickup_text {
+  font-size: 1.4em;
+  color: #6cc04b;
+  position: absolute;
+  top: -7%;
+}
+.sellers_info_details {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+.sellers_info_details h4 {
+  font-size: 1.6em;
+  color: #000000;
+  padding: 0;
+  margin-bottom: 0;
+}
+.sellers_info_details span {
+  font-size: 1.4em;
+  color: #9349de;
+}
+.sellers_address {
+  margin-top: 23px;
+  margin-bottom: 44px;
+}
+mark {
+  background-color: transparent;
+  font-weight: bold;
+}
+
+.listing_details {
+  height: 125px;
+}
+
+.listing_details_img {
+  display: flex;
+  justify-content: center;
+}
+.listing_details_information {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.listing_details_information h5 {
+  font-size: 14px;
+}
+.listing_details_information span {
+  font-size: 16px;
+  font-weight: bold;
+  color: #6318af;
+}
+.link_home {
+  color: #000000;
+  text-decoration: none;
+}
+.link_home:hover {
+  color: #6318af;
+}

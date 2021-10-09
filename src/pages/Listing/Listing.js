@@ -1,17 +1,44 @@
 import "./Listing.css";
-import { useParams, useRouteMatch } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import { Link, useRouteMatch, useParams } from "react-router-dom";
 import Button from "../../reusableComponent/Button";
 import { Container, Row, Col, Card, CardBody } from "reactstrap";
 import logo_listing_user from "../../assets/listing_logo.svg";
 
-const Listing = () => {
+const Listing = (props) => {
+  let match = useRouteMatch();
+  // const id = useParams();
+
+  const [item, setItem] = useState({
+    id: 1,
+    productName: "Microsoft Xbox One X 1TB Console",
+    description: `The world’s most powerful console. The most powerful
+  console ever, featuring 6 'Teraflops' of graphical
+  processing power, 'true' 4K gaming, and compatibility with
+  Xbox One games and accessories`,
+    price: 340,
+    firstName: "Matt",
+    lastName: "Smith",
+    numberOfListings: 2,
+    profileImageUrl: "",
+  });
+
+  useEffect(() => {}, []);
+
   return (
     <Container fluid className="listing_container">
       <Card className="border_document_listing">
+        <div className="page_path">
+          <Link to="/home" className="link_home">
+            <span>home</span>
+          </Link>
+          <span className="arrow_path"> {">"} </span>
+          <span>product listing</span>
+        </div>
         <CardBody>
           <Row className="w-100" className="border">
             {/* First column -carousel*/}
-
             <Col>
               <Row>
                 <Col lg="2" className="border">
@@ -29,26 +56,23 @@ const Listing = () => {
               <Card className="item_details_card">
                 <CardBody>
                   <Col>
-                    <h2>Microsoft Xbox One X 1TB Console</h2>
+                    <h2>{item.productName}</h2>
                   </Col>
                   <Col>
-                    <span>$ 340</span>
+                    <span>$ {item.price}</span>
                   </Col>
                   <Col>
-                    <button className="item_details_button">
-                      I want this!
-                    </button>
+                    <Link to={`${match.url}/checkout`}>
+                      <Button className="item_details_button">
+                        I want this!
+                      </Button>
+                    </Link>
                   </Col>
                   <Col>
                     <h3>Details</h3>
                   </Col>
                   <Col>
-                    <p>
-                      The world’s most powerful console. The most powerful
-                      console ever, featuring 6 Teraflops of graphical
-                      processing power, true 4K gaming, and compatibility with
-                      Xbox One games and accessories.
-                    </p>
+                    <p>{item.description}</p>
                   </Col>
                   <Col>
                     <div className="sellers_info">
@@ -56,11 +80,11 @@ const Listing = () => {
                         <span>M</span>
                       </div>
                       <span>
-                        <h4>Matt Smith </h4>
+                        <h4>{`${item.firstName} ${item.lastName}`} </h4>
                         <div className="sellers_number_of_listings">
                           <img src={logo_listing_user} alt="/" />
                           <div>
-                            <h4>2</h4>
+                            <h4>{item.numberOfListings}</h4>
                             <h5>listings</h5>
                           </div>
                         </div>

@@ -1,0 +1,107 @@
+.checkout_container {
+  /* border: 1px solid black; */
+  height: 100vh;
+
+  background-image: url("/Users/Julian/PROJECT/mktfy_web_app/src/assets/imgBackgoundGreyWaves.svg");
+  background-attachment: fixed;
+  background-position: 50% 50%;
+  padding-top: 312px;
+  /* margin-bottom: 210px; */
+  background-color: #f4f4f5;
+}
+.border_document_checkout {
+  max-width: 1636px;
+  margin: 0 auto;
+  background-color: transparent;
+}
+
+.checkout_card {
+  max-width: 532px;
+  background-color: #ffffff;
+}
+.card-body {
+  padding: 2rem 2rem;
+}
+
+.link_home {
+  color: #000000;
+  text-decoration: none;
+}
+.link_home:hover {
+  color: #6318af;
+}
+
+.page_path {
+  font-size: 14px;
+  position: absolute;
+  top: -5%;
+}
+.arrow_path {
+  color: #9349de;
+  font-weight: bold;
+  padding: 5px;
+}
+.checkout_card h4 {
+  font-size: 40px;
+  font-weight: bold;
+  color: #9349de;
+  margin-bottom: 22px;
+  padding-top: 44px;
+}
+.checkout_button {
+  width: 100%;
+  background-color: #6318af;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 70px;
+}
+
+.price_card {
+  width: 100%;
+  height: 108px;
+  border: 1px solid #f2f2f2;
+  margin-bottom: 30px;
+  border-top: 2px solid #e0dcdc;
+  padding: 20px 15px;
+}
+.price_card h5 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #6318af;
+  margin: 0;
+}
+
+.price_card span {
+  display: inline-block;
+  font-size: 36px;
+  font-weight: bold;
+  color: #6318af;
+}
+.listing_details {
+  height: 125px;
+}
+
+.listing_details_img {
+  display: flex;
+  justify-content: center;
+}
+.listing_details_information {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.listing_details_information h5 {
+  font-size: 14px;
+}
+.listing_details_information span {
+  font-size: 16px;
+  font-weight: bold;
+  color: #6318af;
+}
+.link_home {
+  color: #000000;
+  text-decoration: none;
+}
+.link_home:hover {
+  color: #6318af;
+}
