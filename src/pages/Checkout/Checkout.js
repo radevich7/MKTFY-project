@@ -5,7 +5,8 @@ import { Container, Card, CardBody, Row, Col } from "reactstrap";
 import dummy_img from "../../assets/imagesForDahsboard/playstation.png";
 
 const Checkout = () => {
-  const id = useParams();
+  const { lisningId } = useParams();
+
   let match = useRouteMatch();
 
   return (
@@ -16,7 +17,7 @@ const Checkout = () => {
             <span>home</span>
           </Link>
           <span className="arrow_path">{">"}</span>
-          <Link to={`/post/${id}`} className="link_home">
+          <Link to={`/post/${lisningId}`} className="link_home">
             <span>product listing</span>
           </Link>
           <span className="arrow_path"> {">"} </span>

@@ -8,7 +8,6 @@ import logo_listing_user from "../../assets/listing_logo.svg";
 
 const Listing = (props) => {
   let match = useRouteMatch();
-  // const id = useParams();
 
   const [item, setItem] = useState({
     id: 1,

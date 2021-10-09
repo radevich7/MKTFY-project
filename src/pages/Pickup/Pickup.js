@@ -1,11 +1,11 @@
 import "./Pickup.css";
-import { Link, useParams, useRouteMatch } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Button from "../../reusableComponent/Button";
 import { Container, Card, CardBody, Row, Col } from "reactstrap";
 import dummy_img from "../../assets/imagesForDahsboard/playstation.png";
 
 const Pickup = () => {
-  const { id } = useParams();
+  const { lisningId } = useParams();
 
   return (
     <Container fluid className="pickup_container">
@@ -15,11 +15,11 @@ const Pickup = () => {
             <span>home</span>
           </Link>
           <span className="arrow_path">{">"}</span>
-          <Link to={`/post/${id}`} className="link_home">
+          <Link to={`/post/${lisningId}`} className="link_home">
             <span>product listing</span>
           </Link>
           <span className="arrow_path"> {">"} </span>
-          <Link to={`/post/${id}/checkout`} className="link_home">
+          <Link to={`/post/${lisningId}/checkout`} className="link_home">
             <span>Checkout</span>
           </Link>
           <span className="arrow_path"> {">"} </span>
