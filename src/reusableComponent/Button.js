@@ -2,7 +2,10 @@ import "./Button.css";
 
 const Button = (props) => {
   return (
-    <button className={`reusable_button ${props.className}`}>
+    <button
+      className={`reusable_button ${props.className}`}
+      onClick={props.onClick}
+    >
       {props.children}
     </button>
   );

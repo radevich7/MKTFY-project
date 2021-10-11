@@ -1,0 +1,49 @@
+.login_container {
+  height: 100vh;
+  background-image: url("/Users/Julian/PROJECT/mktfy_web_app/src/assets/login_page/background_begin.svg");
+  background-size: cover;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.login_card {
+  background-color: transparent;
+  width: 345px;
+  display: flex;
+  justify-content: center;
+}
+.logo_image {
+  display: flex;
+  justify-content: center;
+}
+.login_button {
+  width: 100%;
+  background-color: #ffba00;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: none;
+  margin-top: 52px;
+  margin-bottom: 15px;
+}
+
+.createAccount_button {
+  width: 100%;
+  background-color: #6318af;
+  font-size: 20px;
+  font-weight: bold;
+}
+.link_to_website {
+  font-size: 1.7em;
+  color: #ffffff;
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+}
+.link_text {
+  font-weight: bold;
+  text-decoration: none;
+  color: #ffba00;
+  padding-left: 5px;
+}

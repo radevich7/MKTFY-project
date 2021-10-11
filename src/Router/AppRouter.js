@@ -7,35 +7,43 @@ import Listing from "../pages/Listing/Listing";
 import Checkout from "../pages/Checkout/Checkout";
 import Pickup from "../pages/Pickup/Pickup";
 import Login from "../pages/Login/Login";
+import LoginFormOverlay from "../pages/Login/LoginFormOverlay";
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
-      <Route path="/login" exact render={(props) => <Login {...props} />} />
       {/* If user autorized and loged in show NavBar ===useReducer.authorized &&*/}
-      <NavBar />
       <Switch>
-        <Route path="/" exact render={(props) => <Redirect to="/home" />} />
+        <Route path="/login" exact render={(props) => <Login {...props} />} />
         <Route
-          path="/home"
+          path="/form"
           exact
-          render={(props) => <Dashboard {...props} />}
+          render={(props) => <LoginFormOverlay {...props} />}
         />
-        <Route
-          path="/post/:lisningId"
-          exact
-          render={(props) => <Listing {...props} />}
-        />
-        <Route
-          path="/post/:lisningId/checkout"
-          exact
-          render={(props) => <Checkout {...props} />}
-        />
-        <Route
-          path="/post/:lisningId/checkout/pickupConfirmation"
-          exact
-          render={(props) => <Pickup {...props} />}
-        />
+        <div>
+          <NavBar />
+          <Route path="/" exact render={(props) => <Redirect to="/home" />} />
+          <Route
+            path="/home"
+            exact
+            render={(props) => <Dashboard {...props} />}
+          />
+          <Route
+            path="/post/:lisningId"
+            exact
+            render={(props) => <Listing {...props} />}
+          />
+          <Route
+            path="/post/:lisningId/checkout"
+            exact
+            render={(props) => <Checkout {...props} />}
+          />
+          <Route
+            path="/post/:lisningId/checkout/pickupConfirmation"
+            exact
+            render={(props) => <Pickup {...props} />}
+          />
+        </div>
       </Switch>
     </BrowserRouter>
   );
