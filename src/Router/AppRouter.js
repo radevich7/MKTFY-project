@@ -7,7 +7,7 @@ import Listing from "../pages/Listing/Listing";
 import Checkout from "../pages/Checkout/Checkout";
 import Pickup from "../pages/Pickup/Pickup";
 import Login from "../pages/Login/Login";
-import LoginFormOverlay from "../pages/Login/LoginFormOverlay";
+import SignUpFormOverlay from "../pages/Login/SignUpFormOverlay";
 
 const AppRouter = () => {
   return (
@@ -18,8 +18,9 @@ const AppRouter = () => {
         <Route
           path="/form"
           exact
-          render={(props) => <LoginFormOverlay {...props} />}
+          render={(props) => <SignUpFormOverlay {...props} />}
         />
+
         <div>
           <NavBar />
           <Route path="/" exact render={(props) => <Redirect to="/home" />} />

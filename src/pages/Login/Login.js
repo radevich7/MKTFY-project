@@ -7,21 +7,18 @@ import LoginFormOverlay from "./LoginFormOverlay";
 import "./Login.css";
 
 const Login = () => {
-  const [modalCart, setModalCart] = useState(false);
+  const [modal, setModal] = useState(false);
 
-  const openModalCart = () => {
-    setModalCart(true);
-  };
-  const hideModalCart = () => {
-    setModalCart(false);
-  };
+  const toggle = () => setModal(!modal);
+
   return (
     <Container fluid className="login_container">
+      <LoginFormOverlay toggle={toggle} modal={modal} />
       <Card className="login_card">
         <div className="logo_image">
           <img src={logo} alt="Logo of the company" />
         </div>
-        <Button className="login_button" onClick={openModalCart}>
+        <Button className="login_button" onClick={toggle}>
           Login
         </Button>
         {/* {modalCart && <LoginModalOverlay />} */}

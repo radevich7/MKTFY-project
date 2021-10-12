@@ -1,11 +1,10 @@
 .modal-dialog {
   top: 15%;
 }
-.modal-content {
-  height: 630px;
-}
-.modal-body {
+
+.login_body {
   padding: 0 8.6rem;
+  flex: 0;
 }
 .modal-title {
   font-size: 40px;
@@ -36,17 +35,52 @@ label {
   margin-bottom: 12px;
 }
 
-.form-control {
+.login_inputField {
   height: 3.4rem;
   font-size: 2em;
   border: 1px solid #e2e2e2;
   margin-bottom: 45px;
 }
-.form-control::placeholder {
+.login_inputField::placeholder {
   color: #4d4d4d60;
   font-weight: 500;
 }
-.form-control:focus {
+.login_inputField:focus {
   border-color: rgb(147, 73, 222);
   box-shadow: 0 0 0 0.25rem rgb(147 73 222 / 25%);
+}
+.password_input_field {
+  display: flex;
+  position: relative;
+}
+.password_eye_logo {
+  position: absolute;
+  height: 3.4rem;
+  right: 2%;
+  font-size: 24px;
+  color: #888889;
+  border: none;
+  background-color: transparent;
+}
+
+.forgot_myPassword_link {
+  font-size: 1.4em;
+  color: #ffba00;
+  font-weight: 600;
+  text-decoration: none;
+  float: right;
+  margin-top: -10px;
+}
+.modal-footer {
+  justify-content: center;
+  border: none;
+}
+.login_input_button {
+  width: 345px;
+  background-color: #ffba00;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: none;
+  margin-top: 50px;
+  margin-bottom: 48px;
 }
