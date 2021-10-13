@@ -5,3 +5,7 @@
   padding: 19px 0px;
   box-shadow: 0px 5px 20px #0000007e;
 }
+
+.reusable_button:disabled {
+  background-color: #e2e2e2;
+}

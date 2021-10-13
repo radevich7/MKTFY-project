@@ -5,24 +5,29 @@ import logo from "../../assets/login_page/logo.svg";
 import Button from "../../reusableComponent/Button";
 import LoginFormOverlay from "./LoginFormOverlay";
 import "./Login.css";
+import SignUpFormOverlay from "./SignUpFormOverlay";
 
 const Login = () => {
-  const [modal, setModal] = useState(false);
-
-  const toggle = () => setModal(!modal);
+  const [modalLogin, setModalLogin] = useState(false);
+  const [modalSignUp, setmodalSignUp] = useState(false);
+  const toggleLogin = () => setModalLogin(!modalLogin);
+  const toggleSignUp = () => setmodalSignUp(!modalSignUp);
 
   return (
     <Container fluid className="login_container">
-      <LoginFormOverlay toggle={toggle} modal={modal} />
+      <LoginFormOverlay toggle={toggleLogin} modal={modalLogin} />
+      <SignUpFormOverlay toggle={toggleSignUp} modal={modalSignUp} />
       <Card className="login_card">
         <div className="logo_image">
           <img src={logo} alt="Logo of the company" />
         </div>
-        <Button className="login_button" onClick={toggle}>
+        <Button className="login_button" onClick={toggleLogin}>
           Login
         </Button>
-        {/* {modalCart && <LoginModalOverlay />} */}
-        <Button className="createAccount_button">Create Account</Button>
+
+        <Button className="createAccount_button" onClick={toggleSignUp}>
+          Create Account
+        </Button>
       </Card>
       <div className="link_to_website">
         <span>

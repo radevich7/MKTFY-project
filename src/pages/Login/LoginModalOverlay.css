@@ -27,6 +27,9 @@
 }
 
 /* Form-GROUP */
+.password_form_group {
+  margin-top: 45px;
+}
 
 label {
   font-size: 1.6em;
@@ -39,15 +42,18 @@ label {
   height: 3.4rem;
   font-size: 2em;
   border: 1px solid #e2e2e2;
-  margin-bottom: 45px;
+  margin-bottom: 10px;
 }
 .login_inputField::placeholder {
   color: #4d4d4d60;
   font-weight: 500;
 }
-.login_inputField:focus {
+.login_inputField.form-control:focus {
   border-color: rgb(147, 73, 222);
   box-shadow: 0 0 0 0.25rem rgb(147 73 222 / 25%);
+}
+.login_inputField.invalid.form-control {
+  border-color: rgb(255, 44, 44);
 }
 .password_input_field {
   display: flex;
@@ -69,7 +75,7 @@ label {
   font-weight: 600;
   text-decoration: none;
   float: right;
-  margin-top: -10px;
+  padding-top: 30px;
 }
 .modal-footer {
   justify-content: center;
@@ -81,6 +87,13 @@ label {
   font-size: 20px;
   font-weight: bold;
   box-shadow: none;
-  margin-top: 50px;
-  margin-bottom: 48px;
+  text-align: center;
+  margin: 112px auto 48px auto;
+  display: block;
+}
+
+.error_message {
+  color: #ff2c2c;
+  font-size: 1.4em;
+  padding: 10px 0;
 }

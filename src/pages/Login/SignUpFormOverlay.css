@@ -10,18 +10,18 @@
 .signup_container.modal-dialog {
   max-width: 1360px;
   height: 800px;
-  top: 0;
+  top: 10%;
 }
 
 .signUp_header.modal-header {
   border: none;
   display: inline-block;
   padding: 0;
+  margin-right: 138px;
   /* align-items: flex-end; */
 }
-.signUp_header h2 {
+.signUp_header h6 {
   font-size: 40px;
-  margin: auto;
   color: #6e20be;
   font-weight: bold;
   margin: 12px 0;
@@ -36,4 +36,35 @@
 .signUp_modal_body {
   background-color: #f7f7f7;
   border-radius: 30px 0 0 0;
+  padding: 30px 138px 0px 34px;
+}
+.signUp_next_button {
+  width: 345px;
+  background-color: #ffba00;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: none;
+  height: 4.4rem;
+  margin-top: 35px;
+}
+
+.signUp_inputField {
+  height: 4.4rem;
+  font-size: 2em;
+  border: 1px solid #e2e2e2;
+  margin-bottom: 15px;
+}
+.signUp_inputField::placeholder {
+  color: #4d4d4d60;
+  font-weight: 500;
+}
+.signUp_inputField:focus {
+  border-color: rgb(147, 73, 222);
+  box-shadow: 0 0 0 0.25rem rgb(147 73 222 / 25%);
+}
+
+.signUp_footer_text {
+  font-size: 17px;
+  color: #888889;
+  margin-top: 18px;
 }
