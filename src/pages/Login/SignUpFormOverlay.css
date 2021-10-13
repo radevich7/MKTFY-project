@@ -52,7 +52,10 @@
   height: 4.4rem;
   font-size: 2em;
   border: 1px solid #e2e2e2;
-  margin-bottom: 15px;
+  /* margin-bottom: 10px; */
+}
+.signUp_modal_body label {
+  margin-top: 15px;
 }
 .signUp_inputField::placeholder {
   color: #4d4d4d60;
@@ -62,9 +65,18 @@
   border-color: rgb(147, 73, 222);
   box-shadow: 0 0 0 0.25rem rgb(147 73 222 / 25%);
 }
+.signUp_inputField.invalid.form-control {
+  border-color: rgb(255, 44, 44);
+}
 
 .signUp_footer_text {
   font-size: 17px;
   color: #888889;
   margin-top: 18px;
+}
+
+.signUp_error_message {
+  color: #ff2c2c;
+  font-size: 1.4em;
+  padding: -5px 0;
 }

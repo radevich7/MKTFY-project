@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "./LoginModalOverlay.css";
+import "./LoginFormOverlay.css";
 import {
   Form,
   FormGroup,
@@ -12,11 +12,12 @@ import {
   Input,
 } from "reactstrap";
 import Button from "../../reusableComponent/Button";
-import { FaEyeSlash } from "react-icons/fa";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
+
 const LoginFormOverlay = (props) => {
-  const [emailValue, setEmailValue] = useState("");
-  const [passwordValue, setPasswordValue] = useState();
+  const [emailValue, setEmailValue] = useState();
   const [emailError, setEmailError] = useState();
+  const [passwordValue, setPasswordValue] = useState();
   const [passwordError, setPasswordError] = useState(false);
   const [formIsValid, setFormIsValid] = useState(false);
   const [visible, setVisible] = useState("password");
@@ -34,9 +35,6 @@ const LoginFormOverlay = (props) => {
       );
     }
   };
-  const emailClasses = emailError
-    ? "login_inputField invalid"
-    : "login_inputField";
 
   const handlePasswordValidation = (e) => {
     const value = e.target.value;
@@ -53,6 +51,10 @@ const LoginFormOverlay = (props) => {
       );
     }
   };
+  const emailClasses = emailError
+    ? "login_inputField invalid"
+    : "login_inputField";
+
   const passwordClasses = passwordError
     ? "login_inputField invalid"
     : "login_inputField";
@@ -64,10 +66,21 @@ const LoginFormOverlay = (props) => {
 
   // show Password Handler
 
-  const showPasswordHandler = (e) => {
+  const togglePasswordHandler = (e) => {
     e.preventDefault();
-    setVisible("text");
+    if (visible === "password") {
+      setVisible("text");
+    } else {
+      setVisible("password");
+    }
   };
+
+  // Form Submit Handler
+
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <Modal
       isOpen={props.modal}
@@ -106,9 +119,9 @@ const LoginFormOverlay = (props) => {
               />
               <button
                 className="password_eye_logo"
-                onClick={showPasswordHandler}
+                onClick={togglePasswordHandler}
               >
-                <FaEyeSlash />
+                {visible === "password" ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
             {passwordError}
@@ -117,7 +130,11 @@ const LoginFormOverlay = (props) => {
             <span>I forgot my password</span>
           </Link>
           <div>
-            <Button disabled={disableLogin} className="login_input_button">
+            <Button
+              disabled={disableLogin}
+              onClick={formSubmitHandler}
+              className="login_input_button"
+            >
               Login
             </Button>
           </div>
