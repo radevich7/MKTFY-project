@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "../../reusableComponent/Button";
 import "./SignUpFormOverlay.css";
+import PhoneInput from "react-phone-number-input/input";
 
 import {
   Col,
@@ -12,7 +13,6 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
 } from "reactstrap";
 
 const SignUpFormOverlay = (props) => {
@@ -23,11 +23,17 @@ const SignUpFormOverlay = (props) => {
   const [emailValue, setEmailValue] = useState();
   const [emailError, setEmailError] = useState();
   const [phoneValue, setPhoneValue] = useState();
+  const [valuePhone, setValuePhone] = useState();
   const [phoneError, setPhoneError] = useState();
   const [streetValue, setStreetValue] = useState();
   const [streetError, setStreetError] = useState();
   const [cityValue, setCityValue] = useState();
   const [cityError, setCityError] = useState();
+  const [provinceValue, setProvinceValue] = useState();
+  const [provinceError, setProvinceError] = useState();
+  const [countryValue, setCountryValue] = useState();
+  const [countryError, setCountryError] = useState();
+  const [formIsValid, setFormIsValid] = useState();
 
   // FIRST NAME
   const firstNameValidation = (e) => {
@@ -82,7 +88,7 @@ const SignUpFormOverlay = (props) => {
   // PHONE
   const phoneValidation = (e) => {
     const value = e.target.value;
-    const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    const regex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
     const isValid = regex.test(value);
     if (isValid) {
       setPhoneValue(value);
@@ -129,6 +135,38 @@ const SignUpFormOverlay = (props) => {
       );
     }
   };
+  const provinceValidation = (e) => {
+    const value = e.target.value;
+    const regex = /[a-zA-Z]+(?:[ '-][a-zA-Z]+)*/;
+    const isValid = regex.test(value);
+    if (isValid) {
+      setProvinceValue(value);
+      setProvinceError();
+    } else {
+      setProvinceValue();
+      setProvinceError(
+        <span className="signUp_error_message">
+          Please enter a valid city name
+        </span>
+      );
+    }
+  };
+  const countryValidation = (e) => {
+    const value = e.target.value;
+    const regex = /[a-zA-Z]+(?:[ '-][a-zA-Z]+)*/;
+    const isValid = regex.test(value);
+    if (isValid) {
+      setCountryValue(value);
+      setCountryError();
+    } else {
+      setCountryValue();
+      setCountryError(
+        <span className="signUp_error_message">
+          Please enter a valid city name
+        </span>
+      );
+    }
+  };
 
   const firstNameClasses = firstNameError
     ? "signUp_inputField invalid"
@@ -140,14 +178,30 @@ const SignUpFormOverlay = (props) => {
     ? "signUp_inputField invalid"
     : "signUp_inputField";
   const phoneClasses = phoneError
-    ? "signUp_inputField invalid"
-    : "signUp_inputField";
+    ? "signUp_inputField form-control invalid"
+    : "signUp_inputField form-control";
   const streetClasses = streetError
     ? "signUp_inputField invalid"
     : "signUp_inputField";
   const cityClasses = cityError
     ? "signUp_inputField invalid"
     : "signUp_inputField";
+  const provinceClasses = provinceError
+    ? "signUp_inputField invalid"
+    : "signUp_inputField";
+  const countryClasses = countryError
+    ? "signUp_inputField invalid"
+    : "signUp_inputField";
+
+  const submitFormHandler = (e) => {
+    e.preventDefault();
+  };
+
+  // Button disabled function
+  let disableLogin = true;
+  if (!firstNameError && !emailError && emailValue) {
+    disableLogin = false;
+  }
 
   return (
     <Modal
@@ -164,7 +218,7 @@ const SignUpFormOverlay = (props) => {
         </p>
       </ModalHeader>
       <ModalBody className="signUp_modal_body">
-        <Form>
+        <Form onSubmit={submitFormHandler}>
           <Row>
             {/* LEFT HALF */}
             <Col lg="6">
@@ -217,13 +271,14 @@ const SignUpFormOverlay = (props) => {
                 <FormGroup>
                   <Label for="phone">Phone</Label>
 
-                  <Input
-                    type="text"
-                    name="phone"
-                    id="phone"
-                    placeholder="+1 (000) 000-0000 "
+                  <PhoneInput
+                    country="US"
+                    international
+                    withCountryCallingCode
                     className={phoneClasses}
                     onBlur={phoneValidation}
+                    // value={valuePhone}
+                    onChange={setValuePhone}
                   />
                   {phoneError}
                 </FormGroup>
@@ -272,8 +327,10 @@ const SignUpFormOverlay = (props) => {
                       name="province"
                       id="province"
                       placeholder="Your province"
-                      className="signUp_inputField"
+                      className={provinceClasses}
+                      onBlur={provinceValidation}
                     />
+                    {provinceError}
                   </FormGroup>
                 </Col>
               </Row>
@@ -286,8 +343,10 @@ const SignUpFormOverlay = (props) => {
                     name="country"
                     id="country"
                     placeholder="Country name"
-                    className="signUp_inputField"
+                    className={countryClasses}
+                    onBlur={countryValidation}
                   />
+                  {countryError}
                 </FormGroup>
               </Row>
               <Row>
@@ -295,6 +354,7 @@ const SignUpFormOverlay = (props) => {
                   <Button
                     className="signUp_next_button"
                     onClick={(e) => e.preventDefault()}
+                    disabled={disableLogin}
                   >
                     Next
                   </Button>
