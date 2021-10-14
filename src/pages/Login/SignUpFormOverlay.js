@@ -193,15 +193,16 @@ const SignUpFormOverlay = (props) => {
     ? "signUp_inputField invalid"
     : "signUp_inputField";
 
-  const submitFormHandler = (e) => {
-    e.preventDefault();
-  };
-
   // Button disabled function
   let disableLogin = true;
   if (!firstNameError && !emailError && emailValue) {
     disableLogin = false;
   }
+
+  // Form Submit
+  const submitFormHandler = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <Modal
