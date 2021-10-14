@@ -8,6 +8,7 @@ import Checkout from "../pages/Checkout/Checkout";
 import Pickup from "../pages/Pickup/Pickup";
 import Login from "../pages/Login/Login";
 import CreatePasswordOverlay from "../pages/Login/CreatePasswordOverlay";
+import AccountInformation from "../pages/AccountInformation/AccountInformation";
 
 const AppRouter = () => {
   return (
@@ -43,6 +44,11 @@ const AppRouter = () => {
             path="/post/:lisningId/checkout/pickupConfirmation"
             exact
             render={(props) => <Pickup {...props} />}
+          />
+          <Route
+            path="/home/account"
+            exact
+            render={(props) => <AccountInformation {...props} />}
           />
         </div>
       </Switch>

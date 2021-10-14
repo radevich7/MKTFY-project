@@ -13,37 +13,62 @@ import Button from "../../reusableComponent/Button";
 import { FaEyeSlash, FaEye, FaCheckCircle } from "react-icons/fa";
 
 const CreatePasswordOverlay = (props) => {
+  // states for eyeicons
   const [passwordVisible, setPasswordVisible] = useState("password");
   const [confirmPasswordVisible, setConfirmPasswordVisible] =
     useState("password");
+
+  //states for validation of the password
   const [passwordValue, setPasswordValue] = useState();
-  const [passwordError, setPasswordError] = useState();
-  const [checkboxValue, setCheckboxValue] = useState(true);
   const [confirmPasswordValue, setConfirmPasswordValue] = useState();
   const [confirmPasswordError, setConfirmPasswordError] = useState();
 
-  const [charactersValue, setCharactersValue] = useState();
-  const [upperCaseValue, setUpperCaseValue] = useState();
+  //Checkbox state
+  const [checkboxValue, setCheckboxValue] = useState(true);
+
+  // Icons to flash
   const [numberValueValidation, setNumberValueValidation] = useState(false);
   const [upperCaseValidation, setUpperCaseValidation] = useState(false);
   const [lengthValueValidation, setLengthValueValidation] = useState(false);
 
   let handlePasswordValidation = (e) => {
     const value = e.target.value;
-    const regex =
-      /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{6,20}$/g;
-    const isValid = regex.test(value);
-    console.log(isValid);
-    if (isValid) {
-      setPasswordValue(value);
-      setPasswordError();
+    const regexNumber = /\d/i;
+    const numberPresent = regexNumber.test(value);
+    const regexUpperCase = /[A-Z]/g;
+    const upperCasePresent = regexUpperCase.test(value);
+    const regexLength = /^.{6,17}$/i;
+    const minLengthPresent = regexLength.test(value);
+    if (value.length === 0) {
+      return;
     } else {
-      setPasswordValue();
-      setPasswordError(
-        <span className="error_message">Your password is incorrect</span>
-      );
+      if (numberPresent) {
+        setNumberValueValidation(true);
+      } else {
+        setNumberValueValidation(false);
+      }
+      if (upperCasePresent) {
+        setUpperCaseValidation(true);
+      } else {
+        setUpperCaseValidation(false);
+      }
+      if (minLengthPresent) {
+        setLengthValueValidation(true);
+      } else {
+        setLengthValueValidation(false);
+      }
+    }
+
+    if (numberPresent && upperCasePresent && minLengthPresent) {
+      setPasswordValue(value);
     }
   };
+
+  let disableLogin = true;
+
+  if (passwordValue && confirmPasswordValue && checkboxValue) {
+    disableLogin = false;
+  }
 
   const handleConfirmPasswordValidation = (e) => {
     const value = e.target.value;
@@ -57,15 +82,12 @@ const CreatePasswordOverlay = (props) => {
       );
     }
   };
-
-  // Set error and red border
-  const passwordClasses = passwordError
-    ? "createPassword_inputField invalid"
-    : "createPassword_inputField";
+  // Set error if password doesn't match
   const confirmPasswordClasses = confirmPasswordError
     ? "createPassword_inputField invalid"
     : "createPassword_inputField";
 
+  // Eye icons logic
   const togglePasswordHandler = (e) => {
     e.preventDefault();
     if (passwordVisible === "password") {
@@ -100,47 +122,6 @@ const CreatePasswordOverlay = (props) => {
     });
   };
 
-  // test PASSWORD ICON VALIDATION
-
-  // handlePasswordValidation = (e) => {
-  //   const value = e.target.value;
-
-  //   // const regex =
-  //   //   /^(?=.*\d)  (?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{6,20}$/;
-  //   // "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
-  //   const numberRegex = /^(?=.*\d)/g;
-  //   const isValidNumber = numberRegex.test(value);
-  //   const upperCaseRegex = /(?=.*[A-Z])/g;
-  //   const upperCaseIsvalid = upperCaseRegex.test(value);
-
-  //   if (value.length === 0) {
-  //     setPasswordValue();
-  //     setNumberValueValidation();
-  //     setUpperCaseValidation();
-  //     setPasswordError(
-  //       <span className="error_message">Your password is incorrect</span>
-  //     );
-  //   } else if (upperCaseIsvalid) {
-  //     setUpperCaseValidation(true);
-  //   } else if (!upperCaseIsvalid) {
-  //     setUpperCaseValidation(false);
-  //   } else if (isValidNumber) {
-  //     setNumberValueValidation(true);
-  //   } else if (!isValidNumber) {
-  //     setNumberValueValidation(false);
-  //   }
-
-  //   // if (isValid) {
-  //   //   setPasswordValue(value);
-  //   //   setPasswordError();
-  //   // } else {
-  //   //   setPasswordValue();
-  //   //   setPasswordError(
-  //   //     <span className="error_message">Your password is incorrect</span>
-  //   //   );
-  //   // }
-  // };
-
   const numberCheckClass = numberValueValidation
     ? "number_check valid"
     : "number_check";
@@ -148,6 +129,11 @@ const CreatePasswordOverlay = (props) => {
   const upperCaseClass = upperCaseValidation
     ? "uppercase_check valid"
     : "uppercase_check";
+
+  const lengthClass = lengthValueValidation
+    ? "characters_check valid"
+    : "characters_check";
+
   return (
     <Modal isOpen={props.modal} toggle={props.toggle} size="lg">
       <ModalHeader toggle={props.toggle} className="createPassword_header">
@@ -167,7 +153,7 @@ const CreatePasswordOverlay = (props) => {
                 name="password"
                 id="password"
                 placeholder="Your password"
-                className={passwordClasses}
+                className="createPassword_inputField"
                 onBlur={handlePasswordValidation}
               />
 
@@ -178,7 +164,6 @@ const CreatePasswordOverlay = (props) => {
                 {passwordVisible === "password" ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
-            {passwordError}
           </FormGroup>
           <FormGroup>
             <Label for="confirmPassword">Confirm Password</Label>
@@ -206,7 +191,7 @@ const CreatePasswordOverlay = (props) => {
           </FormGroup>
 
           <div className="validation_checkmark">
-            <div className="characters_check">
+            <div className={lengthClass}>
               <FaCheckCircle /> <span>At least 6 characters</span>
             </div>
             <div className={upperCaseClass}>
@@ -233,11 +218,11 @@ const CreatePasswordOverlay = (props) => {
           </FormGroup>
           <div>
             <Button
-              // disabled={disableLogin}
+              disabled={disableLogin}
               // onClick={formSubmitHandler}
               className="createPassword_input_button"
             >
-              Login
+              Create Account
             </Button>
           </div>
         </Form>

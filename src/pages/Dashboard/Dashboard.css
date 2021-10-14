@@ -139,6 +139,10 @@ div.card {
   height: 546px;
   background-size: cover;
 }
+.card_banner {
+  color: transparent;
+  background-color: transparent;
+}
 .googlePlayLogo {
   width: 29.8em;
   position: absolute;
