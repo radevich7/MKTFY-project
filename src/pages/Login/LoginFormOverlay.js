@@ -7,7 +7,6 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   Label,
   Input,
 } from "reactstrap";
@@ -19,7 +18,7 @@ const LoginFormOverlay = (props) => {
   const [emailError, setEmailError] = useState();
   const [passwordValue, setPasswordValue] = useState();
   const [passwordError, setPasswordError] = useState(false);
-  const [formIsValid, setFormIsValid] = useState(false);
+
   const [visible, setVisible] = useState("password");
   const handleEmailValidation = (e) => {
     const value = e.target.value;

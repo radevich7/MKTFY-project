@@ -16,6 +16,20 @@ import {
 } from "reactstrap";
 
 const SignUpFormOverlay = (props) => {
+  // const [modal, setModal] = useState(false);
+  // const toggle = (e) => {
+  //   e.preventDefault();
+  //   setModal(!modal);
+  // };
+  // const toggle = (e) => {
+  //   e.preventDefault();
+
+  //   if (e) {
+  //     props.onOpenCreatePassword();
+  //     props.toggle();
+  //   }
+  // };
+
   const [firstNameValue, setFirstNameValue] = useState();
   const [firstNameError, setFirstNameError] = useState();
   const [lastNameValue, setLastNameValue] = useState();
@@ -23,7 +37,7 @@ const SignUpFormOverlay = (props) => {
   const [emailValue, setEmailValue] = useState();
   const [emailError, setEmailError] = useState();
   const [phoneValue, setPhoneValue] = useState();
-  const [valuePhone, setValuePhone] = useState();
+  const [valuePhone, setValuePhone] = useState(); //for international input to work
   const [phoneError, setPhoneError] = useState();
   const [streetValue, setStreetValue] = useState();
   const [streetError, setStreetError] = useState();
@@ -33,11 +47,11 @@ const SignUpFormOverlay = (props) => {
   const [provinceError, setProvinceError] = useState();
   const [countryValue, setCountryValue] = useState();
   const [countryError, setCountryError] = useState();
-  const [formIsValid, setFormIsValid] = useState();
 
   // FIRST NAME
   const firstNameValidation = (e) => {
-    const value = e.target.value;
+    const value = e.target.value.toLowerCase();
+
     const regex = /^[a-z ,.'-]+$/i;
     const isValid = regex.test(value);
     if (isValid) {
@@ -54,7 +68,8 @@ const SignUpFormOverlay = (props) => {
   };
   // LAST NAME
   const lastNameValidation = (e) => {
-    const value = e.target.value;
+    const value = e.target.value.toLowerCase();
+
     const regex = /^[a-z ,.'-]+$/i;
     const isValid = regex.test(value);
     if (isValid) {
@@ -71,7 +86,8 @@ const SignUpFormOverlay = (props) => {
   };
   // EMAIL
   const EmailValidation = (e) => {
-    const value = e.target.value;
+    const value = e.target.value.toLowerCase();
+    console.log(value);
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValid = regex.test(value);
     if (isValid) {
@@ -104,7 +120,7 @@ const SignUpFormOverlay = (props) => {
   };
   // STREET
   const streetValidation = (e) => {
-    const value = e.target.value;
+    const value = e.target.value.toLowerCase();
     const regex = /^\s*[0-9a-zA-Z][0-9a-zA-Z '-]*$/;
     const isValid = regex.test(value);
     if (isValid) {
@@ -120,7 +136,7 @@ const SignUpFormOverlay = (props) => {
     }
   };
   const cityValidation = (e) => {
-    const value = e.target.value;
+    const value = e.target.value.toLowerCase();
     const regex = /[a-zA-Z]+(?:[ '-][a-zA-Z]+)*/;
     const isValid = regex.test(value);
     if (isValid) {
@@ -136,7 +152,7 @@ const SignUpFormOverlay = (props) => {
     }
   };
   const provinceValidation = (e) => {
-    const value = e.target.value;
+    const value = e.target.value.toLowerCase();
     const regex = /[a-zA-Z]+(?:[ '-][a-zA-Z]+)*/;
     const isValid = regex.test(value);
     if (isValid) {
@@ -152,7 +168,7 @@ const SignUpFormOverlay = (props) => {
     }
   };
   const countryValidation = (e) => {
-    const value = e.target.value;
+    const value = e.target.value.toLowerCase();
     const regex = /[a-zA-Z]+(?:[ '-][a-zA-Z]+)*/;
     const isValid = regex.test(value);
     if (isValid) {
@@ -195,13 +211,44 @@ const SignUpFormOverlay = (props) => {
 
   // Button disabled function
   let disableLogin = true;
-  if (!firstNameError && !emailError && emailValue) {
+  if (
+    firstNameValue &&
+    lastNameValue &&
+    emailValue &&
+    phoneValue &&
+    streetValue &&
+    cityValue &&
+    provinceValue &&
+    countryValue &&
+    !firstNameError &&
+    !lastNameError &&
+    !emailError &&
+    !phoneError &&
+    !streetError &&
+    !cityError &&
+    !provinceError &&
+    !countryError
+  ) {
     disableLogin = false;
   }
 
   // Form Submit
   const submitFormHandler = (e) => {
     e.preventDefault();
+    if (e) {
+      props.onOpenCreatePassword();
+      props.toggle();
+    }
+    return props.data({
+      firstName: firstNameValue,
+      lastName: lastNameValue,
+      email: emailValue,
+      phone: phoneValue,
+      street: streetValue,
+      city: cityValue,
+      province: provinceValue,
+      country: countryValue,
+    });
   };
 
   return (
@@ -354,7 +401,7 @@ const SignUpFormOverlay = (props) => {
                 <FormGroup>
                   <Button
                     className="signUp_next_button"
-                    onClick={(e) => e.preventDefault()}
+                    // onClick={toggle}
                     disabled={disableLogin}
                   >
                     Next
