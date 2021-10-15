@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 import "./AppRouter.css";
 import NavBar from "../pages/NavBar/NavBar";
@@ -9,12 +10,33 @@ import Pickup from "../pages/Pickup/Pickup";
 import Login from "../pages/Login/Login";
 import CreatePasswordOverlay from "../pages/Login/CreatePasswordOverlay";
 import AccountInformation from "../pages/AccountInformation/AccountInformation";
+// const FakeLogin = (props) => {
+//   const token = new URLSearchParams(props.location.hash.substr(1)).get(
+//     "access_token"
+//   );
+//   console.log(token);
 
-const AppRouter = () => {
+//   useEffect(() => {
+//     if (token.length > 0) {
+//       localStorage.setItem("Auth_token", token);
+//       props.store.setStore((prevState) => ({
+//         ...prevState,
+//         authenticated: true,
+//       }));
+//     }
+//   }, []);
+//   return <Redirect to={"/"} />;
+// };
+const AppRouter = (props) => {
   return (
     <BrowserRouter>
       {/* If user autorized and loged in show NavBar ===useReducer.authorized &&*/}
       <Switch>
+        {/* <Route
+          path="/"
+          exact
+          render={(props) => <FakeLogin {...props} store={props.store} />}
+        /> */}
         <Route path="/login" exact render={(props) => <Login {...props} />} />
         <Route
           path="/form"

@@ -87,7 +87,7 @@ const SignUpFormOverlay = (props) => {
   // EMAIL
   const EmailValidation = (e) => {
     const value = e.target.value.toLowerCase();
-    console.log(value);
+
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValid = regex.test(value);
     if (isValid) {
@@ -239,7 +239,7 @@ const SignUpFormOverlay = (props) => {
       props.onOpenCreatePassword();
       props.toggle();
     }
-    return props.data({
+    const personObject = {
       firstName: firstNameValue,
       lastName: lastNameValue,
       email: emailValue,
@@ -248,7 +248,8 @@ const SignUpFormOverlay = (props) => {
       city: cityValue,
       province: provinceValue,
       country: countryValue,
-    });
+    };
+    props.setSignupData(personObject);
   };
 
   return (

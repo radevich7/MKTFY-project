@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 import { Container, Card } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import logo from "../../assets/login_page/logo.svg";
 import Button from "../../reusableComponent/Button";
 import "./Login.css";
@@ -12,19 +13,11 @@ const Login = () => {
   const [modalLogin, setModalLogin] = useState(false);
   const [modalSignUp, setmodalSignUp] = useState(false);
   const [modalCreatePassword, setModalCreatePassword] = useState(false);
+  const [signupData, setSignupData] = useState({});
   const toggleLogin = () => setModalLogin(!modalLogin);
   const toggleSignUp = () => setmodalSignUp(!modalSignUp);
   const toggleCreatePassword = () =>
     setModalCreatePassword(!modalCreatePassword);
-
-  const signupData = (data) => {
-    // console.log(data); data from
-  };
-
-  const createPasswordData = (data) => {
-    //data
-    console.log(data);
-  };
 
   return (
     <Container fluid className="login_container">
@@ -33,12 +26,12 @@ const Login = () => {
         toggle={toggleSignUp}
         modal={modalSignUp}
         onOpenCreatePassword={toggleCreatePassword}
-        data={signupData}
+        setSignupData={setSignupData}
       />
       <CreatePasswordOverlay
         toggle={toggleCreatePassword}
         modal={modalCreatePassword}
-        data={createPasswordData}
+        signupData={signupData}
       />
       {/* <Button onClick={toggleCreatePassword}>Create</Button> */}
       <Card className="login_card">

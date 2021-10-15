@@ -1,5 +1,6 @@
 import "./CreatePasswordOverlay.css";
 import { useState } from "react";
+
 import {
   Form,
   FormGroup,
@@ -11,8 +12,15 @@ import {
 } from "reactstrap";
 import Button from "../../reusableComponent/Button";
 import { FaEyeSlash, FaEye, FaCheckCircle } from "react-icons/fa";
+import auth0js from "auth0-js";
 
 const CreatePasswordOverlay = (props) => {
+  // AUTH0
+  const webAuth = new auth0js.WebAuth({
+    domain: process.env.REACT_APP_AUTH0_DOMAIN,
+    clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
+  });
+
   // states for eyeicons
   const [passwordVisible, setPasswordVisible] = useState("password");
   const [confirmPasswordVisible, setConfirmPasswordVisible] =
@@ -113,15 +121,33 @@ const CreatePasswordOverlay = (props) => {
       setCheckboxValue(true);
     }
   };
+  //Final DATA
+  const finalData = { ...props.signupData, password: passwordValue };
 
   const formSubmitHanlder = (e) => {
     e.preventDefault();
-
-    return props.data({
-      password: passwordValue,
-    });
+    webAuth.signup(
+      {
+        connection: process.env.REACT_APP_AUTH0_CONNECTION,
+        email: finalData.email,
+        password: finalData.password,
+      },
+      (res) => {
+        console.log(res, "data has been send");
+      }
+    );
   };
+  // if err{
+  //   show err
+  // }else{}
+  //AXIOS CALL to our backend for the remaining data
+  // axios.post('url', finalData).then(res=>{
+  //   console.log(res);
+  // })
+  //   }
+  // );
 
+  // Classes
   const numberCheckClass = numberValueValidation
     ? "number_check valid"
     : "number_check";

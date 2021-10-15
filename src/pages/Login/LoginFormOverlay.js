@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, Redirect } from "react-router-dom";
 import "./LoginFormOverlay.css";
 import {
   Form,
@@ -12,8 +12,14 @@ import {
 } from "reactstrap";
 import Button from "../../reusableComponent/Button";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
+import auth0js from "auth0-js";
 
 const LoginFormOverlay = (props) => {
+  const webAuth = new auth0js.WebAuth({
+    domain: process.env.REACT_APP_AUTH0_DOMAIN,
+    clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
+  });
+
   const [emailValue, setEmailValue] = useState();
   const [emailError, setEmailError] = useState();
   const [passwordValue, setPasswordValue] = useState();
@@ -78,6 +84,19 @@ const LoginFormOverlay = (props) => {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
+    webAuth.redirect.loginWithCredentials(
+      {
+        connection: process.env.REACT_APP_AUTH0_CONNECTION,
+        username: emailValue,
+        password: passwordValue,
+        redirectUri: window.location.origin + "/login",
+        responseType: "token",
+        scope: "openid profile email",
+      },
+      (res) => {
+        // console.log(res, "RES");
+      }
+    );
   };
 
   return (
