@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./NavBar.css";
 import logo1 from "../../assets/img/MKTFY_wordmark.svg";
 import search_icon from "../../assets/img/search_icon.svg";
@@ -178,7 +179,11 @@ const NavBar = () => {
                     <DropdownItem header className="dropdown_settings_header ">
                       Settings
                     </DropdownItem>
-                    <DropdownItem className="dropDownItem_profile">
+                    <DropdownItem
+                      className="dropDownItem_profile"
+                      to="/home/account"
+                      tag={Link}
+                    >
                       Account Information
                     </DropdownItem>
                     <DropdownItem className="dropDownItem_profile">

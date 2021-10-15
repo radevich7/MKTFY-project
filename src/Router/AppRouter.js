@@ -10,34 +10,36 @@ import Pickup from "../pages/Pickup/Pickup";
 import Login from "../pages/Login/Login";
 import CreatePasswordOverlay from "../pages/Login/CreatePasswordOverlay";
 import AccountInformation from "../pages/AccountInformation/AccountInformation";
-// const FakeLogin = (props) => {
-//   const token = new URLSearchParams(props.location.hash.substr(1)).get(
-//     "access_token"
-//   );
-//   console.log(token);
 
-//   useEffect(() => {
-//     if (token.length > 0) {
-//       localStorage.setItem("Auth_token", token);
-//       props.store.setStore((prevState) => ({
-//         ...prevState,
-//         authenticated: true,
-//       }));
-//     }
-//   }, []);
-//   return <Redirect to={"/"} />;
-// };
-const AppRouter = (props) => {
+const AppRouter = (store) => {
+  const FakeLogin = (props) => {
+    const token = new URLSearchParams(props.location.hash.substr(1)).get(
+      "access_token"
+    );
+    console.log(token);
+
+    useEffect(() => {
+      if (token.length > 0) {
+        localStorage.setItem("Auth_token", token);
+        props.store.setStore((prevState) => ({
+          ...prevState,
+          authenticated: true,
+        }));
+      }
+    }, []);
+    return <Redirect to={"/home"} />;
+  };
+
   return (
     <BrowserRouter>
       {/* If user autorized and loged in show NavBar ===useReducer.authorized &&*/}
       <Switch>
-        {/* <Route
-          path="/"
+        <Route
+          path="/login"
           exact
-          render={(props) => <FakeLogin {...props} store={props.store} />}
-        /> */}
-        <Route path="/login" exact render={(props) => <Login {...props} />} />
+          render={(props) => <FakeLogin {...props} store={store} />}
+        />
+        <Route path="/" exact render={(props) => <Login {...props} />} />
         <Route
           path="/form"
           exact
@@ -46,7 +48,7 @@ const AppRouter = (props) => {
 
         <div>
           <NavBar />
-          <Route path="/" exact render={(props) => <Redirect to="/home" />} />
+
           <Route
             path="/home"
             exact
