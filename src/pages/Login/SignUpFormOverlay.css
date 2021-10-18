@@ -54,8 +54,22 @@
   border: 1px solid #e2e2e2;
   /* margin-bottom: 10px; */
 }
+
 .signUp_modal_body label {
   margin-top: 15px;
+}
+.phoneInput_container {
+  position: relative;
+}
+.phone_placeholder {
+  font-size: 2em;
+  color: #bdbdbe;
+  font-weight: 600;
+  margin-bottom: 12px;
+  position: absolute;
+  top: 20px;
+  left: 45px;
+  /* z-index: 1; */
 }
 .signUp_inputField::placeholder {
   color: #4d4d4d60;

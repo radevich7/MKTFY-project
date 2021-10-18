@@ -53,7 +53,7 @@ const NavBar = () => {
             <Row className="w-100 mx-0 nav_bar ">
               {/* LOGO */}
               <Col lg="1">
-                <NavbarBrand href="/">
+                <NavbarBrand href="/home">
                   <img src={logo1} alt="logo of MKTFY" id="logo1" />
                 </NavbarBrand>
               </Col>
@@ -186,7 +186,11 @@ const NavBar = () => {
                     >
                       Account Information
                     </DropdownItem>
-                    <DropdownItem className="dropDownItem_profile">
+                    <DropdownItem
+                      className="dropDownItem_profile"
+                      to="/home/changepassword"
+                      tag={Link}
+                    >
                       Change Password
                     </DropdownItem>
                     <DropdownItem className="dropDownItem_profile">
@@ -204,7 +208,11 @@ const NavBar = () => {
                     <DropdownItem className="dropDownItem_profile">
                       Contact Us
                     </DropdownItem>
-                    <DropdownItem className="dropDownItem_profile sign_out_button">
+                    <DropdownItem
+                      className="dropDownItem_profile sign_out_button"
+                      to="/logout"
+                      tag={Link}
+                    >
                       Sign Out
                       <img src={exit_app} alt="/icon" id="exit_logo" />
                     </DropdownItem>

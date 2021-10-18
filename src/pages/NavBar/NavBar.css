@@ -208,7 +208,7 @@
   font-size: 14px;
   font-weight: bold;
   color: black;
-  margin-top: 40%;
+  margin-top: 10%;
 }
 .dropDownItem_profile {
   padding: 8% 16px;
@@ -217,8 +217,8 @@
   color: #9349de;
 }
 .sign_out_button {
-  margin-top: 25%;
-  margin-bottom: ;
+  margin-top: 5%;
+
   color: #ff2c2c;
 }
 #exit_logo {

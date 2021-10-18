@@ -319,16 +319,21 @@ const SignUpFormOverlay = (props) => {
               <Row>
                 <FormGroup>
                   <Label for="phone">Phone</Label>
-
-                  <PhoneInput
-                    country="US"
-                    international
-                    withCountryCallingCode
-                    className={phoneClasses}
-                    onBlur={phoneValidation}
-                    // value={valuePhone}
-                    onChange={setValuePhone}
-                  />
+                  <div className="phoneInput_container">
+                    <PhoneInput
+                      country="US"
+                      international
+                      withCountryCallingCode
+                      className={phoneClasses}
+                      onBlur={phoneValidation}
+                      placeholder="asdsadas"
+                      value={valuePhone}
+                      onChange={setValuePhone}
+                    />
+                    {!valuePhone && (
+                      <span class="phone_placeholder">(000) 000 - 0000</span>
+                    )}
+                  </div>
                   {phoneError}
                 </FormGroup>
               </Row>

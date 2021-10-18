@@ -132,8 +132,9 @@ const CreatePasswordOverlay = (props) => {
         email: finalData.email,
         password: finalData.password,
       },
-      (res) => {
-        console.log(res, "data has been send");
+      (err) => {
+        if (err) return alert("Something went wrong: ");
+        return alert("success signup without login!");
       }
     );
   };

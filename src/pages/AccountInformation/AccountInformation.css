@@ -28,6 +28,9 @@
   border: 1px solid #e2e2e2;
   /* margin-bottom: 10px; */
 }
+.phone {
+  width: 100%;
+}
 .accountInformation_card label {
   margin-top: 15px;
   color: #6b6b6c;

@@ -93,7 +93,8 @@ const LoginFormOverlay = (props) => {
         responseType: "token",
         scope: "openid profile email",
       },
-      (res) => {
+      (error) => {
+        console.log(error);
         // console.log(res, "RES");
       }
     );

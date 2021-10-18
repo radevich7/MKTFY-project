@@ -11,10 +11,25 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import Button from "..//../reusableComponent/Button";
+import PhoneInput from "react-phone-number-input/input";
 
 import "./AccountInformation.css";
+import { useState } from "react";
 
 const AccountInformation = () => {
+  const [phonevalue, setPhoneValue] = useState();
+  const [account, setAccount] = [
+    {
+      firstName: "Julian",
+      lastName: "Radevych",
+      address: "20 Mahogany Ave",
+      city: "Calgary",
+      province: "AB",
+      country: "Canada",
+      email: "test@test.com",
+      phone: "4034034040",
+    },
+  ];
   return (
     <Container fluid className="accountInformation_container">
       <Card className="border_document_accountInformation">
@@ -41,6 +56,7 @@ const AccountInformation = () => {
                       id="firstName"
                       placeholder="Your first name"
                       className="accountInformation_inputField"
+                      value={account.firstName}
                     />
                   </FormGroup>
                 </Row>
@@ -54,6 +70,7 @@ const AccountInformation = () => {
                       id="lastName"
                       placeholder="Your last name"
                       className="accountInformation_inputField"
+                      value={account.lastName}
                     />
                   </FormGroup>
                 </Row>
@@ -67,25 +84,26 @@ const AccountInformation = () => {
                       id="email"
                       placeholder="Your email"
                       className="accountInformation_inputField"
+                      value={account.email}
                     />
                   </FormGroup>
                 </Row>
                 <Row>
                   <FormGroup>
                     <Label for="phone">Phone</Label>
-                    <Input
+                    {/* <Input
                       type="text"
                       className="accountInformation_inputField"
-                    />
-                    {/* <PhoneInput
+                      value={account.phone}
+                    /> */}
+                    <PhoneInput
                       country="US"
                       international
                       withCountryCallingCode
-                      className={phoneClasses}
-                      onBlur={phoneValidation}
-
+                      className="accountInformation_inputField phone"
+                      value={account.phone}
+                      // onChange={setValuePhone}
                     />
-                    {phoneError} */}
                   </FormGroup>
                 </Row>
               </Col>
@@ -95,13 +113,14 @@ const AccountInformation = () => {
                 <h5>Address Information</h5>
                 <Row>
                   <FormGroup>
-                    <Label for="street">Street Address</Label>
+                    <Label for="address">Street Address</Label>
 
                     <Input
                       type="text"
-                      name="street"
-                      id="street"
+                      name="address"
+                      id="address"
                       className="accountInformation_inputField"
+                      value={account.address}
                     />
                   </FormGroup>
                 </Row>
@@ -115,6 +134,7 @@ const AccountInformation = () => {
                         name="city"
                         id="city"
                         className="accountInformation_inputField"
+                        value={account.city}
                       />
                     </FormGroup>
                   </Col>
@@ -128,6 +148,7 @@ const AccountInformation = () => {
                         id="province"
                         placeholder="Your province"
                         className="accountInformation_inputField"
+                        value={account.province}
                       />
                     </FormGroup>
                   </Col>
@@ -142,6 +163,7 @@ const AccountInformation = () => {
                       id="country"
                       placeholder="Country name"
                       className="accountInformation_inputField"
+                      value={account.country}
                     />
                   </FormGroup>
                 </Row>

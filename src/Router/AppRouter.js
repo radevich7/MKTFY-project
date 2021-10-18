@@ -3,16 +3,28 @@ import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 import "./AppRouter.css";
 import NavBar from "../pages/NavBar/NavBar";
 import Dashboard from "../pages/Dashboard/Dashboard";
-
+import auth0js from "auth0-js";
 import Listing from "../pages/Listing/Listing";
 import Checkout from "../pages/Checkout/Checkout";
 import Pickup from "../pages/Pickup/Pickup";
 import Login from "../pages/Login/Login";
 import CreatePasswordOverlay from "../pages/Login/CreatePasswordOverlay";
 import AccountInformation from "../pages/AccountInformation/AccountInformation";
+import { useAuth0 } from "@auth0/auth0-react";
+import ChangePassword from "../pages/ChangePassword/ChangePassword";
 
 const AppRouter = (store) => {
-  const FakeLogin = (props) => {
+  const RequireAuth = ({ children }) => {
+    if (!store.authenticated) {
+      return <Redirect to={"/"} />;
+    }
+    return children;
+  };
+  const LoginLogic = (props) => {
+    const expiresIn = new URLSearchParams(props.location.hash.substr(1)).get(
+      "expires_in"
+    );
+    console.log(expiresIn);
     const token = new URLSearchParams(props.location.hash.substr(1)).get(
       "access_token"
     );
@@ -30,6 +42,18 @@ const AppRouter = (store) => {
     return <Redirect to={"/home"} />;
   };
 
+  const LogoutLogic = (props) => {
+    localStorage.removeItem("Auth_token");
+    const { logout } = useAuth0();
+    logout({ returnTo: window.location.origin });
+    useEffect(() => {
+      props.store.setStore((prevState) => ({
+        ...prevState,
+        authenticated: false,
+      }));
+    }, []);
+    return <Redirect to={"/"} />;
+  };
   return (
     <BrowserRouter>
       {/* If user autorized and loged in show NavBar ===useReducer.authorized &&*/}
@@ -37,18 +61,23 @@ const AppRouter = (store) => {
         <Route
           path="/login"
           exact
-          render={(props) => <FakeLogin {...props} store={store} />}
+          render={(props) => <LoginLogic {...props} store={store} />}
         />
+
         <Route path="/" exact render={(props) => <Login {...props} />} />
-        <Route
+        {/* <Route
           path="/form"
           exact
           render={(props) => <CreatePasswordOverlay {...props} />}
-        />
+        /> */}
 
-        <div>
-          <NavBar />
-
+        <RequireAuth>
+          {store.authenticated && <NavBar />}
+          <Route
+            path="/logout"
+            exact
+            render={(props) => <LogoutLogic {...props} store={store} />}
+          />
           <Route
             path="/home"
             exact
@@ -74,7 +103,12 @@ const AppRouter = (store) => {
             exact
             render={(props) => <AccountInformation {...props} />}
           />
-        </div>
+          <Route
+            path="/home/changepassword"
+            exact
+            render={(props) => <ChangePassword {...props} />}
+          />
+        </RequireAuth>
       </Switch>
     </BrowserRouter>
   );
