@@ -235,6 +235,7 @@ const SignUpFormOverlay = (props) => {
   // Form Submit
   const submitFormHandler = (e) => {
     e.preventDefault();
+    setValuePhone();
     if (e) {
       props.onOpenCreatePassword();
       props.toggle();
@@ -259,7 +260,7 @@ const SignUpFormOverlay = (props) => {
       className="signup_container"
     >
       <ModalHeader toggle={props.toggle} className="signUp_header">
-        <h6>Welcome to MKTFY!</h6>
+        Welcome to MKTFY!
         <p>
           It’s nice to meet you. At MKTFY you are able to buy, sell and donate
           awesome stuff to a community of awesome people. Please fill out the
@@ -331,7 +332,9 @@ const SignUpFormOverlay = (props) => {
                       onChange={setValuePhone}
                     />
                     {!valuePhone && (
-                      <span class="phone_placeholder">(000) 000 - 0000</span>
+                      <span className="phone_placeholder">
+                        (000) 000 - 0000
+                      </span>
                     )}
                   </div>
                   {phoneError}

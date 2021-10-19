@@ -43,7 +43,7 @@
   font-size: 2em;
   color: #4d4d4d;
   font-weight: 500;
-
+  display: block;
   position: absolute;
   top: 21px;
   left: 35px;

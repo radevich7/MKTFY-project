@@ -10,7 +10,7 @@ const App = () => {
       firstName: "Julian",
       lastName: "Radevych",
       email: "test@test.com",
-      phone: "4033077577",
+      phone: "+14033077577",
       address: "28 Mahogany View",
       city: "Calgary",
       province: "AB",

@@ -84,6 +84,7 @@ const LoginFormOverlay = (props) => {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
+
     webAuth.redirect.loginWithCredentials(
       {
         connection: process.env.REACT_APP_AUTH0_CONNECTION,
@@ -100,13 +101,14 @@ const LoginFormOverlay = (props) => {
     );
   };
 
+  const forgotPasswordLinkHandler = (e) => {
+    if (e) {
+      props.onForgetPassword();
+      props.toggle();
+    }
+  };
   return (
-    <Modal
-      isOpen={props.modal}
-      toggle={props.toggle}
-      size="lg"
-      className="login_modal_content"
-    >
+    <Modal isOpen={props.modal} toggle={props.toggle} size="lg">
       <ModalHeader toggle={props.toggle} className="login_header">
         Welcome Back!
       </ModalHeader>
@@ -145,9 +147,12 @@ const LoginFormOverlay = (props) => {
             </div>
             {passwordError}
           </FormGroup>
-          <Link to="/" className="forgot_myPassword_link">
+          <p
+            onClick={forgotPasswordLinkHandler}
+            className="forgot_myPassword_link"
+          >
             <span>I forgot my password</span>
-          </Link>
+          </p>
           <div>
             <Button
               disabled={disableLogin}

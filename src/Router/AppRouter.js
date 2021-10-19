@@ -12,6 +12,7 @@ import CreatePasswordOverlay from "../pages/Login/CreatePasswordOverlay";
 import AccountInformation from "../pages/AccountInformation/AccountInformation";
 import { useAuth0 } from "@auth0/auth0-react";
 import ChangePassword from "../pages/ChangePassword/ChangePassword";
+import ForgetPasswordModal from "../pages/Login/ForgetPasswordModal";
 
 const AppRouter = (store) => {
   const RequireAuth = ({ children }) => {
@@ -21,10 +22,6 @@ const AppRouter = (store) => {
     return children;
   };
   const LoginLogic = (props) => {
-    const expiresIn = new URLSearchParams(props.location.hash.substr(1)).get(
-      "expires_in"
-    );
-    console.log(expiresIn);
     const token = new URLSearchParams(props.location.hash.substr(1)).get(
       "access_token"
     );
@@ -66,11 +63,11 @@ const AppRouter = (store) => {
         />
 
         <Route path="/" exact render={(props) => <Login {...props} />} />
-        {/* <Route
+        <Route
           path="/form"
           exact
-          render={(props) => <CreatePasswordOverlay {...props} />}
-        /> */}
+          render={(props) => <ForgetPasswordModal {...props} />}
+        />
 
         <RequireAuth>
           {store.authenticated && <NavBar />}

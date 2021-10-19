@@ -39,16 +39,16 @@ const AccountInformation = (props) => {
   const [countryUpdated, setCountryUpdated] = useState(
     props.store.userData.country
   );
-  const currentPhone = `(${phoneUpdated.slice(0, 3)}) ${phoneUpdated.slice(
-    3,
-    6
-  )} - ${phoneUpdated.slice(6)}`;
+  const phonePlaceholder = `(${phoneUpdated.slice(2, 5)}) ${phoneUpdated.slice(
+    5,
+    8
+  )} - ${phoneUpdated.slice(8)}`;
 
   const userDataUpdated = {
     firstName: firstNameUpdated,
     lastName: lastNameUpdated,
     email: emailUpdated,
-    phone: phoneUpdated,
+    phone: !defaultPhoneValue ? phoneUpdated : defaultPhoneValue,
     address: addressUpdated,
     city: cityUpdated,
     province: provinceUpdated,
@@ -69,6 +69,7 @@ const AccountInformation = (props) => {
       })
       .catch((err) => alert(err));
   };
+
   return (
     <Container fluid className="accountInformation_container">
       <Card className="border_document_accountInformation">
@@ -140,11 +141,11 @@ const AccountInformation = (props) => {
                         withCountryCallingCode
                         className="accountInformation_inputField phone"
                         value={defaultPhoneValue}
-                        onChange={(e) => setPhoneUpdated(e.target.value)}
+                        onChange={(e) => setDefaultPhoneValue(e)}
                       />
                       {!defaultPhoneValue && (
                         <span className="accountInformation_phone_placeholder">
-                          {currentPhone}
+                          {phonePlaceholder}
                         </span>
                       )}
                     </div>

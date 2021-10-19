@@ -8,20 +8,28 @@ import "./Login.css";
 import LoginFormOverlay from "./LoginFormOverlay";
 import SignUpFormOverlay from "./SignUpFormOverlay";
 import CreatePasswordOverlay from "./CreatePasswordOverlay";
+import ForgetPasswordModal from "./ForgetPasswordModal";
 
 const Login = () => {
   const [modalLogin, setModalLogin] = useState(false);
   const [modalSignUp, setmodalSignUp] = useState(false);
   const [modalCreatePassword, setModalCreatePassword] = useState(false);
+  const [forgetPasswordModal, setForgetPasswordModal] = useState(false);
   const [signupData, setSignupData] = useState({});
   const toggleLogin = () => setModalLogin(!modalLogin);
   const toggleSignUp = () => setmodalSignUp(!modalSignUp);
   const toggleCreatePassword = () =>
     setModalCreatePassword(!modalCreatePassword);
+  const toggleForgotPasswordModal = () =>
+    setForgetPasswordModal(!forgetPasswordModal);
 
   return (
     <Container fluid className="login_container">
-      <LoginFormOverlay toggle={toggleLogin} modal={modalLogin} />
+      <LoginFormOverlay
+        toggle={toggleLogin}
+        modal={modalLogin}
+        onForgetPassword={toggleForgotPasswordModal}
+      />
       <SignUpFormOverlay
         toggle={toggleSignUp}
         modal={modalSignUp}
@@ -33,7 +41,11 @@ const Login = () => {
         modal={modalCreatePassword}
         signupData={signupData}
       />
-      {/* <Button onClick={toggleCreatePassword}>Create</Button> */}
+      <ForgetPasswordModal
+        toggle={toggleForgotPasswordModal}
+        modal={forgetPasswordModal}
+      />
+
       <Card className="login_card">
         <div className="logo_image">
           <img src={logo} alt="Logo of the company" />
