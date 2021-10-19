@@ -44,6 +44,7 @@ const Login = () => {
       <ForgetPasswordModal
         toggle={toggleForgotPasswordModal}
         modal={forgetPasswordModal}
+        loginToggle={toggleLogin}
       />
 
       <Card className="login_card">

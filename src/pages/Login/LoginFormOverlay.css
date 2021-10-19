@@ -76,6 +76,7 @@ label {
   text-decoration: none;
   float: right;
   padding-top: 30px;
+  cursor: pointer;
 }
 .modal-footer {
   justify-content: center;

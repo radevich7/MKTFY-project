@@ -8,9 +8,10 @@ import {
   ModalBody,
   Label,
   Input,
-  Container,
 } from "reactstrap";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
+
 import Button from "../../reusableComponent/Button";
 import auth0js from "auth0-js";
 const ForgetPasswordModal = (props) => {
@@ -75,7 +76,7 @@ const ForgetPasswordModal = (props) => {
     setEmailError();
     props.toggle();
   };
-  const message = (
+  const confirmationMessage = (
     <div className="confirmation_card">
       <p className="confirmation_text">
         Please check your email inbox for a password recovery link. Don't forget
@@ -92,8 +93,17 @@ const ForgetPasswordModal = (props) => {
       <ModalHeader toggle={props.toggle} className="forgetPassword_header">
         Forgot Your Password?
       </ModalHeader>
+      <div
+        className="backArrow"
+        onClick={(e) => {
+          props.toggle();
+          props.loginToggle();
+        }}
+      >
+        <FaArrowLeft />
+      </div>
       {isSuccess ? (
-        message
+        confirmationMessage
       ) : (
         <ModalBody className="forgetPassword_body">
           <Form onSubmit={formSubmitHandler}>

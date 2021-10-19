@@ -151,7 +151,7 @@ const LoginFormOverlay = (props) => {
             onClick={forgotPasswordLinkHandler}
             className="forgot_myPassword_link"
           >
-            <span>I forgot my password</span>
+            I forgot my password
           </p>
           <div>
             <Button

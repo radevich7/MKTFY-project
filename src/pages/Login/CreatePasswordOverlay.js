@@ -13,6 +13,7 @@ import {
 import Button from "../../reusableComponent/Button";
 import { FaEyeSlash, FaEye, FaCheckCircle } from "react-icons/fa";
 import auth0js from "auth0-js";
+import { Link } from "react-router-dom";
 
 const CreatePasswordOverlay = (props) => {
   // AUTH0
@@ -239,8 +240,15 @@ const CreatePasswordOverlay = (props) => {
               className="createPassword_checkbox"
             />
             <Label>
-              By checking this box, you agree to our Terms of service and our
-              Privacy Policy
+              By checking this box, you agree to our{" "}
+              <Link className="policy_link" to="/termsofservice">
+                {" "}
+                Terms of service{" "}
+              </Link>
+              and our{" "}
+              <Link className="policy_link" to="">
+                Privacy Policy
+              </Link>
             </Label>
           </FormGroup>
           <div>

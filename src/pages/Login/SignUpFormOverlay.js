@@ -160,11 +160,6 @@ const SignUpFormOverlay = (props) => {
       setProvinceError();
     } else {
       setProvinceValue();
-      setProvinceError(
-        <span className="signUp_error_message">
-          Please enter a valid city name
-        </span>
-      );
     }
   };
   const countryValidation = (e) => {

@@ -3,16 +3,14 @@ import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 import "./AppRouter.css";
 import NavBar from "../pages/NavBar/NavBar";
 import Dashboard from "../pages/Dashboard/Dashboard";
-import auth0js from "auth0-js";
 import Listing from "../pages/Listing/Listing";
 import Checkout from "../pages/Checkout/Checkout";
 import Pickup from "../pages/Pickup/Pickup";
 import Login from "../pages/Login/Login";
-import CreatePasswordOverlay from "../pages/Login/CreatePasswordOverlay";
 import AccountInformation from "../pages/AccountInformation/AccountInformation";
 import { useAuth0 } from "@auth0/auth0-react";
 import ChangePassword from "../pages/ChangePassword/ChangePassword";
-import ForgetPasswordModal from "../pages/Login/ForgetPasswordModal";
+import TermsOfService from "../pages/TermsOfService/TermsOfService";
 
 const AppRouter = (store) => {
   const RequireAuth = ({ children }) => {
@@ -61,12 +59,11 @@ const AppRouter = (store) => {
           exact
           render={(props) => <LoginLogic {...props} store={store} />}
         />
-
         <Route path="/" exact render={(props) => <Login {...props} />} />
         <Route
-          path="/form"
+          path="/termsofservice"
           exact
-          render={(props) => <ForgetPasswordModal {...props} />}
+          render={(props) => <TermsOfService {...props} />}
         />
 
         <RequireAuth>
