@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./ChangePassword.css";
 import { Link } from "react-router-dom";
 import Button from "../../reusableComponent/Button";
+import auth0js from "auth0-js";
 import {
   Container,
   Card,
@@ -18,8 +19,10 @@ import {
 } from "reactstrap";
 import { FaEyeSlash, FaEye, FaCheckCircle } from "react-icons/fa";
 
-const ChangePassword = () => {
+const ChangePassword = (props) => {
   // states for eyeicons
+  const [currentPasswordVisible, setCurrentPasswordVisible] =
+    useState("password");
   const [passwordVisible, setPasswordVisible] = useState("password");
   const [confirmPasswordVisible, setConfirmPasswordVisible] =
     useState("password");
@@ -88,6 +91,14 @@ const ChangePassword = () => {
     : "createPassword_inputField";
 
   // Eye icons logic
+  const toggleCurrentPassword = (e) => {
+    e.preventDefault();
+    if (currentPasswordVisible === "password") {
+      setCurrentPasswordVisible("text");
+    } else {
+      setCurrentPasswordVisible("password");
+    }
+  };
   const togglePasswordHandler = (e) => {
     e.preventDefault();
     if (passwordVisible === "password") {
@@ -115,7 +126,28 @@ const ChangePassword = () => {
   const lengthClass = lengthValueValidation
     ? "characters_check valid"
     : "characters_check";
-  const formSubmitHanlder = () => {};
+
+  const webAuth = new auth0js.WebAuth({
+    domain: process.env.REACT_APP_AUTH0_DOMAIN,
+    clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
+  });
+  const formSubmitHanlder = (e) => {
+    e.preventDefault();
+
+    webAuth.changePassword(
+      {
+        connection: "CONNECTION",
+        email: "EMAIL",
+      },
+      function (err, resp) {
+        if (err) {
+          console.log(err.message);
+        } else {
+          console.log(resp);
+        }
+      }
+    );
+  };
   return (
     <Container fluid className="changePassword_container">
       <Card className="changePassword_card">
@@ -132,13 +164,22 @@ const ChangePassword = () => {
           <Label for="currentPassword">Current Password</Label>
           <div className="password_input_field">
             <Input
-              type={confirmPasswordVisible}
+              type={currentPasswordVisible}
               name="currentPassword"
               id="currentPassword"
               placeholder="Your password"
               className="createPassword_inputField"
-              onBlur={handleConfirmPasswordValidation}
             />
+            <button
+              className="password_eye_logo"
+              onClick={toggleCurrentPassword}
+            >
+              {currentPasswordVisible === "password" ? (
+                <FaEyeSlash />
+              ) : (
+                <FaEye />
+              )}
+            </button>
           </div>
 
           <Form onSubmit={formSubmitHanlder}>
@@ -207,7 +248,7 @@ const ChangePassword = () => {
             </div>
           </Form>
           <Link to={`/pickupConfirmation`}>
-            <Button className="checkout_button">Set Password</Button>
+            <Button className="changePassword_button">Set Password</Button>
           </Link>
         </CardBody>
       </Card>

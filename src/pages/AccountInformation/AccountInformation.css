@@ -39,6 +39,16 @@
   color: #4d4d4d60;
   font-weight: 500;
 }
+.accountInformation_phone_placeholder {
+  font-size: 2em;
+  color: #4d4d4d;
+  font-weight: 500;
+
+  position: absolute;
+  top: 21px;
+  left: 35px;
+  /* z-index: 1; */
+}
 
 .accountInformation_button {
   background-color: #ffba00;

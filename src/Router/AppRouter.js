@@ -54,6 +54,7 @@ const AppRouter = (store) => {
     }, []);
     return <Redirect to={"/"} />;
   };
+
   return (
     <BrowserRouter>
       {/* If user autorized and loged in show NavBar ===useReducer.authorized &&*/}
@@ -81,32 +82,32 @@ const AppRouter = (store) => {
           <Route
             path="/home"
             exact
-            render={(props) => <Dashboard {...props} />}
+            render={(props) => <Dashboard {...props} store={store} />}
           />
           <Route
             path="/post/:lisningId"
             exact
-            render={(props) => <Listing {...props} />}
+            render={(props) => <Listing {...props} store={store} />}
           />
           <Route
             path="/post/:lisningId/checkout"
             exact
-            render={(props) => <Checkout {...props} />}
+            render={(props) => <Checkout {...props} store={store} />}
           />
           <Route
             path="/post/:lisningId/checkout/pickupConfirmation"
             exact
-            render={(props) => <Pickup {...props} />}
+            render={(props) => <Pickup {...props} store={store} />}
           />
           <Route
             path="/home/account"
             exact
-            render={(props) => <AccountInformation {...props} />}
+            render={(props) => <AccountInformation {...props} store={store} />}
           />
           <Route
             path="/home/changepassword"
             exact
-            render={(props) => <ChangePassword {...props} />}
+            render={(props) => <ChangePassword {...props} store={store} />}
           />
         </RequireAuth>
       </Switch>

@@ -9,27 +9,66 @@ import {
   Card,
   CardBody,
 } from "reactstrap";
+
 import { Link } from "react-router-dom";
 import Button from "..//../reusableComponent/Button";
 import PhoneInput from "react-phone-number-input/input";
 
 import "./AccountInformation.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import axios from "axios";
 
-const AccountInformation = () => {
-  const [phonevalue, setPhoneValue] = useState();
-  const [account, setAccount] = [
-    {
-      firstName: "Julian",
-      lastName: "Radevych",
-      address: "20 Mahogany Ave",
-      city: "Calgary",
-      province: "AB",
-      country: "Canada",
-      email: "test@test.com",
-      phone: "4034034040",
-    },
-  ];
+const AccountInformation = (props) => {
+  const [userData, setUserData] = useState(props.store.userData);
+  const [firstNameUpdated, setFirstNameUpdated] = useState(
+    props.store.userData.firstName
+  );
+  const [lastNameUpdated, setLastNameUpdated] = useState(
+    props.store.userData.lastName
+  );
+  const [emailUpdated, setEmailUpdated] = useState(props.store.userData.email);
+  const [phoneUpdated, setPhoneUpdated] = useState(props.store.userData.phone);
+  const [defaultPhoneValue, setDefaultPhoneValue] = useState("");
+  const [addressUpdated, setAddressUpdated] = useState(
+    props.store.userData.address
+  );
+  const [cityUpdated, setCityUpdated] = useState(props.store.userData.city);
+  const [provinceUpdated, setProvinceUpdated] = useState(
+    props.store.userData.province
+  );
+  const [countryUpdated, setCountryUpdated] = useState(
+    props.store.userData.country
+  );
+  const currentPhone = `(${phoneUpdated.slice(0, 3)}) ${phoneUpdated.slice(
+    3,
+    6
+  )} - ${phoneUpdated.slice(6)}`;
+
+  const userDataUpdated = {
+    firstName: firstNameUpdated,
+    lastName: lastNameUpdated,
+    email: emailUpdated,
+    phone: phoneUpdated,
+    address: addressUpdated,
+    city: cityUpdated,
+    province: provinceUpdated,
+    country: countryUpdated,
+  };
+  console.log(userDataUpdated);
+
+  const submitFormHandler = (e) => {
+    e.preventDefault();
+
+    axios
+      .put("url", userDataUpdated)
+      .then((res) => {
+        props.store.setStore((prevState) => ({
+          ...prevState,
+          userData: userDataUpdated,
+        }));
+      })
+      .catch((err) => alert(err));
+  };
   return (
     <Container fluid className="accountInformation_container">
       <Card className="border_document_accountInformation">
@@ -41,7 +80,7 @@ const AccountInformation = () => {
           <span>Account information</span>
         </div>
         <CardBody className="accountInformation_card">
-          <Form>
+          <Form onSubmit={submitFormHandler}>
             <Row>
               {/* LEFT HALF */}
               <Col lg="6">
@@ -56,7 +95,8 @@ const AccountInformation = () => {
                       id="firstName"
                       placeholder="Your first name"
                       className="accountInformation_inputField"
-                      value={account.firstName}
+                      defaultValue={firstNameUpdated}
+                      onChange={(e) => setFirstNameUpdated(e.target.value)}
                     />
                   </FormGroup>
                 </Row>
@@ -70,7 +110,8 @@ const AccountInformation = () => {
                       id="lastName"
                       placeholder="Your last name"
                       className="accountInformation_inputField"
-                      value={account.lastName}
+                      defaultValue={userData.lastName}
+                      onChange={(e) => setLastNameUpdated(e.target.value)}
                     />
                   </FormGroup>
                 </Row>
@@ -84,26 +125,29 @@ const AccountInformation = () => {
                       id="email"
                       placeholder="Your email"
                       className="accountInformation_inputField"
-                      value={account.email}
+                      defaultValue={userData.email}
+                      onChange={(e) => setEmailUpdated(e.target.value)}
                     />
                   </FormGroup>
                 </Row>
                 <Row>
                   <FormGroup>
                     <Label for="phone">Phone</Label>
-                    {/* <Input
-                      type="text"
-                      className="accountInformation_inputField"
-                      value={account.phone}
-                    /> */}
-                    <PhoneInput
-                      country="US"
-                      international
-                      withCountryCallingCode
-                      className="accountInformation_inputField phone"
-                      value={account.phone}
-                      // onChange={setValuePhone}
-                    />
+                    <div className="phoneInput_container">
+                      <PhoneInput
+                        country="US"
+                        international
+                        withCountryCallingCode
+                        className="accountInformation_inputField phone"
+                        value={defaultPhoneValue}
+                        onChange={(e) => setPhoneUpdated(e.target.value)}
+                      />
+                      {!defaultPhoneValue && (
+                        <span className="accountInformation_phone_placeholder">
+                          {currentPhone}
+                        </span>
+                      )}
+                    </div>
                   </FormGroup>
                 </Row>
               </Col>
@@ -120,7 +164,8 @@ const AccountInformation = () => {
                       name="address"
                       id="address"
                       className="accountInformation_inputField"
-                      value={account.address}
+                      defaultValue={userData.address}
+                      onChange={(e) => setAddressUpdated(e.target.value)}
                     />
                   </FormGroup>
                 </Row>
@@ -134,7 +179,8 @@ const AccountInformation = () => {
                         name="city"
                         id="city"
                         className="accountInformation_inputField"
-                        value={account.city}
+                        defaultValue={userData.city}
+                        onChange={(e) => setCityUpdated(e.target.value)}
                       />
                     </FormGroup>
                   </Col>
@@ -148,7 +194,8 @@ const AccountInformation = () => {
                         id="province"
                         placeholder="Your province"
                         className="accountInformation_inputField"
-                        value={account.province}
+                        defaultValue={userData.province}
+                        onChange={(e) => setProvinceUpdated(e.target.value)}
                       />
                     </FormGroup>
                   </Col>
@@ -163,18 +210,14 @@ const AccountInformation = () => {
                       id="country"
                       placeholder="Country name"
                       className="accountInformation_inputField"
-                      value={account.country}
+                      defaultValue={userData.country}
+                      onChange={(e) => setCountryUpdated(e.target.value)}
                     />
                   </FormGroup>
                 </Row>
                 <Row>
                   <FormGroup>
-                    <Button
-                      className="accountInformation_button"
-                      // onClick={toggle}
-                    >
-                      Save
-                    </Button>
+                    <Button className="accountInformation_button">Save</Button>
                   </FormGroup>
                 </Row>
               </Col>
