@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Button from "../../reusableComponent/Button";
 import { Link } from "react-router-dom";
+
 import {
   Container,
   Dropdown,
@@ -12,14 +13,14 @@ import {
   FormGroup,
   Label,
   Input,
-  UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem,
 } from "reactstrap";
 import "./CreateListing.css";
+import camera from "../../assets/camera.svg";
 
 const CreateListing = () => {
+  // State managment for toggling of the dropdown menus
   const [dropdownOpenCategories, setDropdownOpenCategories] = useState(false);
   const toggleCategories = () =>
     setDropdownOpenCategories((prevState) => !prevState);
@@ -28,6 +29,23 @@ const CreateListing = () => {
     setDropdownOpenCondition((prevState) => !prevState);
   const [dropdownOpenCity, setDropdownOpenCity] = useState(false);
   const toggleCity = () => setDropdownOpenCity((prevState) => !prevState);
+  // State managment for uploading images
+  const inputRef = useRef(null);
+  const [uploadFile, setUploadFile] = useState(null);
+  const [previewImages, setPreviewImages] = useState(null);
+  const downloadImageHandler = (event) => {
+    let previewUrls = [];
+    let imageFiles = event.target.files;
+    if (imageFiles.length > 5) {
+      console.log("error");
+    } else {
+      for (let i = 0; i < imageFiles.length; i++) {
+        let url = URL.createObjectURL(imageFiles[i]);
+        previewUrls.push(url);
+      }
+      console.log(previewUrls);
+    }
+  };
 
   return (
     <Container fluid className="createListing_container">
@@ -40,24 +58,76 @@ const CreateListing = () => {
           <span>product listing</span>
         </div>
         <CardBody className="cardBody_createListing">
-          <Row className="w-100" className="border">
-            {/* First column -carousel*/}
-            <Col lg="4">
-              <Row>
-                {" "}
-                <Card className="product_images_createListing">
-                  <CardBody>sad</CardBody>
-                </Card>
-              </Row>
-            </Col>
+          <Form>
+            <Row className="w-100">
+              <Col lg="4">
+                <Row className="h-100">
+                  <Card className="p-0">
+                    <CardBody className="product_images_createListing">
+                      <FormGroup
+                        className="p-0"
+                        onClick={() => inputRef.current.click()}
+                      >
+                        <div className="addPhoto_main">
+                          <img src={camera} alt="/" className="main_camera" />
+                          <p>Choose or drag up to 5 photos</p>
+                        </div>
+                        <Row>
+                          <Col>
+                            <div className="addPhoto_secondary">
+                              <img
+                                src={camera}
+                                alt="/"
+                                className="secondary_camera"
+                              />
+                            </div>
+                          </Col>
+                          <Col>
+                            <div className="addPhoto_secondary">
+                              <img
+                                src={camera}
+                                alt="/"
+                                className="secondary_camera"
+                              />
+                            </div>
+                          </Col>
+                          <Col>
+                            <div className="addPhoto_secondary">
+                              <img
+                                src={camera}
+                                alt="/"
+                                className="secondary_camera"
+                              />
+                            </div>
+                          </Col>
+                          <Col>
+                            <div className="addPhoto_secondary">
+                              <img
+                                src={camera}
+                                alt="/"
+                                className="secondary_camera"
+                              />
+                            </div>
+                          </Col>
+                        </Row>
+                      </FormGroup>
+                      <input
+                        multiple
+                        type="file"
+                        ref={inputRef}
+                        onChange={downloadImageHandler}
+                        style={{ display: "none" }}
+                      />
+                    </CardBody>
+                  </Card>
+                </Row>
+              </Col>
 
-            <Col className="">
-              <Row>
-                {" "}
-                <Card className="product_details_createListing">
-                  <CardBody>
-                    <Form>
-                      <FormGroup>
+              <Col>
+                <Row className="w-100">
+                  <FormGroup className="p-0">
+                    <Card className="p-0">
+                      <CardBody className="product_details_createListing">
                         <Row>
                           <Label for="productName">Product Name</Label>
 
@@ -66,6 +136,7 @@ const CreateListing = () => {
                             name="productName"
                             id="productName"
                             className="createListing_inputField"
+                            placeholder="Enter product name"
                           />
                         </Row>
                         <Row>
@@ -75,6 +146,7 @@ const CreateListing = () => {
                             name="description"
                             id="description"
                             className="createListing_inputField description"
+                            placeholder="Enter description"
                           />
                         </Row>
                         {/* CATEGORIES DROPDOWN */}
@@ -140,7 +212,7 @@ const CreateListing = () => {
                               >
                                 Select condition
                               </DropdownToggle>
-                              <DropdownMenu className="categories_dropdownMenu">
+                              <DropdownMenu className="condition_dropdownMenu">
                                 <div
                                   onClick={toggleCondition}
                                   className="dropDownItem_createListing"
@@ -195,7 +267,7 @@ const CreateListing = () => {
                             >
                               Select city
                             </DropdownToggle>
-                            <DropdownMenu className="categories_dropdownMenu">
+                            <DropdownMenu className="city_dropdownMenu">
                               <div
                                 onClick={toggleCity}
                                 className="dropDownItem_createListing"
@@ -217,13 +289,13 @@ const CreateListing = () => {
                           </Button>
                           <Button className="cancel_button">Cancel</Button>
                         </Row>
-                      </FormGroup>
-                    </Form>
-                  </CardBody>
-                </Card>
-              </Row>
-            </Col>
-          </Row>
+                      </CardBody>
+                    </Card>
+                  </FormGroup>
+                </Row>
+              </Col>
+            </Row>
+          </Form>
         </CardBody>
       </Card>
     </Container>
