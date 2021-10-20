@@ -211,6 +211,12 @@ const CreateListing = () => {
                             </DropdownMenu>
                           </Dropdown>
                         </Row>
+                        <Row>
+                          <Button className="postListing_button">
+                            Post your listing
+                          </Button>
+                          <Button className="cancel_button">Cancel</Button>
+                        </Row>
                       </FormGroup>
                     </Form>
                   </CardBody>

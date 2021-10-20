@@ -24,7 +24,7 @@ div.card.product_images_createListing {
 }
 div.card.product_details_createListing {
   border-radius: 0px 10px 10px 0px;
-  padding: 0px 352px 62px 0;
+  padding: 0px 352px 2rem 0;
 }
 .product_details_createListing label {
   font-size: 1.4em;
@@ -96,3 +96,20 @@ div.card.product_details_createListing {
 }
 
 /*     transform: translate3d(0px, 52px, 0px) */
+.postListing_button {
+  background-color: #6318af;
+  font-size: 1.4em;
+  font-weight: bold;
+  box-shadow: none;
+  margin-top: 32px;
+}
+.cancel_button {
+  color: #969696;
+  font-size: 1.4em;
+  font-weight: bold;
+  box-shadow: none;
+  background-color: #f8f8f8;
+  border: 1px solid #969696;
+  box-shadow: none;
+  margin-top: 20px;
+}
