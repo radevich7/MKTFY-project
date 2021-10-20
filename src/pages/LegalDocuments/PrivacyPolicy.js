@@ -10,7 +10,7 @@ const PrivacyPolicy = (props) => {
         <img src={logo} alt="Logo of the company" className="company_logo" />
       </div>
       <Card className="terms_card">
-        <CardBody className="terms_cardBody">
+        <CardBody className="privacy_cardBody">
           <div className="backArrow_terms">
             <FaArrowLeft />
           </div>

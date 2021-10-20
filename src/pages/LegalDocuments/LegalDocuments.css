@@ -8,14 +8,19 @@
   background-color: #ffffff;
 }
 
-.terms_cardBody {
-  padding: 0 418px;
+.terms_cardBody,
+.privacy_cardBody {
+  padding: 0 418px 61px 418px;
 }
-.terms_cardBody p {
+
+.terms_cardBody p,
+.privacy_cardBody p {
   font-size: 2em;
   color: #888889;
 }
-.terms_cardBody h1 {
+
+.terms_cardBody h1,
+.privacy_cardBody h1 {
   font-size: 4em;
   text-align: center;
   font-weight: bold;

@@ -24,6 +24,7 @@ const LoginFormOverlay = (props) => {
   const [emailError, setEmailError] = useState();
   const [passwordValue, setPasswordValue] = useState();
   const [passwordError, setPasswordError] = useState(false);
+  const [loginError, setLoginError] = useState();
 
   const [visible, setVisible] = useState("password");
   const handleEmailValidation = (e) => {
@@ -95,8 +96,9 @@ const LoginFormOverlay = (props) => {
         scope: "openid profile email",
       },
       (error) => {
-        console.log(error);
-        // console.log(res, "RES");
+        setLoginError(
+          <span className="error_message">{error.description}</span>
+        );
       }
     );
   };
@@ -146,6 +148,7 @@ const LoginFormOverlay = (props) => {
               </button>
             </div>
             {passwordError}
+            {loginError}
           </FormGroup>
           <p
             onClick={forgotPasswordLinkHandler}

@@ -13,6 +13,7 @@ import ChangePassword from "../pages/ChangePassword/ChangePassword";
 import TermsOfService from "../pages/LegalDocuments/TermsOfService";
 import Purchases from "../pages/Purchases/Purchases";
 import PrivacyPolicy from "../pages/LegalDocuments/PrivacyPolicy";
+import CreateListing from "../pages/CreateListing/CreateListing";
 
 const AppRouter = (store) => {
   const RequireAuth = ({ children }) => {
@@ -113,6 +114,11 @@ const AppRouter = (store) => {
             path="/home/purchases"
             exact
             render={(props) => <Purchases {...props} store={store} />}
+          />
+          <Route
+            path="/home/create"
+            exact
+            render={(props) => <CreateListing {...props} store={store} />}
           />
         </RequireAuth>
       </Switch>

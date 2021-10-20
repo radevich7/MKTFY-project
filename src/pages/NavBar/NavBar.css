@@ -343,6 +343,10 @@
   font-weight: 600;
   color: #ffffff;
   box-shadow: 0px 5px 20px #0000007e;
+  text-decoration: none;
+}
+.button_create_listing:hover {
+  color: #ffffff;
 }
 
 #container {

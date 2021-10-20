@@ -286,12 +286,12 @@ const NavBar = () => {
                 </Dropdown>
               </Col>
               <Col lg="2" className="button_column">
-                <button className="button_create_listing w-100">
+                <Link to="/home/create" className="button_create_listing w-100">
                   <span id="container">
                     <span>+</span>
                   </span>
                   Create Listing
-                </button>
+                </Link>
               </Col>
             </Row>
           </Nav>
