@@ -9,7 +9,6 @@ import {
   Label,
   Input,
 } from "reactstrap";
-import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 
 import Button from "../../reusableComponent/Button";

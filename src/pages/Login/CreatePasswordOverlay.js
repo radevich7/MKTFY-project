@@ -241,12 +241,12 @@ const CreatePasswordOverlay = (props) => {
             />
             <Label>
               By checking this box, you agree to our{" "}
-              <Link className="policy_link" to="/termsofservice">
+              <Link className="policy_link" to="/terms&services">
                 {" "}
                 Terms of service{" "}
               </Link>
               and our{" "}
-              <Link className="policy_link" to="">
+              <Link className="policy_link" to="/termsofservice">
                 Privacy Policy
               </Link>
             </Label>

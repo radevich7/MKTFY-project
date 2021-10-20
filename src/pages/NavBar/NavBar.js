@@ -193,7 +193,11 @@ const NavBar = () => {
                     >
                       Change Password
                     </DropdownItem>
-                    <DropdownItem className="dropDownItem_profile">
+                    <DropdownItem
+                      className="dropDownItem_profile"
+                      to="/home/purchases"
+                      tag={Link}
+                    >
                       My purchases
                     </DropdownItem>
                     <DropdownItem className="dropDownItem_profile">

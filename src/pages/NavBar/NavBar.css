@@ -94,6 +94,7 @@
 }
 .dropdown {
   font-size: 2em;
+  cursor: pointer;
 }
 .dropDownCustom_search_card {
   margin-top: 40px;

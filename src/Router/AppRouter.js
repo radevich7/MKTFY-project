@@ -10,7 +10,9 @@ import Login from "../pages/Login/Login";
 import AccountInformation from "../pages/AccountInformation/AccountInformation";
 import { useAuth0 } from "@auth0/auth0-react";
 import ChangePassword from "../pages/ChangePassword/ChangePassword";
-import TermsOfService from "../pages/TermsOfService/TermsOfService";
+import TermsOfService from "../pages/LegalDocuments/TermsOfService";
+import Purchases from "../pages/Purchases/Purchases";
+import PrivacyPolicy from "../pages/LegalDocuments/PrivacyPolicy";
 
 const AppRouter = (store) => {
   const RequireAuth = ({ children }) => {
@@ -23,7 +25,6 @@ const AppRouter = (store) => {
     const token = new URLSearchParams(props.location.hash.substr(1)).get(
       "access_token"
     );
-    console.log(token);
 
     useEffect(() => {
       if (token.length > 0) {
@@ -61,9 +62,14 @@ const AppRouter = (store) => {
         />
         <Route path="/" exact render={(props) => <Login {...props} />} />
         <Route
-          path="/termsofservice"
+          path="/terms&services"
           exact
           render={(props) => <TermsOfService {...props} />}
+        />
+        <Route
+          path="/privacy"
+          exact
+          render={(props) => <PrivacyPolicy {...props} />}
         />
 
         <RequireAuth>
@@ -102,6 +108,11 @@ const AppRouter = (store) => {
             path="/home/changepassword"
             exact
             render={(props) => <ChangePassword {...props} store={store} />}
+          />
+          <Route
+            path="/home/purchases"
+            exact
+            render={(props) => <Purchases {...props} store={store} />}
           />
         </RequireAuth>
       </Switch>

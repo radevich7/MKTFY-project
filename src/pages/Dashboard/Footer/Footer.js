@@ -28,8 +28,8 @@ const Footer = () => {
             <Col lg="6">
               <Nav vertical>
                 <NavLink className="footer_navlink_header">Jump to</NavLink>
-                <NavLink href="#">Account Information</NavLink>
-                <NavLink href="#">Terms & Services</NavLink>
+                <NavLink href="/home/account">Account Information</NavLink>
+                <NavLink href="/terms&services">Terms & Services</NavLink>
                 <NavLink href="#">Privacy Policy</NavLink>
                 <NavLink href="#">FAQ</NavLink>
               </Nav>

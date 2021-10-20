@@ -1,0 +1,56 @@
+.purchases_container {
+  height: 100vh;
+
+  background-image: url("/Users/Julian/PROJECT/mktfy_web_app/src/assets/imgBackgoundGreyWaves.svg");
+  background-attachment: fixed;
+  background-position: 50% 50%;
+  padding-top: 312px;
+  background-color: #f4f4f5;
+}
+.border_document_purchases {
+  max-width: 1636px;
+  margin: 0 auto;
+  background-color: transparent;
+}
+.purchases_card {
+  max-width: 808px;
+  background-color: #ffffff;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 5px;
+}
+.image_purchases {
+  display: flex;
+  justify-content: center;
+  height: 215px;
+}
+.details_purchases {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.details_purchases h6 {
+  color: #000000;
+  font-size: 1.4em;
+  font-weight: 300;
+}
+.details_purchases h5 {
+  font-size: 2em;
+  font-weight: 400;
+}
+.details_purchases span {
+  display: inline-block;
+  color: #6318af;
+  font-size: 2em;
+  font-weight: bold;
+  margin-top: 12px;
+}
+.border_document_purchases h1 {
+  font-size: 4em;
+  color: #4d4d4d;
+  margin-bottom: 15px;
+}
+.total_purchases {
+  font-size: 1.6em;
+  margin-bottom: 30px;
+}
