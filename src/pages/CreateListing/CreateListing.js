@@ -18,7 +18,7 @@ import {
 } from "reactstrap";
 import "./CreateListing.css";
 import camera from "../../assets/camera.svg";
-
+import UploadImgModal from "./UploadImgModal";
 const CreateListing = () => {
   // State managment for toggling of the dropdown menus
   const [dropdownOpenCategories, setDropdownOpenCategories] = useState(false);
@@ -29,26 +29,22 @@ const CreateListing = () => {
     setDropdownOpenCondition((prevState) => !prevState);
   const [dropdownOpenCity, setDropdownOpenCity] = useState(false);
   const toggleCity = () => setDropdownOpenCity((prevState) => !prevState);
+
+  const [uploadImgModal, setUploadImgModal] = useState(false);
+  const toggleUploadImg = () => setUploadImgModal(!uploadImgModal);
   // State managment for uploading images
-  const inputRef = useRef(null);
   const [uploadFile, setUploadFile] = useState(null);
   const [previewImages, setPreviewImages] = useState(null);
-  const downloadImageHandler = (event) => {
-    let previewUrls = [];
-    let imageFiles = event.target.files;
-    if (imageFiles.length > 5) {
-      console.log("error");
-    } else {
-      for (let i = 0; i < imageFiles.length; i++) {
-        let url = URL.createObjectURL(imageFiles[i]);
-        previewUrls.push(url);
-      }
-      console.log(previewUrls);
-    }
-  };
-
+  console.log(previewImages.map((image, index) => image));
   return (
     <Container fluid className="createListing_container">
+      <UploadImgModal
+        toggle={toggleUploadImg}
+        modal={uploadImgModal}
+        setPreviewImages={setPreviewImages}
+        setUploadFile={setUploadFile}
+        uploadFile={uploadFile}
+      />
       <Card className="border_document_createListing">
         <div className="page_path">
           <Link to="/home" className="link_home">
@@ -64,10 +60,26 @@ const CreateListing = () => {
                 <Row className="h-100">
                   <Card className="p-0">
                     <CardBody className="product_images_createListing">
-                      <FormGroup
-                        className="p-0"
-                        onClick={() => inputRef.current.click()}
-                      >
+                      {/* For uploading img */}
+                      {/* <FormGroup className="p-0">
+                        <div className="reviewPhoto_main"></div>
+                        <Row>
+                          <Col>
+                            <div className="reviewPhoto_secondary"></div>
+                          </Col>
+                          <Col>
+                            <div className="reviewPhoto_secondary"></div>
+                          </Col>
+                          <Col>
+                            <div className="reviewPhoto_secondary"></div>
+                          </Col>
+                          <Col>
+                            <div className="reviewPhoto_secondary"></div>
+                          </Col>
+                        </Row>
+                      </FormGroup> */}
+                      {/* For adding img */}
+                      <FormGroup className="p-0" onClick={toggleUploadImg}>
                         <div className="addPhoto_main">
                           <img src={camera} alt="/" className="main_camera" />
                           <p>Choose or drag up to 5 photos</p>
@@ -111,20 +123,13 @@ const CreateListing = () => {
                           </Col>
                         </Row>
                       </FormGroup>
-                      <input
-                        multiple
-                        type="file"
-                        ref={inputRef}
-                        onChange={downloadImageHandler}
-                        style={{ display: "none" }}
-                      />
                     </CardBody>
                   </Card>
                 </Row>
               </Col>
 
               <Col>
-                <Row className="w-100">
+                <Row w={100}>
                   <FormGroup className="p-0">
                     <Card className="p-0">
                       <CardBody className="product_details_createListing">
