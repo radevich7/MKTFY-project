@@ -19,6 +19,7 @@ import {
 import "./CreateListing.css";
 import camera from "../../assets/camera.svg";
 import UploadImgModal from "./UploadImgModal";
+import PreviewContent from "./PreviewContent";
 const CreateListing = () => {
   // State managment for toggling of the dropdown menus
   const [dropdownOpenCategories, setDropdownOpenCategories] = useState(false);
@@ -35,9 +36,11 @@ const CreateListing = () => {
   // State managment for uploading images
   const [uploadFile, setUploadFile] = useState(null);
   const [previewImages, setPreviewImages] = useState(null);
-  console.log(previewImages.map((image, index) => image));
+  // console.log(previewImages.map((image, index) => image));
+
   return (
     <Container fluid className="createListing_container">
+      {/* MODAL */}
       <UploadImgModal
         toggle={toggleUploadImg}
         modal={uploadImgModal}
@@ -45,6 +48,7 @@ const CreateListing = () => {
         setUploadFile={setUploadFile}
         uploadFile={uploadFile}
       />
+      {/* END MODAL */}
       <Card className="border_document_createListing">
         <div className="page_path">
           <Link to="/home" className="link_home">
@@ -60,69 +64,59 @@ const CreateListing = () => {
                 <Row className="h-100">
                   <Card className="p-0">
                     <CardBody className="product_images_createListing">
-                      {/* For uploading img */}
-                      {/* <FormGroup className="p-0">
-                        <div className="reviewPhoto_main"></div>
-                        <Row>
-                          <Col>
-                            <div className="reviewPhoto_secondary"></div>
-                          </Col>
-                          <Col>
-                            <div className="reviewPhoto_secondary"></div>
-                          </Col>
-                          <Col>
-                            <div className="reviewPhoto_secondary"></div>
-                          </Col>
-                          <Col>
-                            <div className="reviewPhoto_secondary"></div>
-                          </Col>
-                        </Row>
-                      </FormGroup> */}
-                      {/* For adding img */}
-                      <FormGroup className="p-0" onClick={toggleUploadImg}>
-                        <div className="addPhoto_main">
-                          <img src={camera} alt="/" className="main_camera" />
-                          <p>Choose or drag up to 5 photos</p>
-                        </div>
-                        <Row>
-                          <Col>
-                            <div className="addPhoto_secondary">
-                              <img
-                                src={camera}
-                                alt="/"
-                                className="secondary_camera"
-                              />
-                            </div>
-                          </Col>
-                          <Col>
-                            <div className="addPhoto_secondary">
-                              <img
-                                src={camera}
-                                alt="/"
-                                className="secondary_camera"
-                              />
-                            </div>
-                          </Col>
-                          <Col>
-                            <div className="addPhoto_secondary">
-                              <img
-                                src={camera}
-                                alt="/"
-                                className="secondary_camera"
-                              />
-                            </div>
-                          </Col>
-                          <Col>
-                            <div className="addPhoto_secondary">
-                              <img
-                                src={camera}
-                                alt="/"
-                                className="secondary_camera"
-                              />
-                            </div>
-                          </Col>
-                        </Row>
-                      </FormGroup>
+                      {uploadFile && previewImages.length > 0 ? (
+                        // PREVIEW CONTENT
+                        <PreviewContent
+                          previewImages={previewImages}
+                          toggle={toggleUploadImg}
+                        />
+                      ) : (
+                        // PREVIEW CONTENT
+                        <FormGroup className="p-0" onClick={toggleUploadImg}>
+                          <div className="addPhoto_main">
+                            <img src={camera} alt="/" className="main_camera" />
+                            <p>Choose or drag up to 5 photos</p>
+                          </div>
+                          <Row>
+                            <Col>
+                              <div className="addPhoto_secondary">
+                                <img
+                                  src={camera}
+                                  alt="/"
+                                  className="secondary_camera"
+                                />
+                              </div>
+                            </Col>
+                            <Col>
+                              <div className="addPhoto_secondary">
+                                <img
+                                  src={camera}
+                                  alt="/"
+                                  className="secondary_camera"
+                                />
+                              </div>
+                            </Col>
+                            <Col>
+                              <div className="addPhoto_secondary">
+                                <img
+                                  src={camera}
+                                  alt="/"
+                                  className="secondary_camera"
+                                />
+                              </div>
+                            </Col>
+                            <Col>
+                              <div className="addPhoto_secondary">
+                                <img
+                                  src={camera}
+                                  alt="/"
+                                  className="secondary_camera"
+                                />
+                              </div>
+                            </Col>
+                          </Row>
+                        </FormGroup>
+                      )}
                     </CardBody>
                   </Card>
                 </Row>

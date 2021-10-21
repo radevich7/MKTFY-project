@@ -173,6 +173,12 @@ div.card.product_details_createListing {
   background-color: #f7f7f7;
   margin-bottom: 12px;
 }
+.reviewPhoto_main img {
+  width: 100%;
+
+  height: 100%;
+  object-fit: contain;
+}
 .reviewPhoto_secondary {
   height: 90px;
   border: 1px solid #7070704d;
@@ -181,6 +187,15 @@ div.card.product_details_createListing {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.reviewPhoto_secondary img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.previewImg_container .col {
+  padding: 5px;
 }
 
 /* MODAL upload img */
