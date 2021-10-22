@@ -292,3 +292,9 @@ div p {
   top: 7%;
   right: -85%;
 }
+
+.caret_custom {
+  position: absolute;
+  top: 25%;
+  right: 2%;
+}

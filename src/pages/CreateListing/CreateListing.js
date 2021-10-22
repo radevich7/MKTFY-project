@@ -404,7 +404,6 @@ const CreateListing = () => {
                         </Row>
                         <Row>
                           {/* <FormGroup> */}
-                          <Label for="exampleSelect">Select</Label>
                           <CustomSelect />
                         </Row>
                         <Row>
