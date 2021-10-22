@@ -19,9 +19,9 @@ const TermsOfService = (props) => {
 
       <Card className="terms_card">
         <CardBody className="terms_cardBody">
-          <div className="backArrow_terms" onClick={goBack}>
+          {/* <div className="backArrow_terms" onClick={goBack}>
             <FaArrowLeft />
-          </div>
+          </div> */}
           <h1>MKTFY Terms & Services</h1>
           <p>
             These Terms of Service constitute a legally binding agreement made

@@ -4,6 +4,7 @@ import { Form, FormGroup, Modal, ModalHeader, ModalBody } from "reactstrap";
 import Button from "../../reusableComponent/Button";
 const UploadImgModal = (props) => {
   const [imageNames, setImageNames] = useState();
+  const [maxImageError, setmaxImageError] = useState();
   const inputRef = useRef(null);
   let previewUrls = [];
 
@@ -11,13 +12,18 @@ const UploadImgModal = (props) => {
     let FileList = event.target.files;
 
     if (FileList.length > 5) {
-      console.log("error");
+      setmaxImageError(
+        <p className="maxImage_error">
+          You have exceeded maximum download limit (max 5 images){" "}
+        </p>
+      );
     } else {
       for (let i = 0; i < FileList.length; i++) {
         //   Get url's
         let url = URL.createObjectURL(FileList[i]);
         previewUrls.push(url);
-        // Get file names
+
+        setmaxImageError();
       }
       let names = Array.from(FileList).map((file) => file.name);
       setImageNames(names);
@@ -51,9 +57,12 @@ const UploadImgModal = (props) => {
               Choose Files
             </button>
             <span>No file Chosen</span>
-            <div className="uploadImg_container">
-              <h2>Drop files here</h2>
-            </div>
+            {maxImageError}
+            {!imageNames && (
+              <div className="uploadImg_container">
+                <h2>Drop files here</h2>
+              </div>
+            )}
             <input
               multiple
               type="file"

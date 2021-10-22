@@ -1,6 +1,6 @@
 .signup_container .modal-content {
   width: 1360px;
-  height: 800px;
+
   padding: 0 0 0 104px;
   border-radius: 10px;
 
@@ -9,7 +9,7 @@
 
 .signup_container.modal-dialog {
   max-width: 1360px;
-  height: 800px;
+
   top: 10%;
 }
 

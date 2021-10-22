@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import Button from "../../reusableComponent/Button";
 import { Link } from "react-router-dom";
 
@@ -15,21 +16,30 @@ import {
   Input,
   DropdownToggle,
   DropdownMenu,
+  DropdownItem,
 } from "reactstrap";
 import "./CreateListing.css";
 import camera from "../../assets/camera.svg";
 import UploadImgModal from "./UploadImgModal";
 import PreviewContent from "./PreviewContent";
+
+import CustomSelect from "../../reusableComponent/CustomSelect";
 const CreateListing = () => {
+  const history = useHistory();
+
   // State managment for toggling of the dropdown menus
   const [dropdownOpenCategories, setDropdownOpenCategories] = useState(false);
-  const toggleCategories = () =>
+  const toggleCategories = (e) => {
     setDropdownOpenCategories((prevState) => !prevState);
+  };
   const [dropdownOpenCondition, setDropdownOpenCondition] = useState(false);
   const toggleCondition = () =>
     setDropdownOpenCondition((prevState) => !prevState);
   const [dropdownOpenCity, setDropdownOpenCity] = useState(false);
   const toggleCity = () => setDropdownOpenCity((prevState) => !prevState);
+  const [dropdownOpenProvince, setDropdownOpenProvince] = useState(false);
+  const toggleProvince = () =>
+    setDropdownOpenProvince((prevState) => !prevState);
 
   const [uploadImgModal, setUploadImgModal] = useState(false);
   const toggleUploadImg = () => setUploadImgModal(!uploadImgModal);
@@ -37,6 +47,73 @@ const CreateListing = () => {
   const [uploadFile, setUploadFile] = useState(null);
   const [previewImages, setPreviewImages] = useState(null);
   // console.log(previewImages.map((image, index) => image));
+
+  const removeImage = (index) => {
+    let previewimageClone = [...previewImages];
+    let uploadFileClone = [...uploadFile];
+
+    let newImages = previewimageClone.filter((image, i) => i !== index);
+    let newFiles = uploadFileClone.filter((image, i) => i !== index);
+    setPreviewImages(newImages);
+    setUploadFile(newFiles);
+  };
+
+  // VALIDATION OF THE FORM
+  const [productName, setProductName] = useState();
+  const [description, setDescription] = useState();
+  const [category, setCategory] = useState();
+  const [condition, setCondition] = useState();
+  const [price, setPrice] = useState();
+  const [address, setAddress] = useState();
+  const [city, setCity] = useState();
+  const [province, setProvince] = useState();
+  const productNameHandler = (e) => {
+    setProductName(e.target.value);
+  };
+  const descriptionHandler = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const categoriesHandler = (e) => {
+    setCategory(e.target.value);
+  };
+  const conditionHandler = (e) => {
+    setCondition(e.target.value);
+  };
+  const priceHandler = (e) => {
+    setPrice(e.target.value);
+  };
+  const addressHandler = (e) => {
+    setAddress(e.target.value);
+  };
+  const cityHandler = (e) => {
+    setCity(e.target.value);
+    console.log(e.target.value);
+  };
+  const provinceHandler = (e) => {
+    setProvince(e.target.value);
+  };
+
+  const submitFormHandler = (e) => {
+    e.preventDefault();
+
+    const newListing = {
+      productName,
+      description,
+      category,
+      condition,
+      price,
+      address,
+      province,
+      city,
+    };
+    console.log(newListing);
+    // let fileData = new FormData();
+    // for (let i = 0; i < uploadFile.length; i++) {
+    //   fileData.append("File[]", uploadFile[i]);
+    // }
+    // AXIOS CALL.post (url, fileData).then(res=>{})
+  };
 
   return (
     <Container fluid className="createListing_container">
@@ -58,7 +135,7 @@ const CreateListing = () => {
           <span>product listing</span>
         </div>
         <CardBody className="cardBody_createListing">
-          <Form>
+          <Form onSubmit={submitFormHandler}>
             <Row className="w-100">
               <Col lg="4">
                 <Row className="h-100">
@@ -69,6 +146,7 @@ const CreateListing = () => {
                         <PreviewContent
                           previewImages={previewImages}
                           toggle={toggleUploadImg}
+                          removeImage={removeImage}
                         />
                       ) : (
                         // PREVIEW CONTENT
@@ -136,6 +214,7 @@ const CreateListing = () => {
                             id="productName"
                             className="createListing_inputField"
                             placeholder="Enter product name"
+                            onBlur={productNameHandler}
                           />
                         </Row>
                         <Row>
@@ -145,12 +224,15 @@ const CreateListing = () => {
                             name="description"
                             id="description"
                             className="createListing_inputField description"
-                            placeholder="Enter description"
+                            placeholder="Enter description (max 250 characters)"
+                            maxLength="250"
+                            onBlur={descriptionHandler}
                           />
                         </Row>
                         {/* CATEGORIES DROPDOWN */}
                         <Row>
                           <Label for="category">Category</Label>
+
                           <Dropdown
                             isOpen={dropdownOpenCategories}
                             toggle={toggleCategories}
@@ -163,33 +245,35 @@ const CreateListing = () => {
                               className="createListing_dropdown_header"
                               caret
                             >
-                              Select a category
+                              {!category ? "Select a category" : category}
                             </DropdownToggle>
                             <DropdownMenu className="categories_dropdownMenu">
-                              <div
-                                onClick={toggleCategories}
+                              <DropdownItem
+                                onClick={categoriesHandler}
                                 className="dropDownItem_createListing"
+                                value="cars"
                               >
                                 Cars & Vehicles
-                              </div>
-                              <div
-                                onClick={toggleCategories}
+                              </DropdownItem>
+                              <DropdownItem
+                                onClick={categoriesHandler}
                                 className="dropDownItem_createListing"
+                                value="furniture"
                               >
                                 Furniture
-                              </div>
-                              <div
-                                onClick={toggleCategories}
+                              </DropdownItem>
+                              <DropdownItem
+                                onClick={categoriesHandler}
                                 className="dropDownItem_createListing"
                               >
                                 Electronics
-                              </div>
-                              <div
-                                onClick={toggleCategories}
+                              </DropdownItem>
+                              <DropdownItem
+                                onClick={categoriesHandler}
                                 className="dropDownItem_createListing"
                               >
                                 Real State
-                              </div>
+                              </DropdownItem>
                             </DropdownMenu>
                           </Dropdown>
                         </Row>
@@ -200,7 +284,7 @@ const CreateListing = () => {
                             <Dropdown
                               isOpen={dropdownOpenCondition}
                               toggle={toggleCondition}
-                              className="createListing_dropdown condition"
+                              className="createListing_dropdown padddingText"
                             >
                               <DropdownToggle
                                 tag="span"
@@ -212,23 +296,23 @@ const CreateListing = () => {
                                 Select condition
                               </DropdownToggle>
                               <DropdownMenu className="condition_dropdownMenu">
-                                <div
-                                  onClick={toggleCondition}
+                                <DropdownItem
+                                  onClick={conditionHandler}
                                   className="dropDownItem_createListing"
                                 >
                                   Used
-                                </div>
-                                <div
-                                  onClick={toggleCondition}
+                                </DropdownItem>
+                                <DropdownItem
+                                  onClick={conditionHandler}
                                   className="dropDownItem_createListing"
                                 >
                                   New
-                                </div>
+                                </DropdownItem>
                               </DropdownMenu>
                             </Dropdown>
                           </Col>
 
-                          <Col lg="6" className=" padding_left">
+                          <Col lg="6" className="padding_left">
                             <Label for="price">Price</Label>
                             <Input
                               type="number"
@@ -236,6 +320,7 @@ const CreateListing = () => {
                               id="price"
                               className="createListing_inputField "
                               placeholder="Type the price"
+                              onBlur={priceHandler}
                             />
                           </Col>
                         </Row>
@@ -248,45 +333,91 @@ const CreateListing = () => {
                             id="address"
                             className="createListing_inputField"
                             placeholder="Enter address for pick up"
+                            onBlur={addressHandler}
                           />
                         </Row>
                         <Row>
-                          <Label for="category">City</Label>
-                          <Dropdown
-                            isOpen={dropdownOpenCity}
-                            toggle={toggleCity}
-                            className="createListing_dropdown category"
-                          >
-                            <DropdownToggle
-                              tag="span"
-                              data-toggle="dropdown"
-                              aria-expanded={dropdownOpenCity}
-                              className="createListing_dropdown_header"
-                              caret
+                          <Col lg="6" className="padding_rigth">
+                            <Label for="category">City</Label>
+                            <Dropdown
+                              isOpen={dropdownOpenCity}
+                              toggle={toggleCity}
+                              className="createListing_dropdown padddingText"
                             >
-                              Select city
-                            </DropdownToggle>
-                            <DropdownMenu className="city_dropdownMenu">
-                              <div
-                                onClick={toggleCity}
-                                className="dropDownItem_createListing"
+                              <DropdownToggle
+                                tag="span"
+                                data-toggle="dropdown"
+                                aria-expanded={dropdownOpenCity}
+                                className="createListing_dropdown_header"
+                                caret
                               >
-                                Cars & Vehicles
-                              </div>
-                              <div
-                                onClick={toggleCity}
-                                className="dropDownItem_createListing"
+                                Select city
+                              </DropdownToggle>
+                              <DropdownMenu className="city_dropdownMenu">
+                                <DropdownItem
+                                  onClick={cityHandler}
+                                  className="dropDownItem_createListing"
+                                >
+                                  Calgary
+                                </DropdownItem>
+                                <DropdownItem
+                                  onClick={cityHandler}
+                                  className="dropDownItem_createListing"
+                                >
+                                  Brooks
+                                </DropdownItem>
+                              </DropdownMenu>
+                            </Dropdown>
+                          </Col>
+                          <Col lg="6" className="padding_left">
+                            <Label for="province">Province</Label>
+                            <Dropdown
+                              isOpen={dropdownOpenProvince}
+                              toggle={toggleProvince}
+                              className="createListing_dropdown padddingText"
+                            >
+                              <DropdownToggle
+                                tag="span"
+                                data-toggle="dropdown"
+                                aria-expanded={dropdownOpenProvince}
+                                className="createListing_dropdown_header"
+                                caret
                               >
-                                Furniture
-                              </div>
-                            </DropdownMenu>
-                          </Dropdown>
+                                Select province
+                              </DropdownToggle>
+                              <DropdownMenu className="city_dropdownMenu">
+                                <DropdownItem
+                                  onClick={provinceHandler}
+                                  className="dropDownItem_createListing"
+                                >
+                                  Alberta
+                                </DropdownItem>
+                                <DropdownItem
+                                  onClick={provinceHandler}
+                                  className="dropDownItem_createListing"
+                                >
+                                  Manitoba
+                                </DropdownItem>
+                              </DropdownMenu>
+                            </Dropdown>
+                          </Col>
+                        </Row>
+                        <Row>
+                          {/* <FormGroup> */}
+                          <Label for="exampleSelect">Select</Label>
+                          <CustomSelect />
                         </Row>
                         <Row>
                           <Button className="postListing_button">
                             Post your listing
                           </Button>
-                          <Button className="cancel_button">Cancel</Button>
+
+                          <Button
+                            className="cancel_button"
+                            onClick={() => history.push("/home")}
+                          >
+                            Cancel
+                          </Button>
                         </Row>
                       </CardBody>
                     </Card>

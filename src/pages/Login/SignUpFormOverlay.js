@@ -16,20 +16,6 @@ import {
 } from "reactstrap";
 
 const SignUpFormOverlay = (props) => {
-  // const [modal, setModal] = useState(false);
-  // const toggle = (e) => {
-  //   e.preventDefault();
-  //   setModal(!modal);
-  // };
-  // const toggle = (e) => {
-  //   e.preventDefault();
-
-  //   if (e) {
-  //     props.onOpenCreatePassword();
-  //     props.toggle();
-  //   }
-  // };
-
   const [firstNameValue, setFirstNameValue] = useState();
   const [firstNameError, setFirstNameError] = useState();
   const [lastNameValue, setLastNameValue] = useState();

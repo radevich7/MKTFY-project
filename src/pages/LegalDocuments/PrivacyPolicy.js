@@ -11,9 +11,9 @@ const PrivacyPolicy = (props) => {
       </div>
       <Card className="terms_card">
         <CardBody className="privacy_cardBody">
-          <div className="backArrow_terms">
+          {/* <div className="backArrow_terms">
             <FaArrowLeft />
-          </div>
+          </div> */}
           <h1>MKTFY Terms & Services</h1>
           <p>
             Privacy is the ability of an individual or group to seclude
