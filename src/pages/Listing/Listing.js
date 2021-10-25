@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 
 import { Link, useRouteMatch, useParams } from "react-router-dom";
 import Button from "../../reusableComponent/Button";
-import { Container, Row, Col, Card, CardBody } from "reactstrap";
+import { Container, Row, Col, Card, CardBody, Carousel } from "reactstrap";
 import logo_listing_user from "../../assets/listing_logo.svg";
+import ListingCarousel from "./ListingCarousel";
 
 const Listing = (props) => {
   let match = useRouteMatch();
@@ -23,7 +24,16 @@ const Listing = (props) => {
     profileImageUrl: "",
   });
 
-  useEffect(() => {}, []);
+  const [images, setImages] = useState();
+
+  useEffect(() => {
+    setImages(
+      Array.from(Array(10).keys()).map((id) => ({
+        id,
+        url: `https://picsum.photos/1000?random=${id}`,
+      }))
+    );
+  }, []);
 
   return (
     <Container fluid className="listing_container">
@@ -38,15 +48,16 @@ const Listing = (props) => {
         <CardBody>
           <Row className="w-100" className="border">
             {/* First column -carousel*/}
-            <Col>
-              <Row>
+            <Col lg="6">
+              {/* <Row>
                 <Col lg="2" className="border">
                   Hello
                 </Col>
                 <Col lg="10" className="border">
                   Hello2
                 </Col>
-              </Row>
+              </Row> */}
+              <ListingCarousel images={images} />
             </Col>
 
             {/* Second column - item details*/}
