@@ -2,17 +2,10 @@ import "./Footer.css";
 // import footerImg from "../../../assets/imagesFooter/background_begin.svg";
 import { Container, Row, Col, Nav, NavLink } from "reactstrap";
 import logo from "../../../assets/img/MKTFY_wordmark.svg";
+
 const Footer = () => {
   return (
-    <Container
-      fluid
-      className="footer_container"
-      style={
-        {
-          // background: `url(${footerImg}) `,
-        }
-      }
-    >
+    <Container fluid className="footer_container">
       <Row>
         <Col lg="3" className="footer_logo_container">
           <img src={logo} alt="logo of the MKTFY" />
@@ -29,8 +22,13 @@ const Footer = () => {
               <Nav vertical>
                 <NavLink className="footer_navlink_header">Jump to</NavLink>
                 <NavLink href="/home/account">Account Information</NavLink>
-                <NavLink href="/terms&services">Terms & Services</NavLink>
-                <NavLink href="#">Privacy Policy</NavLink>
+                <NavLink target="_blank" href="/terms&services">
+                  Terms & Services
+                </NavLink>
+                <NavLink target="_blank" href="/privacy">
+                  Privacy Policy
+                </NavLink>
+
                 <NavLink href="#">FAQ</NavLink>
               </Nav>
             </Col>

@@ -17,20 +17,21 @@ const DropDownContainer = styled("div")`
 `;
 
 const DropDownHeader = styled("div")`
-  // margin-bottom: 0.8em;
-  padding: 12px 12px;
+  // margin-bottom: 18px;
+  padding: 14px 12px;
   border: 1px solid #e2e2e2;
   font-weight: 300;
   font-size: 1.6em;
   color: #2a2e43;
   width: 100%;
-  height: 3rem;
+  height: 3.4rem;
   background: #ffffff;
   border-radius: 4px;
 `;
 
 const DropDownListContainer = styled("div")`
   position: absolute;
+  top: 95%;
   z-index: 100;
   width: 100%;
 `;
@@ -60,24 +61,22 @@ const ListItem = styled("li")`
   }
 `;
 
-const options = ["Mangoes", "Apples", "Oranges"];
-
-export default function CustomSelect() {
+export default function CustomSelect(props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState();
+  // const [selectedOption, setSelectedOption] = useState();
 
   const toggling = () => setIsOpen(!isOpen);
 
   const onOptionClicked = (value) => () => {
-    setSelectedOption(value);
+    props.onSetValue(value);
     setIsOpen(false);
-    console.log(selectedOption);
+    // console.log(selectedOption);
   };
-  console.log(selectedOption); //console log is asyncrhronus function so it will run before setState
+  // console.log(selectedOption); //console log is asyncrhronus function so it will run before setState
   return (
     <DropDownContainer>
       <DropDownHeader onClick={toggling}>
-        {selectedOption || "Select"}
+        {props.value || "Select"}
 
         <span className="caret_custom">
           <FaCaretDown />
@@ -86,7 +85,7 @@ export default function CustomSelect() {
       {isOpen && (
         <DropDownListContainer>
           <DropDownList>
-            {options.map((option) => (
+            {props.options.map((option) => (
               <ListItem onClick={onOptionClicked(option)} key={Math.random()}>
                 {option}
               </ListItem>

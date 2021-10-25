@@ -22,8 +22,8 @@ import "./CreateListing.css";
 import camera from "../../assets/camera.svg";
 import UploadImgModal from "./UploadImgModal";
 import PreviewContent from "./PreviewContent";
-
 import CustomSelect from "../../reusableComponent/CustomSelect";
+
 const CreateListing = () => {
   const history = useHistory();
 
@@ -74,24 +74,11 @@ const CreateListing = () => {
     setDescription(e.target.value);
   };
 
-  const categoriesHandler = (e) => {
-    setCategory(e.target.value);
-  };
-  const conditionHandler = (e) => {
-    setCondition(e.target.value);
-  };
   const priceHandler = (e) => {
     setPrice(e.target.value);
   };
   const addressHandler = (e) => {
     setAddress(e.target.value);
-  };
-  const cityHandler = (e) => {
-    setCity(e.target.value);
-    console.log(e.target.value);
-  };
-  const provinceHandler = (e) => {
-    setProvince(e.target.value);
   };
 
   const submitFormHandler = (e) => {
@@ -113,7 +100,29 @@ const CreateListing = () => {
     //   fileData.append("File[]", uploadFile[i]);
     // }
     // AXIOS CALL.post (url, fileData).then(res=>{})
+
+    // Reset the form
+    // e.target.reset();
+    // setCategory();
+    // setCondition();
+    // setCity();
+    // setProvince();
   };
+
+  // options for the select input
+
+  const categoryOptions = [
+    "Deals",
+    "Cars & Vehicles",
+    "Furniture",
+    "Electronics",
+    "Real Estate",
+  ];
+  const conditionOptions = ["New", "Used"];
+
+  const cityOptions = ["Calgary", "Brooks", "Red Deer"];
+
+  const provinceOptions = ["Alberta", "Manitoba", "Saskatchewan"];
 
   return (
     <Container fluid className="createListing_container">
@@ -199,7 +208,7 @@ const CreateListing = () => {
                   </Card>
                 </Row>
               </Col>
-
+              {/* INPUT FIELDS */}
               <Col>
                 <Row w={100}>
                   <FormGroup className="p-0">
@@ -215,6 +224,7 @@ const CreateListing = () => {
                             className="createListing_inputField"
                             placeholder="Enter product name"
                             onBlur={productNameHandler}
+                            required
                           />
                         </Row>
                         <Row>
@@ -227,89 +237,27 @@ const CreateListing = () => {
                             placeholder="Enter description (max 250 characters)"
                             maxLength="250"
                             onBlur={descriptionHandler}
+                            required
                           />
                         </Row>
                         {/* CATEGORIES DROPDOWN */}
-                        <Row>
+                        <Row className="category">
                           <Label for="category">Category</Label>
-
-                          <Dropdown
-                            isOpen={dropdownOpenCategories}
-                            toggle={toggleCategories}
-                            className="createListing_dropdown category"
-                          >
-                            <DropdownToggle
-                              tag="span"
-                              data-toggle="dropdown"
-                              aria-expanded={dropdownOpenCategories}
-                              className="createListing_dropdown_header"
-                              caret
-                            >
-                              {!category ? "Select a category" : category}
-                            </DropdownToggle>
-                            <DropdownMenu className="categories_dropdownMenu">
-                              <DropdownItem
-                                onClick={categoriesHandler}
-                                className="dropDownItem_createListing"
-                                value="cars"
-                              >
-                                Cars & Vehicles
-                              </DropdownItem>
-                              <DropdownItem
-                                onClick={categoriesHandler}
-                                className="dropDownItem_createListing"
-                                value="furniture"
-                              >
-                                Furniture
-                              </DropdownItem>
-                              <DropdownItem
-                                onClick={categoriesHandler}
-                                className="dropDownItem_createListing"
-                              >
-                                Electronics
-                              </DropdownItem>
-                              <DropdownItem
-                                onClick={categoriesHandler}
-                                className="dropDownItem_createListing"
-                              >
-                                Real State
-                              </DropdownItem>
-                            </DropdownMenu>
-                          </Dropdown>
+                          <CustomSelect
+                            options={categoryOptions}
+                            onSetValue={setCategory}
+                            value={category}
+                          />
                         </Row>
                         {/* CONDITION DROPDOWN */}
                         <Row>
                           <Col lg="6" className="padding_rigth">
                             <Label for="condition">Condition</Label>
-                            <Dropdown
-                              isOpen={dropdownOpenCondition}
-                              toggle={toggleCondition}
-                              className="createListing_dropdown padddingText"
-                            >
-                              <DropdownToggle
-                                tag="span"
-                                data-toggle="dropdown"
-                                aria-expanded={dropdownOpenCondition}
-                                className="createListing_dropdown_header"
-                                caret
-                              >
-                                Select condition
-                              </DropdownToggle>
-                              <DropdownMenu className="condition_dropdownMenu">
-                                <DropdownItem
-                                  onClick={conditionHandler}
-                                  className="dropDownItem_createListing"
-                                >
-                                  Used
-                                </DropdownItem>
-                                <DropdownItem
-                                  onClick={conditionHandler}
-                                  className="dropDownItem_createListing"
-                                >
-                                  New
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </Dropdown>
+                            <CustomSelect
+                              options={conditionOptions}
+                              onSetValue={setCondition}
+                              value={condition}
+                            />
                           </Col>
 
                           <Col lg="6" className="padding_left">
@@ -318,6 +266,7 @@ const CreateListing = () => {
                               type="number"
                               name="price"
                               id="price"
+                              step="any"
                               className="createListing_inputField "
                               placeholder="Type the price"
                               onBlur={priceHandler}
@@ -339,73 +288,22 @@ const CreateListing = () => {
                         <Row>
                           <Col lg="6" className="padding_rigth">
                             <Label for="category">City</Label>
-                            <Dropdown
-                              isOpen={dropdownOpenCity}
-                              toggle={toggleCity}
-                              className="createListing_dropdown padddingText"
-                            >
-                              <DropdownToggle
-                                tag="span"
-                                data-toggle="dropdown"
-                                aria-expanded={dropdownOpenCity}
-                                className="createListing_dropdown_header"
-                                caret
-                              >
-                                Select city
-                              </DropdownToggle>
-                              <DropdownMenu className="city_dropdownMenu">
-                                <DropdownItem
-                                  onClick={cityHandler}
-                                  className="dropDownItem_createListing"
-                                >
-                                  Calgary
-                                </DropdownItem>
-                                <DropdownItem
-                                  onClick={cityHandler}
-                                  className="dropDownItem_createListing"
-                                >
-                                  Brooks
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </Dropdown>
+                            <CustomSelect
+                              options={cityOptions}
+                              onSetValue={setCity}
+                              value={city}
+                            />
                           </Col>
                           <Col lg="6" className="padding_left">
                             <Label for="province">Province</Label>
-                            <Dropdown
-                              isOpen={dropdownOpenProvince}
-                              toggle={toggleProvince}
-                              className="createListing_dropdown padddingText"
-                            >
-                              <DropdownToggle
-                                tag="span"
-                                data-toggle="dropdown"
-                                aria-expanded={dropdownOpenProvince}
-                                className="createListing_dropdown_header"
-                                caret
-                              >
-                                Select province
-                              </DropdownToggle>
-                              <DropdownMenu className="city_dropdownMenu">
-                                <DropdownItem
-                                  onClick={provinceHandler}
-                                  className="dropDownItem_createListing"
-                                >
-                                  Alberta
-                                </DropdownItem>
-                                <DropdownItem
-                                  onClick={provinceHandler}
-                                  className="dropDownItem_createListing"
-                                >
-                                  Manitoba
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </Dropdown>
+                            <CustomSelect
+                              options={provinceOptions}
+                              onSetValue={setProvince}
+                              value={province}
+                            />
                           </Col>
                         </Row>
-                        <Row>
-                          {/* <FormGroup> */}
-                          <CustomSelect />
-                        </Row>
+
                         <Row>
                           <Button className="postListing_button">
                             Post your listing
