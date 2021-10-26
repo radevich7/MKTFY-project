@@ -24,16 +24,26 @@ const Listing = (props) => {
     profileImageUrl: "",
   });
 
-  const [images, setImages] = useState();
+  const [images, setImages] = useState([
+    {
+      id: 1,
+      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/GoldenGateBridge-001.jpg/1200px-GoldenGateBridge-001.jpg",
+    },
+    {
+      id: 2,
+      url: "https://cdn.britannica.com/s:800x450,c:crop/35/204435-138-2F2B745A/Time-lapse-hyper-lapse-Isle-Skye-Scotland.jpg",
+    },
+    {
+      id: 3,
+      url: "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg",
+    },
+    {
+      id: 4,
+      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Palace_of_Fine_Arts_%2816794p%29.jpg/1200px-Palace_of_Fine_Arts_%2816794p%29.jpg",
+    },
+  ]);
 
-  useEffect(() => {
-    setImages(
-      Array.from(Array(10).keys()).map((id) => ({
-        id,
-        url: `https://picsum.photos/1000?random=${id}`,
-      }))
-    );
-  }, []);
+  console.log(images);
 
   return (
     <Container fluid className="listing_container">

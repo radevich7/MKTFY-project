@@ -4,11 +4,12 @@
 
 .carousel-container {
   margin: 20px;
+  display: flex;
 }
 
 .selected-image {
-  width: 100%;
-  height: 500px;
+  width: 643px;
+  height: 494px;
   margin-bottom: 8px;
   background-position: center center;
   background-repeat: no-repeat;
@@ -21,8 +22,9 @@
 
 .carousel__images {
   display: flex;
-  max-width: 100%;
-  overflow-x: hidden;
+  flex-direction: column;
+  max-height: 100%;
+  /* overflow-x: hidden; */
 }
 
 .carousel__image-selected {
@@ -31,8 +33,8 @@
 
 .carousel__image {
   margin-right: 10px;
-  height: 150px;
-  min-width: 150px;
+  height: 50px;
+  min-width: 50px;
   border: 3px solid #ffa70000;
   background-position: center center;
   background-repeat: no-repeat;
