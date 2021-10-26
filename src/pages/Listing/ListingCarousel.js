@@ -6,7 +6,8 @@ import { Col, Row } from "reactstrap";
 import "./ListingCarousel.css";
 
 const ListingCarousel = (props) => {
-  const imageRef = useRef();
+  const carouselItemsRef = useRef();
+  // console.log(carouselItemsRef);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [selectedImage, setSelectedImage] = useState(
     props.images[selectedImageIndex].url
@@ -17,24 +18,38 @@ const ListingCarousel = (props) => {
 
   const handleSelectedImageChange = (index) => {
     setSelectedImageIndex(index);
-    //   setSelectedImage(e.target.src);
-    //   setSelectedImageIndex(e.target.id);
-    //   console.log(index);
-    // console.log(carouselItemsRef.current.slice(0, selectedImage.length));
-    // console.log(e.target.url);
-    // if (props.images && props.images.length > 0) {
-    //   setSelectedImage(props.images[newIdx]);
-    //   setSelectedImageIndex(newIdx);
-    //   if (carouselItemsRef?.current[newIdx]) {
-    //     carouselItemsRef?.current[newIdx]?.scrollIntoView({
-    //       inline: "center",
-    //       behavior: "smooth",
-    //     });
-    //   }
-    // };
-    //   className={`carousel__image ${
-    // selectedImageIndex === index && "carousel__image-selected"
-    // imageRef.current.scrollIntoView();
+    let el = document.getElementById(index);
+    scrollTo(el);
+  };
+  const scrollTo = (el) => {
+    // let elementoffsetTop = myElement.offsetTop;
+    // let elementoffsetHeight = myElement.offsetHeight;
+    // let parentoffsetTop = myElement.parentNode.offsetTop;
+    // let parentoffsetHeight = myElement.parentNode.offsetHeight;
+    // console.log(
+    //   `elementoffsetTop ${elementoffsetTop}; elementoffsetHeight ${elementoffsetHeight}; parentoffsetTop ${parentoffsetTop}; parentoffsetHeight ${parentoffsetHeight}`
+    // );
+
+    const elTop = el.offsetTop + el.offsetHeight;
+    const parentTop = el.parentNode.offsetTop + el.parentNode.offsetHeight;
+    console.log(
+      el.parentNode.offsetTop,
+      el.parentNode.scrollTop,
+      el.parentNode.offsetHeight,
+      elTop,
+      el.offsetTop,
+      el.offsetHeight
+    );
+
+    //Check for my element not in the view
+    if (elTop >= parentTop + el.parentNode.scrollTop) {
+      el.parentNode.scroll({ top: elTop - parentTop, behavior: "smooth" });
+    } else if (elTop <= el.parentNode.offsetTop + el.parentNode.scrollTop) {
+      el.parentNode.scroll({
+        top: el.offsetTop - el.parentNode.offsetTop,
+        behavior: "smooth",
+      });
+    }
   };
 
   const handleUpClick = () => {
@@ -44,10 +59,18 @@ const ListingCarousel = (props) => {
         newIndex = props.images.length - 1;
       }
       handleSelectedImageChange(newIndex);
+      if (carouselItemsRef.current[newIndex]) {
+        carouselItemsRef.current[newIndex].scrollIntoView({
+          inline: "center",
+          behavior: "smooth",
+        });
+      }
     }
     // imageRef.current.scrollIntoView();
     // scrollImageView.current.scrollIntoView();
     // scrollIntoView();
+
+    //
   };
   const handleDownClick = () => {
     if (props.images.length > 0 && props.images) {
@@ -59,6 +82,7 @@ const ListingCarousel = (props) => {
     }
 
     // scrollImageView.current.scrollIntoView();
+    // scrollToMyRef();
   };
 
   return (
@@ -82,7 +106,8 @@ const ListingCarousel = (props) => {
                   onClick={() => {
                     handleSelectedImageChange(index);
                   }}
-                  ref={imageRef}
+                  id={index}
+                  ref={carouselItemsRef}
                 />
               ))}
           </Row>
@@ -93,7 +118,11 @@ const ListingCarousel = (props) => {
         <Col
           className="selected-image"
           style={{ backgroundImage: `url(${selectedImage})` }}
-        />
+        >
+          <div className="slide_number">
+            {selectedImageIndex + 1} of {props.images.length}
+          </div>
+        </Col>
       </Row>
     </Fragment>
   );

@@ -22,6 +22,9 @@
   margin-left: 24px;
   border: 1px solid #7070704d;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .carousel {
@@ -56,7 +59,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   margin-top: 7px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .arrow {
@@ -64,4 +67,9 @@
   font-weight: 200;
   color: rgb(136, 136, 137);
   text-align: center;
+}
+.slide_number {
+  font-size: 1.6em;
+  color: #e5e2e2;
+  padding-bottom: 30px;
 }
