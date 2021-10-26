@@ -13,15 +13,17 @@
 .border_document_listing {
   max-width: 1636px;
   margin: 0 auto;
+
+  /* padding: 0; */
   /* height: 558px; */
-  padding-bottom: 15px;
+  /* padding-bottom: 15px; */
 }
 
 /* SECOND COLUMN CARD */
 
 .item_details_card {
-  padding-left: 150px;
-  padding-right: 125px;
+  padding-left: 132px;
+  padding-right: 115px;
 }
 .item_details_card h2 {
   font-size: 40px;
@@ -35,11 +37,12 @@
 }
 .item_details_button {
   width: 100%;
+  box-shadow: none !important;
   background-color: #6318af;
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 53px;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 .item_details_card h3 {
   font-size: 16px;
@@ -47,6 +50,7 @@
 }
 .item_details_card p {
   font-size: 14px;
+  padding: 0;
 }
 
 .sellers_info {
