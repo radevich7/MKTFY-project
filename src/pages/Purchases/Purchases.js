@@ -8,7 +8,7 @@ const Purchases = () => {
         <h1>My Purchases</h1>
         <span className="total_purchases">2 Items </span>
         <CardBody className="purchases_card">
-          <Row className>
+          <Row>
             <Col lg="4" className="image_purchases">
               <img src={dummy_img} alt="" />
             </Col>
@@ -20,7 +20,7 @@ const Purchases = () => {
           </Row>
         </CardBody>
         <CardBody className="purchases_card">
-          <Row className>
+          <Row>
             <Col lg="4" className="image_purchases">
               <img src={dummy_img} alt="" />
             </Col>

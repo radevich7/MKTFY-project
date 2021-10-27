@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
+import useInput from "../hooks/use-input";
+
 import "./LoginFormOverlay.css";
 import {
   Form,
@@ -20,27 +22,20 @@ const LoginFormOverlay = (props) => {
     clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
   });
 
-  const [emailValue, setEmailValue] = useState();
-  const [emailError, setEmailError] = useState();
   const [passwordValue, setPasswordValue] = useState();
   const [passwordError, setPasswordError] = useState(false);
   const [loginError, setLoginError] = useState();
+  const {
+    value: enteredEmailValue,
+    classes: emailClasses,
+    isValid: enteredEmailIsValid,
+    hasError: emailInputHasError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandlder: emailBlurHanlder,
+    reset: resetEmailInput,
+  } = useInput((value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
 
   const [visible, setVisible] = useState("password");
-  const handleEmailValidation = (e) => {
-    const value = e.target.value;
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const isValid = regex.test(value);
-    if (isValid) {
-      setEmailValue(value);
-      setEmailError();
-    } else {
-      setEmailValue();
-      setEmailError(
-        <span className="error_message">Your email is incorrect</span>
-      );
-    }
-  };
 
   const handlePasswordValidation = (e) => {
     const value = e.target.value;
@@ -57,16 +52,18 @@ const LoginFormOverlay = (props) => {
       );
     }
   };
-  const emailClasses = emailError
-    ? "login_inputField invalid"
-    : "login_inputField";
 
   const passwordClasses = passwordError
     ? "login_inputField invalid"
     : "login_inputField";
 
   let disableLogin = true;
-  if (!passwordError && !emailError && emailValue && passwordValue) {
+  if (
+    !passwordError &&
+    !emailInputHasError &&
+    enteredEmailValue &&
+    passwordValue
+  ) {
     disableLogin = false;
   }
 
@@ -83,25 +80,25 @@ const LoginFormOverlay = (props) => {
 
   // Form Submit Handler
 
-  const formSubmitHandler = (e) => {
-    e.preventDefault();
+  // const formSubmitHandler = (e) => {
+  //   e.preventDefault();
 
-    webAuth.redirect.loginWithCredentials(
-      {
-        connection: process.env.REACT_APP_AUTH0_CONNECTION,
-        username: emailValue,
-        password: passwordValue,
-        redirectUri: window.location.origin + "/login",
-        responseType: "token",
-        scope: "openid profile email",
-      },
-      (error) => {
-        setLoginError(
-          <span className="error_message">{error.description}</span>
-        );
-      }
-    );
-  };
+  //   webAuth.redirect.loginWithCredentials(
+  //     {
+  //       connection: process.env.REACT_APP_AUTH0_CONNECTION,
+  //       username: emailValue,
+  //       password: passwordValue,
+  //       redirectUri: window.location.origin + "/login",
+  //       responseType: "token",
+  //       scope: "openid profile email",
+  //     },
+  //     (error) => {
+  //       setLoginError(
+  //         <span className="error_message">{error.description}</span>
+  //       );
+  //     }
+  //   );
+  // };
 
   const forgotPasswordLinkHandler = (e) => {
     if (e) {
@@ -117,17 +114,17 @@ const LoginFormOverlay = (props) => {
       <ModalBody className="login_body">
         <Form>
           <FormGroup>
-            <Label for="exampleEmail">Email</Label>
+            <Label for="email">Email</Label>
 
             <Input
               type="email"
               name="email"
-              id="exampleEmail"
               placeholder="Your email"
               className={emailClasses}
-              onBlur={handleEmailValidation}
+              onChange={emailChangeHandler}
+              onBlur={emailBlurHanlder}
             />
-            {emailError}
+            {/* {emailInputHasError} */}
           </FormGroup>
           <FormGroup className="password_form_group">
             <Label for="examplePassword">Password</Label>
@@ -159,7 +156,7 @@ const LoginFormOverlay = (props) => {
           <div>
             <Button
               disabled={disableLogin}
-              onClick={formSubmitHandler}
+              // onClick={formSubmitHandler}
               className="login_input_button"
             >
               Login
@@ -172,3 +169,23 @@ const LoginFormOverlay = (props) => {
 };
 
 export default LoginFormOverlay;
+
+// const [emailValue, setEmailValue] = useState();
+// const [emailError, setEmailError] = useState();
+// const handleEmailValidation = (e) => {
+//   const value = e.target.value;
+//   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//   const isValid = regex.test(value);
+//   if (isValid) {
+//     setEmailValue(value);
+//     setEmailError();
+//   } else {
+//     setEmailValue();
+//     setEmailError(
+//       <span className="error_message">Your email is incorrect</span>
+//     );
+//   }
+// };
+// const emailClasses = emailInputHasError
+//   ? "login_inputField invalid"
+//   : "login_inputField";

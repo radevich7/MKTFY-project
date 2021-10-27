@@ -7,7 +7,6 @@ import "./ListingCarousel.css";
 
 const ListingCarousel = (props) => {
   const carouselItemsRef = useRef();
-  // console.log(carouselItemsRef);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [selectedImage, setSelectedImage] = useState(
     props.images[selectedImageIndex].url
@@ -22,24 +21,8 @@ const ListingCarousel = (props) => {
     scrollTo(el);
   };
   const scrollTo = (el) => {
-    // let elementoffsetTop = myElement.offsetTop;
-    // let elementoffsetHeight = myElement.offsetHeight;
-    // let parentoffsetTop = myElement.parentNode.offsetTop;
-    // let parentoffsetHeight = myElement.parentNode.offsetHeight;
-    // console.log(
-    //   `elementoffsetTop ${elementoffsetTop}; elementoffsetHeight ${elementoffsetHeight}; parentoffsetTop ${parentoffsetTop}; parentoffsetHeight ${parentoffsetHeight}`
-    // );
-
     const elTop = el.offsetTop + el.offsetHeight;
     const parentTop = el.parentNode.offsetTop + el.parentNode.offsetHeight;
-    console.log(
-      el.parentNode.offsetTop,
-      el.parentNode.scrollTop,
-      el.parentNode.offsetHeight,
-      elTop,
-      el.offsetTop,
-      el.offsetHeight
-    );
 
     //Check for my element not in the view
     if (elTop >= parentTop + el.parentNode.scrollTop) {
