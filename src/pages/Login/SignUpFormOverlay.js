@@ -96,6 +96,9 @@ const SignUpFormOverlay = (props) => {
     reset: resetCountryInput,
   } = useInput((value) => /[a-zA-Z]+(?:[ '-][a-zA-Z]+)*/.test(value));
 
+  const errorMessage = (text) => {
+    return <span className="signUp_error_message">{text}</span>;
+  };
   // Button disabled function
   let disableLogin = true;
 
@@ -181,6 +184,8 @@ const SignUpFormOverlay = (props) => {
                     className={firstNameClasses}
                     onBlur={firstNameBlurHanlder}
                   />
+                  {firstNameInputHasError &&
+                    errorMessage("Please enter valid first name")}
                 </FormGroup>
               </Row>
               <Row>
@@ -195,9 +200,8 @@ const SignUpFormOverlay = (props) => {
                     className={lastNameClasses}
                     onBlur={lastNameBlurHanlder}
                   />
-                  {/* <span className="signUp_error_message">
-  //         Please enter a last name valid
-  //       </span> */}
+                  {lastNameInputHasError &&
+                    errorMessage("Please enter valid last name")}
                 </FormGroup>
               </Row>
               <Row>
@@ -212,6 +216,10 @@ const SignUpFormOverlay = (props) => {
                     className={emailClasses}
                     onBlur={emailBlurHanlder}
                   />
+                  {emailInputHasError &&
+                    errorMessage(
+                      "Please enter valid email (example@example.example)"
+                    )}
                 </FormGroup>
               </Row>
               <Row>
@@ -233,6 +241,10 @@ const SignUpFormOverlay = (props) => {
                       </span>
                     )}
                   </div>
+                  {phoneInputHasError &&
+                    errorMessage(
+                      "Please enter valid phone number ( 000-000-0000)"
+                    )}
                 </FormGroup>
               </Row>
             </Col>
@@ -251,6 +263,8 @@ const SignUpFormOverlay = (props) => {
                     className={addressClasses}
                     onBlur={addressBlurHanlder}
                   />
+                  {addressInputHasError &&
+                    errorMessage("Please enter street address")}
                 </FormGroup>
               </Row>
               <Row>
@@ -266,6 +280,7 @@ const SignUpFormOverlay = (props) => {
                       className={cityClasses}
                       onBlur={cityBlurHanlder}
                     />
+                    {cityInputHasError && errorMessage("Please enter city")}
                   </FormGroup>
                 </Col>
                 <Col lg="6">
@@ -280,6 +295,8 @@ const SignUpFormOverlay = (props) => {
                       className={provinceClasses}
                       onBlur={provinceBlurHanlder}
                     />
+                    {provinceInputHasError &&
+                      errorMessage("Please enter province")}
                   </FormGroup>
                 </Col>
               </Row>
@@ -295,6 +312,7 @@ const SignUpFormOverlay = (props) => {
                     className={countryClasses}
                     onBlur={countryBlurHanlder}
                   />
+                  {countryInputHasError && errorMessage("Please enter country")}
                 </FormGroup>
               </Row>
               <Row>
