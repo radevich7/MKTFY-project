@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../../reusableComponent/Button";
 import "./SignUpFormOverlay.css";
 import PhoneInput from "react-phone-number-input/input";
-
+import useInput from "../hooks/use-input";
 import {
   Col,
   Row,
@@ -16,207 +16,122 @@ import {
 } from "reactstrap";
 
 const SignUpFormOverlay = (props) => {
-  const [firstNameValue, setFirstNameValue] = useState();
-  const [firstNameError, setFirstNameError] = useState();
-  const [lastNameValue, setLastNameValue] = useState();
-  const [lastNameError, setLastNameError] = useState();
-  const [emailValue, setEmailValue] = useState();
-  const [emailError, setEmailError] = useState();
-  const [phoneValue, setPhoneValue] = useState();
   const [valuePhone, setValuePhone] = useState(); //for international input to work
-  const [phoneError, setPhoneError] = useState();
-  const [streetValue, setStreetValue] = useState();
-  const [streetError, setStreetError] = useState();
-  const [cityValue, setCityValue] = useState();
-  const [cityError, setCityError] = useState();
-  const [provinceValue, setProvinceValue] = useState();
-  const [provinceError, setProvinceError] = useState();
-  const [countryValue, setCountryValue] = useState();
-  const [countryError, setCountryError] = useState();
 
   // FIRST NAME
-  const firstNameValidation = (e) => {
-    const value = e.target.value.toLowerCase();
+  const {
+    value: firstNameValue,
+    classes: firstNameClasses,
+    isValid: firstNameIsValid,
+    hasError: firstNameInputHasError,
+    inputBlurHandlder: firstNameBlurHanlder,
+    reset: resetFirstNameInput,
+  } = useInput((value) => /^[a-z ,.'-]+$/i.test(value));
+  // LastName
+  const {
+    value: lastNameValue,
+    classes: lastNameClasses,
+    isValid: lastNameIsValid,
+    hasError: lastNameInputHasError,
+    inputBlurHandlder: lastNameBlurHanlder,
+    reset: resetLastNameInput,
+  } = useInput((value) => /^[a-z ,.'-]+$/i.test(value));
 
-    const regex = /^[a-z ,.'-]+$/i;
-    const isValid = regex.test(value);
-    if (isValid) {
-      setFirstNameValue(value);
-      setFirstNameError();
-    } else {
-      setFirstNameValue();
-      setFirstNameError(
-        <span className="signUp_error_message">
-          Please enter a valid first name
-        </span>
-      );
-    }
-  };
-  // LAST NAME
-  const lastNameValidation = (e) => {
-    const value = e.target.value.toLowerCase();
-
-    const regex = /^[a-z ,.'-]+$/i;
-    const isValid = regex.test(value);
-    if (isValid) {
-      setLastNameValue(value);
-      setLastNameError();
-    } else {
-      setLastNameValue();
-      setLastNameError(
-        <span className="signUp_error_message">
-          Please enter a last name valid
-        </span>
-      );
-    }
-  };
   // EMAIL
-  const EmailValidation = (e) => {
-    const value = e.target.value.toLowerCase();
-
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const isValid = regex.test(value);
-    if (isValid) {
-      setEmailValue(value);
-      setEmailError();
-    } else {
-      setEmailValue();
-      setEmailError(
-        <span className="error_message">Your email is incorrect</span>
-      );
-    }
-  };
-
-  // PHONE
-  const phoneValidation = (e) => {
-    const value = e.target.value;
-    const regex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
-    const isValid = regex.test(value);
-    if (isValid) {
-      setPhoneValue(value);
-      setPhoneError();
-    } else {
-      setPhoneValue();
-      setPhoneError(
-        <span className="signUp_error_message">
-          Please enter a valid phone number
-        </span>
-      );
-    }
-  };
-  // STREET
-  const streetValidation = (e) => {
-    const value = e.target.value.toLowerCase();
-    const regex = /^\s*[0-9a-zA-Z][0-9a-zA-Z '-]*$/;
-    const isValid = regex.test(value);
-    if (isValid) {
-      setStreetValue(value);
-      setStreetError();
-    } else {
-      setStreetValue();
-      setStreetError(
-        <span className="signUp_error_message">
-          Please enter a valid street name
-        </span>
-      );
-    }
-  };
-  const cityValidation = (e) => {
-    const value = e.target.value.toLowerCase();
-    const regex = /[a-zA-Z]+(?:[ '-][a-zA-Z]+)*/;
-    const isValid = regex.test(value);
-    if (isValid) {
-      setCityValue(value);
-      setCityError();
-    } else {
-      setCityValue();
-      setCityError(
-        <span className="signUp_error_message">
-          Please enter a valid city name
-        </span>
-      );
-    }
-  };
-  const provinceValidation = (e) => {
-    const value = e.target.value.toLowerCase();
-    const regex = /[a-zA-Z]+(?:[ '-][a-zA-Z]+)*/;
-    const isValid = regex.test(value);
-    if (isValid) {
-      setProvinceValue(value);
-      setProvinceError();
-    } else {
-      setProvinceValue();
-    }
-  };
-  const countryValidation = (e) => {
-    const value = e.target.value.toLowerCase();
-    const regex = /[a-zA-Z]+(?:[ '-][a-zA-Z]+)*/;
-    const isValid = regex.test(value);
-    if (isValid) {
-      setCountryValue(value);
-      setCountryError();
-    } else {
-      setCountryValue();
-      setCountryError(
-        <span className="signUp_error_message">
-          Please enter a valid city name
-        </span>
-      );
-    }
-  };
-
-  const firstNameClasses = firstNameError
-    ? "signUp_inputField invalid"
-    : "signUp_inputField";
-  const lastNameClasses = lastNameError
-    ? "signUp_inputField invalid"
-    : "signUp_inputField";
-  const emailClasses = emailError
-    ? "signUp_inputField invalid"
-    : "signUp_inputField";
-  const phoneClasses = phoneError
+  const {
+    value: emailValue,
+    classes: emailClasses,
+    isValid: emailIsValid,
+    hasError: emailInputHasError,
+    inputBlurHandlder: emailBlurHanlder,
+    reset: resetEmailInput,
+  } = useInput((value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
+  // Phone
+  const {
+    value: phoneValue,
+    isValid: phoneIsValid,
+    hasError: phoneInputHasError,
+    inputBlurHandlder: phoneBlurHanlder,
+    reset: resetPhoneInput,
+  } = useInput((value) =>
+    /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/.test(value)
+  );
+  const phoneClasses = phoneInputHasError
     ? "signUp_inputField form-control invalid"
     : "signUp_inputField form-control";
-  const streetClasses = streetError
-    ? "signUp_inputField invalid"
-    : "signUp_inputField";
-  const cityClasses = cityError
-    ? "signUp_inputField invalid"
-    : "signUp_inputField";
-  const provinceClasses = provinceError
-    ? "signUp_inputField invalid"
-    : "signUp_inputField";
-  const countryClasses = countryError
-    ? "signUp_inputField invalid"
-    : "signUp_inputField";
+  // St
+  const {
+    value: addressValue,
+    classes: addressClasses,
+    isValid: addressIsValid,
+    hasError: addressInputHasError,
+    inputBlurHandlder: addressBlurHanlder,
+    reset: resetAddressInput,
+  } = useInput((value) => /^\s*[0-9a-zA-Z][0-9a-zA-Z '-]*$/.test(value));
+
+  const {
+    value: cityValue,
+    classes: cityClasses,
+    isValid: cityIsValid,
+    hasError: cityInputHasError,
+    inputBlurHandlder: cityBlurHanlder,
+    reset: resetCityInput,
+  } = useInput((value) => /[a-zA-Z]+(?:[ '-][a-zA-Z]+)*/.test(value));
+
+  const {
+    value: provinceValue,
+    classes: provinceClasses,
+    isValid: provinceIsValid,
+    hasError: provinceInputHasError,
+    inputBlurHandlder: provinceBlurHanlder,
+    reset: resetProvinceInput,
+  } = useInput((value) => /[a-zA-Z]+(?:[ '-][a-zA-Z]+)*/.test(value));
+
+  const {
+    value: countryValue,
+    classes: countryClasses,
+    isValid: countryIsValid,
+    hasError: countryInputHasError,
+    inputBlurHandlder: countryBlurHanlder,
+    reset: resetCountryInput,
+  } = useInput((value) => /[a-zA-Z]+(?:[ '-][a-zA-Z]+)*/.test(value));
 
   // Button disabled function
   let disableLogin = true;
-  if (
-    firstNameValue &&
-    lastNameValue &&
-    emailValue &&
-    phoneValue &&
-    streetValue &&
-    cityValue &&
-    provinceValue &&
-    countryValue &&
-    !firstNameError &&
-    !lastNameError &&
-    !emailError &&
-    !phoneError &&
-    !streetError &&
-    !cityError &&
-    !provinceError &&
-    !countryError
-  ) {
-    disableLogin = false;
-  }
 
+  firstNameValue &&
+  lastNameValue &&
+  emailValue &&
+  phoneValue &&
+  addressValue &&
+  cityValue &&
+  provinceValue &&
+  countryValue &&
+  !firstNameInputHasError &&
+  !lastNameInputHasError &&
+  !emailInputHasError &&
+  !phoneInputHasError &&
+  !addressInputHasError &&
+  !cityInputHasError &&
+  !provinceInputHasError &&
+  !countryInputHasError
+    ? (disableLogin = false)
+    : (disableLogin = true);
+
+  const resetForm = () => {
+    resetFirstNameInput();
+    resetLastNameInput();
+    resetEmailInput();
+    setValuePhone();
+    resetPhoneInput();
+    resetAddressInput();
+    resetCityInput();
+    resetProvinceInput();
+    resetCountryInput();
+  };
   // Form Submit
   const submitFormHandler = (e) => {
     e.preventDefault();
-    setValuePhone();
     if (e) {
       props.onOpenCreatePassword();
       props.toggle();
@@ -226,12 +141,13 @@ const SignUpFormOverlay = (props) => {
       lastName: lastNameValue,
       email: emailValue,
       phone: phoneValue,
-      street: streetValue,
+      address: addressValue,
       city: cityValue,
       province: provinceValue,
       country: countryValue,
     };
     props.setSignupData(personObject);
+    resetForm();
   };
 
   return (
@@ -263,9 +179,8 @@ const SignUpFormOverlay = (props) => {
                     id="firstName"
                     placeholder="Your first name"
                     className={firstNameClasses}
-                    onBlur={firstNameValidation}
+                    onBlur={firstNameBlurHanlder}
                   />
-                  {firstNameError}
                 </FormGroup>
               </Row>
               <Row>
@@ -278,9 +193,11 @@ const SignUpFormOverlay = (props) => {
                     id="lastName"
                     placeholder="Your last name"
                     className={lastNameClasses}
-                    onBlur={lastNameValidation}
+                    onBlur={lastNameBlurHanlder}
                   />
-                  {lastNameError}
+                  {/* <span className="signUp_error_message">
+  //         Please enter a last name valid
+  //       </span> */}
                 </FormGroup>
               </Row>
               <Row>
@@ -293,9 +210,8 @@ const SignUpFormOverlay = (props) => {
                     id="email"
                     placeholder="Your email"
                     className={emailClasses}
-                    onBlur={EmailValidation}
+                    onBlur={emailBlurHanlder}
                   />
-                  {emailError}
                 </FormGroup>
               </Row>
               <Row>
@@ -307,8 +223,7 @@ const SignUpFormOverlay = (props) => {
                       international
                       withCountryCallingCode
                       className={phoneClasses}
-                      onBlur={phoneValidation}
-                      placeholder="asdsadas"
+                      onBlur={phoneBlurHanlder}
                       value={valuePhone}
                       onChange={setValuePhone}
                     />
@@ -318,7 +233,6 @@ const SignUpFormOverlay = (props) => {
                       </span>
                     )}
                   </div>
-                  {phoneError}
                 </FormGroup>
               </Row>
             </Col>
@@ -327,17 +241,16 @@ const SignUpFormOverlay = (props) => {
             <Col lg="6">
               <Row>
                 <FormGroup>
-                  <Label for="street">Street Address</Label>
+                  <Label for="address">Street Address</Label>
 
                   <Input
                     type="text"
-                    name="street"
-                    id="street"
+                    name="address"
+                    id="address"
                     placeholder="Insert your address"
-                    className={streetClasses}
-                    onBlur={streetValidation}
+                    className={addressClasses}
+                    onBlur={addressBlurHanlder}
                   />
-                  {streetError}
                 </FormGroup>
               </Row>
               <Row>
@@ -351,9 +264,8 @@ const SignUpFormOverlay = (props) => {
                       id="city"
                       placeholder="City name"
                       className={cityClasses}
-                      onBlur={cityValidation}
+                      onBlur={cityBlurHanlder}
                     />
-                    {cityError}
                   </FormGroup>
                 </Col>
                 <Col lg="6">
@@ -366,9 +278,8 @@ const SignUpFormOverlay = (props) => {
                       id="province"
                       placeholder="Your province"
                       className={provinceClasses}
-                      onBlur={provinceValidation}
+                      onBlur={provinceBlurHanlder}
                     />
-                    {provinceError}
                   </FormGroup>
                 </Col>
               </Row>
@@ -382,9 +293,8 @@ const SignUpFormOverlay = (props) => {
                     id="country"
                     placeholder="Country name"
                     className={countryClasses}
-                    onBlur={countryValidation}
+                    onBlur={countryBlurHanlder}
                   />
-                  {countryError}
                 </FormGroup>
               </Row>
               <Row>

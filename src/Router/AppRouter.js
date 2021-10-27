@@ -34,6 +34,8 @@ const AppRouter = (store) => {
           ...prevState,
           authenticated: true,
         }));
+      } else {
+        // return RequireAuth();
       }
     }, []);
     return <Redirect to={"/home"} />;

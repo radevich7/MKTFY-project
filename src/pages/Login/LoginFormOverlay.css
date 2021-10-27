@@ -39,10 +39,11 @@ label {
 }
 
 .login_inputField {
-  height: 3.4rem;
+  height: 68px;
   font-size: 2em;
   border: 1px solid #e2e2e2;
   margin-bottom: 10px;
+  width: 100%;
 }
 .login_inputField::placeholder {
   color: #4d4d4d60;

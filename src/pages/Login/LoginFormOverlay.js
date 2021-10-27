@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { useState } from "react";
 import useInput from "../hooks/use-input";
-
 import "./LoginFormOverlay.css";
 import {
   Form,
@@ -21,84 +19,68 @@ const LoginFormOverlay = (props) => {
     domain: process.env.REACT_APP_AUTH0_DOMAIN,
     clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
   });
+  const [loginError, setLoginError] = useState(); // auth0 error
+  const [visible, setVisible] = useState("password");
 
-  const [passwordValue, setPasswordValue] = useState();
-  const [passwordError, setPasswordError] = useState(false);
-  const [loginError, setLoginError] = useState();
+  // Used custom hook for validation
   const {
     value: enteredEmailValue,
     classes: emailClasses,
     isValid: enteredEmailIsValid,
     hasError: emailInputHasError,
-    valueChangeHandler: emailChangeHandler,
     inputBlurHandlder: emailBlurHanlder,
     reset: resetEmailInput,
   } = useInput((value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
 
-  const [visible, setVisible] = useState("password");
-
-  const handlePasswordValidation = (e) => {
-    const value = e.target.value;
-    const regex =
-      /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{6,20}$/;
-    const isValid = regex.test(value);
-    if (isValid) {
-      setPasswordValue(value);
-      setPasswordError();
-    } else {
-      setPasswordValue();
-      setPasswordError(
-        <span className="error_message">Your password is incorrect</span>
-      );
-    }
-  };
-
-  const passwordClasses = passwordError
-    ? "login_inputField invalid"
-    : "login_inputField";
-
-  let disableLogin = true;
-  if (
-    !passwordError &&
-    !emailInputHasError &&
-    enteredEmailValue &&
-    passwordValue
-  ) {
-    disableLogin = false;
-  }
-
-  // show Password Handler
+  const {
+    value: enteredPasswordValue,
+    classes: passwordClasses,
+    isValid: enteredPasswordIsValid,
+    hasError: passwordInputHasError,
+    inputBlurHandlder: passwordBlurHanlder,
+    reset: resetPasswordInput,
+  } = useInput((value) =>
+    /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{6,20}$/.test(
+      value
+    )
+  );
 
   const togglePasswordHandler = (e) => {
     e.preventDefault();
-    if (visible === "password") {
-      setVisible("text");
-    } else {
-      setVisible("password");
-    }
+    return visible === "password" ? setVisible("text") : setVisible("password");
   };
+
+  let disableLogin = true;
+  enteredPasswordIsValid &&
+  enteredEmailIsValid &&
+  !emailInputHasError &&
+  !passwordInputHasError
+    ? (disableLogin = false)
+    : (disableLogin = true);
 
   // Form Submit Handler
 
-  // const formSubmitHandler = (e) => {
-  //   e.preventDefault();
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
 
-  //   webAuth.redirect.loginWithCredentials(
-  //     {
-  //       connection: process.env.REACT_APP_AUTH0_CONNECTION,
-  //       username: emailValue,
-  //       password: passwordValue,
-  //       redirectUri: window.location.origin + "/login",
-  //       responseType: "token",
-  //       scope: "openid profile email",
-  //     },
-  //     (error) => {
-  //       setLoginError(
-  //         <span className="error_message">{error.description}</span>
-  //       );
-  //     }
-  //   );
-  // };
+    webAuth.redirect.loginWithCredentials(
+      {
+        connection: process.env.REACT_APP_AUTH0_CONNECTION,
+        username: enteredEmailValue,
+        password: enteredPasswordValue,
+        redirectUri: window.location.origin + "/login",
+        responseType: "token",
+        scope: "openid profile email",
+      },
+      (error) => {
+        setLoginError(
+          <span className="error_message">{error.description}</span>
+        );
+      }
+    );
+    resetPasswordInput();
+    resetEmailInput();
+  };
 
   const forgotPasswordLinkHandler = (e) => {
     if (e) {
@@ -115,16 +97,16 @@ const LoginFormOverlay = (props) => {
         <Form>
           <FormGroup>
             <Label for="email">Email</Label>
-
             <Input
               type="email"
               name="email"
               placeholder="Your email"
               className={emailClasses}
-              onChange={emailChangeHandler}
               onBlur={emailBlurHanlder}
             />
-            {/* {emailInputHasError} */}
+            {emailInputHasError && (
+              <span className="error_message">Please enter a valid email</span>
+            )}
           </FormGroup>
           <FormGroup className="password_form_group">
             <Label for="examplePassword">Password</Label>
@@ -135,8 +117,9 @@ const LoginFormOverlay = (props) => {
                 id="examplePassword"
                 placeholder="Your password"
                 className={passwordClasses}
-                onBlur={handlePasswordValidation}
+                onBlur={passwordBlurHanlder}
               />
+
               <button
                 className="password_eye_logo"
                 onClick={togglePasswordHandler}
@@ -144,7 +127,12 @@ const LoginFormOverlay = (props) => {
                 {visible === "password" ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
-            {passwordError}
+            {passwordInputHasError && (
+              <span className="error_message">
+                Please enter a valid password (At least 6 characters, 1
+                upperCase, 1 Number)
+              </span>
+            )}
             {loginError}
           </FormGroup>
           <p
@@ -156,7 +144,7 @@ const LoginFormOverlay = (props) => {
           <div>
             <Button
               disabled={disableLogin}
-              // onClick={formSubmitHandler}
+              onClick={formSubmitHandler}
               className="login_input_button"
             >
               Login
@@ -169,23 +157,3 @@ const LoginFormOverlay = (props) => {
 };
 
 export default LoginFormOverlay;
-
-// const [emailValue, setEmailValue] = useState();
-// const [emailError, setEmailError] = useState();
-// const handleEmailValidation = (e) => {
-//   const value = e.target.value;
-//   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//   const isValid = regex.test(value);
-//   if (isValid) {
-//     setEmailValue(value);
-//     setEmailError();
-//   } else {
-//     setEmailValue();
-//     setEmailError(
-//       <span className="error_message">Your email is incorrect</span>
-//     );
-//   }
-// };
-// const emailClasses = emailInputHasError
-//   ? "login_inputField invalid"
-//   : "login_inputField";
