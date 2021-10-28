@@ -89,7 +89,12 @@ const LoginFormOverlay = (props) => {
     }
   };
   return (
-    <Modal isOpen={props.modal} toggle={props.toggle} size="lg">
+    <Modal
+      isOpen={props.modal}
+      toggle={props.toggle}
+      className="modal_container"
+      size="lg"
+    >
       <ModalHeader toggle={props.toggle} className="login_header">
         Welcome Back!
       </ModalHeader>

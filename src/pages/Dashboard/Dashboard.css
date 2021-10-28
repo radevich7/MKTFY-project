@@ -1,9 +1,14 @@
+html {
+  /* background-color: transparent; */
+}
 .dashboard_container {
-  height: 100%;
+  height: 100vh;
   margin-top: 221px;
   background-image: url("/Users/Julian/PROJECT/mktfy_web_app/src/assets/imgBackgoundGreyWaves.svg");
   background-attachment: fixed;
-  background-position: 50% 50%;
+
+  background-attachment: cover;
+  background-position: bottom;
   background-color: #f4f4f5;
   padding: 0;
 

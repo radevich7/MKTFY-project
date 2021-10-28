@@ -1,11 +1,13 @@
-.modal-dialog {
-  top: 15%;
+.modal-content {
+  border-radius: 10px;
 }
-
+.modal.show .modal-dialog {
+  top: 20%;
+}
 .login_body {
   padding: 0 8.6rem;
-  flex: 0;
 }
+
 .modal-title {
   font-size: 40px;
   margin: auto;
@@ -98,4 +100,24 @@ label {
   color: #ff2c2c;
   font-size: 1.4em;
   padding: 10px 0;
+}
+
+@media (max-width: 991px) {
+  .login_body {
+    padding: 0 2rem;
+  }
+  .login_input_button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 731px) {
+  .modal-dialog.modal_container {
+    width: 100vw;
+    height: 100vh;
+  }
+  .modal-content {
+    height: 100vh;
+    padding-top: 35%;
+  }
 }

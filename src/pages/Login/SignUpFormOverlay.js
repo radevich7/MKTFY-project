@@ -22,7 +22,6 @@ const SignUpFormOverlay = (props) => {
   const {
     value: firstNameValue,
     classes: firstNameClasses,
-    isValid: firstNameIsValid,
     hasError: firstNameInputHasError,
     inputBlurHandlder: firstNameBlurHanlder,
     reset: resetFirstNameInput,
@@ -31,7 +30,6 @@ const SignUpFormOverlay = (props) => {
   const {
     value: lastNameValue,
     classes: lastNameClasses,
-    isValid: lastNameIsValid,
     hasError: lastNameInputHasError,
     inputBlurHandlder: lastNameBlurHanlder,
     reset: resetLastNameInput,
@@ -41,7 +39,6 @@ const SignUpFormOverlay = (props) => {
   const {
     value: emailValue,
     classes: emailClasses,
-    isValid: emailIsValid,
     hasError: emailInputHasError,
     inputBlurHandlder: emailBlurHanlder,
     reset: resetEmailInput,
@@ -49,7 +46,6 @@ const SignUpFormOverlay = (props) => {
   // Phone
   const {
     value: phoneValue,
-    isValid: phoneIsValid,
     hasError: phoneInputHasError,
     inputBlurHandlder: phoneBlurHanlder,
     reset: resetPhoneInput,
@@ -63,7 +59,6 @@ const SignUpFormOverlay = (props) => {
   const {
     value: addressValue,
     classes: addressClasses,
-    isValid: addressIsValid,
     hasError: addressInputHasError,
     inputBlurHandlder: addressBlurHanlder,
     reset: resetAddressInput,
@@ -72,7 +67,6 @@ const SignUpFormOverlay = (props) => {
   const {
     value: cityValue,
     classes: cityClasses,
-    isValid: cityIsValid,
     hasError: cityInputHasError,
     inputBlurHandlder: cityBlurHanlder,
     reset: resetCityInput,
@@ -81,7 +75,6 @@ const SignUpFormOverlay = (props) => {
   const {
     value: provinceValue,
     classes: provinceClasses,
-    isValid: provinceIsValid,
     hasError: provinceInputHasError,
     inputBlurHandlder: provinceBlurHanlder,
     reset: resetProvinceInput,
@@ -90,7 +83,6 @@ const SignUpFormOverlay = (props) => {
   const {
     value: countryValue,
     classes: countryClasses,
-    isValid: countryIsValid,
     hasError: countryInputHasError,
     inputBlurHandlder: countryBlurHanlder,
     reset: resetCountryInput,
@@ -157,7 +149,7 @@ const SignUpFormOverlay = (props) => {
     <Modal
       isOpen={props.modal}
       toggle={props.toggle}
-      className="signup_container"
+      className="signup_container "
     >
       <ModalHeader toggle={props.toggle} className="signUp_header">
         Welcome to MKTFY!
@@ -315,6 +307,7 @@ const SignUpFormOverlay = (props) => {
                   {countryInputHasError && errorMessage("Please enter country")}
                 </FormGroup>
               </Row>
+
               <Row>
                 <FormGroup>
                   <Button
