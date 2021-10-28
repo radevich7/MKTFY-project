@@ -102,22 +102,20 @@ label {
   padding: 10px 0;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 992px) {
   .login_body {
-    padding: 0 2rem;
+    padding: 0 4rem;
   }
   .login_input_button {
     width: 100%;
   }
 }
 
-@media (max-width: 731px) {
-  .modal-dialog.modal_container {
-    width: 100vw;
+@media (max-width: 576px) {
+  .modal_container .modal-content {
     height: 100vh;
   }
-  .modal-content {
-    height: 100vh;
-    padding-top: 35%;
+  .login_body.modal-body {
+    margin-top: 20%;
   }
 }
