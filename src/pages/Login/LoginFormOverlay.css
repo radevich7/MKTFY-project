@@ -2,10 +2,11 @@
   border-radius: 10px;
 }
 .modal.show .modal-dialog {
-  top: 20%;
+  top: 5%;
 }
 .login_body {
   padding: 0 8.6rem;
+  flex: 0;
 }
 
 .modal-title {

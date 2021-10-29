@@ -95,6 +95,7 @@ div.card {
   text-align: start;
   margin: 10px 21px 10px 14px;
   color: #000000;
+  text-decoration: none;
 }
 .deals_price {
   color: #6318af;

@@ -7,6 +7,7 @@ import blackCaretDown from "../../assets/img/blackCaretDown.svg";
 import gold_caret from "../../assets/img/gold_caret.svg";
 import exit_app from "../../assets/img/exit_to_app-24px.svg";
 import notification_bell from "../../assets/img/notification_bell_main.svg";
+import { BiSearchAlt2 } from "react-icons/bi";
 
 import {
   Container,
@@ -49,7 +50,7 @@ const NavBar = () => {
       <Container fluid>
         <Navbar className="app_container" fixed="top">
           {/* ROW LINE */}
-          <Nav className="w-100 border_document app_container">
+          <Nav className="w-100 border_document ">
             <Row className="w-100 mx-0 nav_bar ">
               {/* LOGO */}
               <Col lg="1">
@@ -58,7 +59,7 @@ const NavBar = () => {
                 </NavbarBrand>
               </Col>
               {/* CARD for the SEARCH BAR */}
-              <Col lg="7">
+              <Col xl="7">
                 <Card className="search_card_padding border-0">
                   <Row>
                     {/* BUTTON ALL */}
@@ -75,11 +76,11 @@ const NavBar = () => {
                           alt="/"
                         />
                         <Input
-                          className="border-0"
                           type="search"
                           name="search"
                           id="exampleSearch"
-                          placeholder="Search on MKTFY "
+                          placeholder="Search on MKTFY"
+                          className="search_input"
                         />
                       </Form>
                     </Col>
@@ -100,20 +101,21 @@ const NavBar = () => {
                           <h3>City</h3>
                         </DropdownToggle>
                         <DropdownMenu className="dropDownCustom_search_card arrow_city_search">
-                          <DropdownItem>
+                          <div className="dropDown_search_input2">
                             <img
                               src={search_icon}
                               alt="/"
                               className="icon_style2"
                             />
                             <Input
-                              className="dropDown_search_input2"
                               type="search"
                               name="search"
                               id="exampleSearch"
-                              placeholder="Search city"
+                              placeholder="Search City"
+                              className="searchInput_city"
                             />
-                          </DropdownItem>
+                          </div>
+
                           <DropdownItem className="dropDownItem">
                             Brooks{" "}
                           </DropdownItem>
@@ -132,12 +134,13 @@ const NavBar = () => {
                 <Nav className="category_links">
                   {/* <NavbarToggler onClick={toggleNavbar} className="mr-2" /> */}
                   {/* <Collapse isOpen={!collapsed} navbar> */}
+
+                  <NavLink href="#" className="hamburger_button">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </NavLink>
                   <NavLink href="#" className="category_header">
-                    <div className="hamburger_button">
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                    </div>
                     Categories
                   </NavLink>
                   <NavLink href="#">Deals</NavLink>

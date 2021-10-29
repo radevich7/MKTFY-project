@@ -4,10 +4,6 @@
   padding: 0;
   background-color: var(--indigo);
 }
-/* .row > * {
-  padding-right: 0;
-  padding-left: 0;
-} */
 
 .border_document {
   max-width: 1660px;
@@ -16,7 +12,6 @@
 
 .nav_bar {
   margin-top: 63px;
-  /* margin-top: 221px; */
 }
 
 .dropdown-item:active {
@@ -35,6 +30,8 @@
 }
 
 .border-custom {
+  height: 100%;
+  align-self: center;
   border: none;
   border-left: 1px solid rgb(189, 186, 186);
   border-right: 1px solid rgb(189, 186, 186);
@@ -47,7 +44,7 @@
 #logo1 {
   margin-top: 15px;
   padding: 0;
-  width: 117.94px;
+  width: 115px;
 }
 
 .icon_style1 {
@@ -57,8 +54,8 @@
 }
 .icon_style2 {
   position: absolute;
-  left: 9%;
-  top: 11%;
+  left: 10%;
+  top: 30%;
 }
 .btn-outline-secondary:hover {
   color: black;
@@ -70,7 +67,6 @@
 }
 
 .arrow_city_search:before {
-  content: "";
   width: 0;
   height: 0;
   position: absolute;
@@ -124,6 +120,21 @@
 }
 
 .dropDown_search_input2 {
+  padding: 0.8rem 1rem;
+  position: relative;
+  width: 100%;
+}
+.searchInput_city {
+  height: 40px;
+  font-size: 1.6rem;
+  border-radius: 4px;
+}
+
+.searchInput_city.form-control:focus {
+  box-shadow: 0 0 0 0.25rem rgb(99 24 175 / 25%);
+  border: none;
+}
+.searchInput_city::placeholder {
   padding-left: 15%;
 }
 
@@ -219,7 +230,6 @@
 }
 .sign_out_button {
   margin-top: 5%;
-
   color: #ff2c2c;
 }
 #exit_logo {
@@ -371,11 +381,34 @@
   padding-left: 0;
 }
 .hamburger_button {
-  margin-right: 5px;
+  padding: 0.5rem 1rem 0.5rem 0rem;
+  margin: 12px 0;
 }
 .hamburger_button div {
   width: 24px;
-  height: 0.1px;
+  height: 0.2px;
   background-color: #ffffff;
   margin: 6px 0;
+}
+
+.search_input {
+  height: 30px;
+  border: none;
+  font-size: 1.6rem;
+}
+.search_input.form-control {
+  line-height: 0;
+}
+.search_input.form-control:focus {
+  box-shadow: 0 0 0 0.25rem rgb(99 24 175 / 25%);
+}
+
+.search_input::placeholder {
+  font-size: 1.4rem;
+}
+
+@media (max-width: 1500px) {
+  #logo1 {
+    width: 110px;
+  }
 }
