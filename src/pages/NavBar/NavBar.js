@@ -51,7 +51,7 @@ const NavBar = () => {
 
   return (
     <Container fluid>
-      <Navbar expand="xl" fixed="top" light className="app_container">
+      <Navbar expand="xl" fixed="top" className="app_container">
         <NavbarToggler onClick={toggle4} />
         <Collapse navbar isOpen={open}>
           <Nav className="me-auto w-100 border_document" navbar>
@@ -135,7 +135,33 @@ const NavBar = () => {
                     </Row>
                   </Card>
 
-                  <Row>asdsda</Row>
+                  <Row className="categories_row">
+                    <Col lg="2">
+                      <NavLink href="#" className="category_header">
+                        <div className="hamburger_button">
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                        </div>
+                        Categories
+                      </NavLink>
+                    </Col>
+                    <Col lg="2">
+                      <NavLink href="#">Deals</NavLink>
+                    </Col>
+                    <Col lg="2">
+                      <NavLink href="#">Cars & Vehicles </NavLink>
+                    </Col>
+                    <Col lg="2">
+                      <NavLink href="#">Furniture</NavLink>
+                    </Col>
+                    <Col lg="2">
+                      <NavLink href="#">Electronics</NavLink>
+                    </Col>
+                    <Col lg="2">
+                      <NavLink href="#">Real Estate</NavLink>
+                    </Col>
+                  </Row>
                 </NavItem>
 
                 {/* end search input */}

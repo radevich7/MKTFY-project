@@ -139,21 +139,19 @@
 }
 
 /* Category LINKS */
+.categories_row {
+}
 .nav-link {
   color: #ffffff;
-  font-size: 1.7em;
-  font-weight: 600;
-  margin: 12px 10px;
+  font-size: 1.7rem;
+  font-weight: 500;
+  /* margin: 12px 10px; */
 }
 .nav-link:hover {
   color: white;
 }
 .nav-link:focus {
   color: white;
-}
-.categories_column {
-  display: flex;
-  flex-direction: row;
 }
 
 /* DropDown Profile */
@@ -384,8 +382,8 @@
   padding-left: 0;
 }
 .hamburger_button {
-  padding: 0.5rem 1rem 0.5rem 0rem;
-  margin: 12px 0;
+  /* padding: 0.5rem 1rem 0.5rem 0rem; */
+  margin: 0px 10px 0 0px;
 }
 .hamburger_button div {
   width: 24px;
