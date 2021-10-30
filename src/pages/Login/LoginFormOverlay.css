@@ -116,7 +116,4 @@ label {
   .modal_container .modal-content {
     height: 100vh;
   }
-  .login_body.modal-body {
-    margin-top: 20%;
-  }
 }

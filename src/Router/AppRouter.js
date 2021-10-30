@@ -23,9 +23,10 @@ const AppRouter = (store) => {
     return children;
   };
   const LoginLogic = (props) => {
-    const token = new URLSearchParams(props.location.hash.substr(1)).get(
+    let token = new URLSearchParams(props.location.hash.substr(1)).get(
       "access_token"
     );
+    console.log(token);
 
     useEffect(() => {
       if (token.length > 0) {

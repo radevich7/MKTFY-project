@@ -19,7 +19,7 @@ html {
 .border_document_dashboard {
   max-width: 1660px;
   margin: auto;
-  padding: 30px 0px 120px 0px !important;
+  /* padding: 30px 0px 120px 0px !important; */
 }
 .container_title {
   display: inline-block;

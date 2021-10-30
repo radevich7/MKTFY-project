@@ -2,7 +2,7 @@
   height: 191px;
   width: 100vw;
   padding: 0;
-  background-color: var(--indigo);
+  background-color: #6318af;
 }
 
 .border_document {
@@ -151,6 +151,10 @@
 .nav-link:focus {
   color: white;
 }
+.categories_column {
+  display: flex;
+  flex-direction: row;
+}
 
 /* DropDown Profile */
 .dropDownCustom_profile {
@@ -170,10 +174,8 @@
   font-weight: 600;
 }
 .dropDownToggle_profile h4 {
-  margin-top: 5px;
   font-size: 14px;
-  margin-left: 15%;
-  line-height: 0.8;
+  margin-left: 11%;
   color: #e2e2e2;
 }
 .arrow_profile:before {
@@ -305,7 +307,8 @@
 }
 #notification_bell_logo {
   position: absolute;
-  top: 12%;
+  top: 40%;
+  left: 0;
 }
 
 .notification_brand_logo {
@@ -412,3 +415,5 @@
     width: 110px;
   }
 }
+
+/* NEw */
