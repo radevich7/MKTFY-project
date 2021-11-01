@@ -1,8 +1,9 @@
 .app_container {
-  height: 191px;
+  /* height: 191px; */
   width: 100vw;
   padding: 0;
   background-color: #6318af;
+  padding-top: 39px;
 }
 
 .border_document {
@@ -39,7 +40,7 @@
 }
 
 .search_card_padding {
-  padding: 10px 0px;
+  padding: 15px 0px;
 }
 #logo1 {
   margin-top: 15px;
@@ -139,7 +140,20 @@
 }
 
 /* Category LINKS */
-.categories_row {
+
+.categories_column {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 80%;
+  margin-top: 24px;
+  margin-bottom: 21px;
+}
+
+.categories_column span {
+  color: #ffffff;
+  font-size: 1.7rem;
+  font-weight: 500;
 }
 .nav-link {
   color: #ffffff;

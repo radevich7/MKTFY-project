@@ -135,33 +135,26 @@ const NavBar = () => {
                     </Row>
                   </Card>
 
-                  <Row className="categories_row">
-                    <Col lg="2">
-                      <NavLink href="#" className="category_header">
-                        <div className="hamburger_button">
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                        </div>
-                        Categories
-                      </NavLink>
-                    </Col>
-                    <Col lg="2">
-                      <NavLink href="#">Deals</NavLink>
-                    </Col>
-                    <Col lg="2">
-                      <NavLink href="#">Cars & Vehicles </NavLink>
-                    </Col>
-                    <Col lg="2">
-                      <NavLink href="#">Furniture</NavLink>
-                    </Col>
-                    <Col lg="2">
-                      <NavLink href="#">Electronics</NavLink>
-                    </Col>
-                    <Col lg="2">
-                      <NavLink href="#">Real Estate</NavLink>
-                    </Col>
-                  </Row>
+                  <Col className="categories_column ">
+                    <span href="#" className="category_header">
+                      <div className="hamburger_button">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                      </div>
+                      Categories
+                    </span>
+
+                    <span href="#">Deals</span>
+
+                    <span href="#">Cars & Vehicles </span>
+
+                    <span href="#">Furniture</span>
+
+                    <span href="#">Electronics</span>
+
+                    <span href="#">Real Estate</span>
+                  </Col>
                 </NavItem>
 
                 {/* end search input */}
