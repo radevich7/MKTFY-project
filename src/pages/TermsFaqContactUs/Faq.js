@@ -14,7 +14,7 @@ const Faq = () => {
     <Container fluid className="faq_container">
       <Card className="border_document_faq">
         <Row className="faq_row_container">
-          <Col lg="4" className="border">
+          <Col lg="4" className="faq_hints">
             <Row className="w-100 border">
               <CardHeader onClick={() => setToggequestion(1)}>
                 <span>How MKTFY works?</span>
@@ -22,22 +22,22 @@ const Faq = () => {
             </Row>
             <Row className="w-100 border">
               <CardHeader onClick={() => setToggequestion(2)}>
-                <span>How MKTFY works?</span>
+                <span>How I can sell things on MKTFY</span>
               </CardHeader>
             </Row>
             <Row className="w-100 border">
               <CardHeader onClick={() => setToggequestion(3)}>
-                <span>How MKTFY works?</span>
+                <span>Where the products come from?</span>
               </CardHeader>
             </Row>
             <Row className="w-100 border">
               <CardHeader onClick={() => setToggequestion(4)}>
-                <span>How MKTFY works?</span>
+                <span>Can I have a refund?</span>
               </CardHeader>
             </Row>
             <Row className="w-100 border">
               <CardHeader onClick={() => setToggequestion(5)}>
-                <span>How MKTFY works?</span>
+                <span>Where MKTFY is based?</span>
               </CardHeader>
             </Row>
           </Col>

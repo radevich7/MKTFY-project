@@ -64,6 +64,7 @@
 
 .text_container {
   background-color: #f8f8f8;
+  border-radius: 0px 10px 10px 0;
 }
 .text_container h2 {
   font-size: 3.4rem;
@@ -78,4 +79,8 @@
 
 .cardBody_text {
   padding: 42px 42px 80px 42px;
+}
+
+.faq_hints {
+  background-color: #ffffff;
 }
