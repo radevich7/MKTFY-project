@@ -29,7 +29,7 @@ const Footer = () => {
                   Privacy Policy
                 </NavLink>
 
-                <NavLink href="#">FAQ</NavLink>
+                <NavLink href="/home/faq">FAQ</NavLink>
               </Nav>
             </Col>
             <Col lg="6">

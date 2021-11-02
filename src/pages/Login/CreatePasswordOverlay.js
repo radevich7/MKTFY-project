@@ -138,6 +138,24 @@ const CreatePasswordOverlay = (props) => {
         if (err) {
           console.log(err);
         }
+        if (!err) {
+          webAuth.login(
+            {
+              email: finalData.email,
+              password: finalData.password,
+              realm: "Username-Password-Authentication",
+              responseType: "token",
+              redirectUri: window.location.origin + "/login",
+              audience: "http://mktfy.com",
+            },
+            (error) => {
+              return alert("Something went wrong");
+              // setLoginError(
+              //   <span className="error_message">{error.description}</span>
+              // );
+            }
+          );
+        }
         // if (!err) {
         //   webAuth.redirect.loginWithCredentials(
         //     {

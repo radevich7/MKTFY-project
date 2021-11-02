@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Button from "../../reusableComponent/Button";
 import "./SignUpFormOverlay.css";
 import PhoneInput from "react-phone-number-input/input";
@@ -14,9 +14,11 @@ import {
   ModalHeader,
   ModalBody,
 } from "reactstrap";
+import { placeholder } from "@babel/types";
 
 const SignUpFormOverlay = (props) => {
   const [valuePhone, setValuePhone] = useState(); //for international input to work
+  const phoneInputRef = useRef();
 
   // FIRST NAME
   const {
@@ -226,9 +228,13 @@ const SignUpFormOverlay = (props) => {
                       onBlur={phoneBlurHanlder}
                       value={valuePhone}
                       onChange={setValuePhone}
+                      ref={phoneInputRef}
                     />
                     {!valuePhone && (
-                      <span className="phone_placeholder">
+                      <span
+                        className="phone_placeholder"
+                        onClick={() => phoneInputRef.current.focus()}
+                      >
                         (000) 000 - 0000
                       </span>
                     )}

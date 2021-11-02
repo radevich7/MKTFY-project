@@ -32,14 +32,12 @@ const AppRouter = (store) => {
     console.log(token);
 
     useEffect(() => {
-      if (token.length > 0) {
+      if (token && token.length > 0) {
         localStorage.setItem("Auth_token", token);
         props.store.setStore((prevState) => ({
           ...prevState,
           authenticated: true,
         }));
-      } else {
-        // return RequireAuth();
       }
     }, []);
     return <Redirect to={"/home"} />;

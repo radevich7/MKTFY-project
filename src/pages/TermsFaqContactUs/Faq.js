@@ -7,37 +7,80 @@ import {
   Col,
   Row,
 } from "reactstrap";
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
+
+import { FaCaretRight } from "react-icons/fa";
 const Faq = () => {
   const [toggleQuestion, setToggequestion] = useState(1); //1 is the default id to be opened by default
+
   return (
     <Container fluid className="faq_container">
       <Card className="border_document_faq">
+        <div className="page_path">
+          <Link to="/home" className="link_home">
+            <span>home</span>
+          </Link>
+          <span className="arrow_path"> {">"} </span>
+          <span>FAQ</span>
+        </div>
+        <h1>Frequently Asked Questions</h1>
         <Row className="faq_row_container">
           <Col lg="4" className="faq_hints">
-            <Row className="w-100 border">
-              <CardHeader onClick={() => setToggequestion(1)}>
+            <Row>
+              <CardHeader
+                onClick={() => setToggequestion(1)}
+                className={toggleQuestion === 1 ? "active_item" : ""}
+              >
                 <span>How MKTFY works?</span>
+
+                <span className="faq_caret">
+                  <FaCaretRight />
+                </span>
               </CardHeader>
             </Row>
-            <Row className="w-100 border">
-              <CardHeader onClick={() => setToggequestion(2)}>
+            <Row>
+              <CardHeader
+                onClick={() => setToggequestion(2)}
+                className={toggleQuestion === 2 ? "active_item" : ""}
+              >
                 <span>How I can sell things on MKTFY</span>
+                <span className="faq_caret">
+                  <FaCaretRight />
+                </span>
               </CardHeader>
             </Row>
-            <Row className="w-100 border">
-              <CardHeader onClick={() => setToggequestion(3)}>
+            <Row>
+              <CardHeader
+                onClick={() => setToggequestion(3)}
+                className={toggleQuestion === 3 ? "active_item" : ""}
+              >
                 <span>Where the products come from?</span>
+                <span className="faq_caret">
+                  <FaCaretRight />
+                </span>
               </CardHeader>
             </Row>
-            <Row className="w-100 border">
-              <CardHeader onClick={() => setToggequestion(4)}>
+            <Row>
+              <CardHeader
+                onClick={() => setToggequestion(4)}
+                className={toggleQuestion === 4 ? "active_item" : ""}
+              >
                 <span>Can I have a refund?</span>
+                <span className="faq_caret">
+                  <FaCaretRight />
+                </span>
               </CardHeader>
             </Row>
-            <Row className="w-100 border">
-              <CardHeader onClick={() => setToggequestion(5)}>
+            <Row>
+              <CardHeader
+                onClick={() => setToggequestion(5)}
+                className={toggleQuestion === 5 ? "active_item" : ""}
+              >
                 <span>Where MKTFY is based?</span>
+                <span className="faq_caret">
+                  <FaCaretRight />
+                </span>
               </CardHeader>
             </Row>
           </Col>
@@ -133,6 +176,53 @@ const Faq = () => {
                   postings if possible. You can use an existing posted ad and
                   edit it to suit your item for sale. Use bullet points to
                   highlight the important selling points of your product.
+                </p>
+              </CardBody>
+            </Collapse>
+            <Collapse isOpen={toggleQuestion === 3 ? true : false}>
+              <CardBody className="cardBody_text">
+                <h2>Where the products come from?</h2>
+
+                <p>
+                  Unlike traditional marketplaces, we understand what else our
+                  users are shopping for – from furniture, to rental properties,
+                  services and jobs. We can start to build a better consumer
+                  profile and can work with you to target high quality
+                  impressions across your campaigns.
+                </p>
+                <p>
+                  The products are coming from the avarega canadian family that
+                  decided to sell their staff. It can be buying a gently used TV
+                  or donating baby clothes to a new mom. It might be selling
+                  your couch or trading camera equipment with a friend. Any time
+                  you sell, swap, buy or donate a used item, you’re a part of
+                  the second-hand economy.
+                </p>
+              </CardBody>
+            </Collapse>
+
+            <Collapse isOpen={toggleQuestion === 4 ? true : false}>
+              <CardBody className="cardBody_text">
+                <h2>Can I have a refund?</h2>
+                <p>
+                  Unless the item is final sale, most items purchased with
+                  checkout on Facebook are returnable for at least 30 days after
+                  delivery. Items purchased with checkout from individual
+                  sellers on Marketplace may be returned depending on the
+                  seller's return policy.
+                </p>
+              </CardBody>
+            </Collapse>
+            <Collapse isOpen={toggleQuestion === 5 ? true : false}>
+              <CardBody className="cardBody_text">
+                <h2>Where MKTFY is based?</h2>
+                <p>
+                  MKTFY is a Canadian online classified advertising website and
+                  part of eBay Classifieds Group, which was acquired by Adevinta
+                  in 2021. It operates sections for cities and urban regions,
+                  for posting local advertisements. Kijiji was launched in
+                  February 2005 as an eBay subsidiary[2] and become part of the
+                  eBay Classifieds Group in 2007
                 </p>
               </CardBody>
             </Collapse>

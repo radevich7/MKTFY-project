@@ -19,6 +19,8 @@ import { useState, useRef } from "react";
 import axios from "axios";
 
 const AccountInformation = (props) => {
+  const [valuePhone, setValuePhone] = useState(); //for international input to work
+  const phoneInputRef = useRef();
   const [userData, setUserData] = useState(props.store.userData);
   const [firstNameUpdated, setFirstNameUpdated] = useState(
     props.store.userData.firstName
@@ -142,9 +144,13 @@ const AccountInformation = (props) => {
                         className="accountInformation_inputField phone"
                         value={defaultPhoneValue}
                         onChange={(e) => setDefaultPhoneValue(e)}
+                        ref={phoneInputRef}
                       />
                       {!defaultPhoneValue && (
-                        <span className="accountInformation_phone_placeholder">
+                        <span
+                          className="accountInformation_phone_placeholder"
+                          onClick={() => phoneInputRef.current.focus()}
+                        >
                           {phonePlaceholder}
                         </span>
                       )}

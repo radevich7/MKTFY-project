@@ -2,7 +2,6 @@ import { Row, Col, FormGroup } from "reactstrap";
 import camera from "../../assets/camera.svg";
 import closeCircle from "../../assets/closeCircle.svg";
 const PreviewContent = (props) => {
-  console.log(props.previewImages);
   // Remove Image
 
   const emptyContent = (

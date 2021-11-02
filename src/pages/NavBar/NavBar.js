@@ -217,7 +217,11 @@ const NavBar = () => {
                     <DropdownItem header className="dropdown_help_header">
                       Help
                     </DropdownItem>
-                    <DropdownItem className="dropDownItem_profile">
+                    <DropdownItem
+                      className="dropDownItem_profile"
+                      to="/home/faq"
+                      tag={Link}
+                    >
                       FAQ
                     </DropdownItem>
                     <DropdownItem className="dropDownItem_profile">

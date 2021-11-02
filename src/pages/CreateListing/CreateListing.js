@@ -46,7 +46,7 @@ const CreateListing = () => {
   // State managment for uploading images
   const [uploadFile, setUploadFile] = useState(null);
   const [previewImages, setPreviewImages] = useState(null);
-  // console.log(previewImages.map((image, index) => image));
+  console.log(uploadFile, previewImages);
 
   const removeImage = (index) => {
     let previewimageClone = [...previewImages];

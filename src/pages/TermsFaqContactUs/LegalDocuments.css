@@ -46,25 +46,29 @@
   background-attachment: fixed;
   background-position: 50% 50%;
   padding-top: 312px;
-  padding-bottom: 122px;
+
   background-color: #f4f4f5;
+  border-radius: 20px 20px 20px 20px;
+  height: 100vh;
 }
 
 .border_document_faq {
   max-width: 1636px;
   margin: 0 auto;
-  /* padding: 0px 352px 0 0; */
   background-color: transparent;
 }
 
 .faq_row_container {
   max-width: 1448px;
-  max-height: 856px;
+  height: 640px;
+  box-shadow: 0px 7px 12px #00000024;
+  background-color: transparent;
+  border-radius: 10px;
 }
 
 .text_container {
   background-color: #f8f8f8;
-  border-radius: 0px 10px 10px 0;
+  border-radius: 0px 10px 10px 0px;
 }
 .text_container h2 {
   font-size: 3.4rem;
@@ -83,4 +87,32 @@
 
 .faq_hints {
   background-color: #ffffff;
+  border-radius: 10px 0px 0px 10px;
+}
+.faq_hints .card-header {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  font-size: 1.6rem;
+  position: relative;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 1px #c2bfbf1a;
+  margin-bottom: 1px;
+}
+.faq_caret {
+  color: #6318af;
+  position: absolute;
+  right: 20px;
+}
+
+.faq_hints .card-header.active_item {
+  background-color: #f8f8f8;
+}
+
+.border_document_faq h1 {
+  font-size: 4rem;
+  color: #4d4d4d;
+  font-weight: bold;
+  margin-bottom: 32px;
 }

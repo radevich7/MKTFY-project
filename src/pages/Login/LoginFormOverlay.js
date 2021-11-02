@@ -13,7 +13,18 @@ import {
 import Button from "../../reusableComponent/Button";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import auth0js from "auth0-js";
-
+// var webAuth = new auth0.WebAuth({
+//   domain:       'mktfy-core.us.auth0.com',
+//   clientID:     'fA3Qsc0dYKfFixZEViRSYrqvQBuH3pO6'      });
+// const result = webAuth.login({
+//   email: 'jlewis+test1@launchpadbyvog.com',
+//   password: 'Password1%',
+//   realm: 'Username-Password-Authentication',
+//   responseType: 'token',
+//   redirectUri: 'http://localhost:5000',
+//   audience: 'http://mktfy.com'      });
+// console.log('result', result);
+// }
 const LoginFormOverlay = (props) => {
   const webAuth = new auth0js.WebAuth({
     domain: process.env.REACT_APP_AUTH0_DOMAIN,
@@ -62,15 +73,14 @@ const LoginFormOverlay = (props) => {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-
-    webAuth.redirect.loginWithCredentials(
+    webAuth.login(
       {
-        connection: process.env.REACT_APP_AUTH0_CONNECTION,
-        username: enteredEmailValue,
+        email: enteredEmailValue,
         password: enteredPasswordValue,
-        redirectUri: window.location.origin + "/login",
+        realm: "Username-Password-Authentication",
         responseType: "token",
-        scope: "openid profile email",
+        redirectUri: window.location.origin + "/login",
+        audience: "http://mktfy.com",
       },
       (error) => {
         setLoginError(
@@ -78,6 +88,22 @@ const LoginFormOverlay = (props) => {
         );
       }
     );
+
+    // webAuth.redirect.loginWithCredentials(
+    //   {
+    //     connection: process.env.REACT_APP_AUTH0_CONNECTION,
+    //     username: enteredEmailValue,
+    //     password: enteredPasswordValue,
+    //     redirectUri: window.location.origin + "/login",
+    //     responseType: "token",
+    //     scope: "openid profile email",
+    //   },
+    //   (error) => {
+    //     setLoginError(
+    //       <span className="error_message">{error.description}</span>
+    //     );
+    //   }
+    // );
     resetPasswordInput();
     resetEmailInput();
   };

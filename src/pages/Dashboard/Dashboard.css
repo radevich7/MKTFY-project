@@ -148,36 +148,38 @@ div.card {
 .card_banner {
   color: transparent;
   background-color: transparent;
+  margin-bottom: 120px;
 }
 .googlePlayLogo {
-  width: 29.8em;
+  width: 298px;
   position: absolute;
-  bottom: 7.47em;
-  right: 64.8em;
+  bottom: 13%;
+  left: 42%;
 }
 .appStoreLogo {
-  width: 29.8em;
+  width: 298px;
   position: absolute;
-  bottom: 7.47em;
-  right: 32em;
+  bottom: 13%;
+  left: 62%;
 }
 
 .banner_header {
-  font-size: 4em;
+  font-size: 4rem;
   font-weight: bold;
   color: #ffffff;
   position: absolute;
   /* increase font size for 4em thats why 230px/4em=5.75em */
-  bottom: 5.75em;
-  left: 17.3em;
+  bottom: 41%;
+  left: 42%;
 }
 
 .banner_text {
-  font-size: 2em;
+  font-size: 2rem;
   font-weight: bold;
   color: #ffffff;
   position: absolute;
   /* /* increase font size for 4em  */
-  bottom: 8.8em;
-  left: 34.6em;
+  bottom: 32%;
+  left: 42%;
+  padding: 0;
 }
