@@ -6,11 +6,11 @@ const Purchases = () => {
     <Container fluid className="purchases_container">
       <Card className="border_document_purchases">
         <h1>My Purchases</h1>
-        <span className="total_purchases">2 Items </span>
+        <span className="total_purchases">2 Items</span>
         <CardBody className="purchases_card">
           <Row>
             <Col lg="4" className="image_purchases">
-              <img src={dummy_img} alt="" />
+              <img src={dummy_img} alt="/" />
             </Col>
             <Col className="details_purchases">
               <h6>September 07 2020</h6>
@@ -22,7 +22,7 @@ const Purchases = () => {
         <CardBody className="purchases_card">
           <Row>
             <Col lg="4" className="image_purchases">
-              <img src={dummy_img} alt="" />
+              <img src={dummy_img} alt="/" />
             </Col>
             <Col className="details_purchases">
               <h6>September 07 2020</h6>

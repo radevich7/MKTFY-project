@@ -44,7 +44,7 @@
 }
 #logo1 {
   margin-top: 15px;
-  padding: 0;
+  padding: 5px 0px;
   width: 115px;
 }
 
@@ -274,6 +274,10 @@
 }
 
 /* Dropdown NOTIFICATION */
+
+.profile_container {
+  margin-left: 20px;
+}
 .dropdown_notification_header {
   font-size: 1em;
   color: black;
@@ -316,6 +320,7 @@
 .profile_notification_container {
   display: flex;
   justify-content: space-around;
+  padding: 10px 0px;
 }
 #notification_bell_logo {
   position: absolute;
@@ -353,6 +358,7 @@
 .button_column {
   display: flex;
   justify-content: center;
+  padding: 5px 0px;
 }
 .button_create_listing {
   max-width: 152px;
@@ -424,7 +430,22 @@
 
 @media (max-width: 1500px) {
   #logo1 {
-    width: 110px;
+    width: 100px;
+    padding-right: 10px;
+  }
+  .categories_column {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 1199px) {
+  #logo1 {
+    width: 120px;
+    text-align: center;
+  }
+  .navbar-brand {
+    display: flex;
+    justify-content: center;
   }
 }
 

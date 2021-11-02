@@ -3,17 +3,19 @@ import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 import "./AppRouter.css";
 import NavBar from "../pages/NavBar/NavBar";
 import Dashboard from "../pages/Dashboard/Dashboard";
-import Listing from "../pages/Listing/Listing";
+import Listing from "../pages/ViewListing/Listing";
 import Checkout from "../pages/Checkout/Checkout";
 import Pickup from "../pages/Pickup/Pickup";
 import Login from "../pages/Login/Login";
 import AccountInformation from "../pages/AccountInformation/AccountInformation";
 import { useAuth0 } from "@auth0/auth0-react";
 import ChangePassword from "../pages/ChangePassword/ChangePassword";
-import TermsOfService from "../pages/LegalDocuments/TermsOfService";
+import TermsOfService from "../pages/TermsFaqContactUs/TermsOfService";
 import Purchases from "../pages/Purchases/Purchases";
-import PrivacyPolicy from "../pages/LegalDocuments/PrivacyPolicy";
+import PrivacyPolicy from "../pages/TermsFaqContactUs/PrivacyPolicy";
 import CreateListing from "../pages/CreateListing/CreateListing";
+import MyListings from "../pages/MyListings/MyListings";
+import Faq from "../pages/TermsFaqContactUs/Faq";
 
 const AppRouter = (store) => {
   const RequireAuth = ({ children }) => {
@@ -23,6 +25,7 @@ const AppRouter = (store) => {
     return children;
   };
   const LoginLogic = (props) => {
+    console.log(props.location);
     let token = new URLSearchParams(props.location.hash.substr(1)).get(
       "access_token"
     );
@@ -122,6 +125,16 @@ const AppRouter = (store) => {
             path="/home/create"
             exact
             render={(props) => <CreateListing {...props} store={store} />}
+          />
+          <Route
+            path="/home/mylistings"
+            exact
+            render={(props) => <MyListings {...props} store={store} />}
+          />
+          <Route
+            path="/home/faq"
+            exact
+            render={(props) => <Faq {...props} store={store} />}
           />
         </RequireAuth>
       </Switch>

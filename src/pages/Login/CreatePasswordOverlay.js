@@ -135,24 +135,27 @@ const CreatePasswordOverlay = (props) => {
       },
       (err) => {
         if (err) return alert("Something went wrong: ");
-        if (!err) {
-          webAuth.redirect.loginWithCredentials(
-            {
-              connection: process.env.REACT_APP_AUTH0_CONNECTION,
-              username: finalData.email,
-              password: finalData.password,
-              redirectUri: window.location.origin + "/login",
-              responseType: "token",
-              scope: "openid profile email",
-            },
-            (error) => {
-              return alert("Something went wrong");
-              // setLoginError(
-              //   <span className="error_message">{error.description}</span>
-              // );
-            }
-          );
+        if (err) {
+          console.log(err);
         }
+        // if (!err) {
+        //   webAuth.redirect.loginWithCredentials(
+        //     {
+        //       connection: process.env.REACT_APP_AUTH0_CONNECTION,
+        //       username: finalData.email,
+        //       password: finalData.password,
+        //       redirectUri: window.location.origin + "/login",
+        //       responseType: "token",
+        //       scope: "openid profile email",
+        //     },
+        //     (error) => {
+        //       return alert("Something went wrong");
+        //       // setLoginError(
+        //       //   <span className="error_message">{error.description}</span>
+        //       // );
+        //     }
+        //   );
+        // }
       }
     );
   };
