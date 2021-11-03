@@ -133,6 +133,7 @@ const CreateListing = () => {
         setPreviewImages={setPreviewImages}
         setUploadFile={setUploadFile}
         uploadFile={uploadFile}
+        previewImages={previewImages}
       />
       {/* END MODAL */}
       <Card className="border_document_createListing">
