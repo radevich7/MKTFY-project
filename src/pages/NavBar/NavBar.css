@@ -21,7 +21,7 @@
 }
 /* Search Card + DropDown City*/
 .smth {
-  padding-right: 0;
+  /* padding-right: 0; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,9 +32,7 @@
 }
 
 .border-custom {
-  height: 100%;
   align-self: center;
-  border: none;
   border-left: 1px solid rgb(189, 186, 186);
   border-right: 1px solid rgb(189, 186, 186);
   border-radius: 0;
@@ -413,11 +411,6 @@
   margin: 6px 0;
 }
 
-.search_input {
-  height: 30px;
-  border: none;
-  font-size: 1.6rem;
-}
 .search_input.form-control {
   line-height: 0;
 }
@@ -435,7 +428,7 @@
     padding-right: 10px;
   }
   .categories_column {
-    max-width: 100%;
+    /* max-width: 100%; */
   }
 }
 
@@ -451,3 +444,31 @@
 }
 
 /* NEw */
+
+/* Seatch INPUT COLUMN */
+.searchInput_container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.search_input {
+  height: 20px;
+  border: none;
+  font-size: 1.6rem;
+}
+
+.smth {
+  padding-right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.border-custom {
+  align-self: center;
+  border-left: 1px solid rgb(189, 186, 186);
+  border-right: 1px solid rgb(189, 186, 186);
+  border-radius: 0;
+}
