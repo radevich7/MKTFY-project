@@ -1,14 +1,15 @@
 .app_container {
-  /* height: 191px; */
+  height: 191px;
   width: 100vw;
   padding: 0;
   background-color: #6318af;
-  padding-top: 39px;
+  /* padding-top: 39px; */
 }
 
 .border_document {
   max-width: 1660px;
   margin: auto;
+  padding-top: 39px;
 }
 
 .nav_bar {
