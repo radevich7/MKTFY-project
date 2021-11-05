@@ -78,7 +78,7 @@
     height: 400px;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .carousel-container {
     padding: 32px 0px 32px 0px;
   }
@@ -86,5 +86,17 @@
     height: 300px;
     margin-left: 5px;
     margin-right: 5px;
+  }
+  .carousel {
+    position: absolute;
+    top: -5px;
+  }
+  .arrow {
+    position: absolute;
+  }
+  .bottom {
+    position: absolute;
+    /* right: 10px; */
+    bottom: -375px;
   }
 }

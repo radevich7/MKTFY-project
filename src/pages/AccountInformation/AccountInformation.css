@@ -1,14 +1,3 @@
-.accountInformation_container {
-  /* border: 1px solid black; */
-  height: 100vh;
-
-  background-image: url("/Users/Julian/PROJECT/mktfy_web_app/src/assets/imgBackgoundGreyWaves.svg");
-  background-attachment: fixed;
-  background-position: 50% 50%;
-  padding-top: 312px;
-  /* margin-bottom: 210px; */
-  background-color: #f4f4f5;
-}
 .border_document_accountInformation {
   max-width: 1636px;
   margin: 0 auto;

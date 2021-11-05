@@ -1,10 +1,5 @@
 .createListing_container {
-  background-image: url("/Users/Julian/PROJECT/mktfy_web_app/src/assets/imgBackgoundGreyWaves.svg");
-  background-attachment: fixed;
-  background-position: 50% 50%;
-  padding-top: 312px;
-  padding-bottom: 122px;
-  background-color: #f4f4f5;
+  background-color: transparent;
 }
 .border_document_createListing {
   max-width: 1636px;

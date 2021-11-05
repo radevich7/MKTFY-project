@@ -1,13 +1,5 @@
 .listing_container {
-  /* border: 1px solid black; */
-  height: 100vh;
-
-  background-image: url("/Users/Julian/PROJECT/mktfy_web_app/src/assets/imgBackgoundGreyWaves.svg");
-  background-attachment: fixed;
-  background-position: 50% 50%;
   padding-top: 312px;
-  /* margin-bottom: 210px; */
-  background-color: #f4f4f5;
 }
 
 .border_document_listing {
@@ -129,9 +121,4 @@
   .item_details_card h2 {
     font-size: 3.6rem;
   }
-}
-@media (max-width: 1000px) {
-  /* .listingPage_path {
-    top: -3%;
-  } */
 }

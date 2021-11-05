@@ -10,7 +10,7 @@ const Checkout = () => {
   let match = useRouteMatch();
 
   return (
-    <Container fluid className="checkout_container">
+    <Container fluid>
       <Card className="border_document_checkout">
         <div className="page_path">
           <Link to="/home" className="link_home">
