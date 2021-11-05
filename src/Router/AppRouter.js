@@ -16,7 +16,6 @@ import PrivacyPolicy from "../pages/TermsFaqContactUs/PrivacyPolicy";
 import CreateListing from "../pages/CreateListing/CreateListing";
 import MyListings from "../pages/MyListings/MyListings";
 import Faq from "../pages/TermsFaqContactUs/Faq";
-import StyledDropzone from ".//Drag";
 
 const AppRouter = (store) => {
   const RequireAuth = ({ children }) => {
@@ -77,11 +76,11 @@ const AppRouter = (store) => {
           exact
           render={(props) => <PrivacyPolicy {...props} />}
         />
-        <Route
+        {/* <Route
           path="/form"
           exact
-          render={(props) => <StyledDropzone {...props} />}
-        />
+          render={(props) => < {...props} />}
+        /> */}
 
         <RequireAuth>
           {store.authenticated && <NavBar />}

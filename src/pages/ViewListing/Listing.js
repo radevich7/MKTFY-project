@@ -46,7 +46,7 @@ const Listing = (props) => {
   return (
     <Container fluid className="listing_container">
       <Card className="border_document_listing">
-        <div className="page_path">
+        <div className="listingPage_path">
           <Link to="/home" className="link_home">
             <span>home</span>
           </Link>
@@ -54,9 +54,9 @@ const Listing = (props) => {
           <span>product listing</span>
         </div>
         <CardBody className="p-0">
-          <Row className=" m-0">
+          <Row className="m-0">
             {/* First column -carousel*/}
-            <Col lg="6" className="p-0">
+            <Col className="p-0 col-xxl-6 col-xl-7 col-lg-8 col-12">
               <ListingCarousel images={images} />
             </Col>
 

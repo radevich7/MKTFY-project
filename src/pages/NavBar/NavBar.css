@@ -5,6 +5,10 @@
   background-color: #6318af;
   /* padding-top: 39px; */
 }
+.navbar_container {
+  max-width: 1651px;
+  padding-top: 37px;
+}
 
 .border_document {
   max-width: 1660px;
@@ -90,15 +94,18 @@
 }
 .dropdown {
   font-size: 2em;
+  text-align: center;
   cursor: pointer;
 }
+.searchCity_container {
+  position: relative;
+}
 .dropDownCustom_search_card {
-  margin-top: 40px;
   width: 315px;
-  transform: translate3d(-91%, 21px, 0px) !important;
+  transform: translate3d(-24.7rem, 61px, 0px) !important;
   box-shadow: 0px 3px 6px #00000029;
   opacity: 1;
-  font-size: 0.7em;
+  font-size: 1.4rem;
 }
 .dropDownToggle_search_card h3 {
   font-size: 20px;
@@ -171,6 +178,7 @@
 .dropDownCustom_profile {
   margin-top: 40px;
   width: 315px;
+
   /* height: 656px; */
   transform: translate3d(-3%, 31px, 0px) !important;
   box-shadow: 0px 3px 6px #00000029;
@@ -179,14 +187,14 @@
 }
 
 .dropDownToggle_profile h3 {
-  font-size: 20px;
+  font-size: 2rem;
   color: #ffba00;
   line-height: 0.8;
   font-weight: 600;
 }
 .dropDownToggle_profile h4 {
-  font-size: 14px;
-  margin-left: 11%;
+  font-size: 1.4rem;
+  margin-left: -8%;
   color: #e2e2e2;
 }
 .arrow_profile:before {
@@ -236,7 +244,7 @@
   margin-top: 10%;
 }
 .dropDownItem_profile {
-  padding: 8% 16px;
+  padding: 8% 4%;
 }
 .dropDownItem_profile:hover {
   color: #9349de;
@@ -248,7 +256,7 @@
 #exit_logo {
   position: absolute;
   right: 5%;
-  bottom: 3.5%;
+  bottom: 4.2%;
 }
 
 .dropdown-item:active {
@@ -323,8 +331,7 @@
 }
 #notification_bell_logo {
   position: absolute;
-  top: 40%;
-  left: 0;
+  top: 20%;
 }
 
 .notification_brand_logo {
@@ -360,7 +367,7 @@
   padding: 5px 0px;
 }
 .button_create_listing {
-  max-width: 152px;
+  width: 152px;
   height: 50px;
   border-radius: 37px;
   border: none;
@@ -423,23 +430,8 @@
 }
 
 @media (max-width: 1500px) {
-  #logo1 {
-    width: 100px;
-    padding-right: 10px;
-  }
   .categories_column {
-    /* max-width: 100%; */
-  }
-}
-
-@media (max-width: 1199px) {
-  #logo1 {
-    width: 120px;
-    text-align: center;
-  }
-  .navbar-brand {
-    display: flex;
-    justify-content: center;
+    max-width: 100%;
   }
 }
 

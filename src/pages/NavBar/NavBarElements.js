@@ -1,13 +1,26 @@
 import { useState } from "react";
+import gold_caret from "../../assets/img/gold_caret.svg";
+import exit_app from "../../assets/img/exit_to_app-24px.svg";
+import notification_bell from "../../assets/img/notification_bell_main.svg";
+import { Link } from "react-router-dom";
 import {
+  NavItem,
+  NavbarToggler,
+  Collapse,
+  Container,
   Row,
   Col,
+  NavbarBrand,
   Dropdown,
   DropdownToggle,
   DropdownMenu,
   Input,
+  Card,
   DropdownItem,
   Form,
+  Nav,
+  NavLink,
+  Navbar,
 } from "reactstrap";
 
 import search_icon from "../../assets/img/search_icon.svg";
@@ -17,7 +30,7 @@ export const SearchInput = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   return (
-    <Row className="searchInput_container ">
+    <Row className="searchInput_container g-0">
       {/* BUTTON ALL */}
       <Col sm="2" className="smth">
         <span className="output_categories_span">All</span>
@@ -37,7 +50,11 @@ export const SearchInput = () => {
       </Col>
       {/* DROPDOWN CITY */}
       <Col sm="2">
-        <Dropdown isOpen={dropdownOpen} toggle={toggle} className="">
+        <Dropdown
+          isOpen={dropdownOpen}
+          toggle={toggle}
+          className="searchCity_container"
+        >
           <DropdownToggle
             tag="span"
             data-toggle="dropdown"
@@ -73,7 +90,7 @@ export const SearchInput = () => {
 
 export const Categories = (props) => {
   return (
-    <Col className="categories_column ">
+    <Col className="categories_column">
       <span href="#" className="category_header">
         <div className="hamburger_button">
           <div></div>
@@ -97,3 +114,141 @@ export const Categories = (props) => {
 };
 
 // PROFILE INFO  ELEMENT
+const getLetterForLogo = () => {
+  return "George Carlson".charAt(0);
+};
+const letterLogo = getLetterForLogo();
+//
+
+export const UserProfileSettings = (props) => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
+  return (
+    <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+      <DropdownToggle
+        tag="span"
+        data-toggle="dropdown"
+        aria-expanded={dropdownOpen}
+        className="dropDownToggle_profile"
+      >
+        <h4> Welcome back,</h4>
+        <h3>
+          <img src={gold_caret} alt="/" />
+          George Carlson
+        </h3>
+      </DropdownToggle>
+      <DropdownMenu className="dropDownCustom_profile arrow_profile">
+        <DropdownItem className="dropdown_user_name">
+          <div className="name_logo">
+            <div className="letter_logo">{letterLogo}</div>
+          </div>
+          <span> George Carlson</span>
+        </DropdownItem>
+
+        <DropdownItem header className="dropdown_settings_header ">
+          Settings
+        </DropdownItem>
+        <DropdownItem
+          className="dropDownItem_profile"
+          to="/home/account"
+          tag={Link}
+        >
+          Account Information
+        </DropdownItem>
+        <DropdownItem
+          className="dropDownItem_profile"
+          to="/home/changepassword"
+          tag={Link}
+        >
+          Change Password
+        </DropdownItem>
+        <DropdownItem
+          className="dropDownItem_profile"
+          to="/home/purchases"
+          tag={Link}
+        >
+          My purchases
+        </DropdownItem>
+        <DropdownItem
+          className="dropDownItem_profile"
+          to="/home/mylistings"
+          tag={Link}
+        >
+          My Listings
+        </DropdownItem>
+        <DropdownItem header className="dropdown_help_header">
+          Help
+        </DropdownItem>
+        <DropdownItem
+          className="dropDownItem_profile"
+          to="/home/faq"
+          tag={Link}
+        >
+          FAQ
+        </DropdownItem>
+        <DropdownItem className="dropDownItem_profile">Contact Us</DropdownItem>
+        <DropdownItem
+          className="dropDownItem_profile sign_out_button"
+          to="/logout"
+          tag={Link}
+        >
+          Sign Out
+          <img src={exit_app} alt="/icon" id="exit_logo" />
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+  );
+};
+
+// NOTIFICATION BELL ELEMENT
+
+export const NotificationElement = () => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
+  return (
+    <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+      <DropdownToggle
+        tag="span"
+        data-toggle="dropdown"
+        aria-expanded={dropdownOpen}
+      >
+        <img src={notification_bell} alt="/" id="notification_bell_logo" />
+      </DropdownToggle>
+      <DropdownMenu className="dropDownCustom_notification arrow_notification">
+        <DropdownItem header className="dropdown_notification_header">
+          News for you
+        </DropdownItem>
+        <DropdownItem className="notification_dropdown_item">
+          <div className="notification_brand_logo">
+            <span>MKTFY</span>
+          </div>
+          <div className="notification_message">
+            <span> Hey George, welcome to MKTFY</span>
+            <span style={{ fontSize: "12px" }}> September 02, 2020</span>
+          </div>
+        </DropdownItem>
+        <DropdownItem header className="dropdown_notification_header">
+          Previously Seen
+        </DropdownItem>
+        <DropdownItem className="notification_dropdown_item">
+          <div className="notification_brand_logo">
+            <span>MKTFY</span>
+          </div>
+          <div className="notification_message">
+            <span> Let's create your first offer!</span>
+            <span style={{ fontSize: "12px" }}>September 05, 2020</span>
+          </div>
+        </DropdownItem>
+        <DropdownItem className="notification_dropdown_item">
+          <div className="notification_brand_logo">
+            <span>MKTFY</span>
+          </div>
+          <div className="notification_message">
+            <span> Our Terms of Service has been updated</span>
+            <span style={{ fontSize: "12px" }}>September 03, 2020</span>
+          </div>
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+  );
+};

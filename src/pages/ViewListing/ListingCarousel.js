@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Fragment } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { Col, Row } from "reactstrap";
+import { Col, Row, Container } from "reactstrap";
 
 import "./ListingCarousel.css";
 
@@ -70,12 +70,12 @@ const ListingCarousel = (props) => {
 
   return (
     <Fragment>
-      <Row className="carousel-container">
-        <Col className="carousel" lg="2">
+      <Container className="carousel-container " fluid>
+        <Col className="carousel col-md-2 col-1">
           <Row className="arrow">
             <IoIosArrowUp onClick={handleUpClick} />
           </Row>
-          <Row className="carousel__images">
+          <Row className="carousel__images d-none d-md-inline">
             {props.images &&
               props.images.map((image, index) => (
                 <div
@@ -106,7 +106,7 @@ const ListingCarousel = (props) => {
             {selectedImageIndex + 1} of {props.images.length}
           </div>
         </Col>
-      </Row>
+      </Container>
     </Fragment>
   );
 };

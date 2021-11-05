@@ -13,10 +13,6 @@
 .border_document_listing {
   max-width: 1636px;
   margin: 0 auto;
-
-  /* padding: 0; */
-  /* height: 558px; */
-  /* padding-bottom: 15px; */
 }
 
 /* SECOND COLUMN CARD */
@@ -103,13 +99,39 @@
   color: #6318af;
 }
 
-.page_path {
+.listingPage_path {
   font-size: 14px;
   position: absolute;
-  top: -5%;
+  top: -35px;
 }
 .arrow_path {
   color: #9349de;
   font-weight: bold;
   padding: 5px;
+}
+@media (max-width: 1400px) {
+  .listing_container {
+    padding-top: 270px;
+  }
+  .item_details_card {
+    padding-left: 52px;
+    padding-right: 25px;
+  }
+}
+@media (max-width: 1200px) {
+  .listing_container {
+    padding-top: 170px;
+  }
+  .item_details_card {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .item_details_card h2 {
+    font-size: 3.6rem;
+  }
+}
+@media (max-width: 1000px) {
+  /* .listingPage_path {
+    top: -3%;
+  } */
 }
