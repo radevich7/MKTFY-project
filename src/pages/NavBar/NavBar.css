@@ -434,6 +434,20 @@
     max-width: 100%;
   }
 }
+@media (max-width: 1150px) {
+  .dropDownToggle_profile h3 {
+    font-size: 1.5rem;
+  }
+  .dropDownToggle_profile h4 {
+    margin-left: 10%;
+  }
+  .categories_column span {
+    font-size: 1.5rem;
+  }
+  .button_create_listing {
+    width: 140px;
+  }
+}
 
 /* NEw */
 

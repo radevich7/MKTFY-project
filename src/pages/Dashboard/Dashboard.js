@@ -87,13 +87,13 @@ const Dashboard = () => {
       <Row className="border_document_dashboard row">
         <Deals items={deals} />
 
-        <Categories items={categoriesDeals} gutter="pr-1" />
+        <Categories items={categoriesDeals} />
 
-        <Categories items={categoriesDeals} gutter="pl-1" />
+        <Categories items={categoriesDeals} hide="d-none d-xl-block" />
 
         <Deals items={deals} />
         <Categories items={categoriesDeals} />
-        <Categories items={categoriesDeals} />
+        <Categories items={categoriesDeals} hide="d-none d-xl-block" />
         <Banner />
       </Row>
       <Footer />

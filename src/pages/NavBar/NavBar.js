@@ -26,7 +26,7 @@ const NavBar = () => {
   const toggleNav = () => setIsOpen((prevState) => !prevState);
   return (
     // NAVBAR
-    <Navbar expand="xl" fixed="top" style={{ backgroundColor: "#6318AF" }}>
+    <Navbar expand="lg" fixed="top" style={{ backgroundColor: "#6318AF" }}>
       <Container className="navbar_container d-flex align-items-start" fluid>
         {/* Toggle button for small screen  */}
         <NavbarToggler
@@ -35,7 +35,7 @@ const NavBar = () => {
           aria-label="Toggle navigation"
           style={{ backgroundColor: "red" }}
         />
-        <Link to="/home" className="mt-xl-4 pb-sm-4 ">
+        <Link to="/home" className="mt-lg-4 pb-sm-4 ">
           <img src={mainLogo} alt="/" />
         </Link>
 
@@ -44,14 +44,14 @@ const NavBar = () => {
           <Collapse navbar isOpen={open}>
             <Nav className="me-auto w-100" navbar>
               {/*li*/}
-              <Col lg="8" className="me-xl-3">
+              <Col lg="8" className="me-xl-3 ">
                 <NavItem>
                   <SearchInput />
                   <Categories />
                 </NavItem>
               </Col>
               <Col
-                className="mt-lg-2 d-flex flex-row justify-content-around"
+                className="mt-lg-2 d-flex flex-row justify-content-around "
                 lg="2"
               >
                 <NavItem>
@@ -65,7 +65,7 @@ const NavBar = () => {
                 </NavItem>
               </Col>
 
-              <Col className="mt-lg-2 d-flex justify-content-end ">
+              <Col className="mt-lg-2 d-flex justify-content-end">
                 <NavItem>
                   <Link to="/home/create" className="button_create_listing">
                     <span id="container">

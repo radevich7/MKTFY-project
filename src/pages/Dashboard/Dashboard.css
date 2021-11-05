@@ -78,10 +78,10 @@ div.card {
   background-size: contain; */
 }
 .deals_title {
-  font-size: 1.7em;
+  font-size: 1.7rem;
   font-weight: 300;
   text-align: start;
-  margin: 10px 21px 10px 14px;
+  margin: 20px 21px 10px 14px;
   color: #000000;
   text-decoration: none;
 }
@@ -89,20 +89,15 @@ div.card {
   color: #6318af;
   font-size: 2.1em;
   font-weight: bold;
-  margin: 0px 21px 20px 14px;
+  margin: 20px 21px 20px 14px;
 }
 
 /* Categories */
 .categories_card {
-  height: 264px;
-  width: 236px;
   border-radius: 10px;
   box-shadow: 0px 4px 15px #00000024;
-  display: flex;
-  justify-content: space-between;
 }
 .column_categories {
-  width: 100%;
   margin-top: 51px;
   margin-bottom: 12px;
 
@@ -170,4 +165,64 @@ div.card {
   bottom: 32%;
   left: 42%;
   padding: 0;
+}
+
+@media (max-width: 1540px) {
+  .column_categories {
+    width: 170px;
+  }
+  .googlePlayLogo {
+    width: 190px;
+  }
+  .appStoreLogo {
+    width: 190px;
+  }
+  .banner {
+    height: 520px;
+  }
+}
+@media (max-width: 1200px) {
+  .banner_text {
+    font-size: 1.8rem;
+  }
+  .banner_header {
+    font-size: 3rem;
+  }
+  .banner {
+    height: 400px;
+  }
+}
+@media (max-width: 1000px) {
+  .banner {
+    height: 350px;
+  }
+  .googlePlayLogo {
+    width: 130px;
+  }
+  .appStoreLogo {
+    width: 130px;
+  }
+  .banner_text {
+    font-size: 1.6rem;
+  }
+  .banner_header {
+    font-size: 2.2rem;
+  }
+}
+@media (max-width: 768px) {
+  .banner {
+    height: 250px;
+  }
+  .banner_text {
+    font-size: 1.2rem;
+  }
+  .banner_header {
+    font-size: 2.2rem;
+  }
+  .googlePlayLogo {
+    width: 100px;
+  }
+  .appStoreLogo {
+    width: 100px;
+  }
 }

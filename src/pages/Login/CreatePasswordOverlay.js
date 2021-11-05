@@ -201,7 +201,11 @@ const CreatePasswordOverlay = (props) => {
     : "characters_check";
 
   return (
-    <Modal isOpen={props.modal} toggle={props.toggle} size="lg">
+    <Modal
+      isOpen={props.modal}
+      toggle={props.toggle}
+      className="modal-lg modal-fullscreen-md-down"
+    >
       <ModalHeader toggle={props.toggle} className="createPassword_header">
         Create Password
       </ModalHeader>

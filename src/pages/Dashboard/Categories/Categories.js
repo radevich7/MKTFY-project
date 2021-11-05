@@ -5,11 +5,11 @@ import { Card, CardImg, CardBody, Col, Row } from "reactstrap";
 const Categories = (props) => {
   return (
     <React.Fragment>
-      <Col lg="6" className={"mb-4 mt-4 " + props.gutter}>
+      <Col className={`mb-4 mt-4 ${props.hide} xl-6 lg-12`}>
         <Card>
           <CardBody className="">
             <span className="container_title">Shop Electronics</span>
-            <Row className="scroll_effect space-between">
+            <Row className="space-between">
               {props.items.map((item) => (
                 <Col lg="4" key={item.id} className="column_categories p-0 ">
                   <Card className="mt-0 border-0 ">
