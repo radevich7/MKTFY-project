@@ -1,11 +1,9 @@
 .signup_container .modal-content {
   padding: 0 0 0 104px;
-  width: 1360px;
 }
 
 .signup_container.modal-dialog {
   max-width: 1360px;
-  top: 10%;
 }
 
 .signUp_header.modal-header {
@@ -85,76 +83,33 @@
   padding: -5px 0;
 }
 
-@media (max-width: 1399.98px) {
-  .signup_container.modal-dialog {
-    width: 800px;
-  }
-  .signup_container .modal-content {
-    padding: 0;
-    width: 800px;
-    /* margin: 0 auto; */
-  }
-  .signUp_header.modal-header,
-  .signUp_header p {
-    text-align: center;
-    margin-right: 0;
-  }
+@media (max-width: 992px) {
   .modal.show .modal-dialog {
     top: 0;
   }
-  .signUp_modal_body {
-    padding: 30px 34px;
-  }
-}
-@media (max-width: 991.98px) {
   .signUp_next_button {
     width: 100%;
   }
-  .signUp_modal_body {
-    padding: 30px 34px;
-  }
-  .signup_container.modal-dialog {
-    width: 600px;
-  }
-  .signup_container .modal-content {
-    padding: 0;
-    width: 600px;
-    /* margin: 0 auto; */
-  }
 }
-@media (max-width: 767.98px) {
+@media (max-width: 768px) {
   .signUp_modal_body {
-    padding: 0px 10px;
+    padding: 30px 20px 20px 34px;
   }
-  .signup_container.modal-dialog {
-    width: 100vw;
-    margin: 0px;
+  .signUp_header.modal-header {
+    margin-right: 15px;
+    margin-top: 10px;
+    text-align: center;
   }
   .signup_container .modal-content {
-    width: 100vw;
-    /* margin: 0 auto; */
+    padding: 0 0 0 0px;
   }
-  .modal-title {
-    font-size: 3rem;
-    position: relative;
+  .signUp_header h5 {
+    font-size: 2rem;
   }
   .signUp_header p {
-    font-size: 1.5rem;
-  }
-  .close span {
-    position: absolute;
-    top: -10px;
-
-    /* bottom: 5px; */
-    /* left: 5px; */
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #888889;
+    margin-bottom: 25px;
   }
 }
-
-/* .signup_container .modal-content {
-    width: 1200px;
-
-    padding: 0 0 0 104px;
-    border-radius: 10px;
-
-    /* margin: 0 auto; */
-/* } */

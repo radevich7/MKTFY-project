@@ -5,7 +5,7 @@
   top: 5%;
 }
 .login_body {
-  padding: 0 8.6rem;
+  padding: 0 86px;
   flex: 0;
 }
 
@@ -102,18 +102,19 @@ label {
   font-size: 1.4em;
   padding: 10px 0;
 }
-
 @media (max-width: 992px) {
   .login_body {
-    padding: 0 4rem;
-  }
-  .login_input_button {
-    width: 100%;
+    padding: 0 20px;
   }
 }
-
-@media (max-width: 576px) {
-  .modal_container .modal-content {
-    height: 100vh;
+@media (max-width: 768px) {
+  .modal-fullscreen-md-down .modal-body {
+    overflow-y: inherit;
+  }
+  .modal-content {
+    justify-content: center;
+  }
+  .login_input_button {
+    width: 80%;
   }
 }

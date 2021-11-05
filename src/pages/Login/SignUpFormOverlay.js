@@ -151,7 +151,7 @@ const SignUpFormOverlay = (props) => {
     <Modal
       isOpen={props.modal}
       toggle={props.toggle}
-      className="signup_container "
+      className="signup_container modal-fullscreen-lg-down "
     >
       <ModalHeader toggle={props.toggle} className="signUp_header">
         Welcome to MKTFY!

@@ -118,8 +118,7 @@ const LoginFormOverlay = (props) => {
     <Modal
       isOpen={props.modal}
       toggle={props.toggle}
-      className="modal_container"
-      size="lg"
+      className="modal_container modal-lg modal-fullscreen-md-down"
     >
       <ModalHeader toggle={props.toggle} className="login_header">
         Welcome Back!
