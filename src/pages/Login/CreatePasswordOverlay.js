@@ -149,6 +149,7 @@ const CreatePasswordOverlay = (props) => {
               audience: "http://mktfy.com",
             },
             (error) => {
+              console.log(error);
               return alert("Something went wrong");
               // setLoginError(
               //   <span className="error_message">{error.description}</span>

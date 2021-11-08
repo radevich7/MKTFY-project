@@ -150,3 +150,6 @@ mark {
 .link_home:hover {
   color: #6318af;
 }
+
+@media (max-width: 1400px) {
+}

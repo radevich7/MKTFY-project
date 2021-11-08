@@ -73,15 +73,6 @@
   height: 125px;
 }
 
-.listing_details_img {
-  display: flex;
-  justify-content: center;
-}
-.listing_details_information {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
 .listing_details_information h5 {
   font-size: 14px;
 }
@@ -96,4 +87,10 @@
 }
 .link_home:hover {
   color: #6318af;
+}
+
+@media (max-width: 992px) {
+  .checkout_container {
+    padding-top: 180px;
+  }
 }

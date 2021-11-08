@@ -25,8 +25,8 @@ const Checkout = () => {
         </div>
         <CardBody className="checkout_card">
           <h4>Checkout</h4>
-          <Row className="listing_details m-0">
-            <Col lg="6" className="listing_details_img">
+          <Row>
+            <Col className="listing_details_img">
               <img
                 src={dummy_img}
                 alt="picture of the product.name"
@@ -37,15 +37,15 @@ const Checkout = () => {
               <h5>Microsoft Xbox One X 1TB Console</h5>
               <span>$ {(340).toFixed(2)}</span>
             </Col>
-          </Row>
 
-          <div className="price_card">
-            <h5>Total</h5>
-            <span>$ {(340).toFixed(2)}</span>
-          </div>
-          <Link to={`${match.url}/pickupConfirmation`}>
-            <Button className="checkout_button">Place your order</Button>
-          </Link>
+            <div className="price_card">
+              <h5>Total</h5>
+              <span>$ {(340).toFixed(2)}</span>
+            </div>
+            <Link to={`${match.url}/pickupConfirmation`}>
+              <Button className="checkout_button">Place your order</Button>
+            </Link>
+          </Row>
         </CardBody>
       </Card>
     </Container>

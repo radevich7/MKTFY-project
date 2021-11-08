@@ -14,7 +14,6 @@ import {
   ModalHeader,
   ModalBody,
 } from "reactstrap";
-import { placeholder } from "@babel/types";
 
 const SignUpFormOverlay = (props) => {
   const [valuePhone, setValuePhone] = useState(); //for international input to work

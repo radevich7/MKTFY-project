@@ -8,11 +8,21 @@ import {
   Row,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import { FaCaretRight } from "react-icons/fa";
 const Faq = () => {
   const [toggleQuestion, setToggequestion] = useState(1); //1 is the default id to be opened by default
+  // const AuthStr = "Bearer ".concat(localStorage.getItem("Auth_token"));
+  useEffect(() => {
+    axios
+      .get("http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com", {
+        headers: { Authorization: localStorage.getItem("Auth_token") },
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     <Container fluid className="faq_container">

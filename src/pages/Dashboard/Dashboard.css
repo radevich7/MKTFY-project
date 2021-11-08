@@ -214,10 +214,11 @@ div.card {
     height: 250px;
   }
   .banner_text {
-    font-size: 1.2rem;
+    font-size: 1rem;
+    /* width: 80%; */
   }
   .banner_header {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
   .googlePlayLogo {
     width: 100px;
