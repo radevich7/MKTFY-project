@@ -1,3 +1,13 @@
+import { useContext } from "react";
+import { useHistory } from "react-router-dom";
+import AppContext from "../../store/app-context";
+import { Link } from "react-router-dom";
+
+import Button from "..//../reusableComponent/Button";
+import PhoneInput from "react-phone-number-input/input";
+import "./AccountInformation.css";
+import { useState, useRef } from "react";
+import axios from "axios";
 import {
   Col,
   Row,
@@ -10,41 +20,30 @@ import {
   CardBody,
 } from "reactstrap";
 
-import { Link } from "react-router-dom";
-import Button from "..//../reusableComponent/Button";
-import PhoneInput from "react-phone-number-input/input";
-
-import "./AccountInformation.css";
-import { useState, useRef } from "react";
-import axios from "axios";
-
 const AccountInformation = (props) => {
+  const history = useHistory();
+  const appCtx = useContext(AppContext);
+  console.log(appCtx);
+
   const [valuePhone, setValuePhone] = useState(); //for international input to work
   const phoneInputRef = useRef();
-  const [userData, setUserData] = useState(props.store.userData);
+
   const [firstNameUpdated, setFirstNameUpdated] = useState(
-    props.store.userData.firstName
+    appCtx.user.firstName
   );
-  const [lastNameUpdated, setLastNameUpdated] = useState(
-    props.store.userData.lastName
-  );
-  const [emailUpdated, setEmailUpdated] = useState(props.store.userData.email);
-  const [phoneUpdated, setPhoneUpdated] = useState(props.store.userData.phone);
+  const [lastNameUpdated, setLastNameUpdated] = useState(appCtx.user.lastName);
+  const [emailUpdated, setEmailUpdated] = useState(appCtx.user.email);
+  const [phoneUpdated, setPhoneUpdated] = useState(appCtx.user.phone);
   const [defaultPhoneValue, setDefaultPhoneValue] = useState("");
-  const [addressUpdated, setAddressUpdated] = useState(
-    props.store.userData.address
-  );
-  const [cityUpdated, setCityUpdated] = useState(props.store.userData.city);
-  const [provinceUpdated, setProvinceUpdated] = useState(
-    props.store.userData.province
-  );
-  const [countryUpdated, setCountryUpdated] = useState(
-    props.store.userData.country
-  );
-  const phonePlaceholder = `(${phoneUpdated.slice(2, 5)}) ${phoneUpdated.slice(
-    5,
-    8
-  )} - ${phoneUpdated.slice(8)}`;
+  const [addressUpdated, setAddressUpdated] = useState(appCtx.user.address);
+  const [cityUpdated, setCityUpdated] = useState(appCtx.user.city);
+  const [provinceUpdated, setProvinceUpdated] = useState(appCtx.user.province);
+  const [countryUpdated, setCountryUpdated] = useState(appCtx.user.country);
+
+  const phonePlaceholder = `${appCtx.user.phone.slice(
+    2,
+    5
+  )} ${appCtx.user.phone.slice(5, 8)} - ${appCtx.user.phone.slice(8)}`;
 
   const userDataUpdated = {
     firstName: firstNameUpdated,
@@ -56,20 +55,21 @@ const AccountInformation = (props) => {
     province: provinceUpdated,
     country: countryUpdated,
   };
-  console.log(userDataUpdated);
+  // console.log(userDataUpdated);
 
   const submitFormHandler = (e) => {
     e.preventDefault();
-
-    axios
-      .put("url", userDataUpdated)
-      .then((res) => {
-        props.store.setStore((prevState) => ({
-          ...prevState,
-          userData: userDataUpdated,
-        }));
-      })
-      .catch((err) => alert(err));
+    appCtx.dispatch({ type: "SET_USER", user: { ...userDataUpdated } });
+    history.push("/home");
+    // axios
+    //   .put("url", userDataUpdated)
+    //   .then((res) => {
+    //     props.store.setStore((prevState) => ({
+    //       ...prevState,
+    //       userData: userDataUpdated,
+    //     }));
+    //   })
+    //   .catch((err) => alert(err));
   };
 
   return (
@@ -113,7 +113,7 @@ const AccountInformation = (props) => {
                       id="lastName"
                       placeholder="Your last name"
                       className="accountInformation_inputField"
-                      defaultValue={userData.lastName}
+                      defaultValue={lastNameUpdated}
                       onChange={(e) => setLastNameUpdated(e.target.value)}
                     />
                   </FormGroup>
@@ -128,7 +128,7 @@ const AccountInformation = (props) => {
                       id="email"
                       placeholder="Your email"
                       className="accountInformation_inputField"
-                      defaultValue={userData.email}
+                      defaultValue={emailUpdated}
                       onChange={(e) => setEmailUpdated(e.target.value)}
                     />
                   </FormGroup>
@@ -171,7 +171,7 @@ const AccountInformation = (props) => {
                       name="address"
                       id="address"
                       className="accountInformation_inputField"
-                      defaultValue={userData.address}
+                      defaultValue={addressUpdated}
                       onChange={(e) => setAddressUpdated(e.target.value)}
                     />
                   </FormGroup>
@@ -186,7 +186,7 @@ const AccountInformation = (props) => {
                         name="city"
                         id="city"
                         className="accountInformation_inputField"
-                        defaultValue={userData.city}
+                        defaultValue={cityUpdated}
                         onChange={(e) => setCityUpdated(e.target.value)}
                       />
                     </FormGroup>
@@ -201,7 +201,7 @@ const AccountInformation = (props) => {
                         id="province"
                         placeholder="Your province"
                         className="accountInformation_inputField"
-                        defaultValue={userData.province}
+                        defaultValue={provinceUpdated}
                         onChange={(e) => setProvinceUpdated(e.target.value)}
                       />
                     </FormGroup>
@@ -217,14 +217,19 @@ const AccountInformation = (props) => {
                       id="country"
                       placeholder="Country name"
                       className="accountInformation_inputField"
-                      defaultValue={userData.country}
+                      defaultValue={countryUpdated}
                       onChange={(e) => setCountryUpdated(e.target.value)}
                     />
                   </FormGroup>
                 </Row>
                 <Row>
                   <FormGroup>
-                    <Button className="accountInformation_button">Save</Button>
+                    <Button
+                      className="accountInformation_button"
+                      onClick={submitFormHandler}
+                    >
+                      Save
+                    </Button>
                   </FormGroup>
                 </Row>
               </Col>

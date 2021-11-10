@@ -9,6 +9,7 @@ import iwatch from "../../assets/imagesForDahsboard/iwatch.webp";
 import playstation from "../../assets/imagesForDahsboard/playstation.png";
 import samsung from "../../assets/imagesForDahsboard/samsung.webp";
 import "./Dashboard.css";
+import axios from "axios";
 
 const dummy_data = [
   {
@@ -70,6 +71,20 @@ const dummy_data = [
 ];
 
 const Dashboard = () => {
+  useEffect(() => {
+    const AuthStr = "Bearer ".concat(localStorage.getItem("Auth_token"));
+    axios
+      .get(
+        "http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/api/Listing",
+        {
+          Accept: "*/*",
+          "Content-type": "application/json",
+          Authorization: AuthStr,
+        }
+      )
+      .then((res) => console.log(res))
+      .catch((err) => console.error(err));
+  }, []);
   // Deals for the deals section
   const [deals, setDeals] = useState([]);
   useEffect(() => {

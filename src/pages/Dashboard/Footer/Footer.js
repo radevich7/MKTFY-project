@@ -1,6 +1,7 @@
 import "./Footer.css";
 // import footerImg from "../../../assets/imagesFooter/background_begin.svg";
-import { Container, Row, Col, Nav, NavLink } from "reactstrap";
+import { Container, Row, Col, Nav } from "reactstrap";
+import { Link } from "react-router-dom";
 import logo from "../../../assets/img/MKTFY_wordmark.svg";
 
 const Footer = () => {
@@ -20,28 +21,30 @@ const Footer = () => {
           <Row>
             <Col lg="6">
               <Nav vertical>
-                <NavLink className="footer_navlink_header">Jump to</NavLink>
-                <NavLink href="/home/account">Account Information</NavLink>
-                <NavLink target="_blank" href="/terms&services">
+                <span className="footer_navlink_header disabled-link">
+                  Jump to
+                </span>
+                <Link to="/home/account">Account Information</Link>
+                <Link target="_blank" to="/terms&services">
                   Terms & Services
-                </NavLink>
-                <NavLink target="_blank" href="/privacy">
+                </Link>
+                <Link target="_blank" to="/privacy">
                   Privacy Policy
-                </NavLink>
+                </Link>
 
-                <NavLink href="/home/faq">FAQ</NavLink>
+                <Link to="/home/faq">FAQ</Link>
               </Nav>
             </Col>
             <Col lg="6">
               <Nav vertical>
-                <NavLink className="footer_navlink_header">MKTFY</NavLink>
-                <NavLink style={{ color: "#FFBA00" }} href="#">
+                <span className="footer_navlink_header">MKTFY</span>
+                <Link style={{ color: "#FFBA00" }} to="#">
                   Contact Us
-                </NavLink>
-                <NavLink href="#">+1 888 345 6789</NavLink>
-                <NavLink href="#">
+                </Link>
+                <Link to="#">+1 888 345 6789</Link>
+                <Link to="#">
                   Suite 9, 123 1st Street SW, Calgary, Alberta T2T 7F7
-                </NavLink>
+                </Link>
               </Nav>
             </Col>
           </Row>

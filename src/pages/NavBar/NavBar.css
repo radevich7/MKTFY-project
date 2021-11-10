@@ -178,12 +178,12 @@
 .dropDownCustom_profile {
   margin-top: 40px;
   width: 315px;
-
-  /* height: 656px; */
+  max-height: 77vh;
   transform: translate3d(-3%, 31px, 0px) !important;
   box-shadow: 0px 3px 6px #00000029;
   opacity: 1;
   font-size: 0.7em;
+  /* overflow-y: scroll; */
 }
 
 .dropDownToggle_profile h3 {
@@ -201,23 +201,28 @@
   content: "";
   width: 0;
   height: 0;
-  position: absolute;
+  position: fixed;
   bottom: 100%;
-  left: 13px;
-  border-width: 0 8px 8px 8px;
+  left: 14px;
+  border-width: 0 7px 7px 7px;
   border-style: solid;
   border-color: rgb(221, 217, 217) transparent;
+  overflow-y: initial;
+  margin-top: -100%;
 }
 .arrow_profile:after {
   content: "";
   width: 0;
   height: 0;
-  position: absolute;
+  position: fixed;
   bottom: 100%;
   left: 15px;
+
+  margin-top: -100%;
   border-width: 0 6px 6px 6px;
   border-style: solid;
   border-color: #fff transparent;
+  overflow-y: initial;
 }
 .dropdown_user_name {
   font-size: 16px;
@@ -255,8 +260,8 @@
 }
 #exit_logo {
   position: absolute;
-  right: 5%;
-  bottom: 4.2%;
+  right: 14px;
+  /* bottom: 0; */
 }
 
 .dropdown-item:active {

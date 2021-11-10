@@ -1,26 +1,18 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import AppContext from "../../store/app-context";
 import gold_caret from "../../assets/img/gold_caret.svg";
 import exit_app from "../../assets/img/exit_to_app-24px.svg";
 import notification_bell from "../../assets/img/notification_bell_main.svg";
 import { Link } from "react-router-dom";
 import {
-  NavItem,
-  NavbarToggler,
-  Collapse,
-  Container,
   Row,
   Col,
-  NavbarBrand,
   Dropdown,
   DropdownToggle,
   DropdownMenu,
   Input,
-  Card,
   DropdownItem,
   Form,
-  Nav,
-  NavLink,
-  Navbar,
 } from "reactstrap";
 
 import search_icon from "../../assets/img/search_icon.svg";
@@ -29,6 +21,7 @@ import blackCaretDown from "../../assets/img/blackCaretDown.svg";
 export const SearchInput = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
+
   return (
     <Row className="searchInput_container g-0">
       {/* BUTTON ALL */}
@@ -114,13 +107,16 @@ export const Categories = (props) => {
 };
 
 // PROFILE INFO  ELEMENT
-const getLetterForLogo = () => {
-  return "George Carlson".charAt(0);
-};
-const letterLogo = getLetterForLogo();
-//
 
 export const UserProfileSettings = (props) => {
+  const appCtx = useContext(AppContext);
+
+  const getLetterForLogo = () => {
+    return `${appCtx.user.firstName}`.charAt(0);
+  };
+  const letterLogo = getLetterForLogo();
+  //
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   return (
@@ -134,7 +130,7 @@ export const UserProfileSettings = (props) => {
         <h4> Welcome back,</h4>
         <h3>
           <img src={gold_caret} alt="/" />
-          George Carlson
+          {appCtx.user.firstName} {appCtx.user.lastName}
         </h3>
       </DropdownToggle>
       <DropdownMenu className="dropDownCustom_profile arrow_profile">
@@ -142,7 +138,9 @@ export const UserProfileSettings = (props) => {
           <div className="name_logo">
             <div className="letter_logo">{letterLogo}</div>
           </div>
-          <span> George Carlson</span>
+          <span>
+            {appCtx.user.firstName} {appCtx.user.lastName}
+          </span>
         </DropdownItem>
 
         <DropdownItem header className="dropdown_settings_header ">

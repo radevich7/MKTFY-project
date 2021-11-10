@@ -16,54 +16,57 @@ import PrivacyPolicy from "../pages/TermsFaqContactUs/PrivacyPolicy";
 import CreateListing from "../pages/CreateListing/CreateListing";
 import MyListings from "../pages/MyListings/MyListings";
 import Faq from "../pages/TermsFaqContactUs/Faq";
+import { useContext } from "react";
 
-const AppRouter = (store) => {
-  const RequireAuth = ({ children }) => {
-    if (!store.authenticated) {
-      return <Redirect to={"/"} />;
-    }
-    return children;
-  };
+import AppContext from "../store/app-context";
+
+const AppRouter = () => {
+  const appCtx = useContext(AppContext);
+  // console.log(appCtx.authenticated);
+  // const RequireAuth = ({ children }) => {
+  //   if (!appCtx.authenticated) {
+  //     return <Redirect to={"/"} />;
+  //   }
+  //   return children;
+  // };
+
+  const RequireAuth = appCtx.RequireAuth;
+  // console.log(RequireAuth);
   const LoginLogic = (props) => {
-    console.log(props.location);
     let token = new URLSearchParams(props.location.hash.substr(1)).get(
       "access_token"
     );
-    console.log(token);
 
     useEffect(() => {
       if (token && token.length > 0) {
         localStorage.setItem("Auth_token", token);
-        props.store.setStore((prevState) => ({
-          ...prevState,
-          authenticated: true,
-        }));
+
+        appCtx.dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
+        // props.store.setStore((prevState) => ({
+        //   ...prevState,
+        //   authenticated: true,
       }
     }, []);
     return <Redirect to={"/home"} />;
   };
 
-  const LogoutLogic = (props) => {
+  const LogoutLogic = () => {
     localStorage.removeItem("Auth_token");
     const { logout } = useAuth0();
     logout({ returnTo: window.location.origin });
     useEffect(() => {
-      props.store.setStore((prevState) => ({
-        ...prevState,
-        authenticated: false,
-      }));
+      appCtx.dispatch({ type: "SET_AUTHENTICATED", authenticated: false });
     }, []);
     return <Redirect to={"/"} />;
   };
 
   return (
     <BrowserRouter>
-      {/* If user autorized and loged in show NavBar ===useReducer.authorized &&*/}
       <Switch>
         <Route
           path="/login"
           exact
-          render={(props) => <LoginLogic {...props} store={store} />}
+          render={(props) => <LoginLogic {...props} />}
         />
         <Route path="/" exact render={(props) => <Login {...props} />} />
         <Route
@@ -83,61 +86,61 @@ const AppRouter = (store) => {
         /> */}
 
         <RequireAuth>
-          {store.authenticated && <NavBar />}
+          {appCtx.authenticated && <NavBar />}
           <Route
             path="/logout"
             exact
-            render={(props) => <LogoutLogic {...props} store={store} />}
+            render={(props) => <LogoutLogic {...props} />}
           />
           <Route
             path="/home"
             exact
-            render={(props) => <Dashboard {...props} store={store} />}
+            render={(props) => <Dashboard {...props} />}
           />
           <Route
             path="/post/:lisningId"
             exact
-            render={(props) => <Listing {...props} store={store} />}
+            render={(props) => <Listing {...props} />}
           />
           <Route
             path="/post/:lisningId/checkout"
             exact
-            render={(props) => <Checkout {...props} store={store} />}
+            render={(props) => <Checkout {...props} />}
           />
           <Route
             path="/post/:lisningId/checkout/pickupConfirmation"
             exact
-            render={(props) => <Pickup {...props} store={store} />}
+            render={(props) => <Pickup {...props} />}
           />
           <Route
             path="/home/account"
             exact
-            render={(props) => <AccountInformation {...props} store={store} />}
+            render={(props) => <AccountInformation {...props} />}
           />
           <Route
             path="/home/changepassword"
             exact
-            render={(props) => <ChangePassword {...props} store={store} />}
+            render={(props) => <ChangePassword {...props} />}
           />
           <Route
             path="/home/purchases"
             exact
-            render={(props) => <Purchases {...props} store={store} />}
+            render={(props) => <Purchases {...props} />}
           />
           <Route
             path="/home/create"
             exact
-            render={(props) => <CreateListing {...props} store={store} />}
+            render={(props) => <CreateListing {...props} />}
           />
           <Route
             path="/home/mylistings"
             exact
-            render={(props) => <MyListings {...props} store={store} />}
+            render={(props) => <MyListings {...props} />}
           />
           <Route
             path="/home/faq"
             exact
-            render={(props) => <Faq {...props} store={store} />}
+            render={(props) => <Faq {...props} />}
           />
         </RequireAuth>
       </Switch>

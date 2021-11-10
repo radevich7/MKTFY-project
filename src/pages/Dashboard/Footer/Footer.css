@@ -21,16 +21,23 @@
 }
 
 .footer_navlink_header {
-  font-size: 2em;
+  font-size: 2rem;
   font-weight: 600;
   color: #ffffff;
+  margin-bottom: 30px;
 }
 
 .footer_nav_container {
   margin-top: 131px;
 }
+.footer_nav_container a {
+  font-size: 1.7rem;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 15px 0;
+}
 .copyright_notice {
-  font-size: 1.7em;
+  font-size: 1.7rem;
   text-align: center;
   color: #888889;
   /* margin-top: 100px; */
