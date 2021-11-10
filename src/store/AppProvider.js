@@ -43,6 +43,7 @@ const AppProvider = (props) => {
           country: "Canada",
         },
       });
+      // return <Redirect to={"/home"} />;
     }
   }, []);
 
