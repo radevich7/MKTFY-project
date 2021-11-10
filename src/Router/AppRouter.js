@@ -22,16 +22,18 @@ import AppContext from "../store/app-context";
 
 const AppRouter = () => {
   const appCtx = useContext(AppContext);
-  // console.log(appCtx.authenticated);
-  // const RequireAuth = ({ children }) => {
-  //   if (!appCtx.authenticated) {
-  //     return <Redirect to={"/"} />;
-  //   }
-  //   return children;
-  // };
 
-  const RequireAuth = appCtx.RequireAuth;
-  // console.log(RequireAuth);
+  const RequireAuth = ({ children }) => {
+    const authenticated = appCtx.authenticated;
+    useEffect(() => {
+      if (!authenticated) {
+        return <Redirect to={"/"} />;
+      }
+    }, [authenticated]);
+
+    return children;
+  };
+
   const LoginLogic = (props) => {
     let token = new URLSearchParams(props.location.hash.substr(1)).get(
       "access_token"

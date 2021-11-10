@@ -2,7 +2,7 @@ import AppContext from "./app-context";
 import { useEffect, useReducer } from "react";
 import { Redirect } from "react-router-dom";
 const initialState = {
-  loading: true,
+  loading: false,
   authenticated: false,
   user: [],
 };
@@ -43,24 +43,15 @@ const AppProvider = (props) => {
           country: "Canada",
         },
       });
-      // return <Redirect to={"/home"} />;
+      return <Redirect to={"/home"} />;
     }
   }, []);
-
-  console.log(store.authenticated);
-  const RequireAuth = ({ children }) => {
-    if (!store.authenticated) {
-      return <Redirect to={"/"} />;
-    }
-    return children;
-  };
 
   const appContext = {
     loading: store.loading,
     authenticated: store.authenticated,
     user: store.user,
     dispatch: dispatch,
-    RequireAuth: RequireAuth,
   };
 
   return (

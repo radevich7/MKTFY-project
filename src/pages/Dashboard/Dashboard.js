@@ -71,23 +71,24 @@ const dummy_data = [
 ];
 
 const Dashboard = () => {
+  const [deals, setDeals] = useState([]);
   useEffect(() => {
     const AuthStr = "Bearer ".concat(localStorage.getItem("Auth_token"));
     console.log(AuthStr);
-  //   axios
-  //     .get(
-  //       "http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/api/Listing",
-  //       {
-  //         Accept: "*/*",
-  //         "Content-type": "application/json",
-  //         Authorization: AuthStr,
-  //       }
-  //     )
-  //     .then((res) => console.log(res))
-  //     .catch((err) => console.error(err));
-  // }, []);
+    //   axios
+    //     .get(
+    //       "http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/api/Listing",
+    //       {
+    //         Accept: "*/*",
+    //         "Content-type": "application/json",
+    //         Authorization: AuthStr,
+    //       }
+    //     )
+    //     .then((res) => console.log(res))
+    //     .catch((err) => console.error(err));
+  }, []);
   // Deals for the deals section
-  const [deals, setDeals] = useState([]);
+
   useEffect(() => {
     setDeals(dummy_data);
   }, []);
