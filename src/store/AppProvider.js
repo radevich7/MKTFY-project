@@ -1,10 +1,13 @@
 import AppContext from "./app-context";
 import { useEffect, useReducer } from "react";
 import { Redirect } from "react-router-dom";
+// import GET from "../api/api";
 const initialState = {
   loading: false,
   authenticated: false,
   user: [],
+  faq: [],
+  token: localStorage.getItem("Auth_token"),
 };
 
 const AppReducer = (state, action) => {
@@ -14,9 +17,14 @@ const AppReducer = (state, action) => {
     case "SET_AUTHENTICATED": {
       return { ...state, authenticated: action.authenticated };
     }
+    case "SET_TOKEN": {
+      return { ...state, authenticated: action.authenticated };
+    }
     case "SET_USER": {
       return { ...state, user: action.user };
     }
+    case "SET_FAQ":
+      return { ...state, faq: action.faq };
   }
 
   return initialState;
@@ -24,11 +32,11 @@ const AppReducer = (state, action) => {
 
 const AppProvider = (props) => {
   const [store, dispatch] = useReducer(AppReducer, initialState);
+  console.log(store.token);
 
   useEffect(() => {
-    if (localStorage.getItem("Auth_token")) {
+    if (store.token) {
       // Axios call to back to get userInfo
-      dispatch({ type: "SET_LOADING", loading: false });
       dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
       dispatch({
         type: "SET_USER",
@@ -43,19 +51,23 @@ const AppProvider = (props) => {
           country: "Canada",
         },
       });
-      return <Redirect to={"/home"} />;
     }
   }, []);
+  console.log(store.authenticated);
 
-  const appContext = {
-    loading: store.loading,
-    authenticated: store.authenticated,
-    user: store.user,
-    dispatch: dispatch,
-  };
+  // const RequireAuth = ({ children }) => {
+  //   // useEffect(() => {
+  //   // console.log(store.authenticated);
+  //   if (!store.authenticated) {
+  //     return <Redirect to={"/"} />;
+  //   }
+  //   // }, [store.authenticated]);
+
+  //   return children;
+  // };
 
   return (
-    <AppContext.Provider value={appContext}>
+    <AppContext.Provider value={[store, dispatch]}>
       {props.children}
     </AppContext.Provider>
   );

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import AppContext from "../../store/app-context";
 import { Link } from "react-router-dom";
@@ -22,28 +22,27 @@ import {
 
 const AccountInformation = (props) => {
   const history = useHistory();
-  const appCtx = useContext(AppContext);
-  console.log(appCtx);
+  const [store, dispatch] = useContext(AppContext);
 
   const [valuePhone, setValuePhone] = useState(); //for international input to work
   const phoneInputRef = useRef();
 
   const [firstNameUpdated, setFirstNameUpdated] = useState(
-    appCtx.user.firstName
+    store.user.firstName
   );
-  const [lastNameUpdated, setLastNameUpdated] = useState(appCtx.user.lastName);
-  const [emailUpdated, setEmailUpdated] = useState(appCtx.user.email);
-  const [phoneUpdated, setPhoneUpdated] = useState(appCtx.user.phone);
+  const [lastNameUpdated, setLastNameUpdated] = useState(store.user.lastName);
+  const [emailUpdated, setEmailUpdated] = useState(store.user.email);
+  const [phoneUpdated, setPhoneUpdated] = useState(store.user.phone);
   const [defaultPhoneValue, setDefaultPhoneValue] = useState("");
-  const [addressUpdated, setAddressUpdated] = useState(appCtx.user.address);
-  const [cityUpdated, setCityUpdated] = useState(appCtx.user.city);
-  const [provinceUpdated, setProvinceUpdated] = useState(appCtx.user.province);
-  const [countryUpdated, setCountryUpdated] = useState(appCtx.user.country);
+  const [addressUpdated, setAddressUpdated] = useState(store.user.address);
+  const [cityUpdated, setCityUpdated] = useState(store.user.city);
+  const [provinceUpdated, setProvinceUpdated] = useState(store.user.province);
+  const [countryUpdated, setCountryUpdated] = useState(store.user.country);
 
-  const phonePlaceholder = `${appCtx.user.phone.slice(
+  const phonePlaceholder = `${store.user.phone.slice(
     2,
     5
-  )} ${appCtx.user.phone.slice(5, 8)} - ${appCtx.user.phone.slice(8)}`;
+  )} ${store.user.phone.slice(5, 8)} - ${store.user.phone.slice(8)}`;
 
   const userDataUpdated = {
     firstName: firstNameUpdated,
@@ -57,9 +56,23 @@ const AccountInformation = (props) => {
   };
   // console.log(userDataUpdated);
 
+  const authStr = `Bearer ${localStorage.getItem("Auth_token")}`;
+  useEffect(() => {
+    axios
+      .get(
+        `http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/api/Listing`,
+        {
+          Accept: "*/*",
+          "Content-Type": "application/json",
+          Authorization: authStr,
+        }
+      )
+      .then((res) => console.log(res));
+  }, []);
+
   const submitFormHandler = (e) => {
     e.preventDefault();
-    appCtx.dispatch({ type: "SET_USER", user: { ...userDataUpdated } });
+    dispatch({ type: "SET_USER", user: { ...userDataUpdated } });
     history.push("/home");
     // axios
     //   .put("url", userDataUpdated)

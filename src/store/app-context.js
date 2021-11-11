@@ -4,8 +4,7 @@ const AppContext = React.createContext({
   loading: false,
   authenticated: false,
   user: [],
-  dispatch: () => {},
-  RequireAuth: () => {},
+  faq: [],
 });
 
 export default AppContext;

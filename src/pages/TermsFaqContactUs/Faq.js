@@ -10,18 +10,19 @@ import {
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { getFAQ } from "../../api/api";
 import { FaCaretRight } from "react-icons/fa";
 const Faq = () => {
   const [toggleQuestion, setToggequestion] = useState(1); //1 is the default id to be opened by default
 
   useEffect(() => {
-    axios
-      .get(
-        "http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/api/FAQ"
-      )
-      .then((res) => console.log(res))
-      .catch((err) => console.error(err));
+    // appCtx.dispatch({ type: "SET_USER", faq: { ...res.data } })
+    // axios
+    //   .get(
+    //     "http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/api/FA"
+    //   )
+    //   .then((res) => console.log(res.data))
+    //   .catch((err) => console.log(err.message));
   }, []);
 
   return (

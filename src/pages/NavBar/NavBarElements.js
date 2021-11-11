@@ -109,10 +109,10 @@ export const Categories = (props) => {
 // PROFILE INFO  ELEMENT
 
 export const UserProfileSettings = (props) => {
-  const appCtx = useContext(AppContext);
+  const [store, dispatch] = useContext(AppContext);
 
   const getLetterForLogo = () => {
-    return `${appCtx.user.firstName}`.charAt(0);
+    return `${store.user.firstName}`.charAt(0);
   };
   const letterLogo = getLetterForLogo();
   //
@@ -130,69 +130,73 @@ export const UserProfileSettings = (props) => {
         <h4> Welcome back,</h4>
         <h3>
           <img src={gold_caret} alt="/" />
-          {appCtx.user.firstName} {appCtx.user.lastName}
+          {store.user.firstName} {store.user.lastName}
         </h3>
       </DropdownToggle>
       <DropdownMenu className="dropDownCustom_profile arrow_profile">
-        <DropdownItem className="dropdown_user_name">
-          <div className="name_logo">
-            <div className="letter_logo">{letterLogo}</div>
-          </div>
-          <span>
-            {appCtx.user.firstName} {appCtx.user.lastName}
-          </span>
-        </DropdownItem>
+        <div className="dropdown_container">
+          <DropdownItem className="dropdown_user_name">
+            <div className="name_logo">
+              <div className="letter_logo">{letterLogo}</div>
+            </div>
+            <span>
+              {store.user.firstName} {store.user.lastName}
+            </span>
+          </DropdownItem>
 
-        <DropdownItem header className="dropdown_settings_header ">
-          Settings
-        </DropdownItem>
-        <DropdownItem
-          className="dropDownItem_profile"
-          to="/home/account"
-          tag={Link}
-        >
-          Account Information
-        </DropdownItem>
-        <DropdownItem
-          className="dropDownItem_profile"
-          to="/home/changepassword"
-          tag={Link}
-        >
-          Change Password
-        </DropdownItem>
-        <DropdownItem
-          className="dropDownItem_profile"
-          to="/home/purchases"
-          tag={Link}
-        >
-          My purchases
-        </DropdownItem>
-        <DropdownItem
-          className="dropDownItem_profile"
-          to="/home/mylistings"
-          tag={Link}
-        >
-          My Listings
-        </DropdownItem>
-        <DropdownItem header className="dropdown_help_header">
-          Help
-        </DropdownItem>
-        <DropdownItem
-          className="dropDownItem_profile"
-          to="/home/faq"
-          tag={Link}
-        >
-          FAQ
-        </DropdownItem>
-        <DropdownItem className="dropDownItem_profile">Contact Us</DropdownItem>
-        <DropdownItem
-          className="dropDownItem_profile sign_out_button"
-          to="/logout"
-          tag={Link}
-        >
-          Sign Out
-          <img src={exit_app} alt="/icon" id="exit_logo" />
-        </DropdownItem>
+          <DropdownItem header className="dropdown_settings_header ">
+            Settings
+          </DropdownItem>
+          <DropdownItem
+            className="dropDownItem_profile"
+            to="/home/account"
+            tag={Link}
+          >
+            Account Information
+          </DropdownItem>
+          <DropdownItem
+            className="dropDownItem_profile"
+            to="/home/changepassword"
+            tag={Link}
+          >
+            Change Password
+          </DropdownItem>
+          <DropdownItem
+            className="dropDownItem_profile"
+            to="/home/purchases"
+            tag={Link}
+          >
+            My purchases
+          </DropdownItem>
+          <DropdownItem
+            className="dropDownItem_profile"
+            to="/home/mylistings"
+            tag={Link}
+          >
+            My Listings
+          </DropdownItem>
+          <DropdownItem header className="dropdown_help_header">
+            Help
+          </DropdownItem>
+          <DropdownItem
+            className="dropDownItem_profile"
+            to="/home/faq"
+            tag={Link}
+          >
+            FAQ
+          </DropdownItem>
+          <DropdownItem className="dropDownItem_profile">
+            Contact Us
+          </DropdownItem>
+          <DropdownItem
+            className="dropDownItem_profile sign_out_button"
+            to="/logout"
+            tag={Link}
+          >
+            Sign Out
+            <img src={exit_app} alt="/icon" id="exit_logo" />
+          </DropdownItem>
+        </div>
       </DropdownMenu>
     </Dropdown>
   );

@@ -14,7 +14,7 @@ import Button from "../../reusableComponent/Button";
 import { FaEyeSlash, FaEye, FaCheckCircle } from "react-icons/fa";
 import auth0js from "auth0-js";
 import { Link } from "react-router-dom";
-
+import POST from "../../api/api";
 const CreatePasswordOverlay = (props) => {
   // AUTH0
   const webAuth = new auth0js.WebAuth({
@@ -135,10 +135,10 @@ const CreatePasswordOverlay = (props) => {
       },
       (err) => {
         if (err) return alert("Something went wrong: ");
-        if (err) {
-          console.log(err);
-        }
+
         if (!err) {
+          POST("/api/profile", { ...props.signupData });
+
           webAuth.login(
             {
               email: finalData.email,
@@ -178,15 +178,6 @@ const CreatePasswordOverlay = (props) => {
       }
     );
   };
-  // if err{
-  //   show err
-  // }else{}
-  //AXIOS CALL to our backend for the remaining data
-  // axios.post('url', finalData).then(res=>{
-  //   console.log(res);
-  // })
-  //   }
-  // );
 
   // Classes
   const numberCheckClass = numberValueValidation

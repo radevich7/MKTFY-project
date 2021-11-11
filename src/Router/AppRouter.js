@@ -17,20 +17,16 @@ import CreateListing from "../pages/CreateListing/CreateListing";
 import MyListings from "../pages/MyListings/MyListings";
 import Faq from "../pages/TermsFaqContactUs/Faq";
 import { useContext } from "react";
-
+import ProtectedRoute from "../reusableComponent/ProtectedRoute";
 import AppContext from "../store/app-context";
 
 const AppRouter = () => {
-  const appCtx = useContext(AppContext);
+  const [store, dispatch] = useContext(AppContext);
 
   const RequireAuth = ({ children }) => {
-    const authenticated = appCtx.authenticated;
-    useEffect(() => {
-      if (!authenticated) {
-        return <Redirect to={"/"} />;
-      }
-    }, [authenticated]);
-
+    if (!store.token) {
+      return <Redirect to={"/"} />;
+    }
     return children;
   };
 
@@ -43,7 +39,7 @@ const AppRouter = () => {
       if (token && token.length > 0) {
         localStorage.setItem("Auth_token", token);
 
-        appCtx.dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
+        dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
         // props.store.setStore((prevState) => ({
         //   ...prevState,
         //   authenticated: true,
@@ -57,7 +53,7 @@ const AppRouter = () => {
     const { logout } = useAuth0();
     logout({ returnTo: window.location.origin });
     useEffect(() => {
-      appCtx.dispatch({ type: "SET_AUTHENTICATED", authenticated: false });
+      dispatch({ type: "SET_AUTHENTICATED", authenticated: false });
     }, []);
     return <Redirect to={"/"} />;
   };
@@ -88,7 +84,7 @@ const AppRouter = () => {
         /> */}
 
         <RequireAuth>
-          {appCtx.authenticated && <NavBar />}
+          {store.authenticated && <NavBar />}
           <Route
             path="/logout"
             exact

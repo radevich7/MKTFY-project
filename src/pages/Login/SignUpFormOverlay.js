@@ -133,17 +133,19 @@ const SignUpFormOverlay = (props) => {
       props.toggle();
     }
     const personObject = {
+      id: `${(Math.random() + 1).toString(36).substring(7)}`,
       firstName: firstNameValue,
       lastName: lastNameValue,
       email: emailValue,
       phone: phoneValue,
-      address: addressValue,
+      streetAddress: addressValue,
       city: cityValue,
       province: provinceValue,
       country: countryValue,
     };
     props.setSignupData(personObject);
     resetForm();
+    console.log(personObject.id);
   };
 
   return (
