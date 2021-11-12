@@ -7,7 +7,6 @@ const initialState = {
   authenticated: false,
   user: [],
   faq: [],
-  token: localStorage.getItem("Auth_token"),
 };
 
 const AppReducer = (state, action) => {
@@ -17,9 +16,7 @@ const AppReducer = (state, action) => {
     case "SET_AUTHENTICATED": {
       return { ...state, authenticated: action.authenticated };
     }
-    case "SET_TOKEN": {
-      return { ...state, authenticated: action.authenticated };
-    }
+
     case "SET_USER": {
       return { ...state, user: action.user };
     }
@@ -32,10 +29,9 @@ const AppReducer = (state, action) => {
 
 const AppProvider = (props) => {
   const [store, dispatch] = useReducer(AppReducer, initialState);
-  console.log(store.token);
 
   useEffect(() => {
-    if (store.token) {
+    if (localStorage.getItem("Auth_token")) {
       // Axios call to back to get userInfo
       dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
       dispatch({
@@ -53,7 +49,6 @@ const AppProvider = (props) => {
       });
     }
   }, []);
-  console.log(store.authenticated);
 
   // const RequireAuth = ({ children }) => {
   //   // useEffect(() => {

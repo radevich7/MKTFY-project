@@ -1,40 +1,17 @@
-.app_container {
-  height: 191px;
-  width: 100vw;
-  padding: 0;
-  background-color: #6318af;
-  /* padding-top: 39px; */
-}
 .navbar_container {
   max-width: 1651px;
+  display: flex;
+  justify-content: center;
   padding-top: 37px;
-}
-
-.border_document {
-  max-width: 1660px;
-  margin: auto;
-  padding-top: 39px;
-}
-
-.nav_bar {
-  margin-top: 63px;
 }
 
 .dropdown-item:active {
   background-color: none;
 }
 /* Search Card + DropDown City*/
-.smth {
-  /* padding-right: 0; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .output_categories_span {
-  font-size: 1.4em;
-  opacity: 0.7;
+  font-size: 1.4rem;
 }
-
 .border-custom {
   align-self: center;
   border-left: 1px solid rgb(189, 186, 186);
@@ -146,14 +123,19 @@
 }
 
 /* Category LINKS */
+/* .categories_container {
+  margin-right: 0;
+  margin-left: 0;
 
+  background-color: rgb(233, 232, 232);
+  width: 1360px;
+} */
 .categories_column {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  max-width: 80%;
-  margin-top: 24px;
   margin-bottom: 21px;
+  margin-top: 24px;
+  width: 80%;
 }
 
 .categories_column span {
@@ -437,26 +419,6 @@
   font-size: 1.4rem;
 }
 
-@media (max-width: 1500px) {
-  .categories_column {
-    max-width: 100%;
-  }
-}
-@media (max-width: 1150px) {
-  .dropDownToggle_profile h3 {
-    font-size: 1.5rem;
-  }
-  .dropDownToggle_profile h4 {
-    margin-left: 10%;
-  }
-  .categories_column span {
-    font-size: 1.5rem;
-  }
-  .button_create_listing {
-    width: 140px;
-  }
-}
-
 /* NEw */
 
 /* Seatch INPUT COLUMN */
@@ -465,6 +427,7 @@
   border-radius: 8px;
   padding-top: 15px;
   padding-bottom: 15px;
+  /* margin-bottom: 24px; */
 }
 
 .search_input {
@@ -485,4 +448,32 @@
   border-left: 1px solid rgb(189, 186, 186);
   border-right: 1px solid rgb(189, 186, 186);
   border-radius: 0;
+}
+.form-group {
+  position: relative;
+}
+.navbar-dark .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(99, 24, 175, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+.navbar-toggler {
+  position: absolute;
+  top: 16px;
+}
+
+/* .navbar-toggler-icon {
+  color: #6318af;
+} */
+@media (max-width: 1500px) {
+  .categories_column {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1300px) {
+  .dropDownToggle_profile h3 {
+    font-size: 1.6rem;
+  }
+  .dropDownToggle_profile h4 {
+    font-size: 1.2rem;
+  }
 }

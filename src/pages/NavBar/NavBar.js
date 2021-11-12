@@ -26,46 +26,37 @@ const NavBar = () => {
   const toggleNav = () => setIsOpen((prevState) => !prevState);
   return (
     // NAVBAR
-    <Navbar expand="lg" fixed="top" style={{ backgroundColor: "#6318AF" }}>
-      <Container className="navbar_container d-flex align-items-start" fluid>
-        {/* Toggle button for small screen  */}
-        <NavbarToggler
-          onClick={toggleNav}
-          aria-controls="main-nav"
-          aria-label="Toggle navigation"
-          style={{ backgroundColor: "red" }}
-        />
-        <Link to="/home" className="mt-lg-4 pb-sm-4 ">
-          <img src={mainLogo} alt="/" />
-        </Link>
+    <div>
+      <Navbar
+        expand="lg"
+        fixed="top"
+        style={{ backgroundColor: "#6318AF" }}
+        className="d-flex flex-column"
+        // color="dark"
+        dark
+      >
+        <Container className="navbar_container align-items-start" fluid>
+          <Link to="/home" className="navbar-brand pt-4 me-4">
+            <img src={mainLogo} alt="/" />
+          </Link>
+          <Col className="form-group ms-1 me-5 col-xl-7 col-lg-6 ">
+            <SearchInput toggleNav={toggleNav} />
+            {/* <Categories /> */}
+            <Categories />
+          </Col>
 
-        {/*ul*/}
-        <Row className="w-100 ms-3 g-0 ">
           <Collapse navbar isOpen={open}>
-            <Nav className="me-auto w-100" navbar>
-              {/*li*/}
-              <Col lg="8" className="me-xl-3 ">
-                <NavItem>
-                  <SearchInput />
-                  <Categories />
-                </NavItem>
-              </Col>
-              <Col
-                className="mt-lg-2 d-flex flex-row justify-content-around "
-                lg="2"
-              >
+            <Nav className="me-auto w-100 " navbar>
+              <Col className="pt-1 d-flex justify-content-between">
                 <NavItem>
                   <UserProfileSettings />
                 </NavItem>
-                <NavItem>
-                  {/* <NavLink className="d-xl-none">Notification Small</NavLink> */}
-                  <NavLink className="d-none d-xxl-inline-flex ">
-                    <NotificationElement />
-                  </NavLink>
+                <NavItem className="pb-5 d-xxl-flex d-none justify-content-start">
+                  <NotificationElement />
                 </NavItem>
               </Col>
 
-              <Col className="mt-lg-2 d-flex justify-content-end">
+              <Col className="d-flex justify-content-xl-end">
                 <NavItem>
                   <Link to="/home/create" className="button_create_listing">
                     <span id="container">
@@ -77,9 +68,10 @@ const NavBar = () => {
               </Col>
             </Nav>
           </Collapse>
-        </Row>
-      </Container>
-    </Navbar>
+          {/* </Row> */}
+        </Container>
+      </Navbar>
+    </div>
   );
 };
 

@@ -57,18 +57,18 @@ const AccountInformation = (props) => {
   // console.log(userDataUpdated);
 
   const authStr = `Bearer ${localStorage.getItem("Auth_token")}`;
-  useEffect(() => {
-    axios
-      .get(
-        `http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/api/Listing`,
-        {
-          Accept: "*/*",
-          "Content-Type": "application/json",
-          Authorization: authStr,
-        }
-      )
-      .then((res) => console.log(res));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       `http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/api/Listing`,
+  //       {
+  //         Accept: "*/*",
+  //         "Content-Type": "application/json",
+  //         Authorization: authStr,
+  //       }
+  //     )
+  //     .then((res) => console.log(res));
+  // }, []);
 
   const submitFormHandler = (e) => {
     e.preventDefault();

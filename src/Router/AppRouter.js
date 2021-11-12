@@ -22,10 +22,11 @@ import AppContext from "../store/app-context";
 
 const AppRouter = () => {
   const [store, dispatch] = useContext(AppContext);
+  console.log(store.authenticated);
 
   const RequireAuth = ({ children }) => {
-    if (!store.token) {
-      return <Redirect to={"/"} />;
+    if (!store.authenticated) {
+      // return <Redirect to={"/"} />;
     }
     return children;
   };

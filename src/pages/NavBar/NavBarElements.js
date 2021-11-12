@@ -13,20 +13,27 @@ import {
   Input,
   DropdownItem,
   Form,
+  NavbarToggler,
 } from "reactstrap";
 
 import search_icon from "../../assets/img/search_icon.svg";
 import blackCaretDown from "../../assets/img/blackCaretDown.svg";
 
-export const SearchInput = () => {
+export const SearchInput = (props) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   return (
     <Row className="searchInput_container g-0">
       {/* BUTTON ALL */}
-      <Col sm="2" className="smth">
-        <span className="output_categories_span">All</span>
+      <Col sm="2" className="smth ">
+        <NavbarToggler
+          onClick={props.toggleNav}
+          aria-controls="main-nav"
+          aria-label="Toggle navigation"
+          className="d-lg d-lg-none"
+        />
+        <span className="output_categories_span d-none d-lg-flex">All</span>
       </Col>
       {/* SEARCH INPUT */}
       <Col className="border-custom">
@@ -175,6 +182,14 @@ export const UserProfileSettings = (props) => {
           >
             My Listings
           </DropdownItem>
+          <DropdownItem
+            className="dropDownItem_profile d-xxl-none d-flex"
+            to="/home/mylistings"
+            tag={Link}
+          >
+            Notification
+          </DropdownItem>
+
           <DropdownItem header className="dropdown_help_header">
             Help
           </DropdownItem>
