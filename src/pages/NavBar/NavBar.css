@@ -319,10 +319,6 @@
   justify-content: space-around;
   padding: 10px 0px;
 }
-#notification_bell_logo {
-  position: absolute;
-  top: 20%;
-}
 
 .notification_brand_logo {
   width: 60px;
@@ -460,22 +456,60 @@
   top: 16px;
 }
 
-/* .navbar-toggler-icon {
-  color: #6318af;
+/* CollapseMenu */
+.collapseMenu_closeArea {
+  height: 25px;
+  border: none;
+}
+.collapseMenu_header {
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dee2e6;
+  border-top: 1px solid #dee2e6;
+  padding: 10px 0;
+}
+.close.close_button {
+  font-size: 3rem;
+}
+.collapseMenu_header span {
+  font-size: 3.2rem;
+  margin-left: 16px;
+}
+/* .collapseMenu_body {
+  overflow-y: scroll;
 } */
+.collapseMenu_linkHeader {
+  font-size: 1.6rem;
+  font-weight: bold;
+  padding: 10px 10px;
+}
+
+.collapseMenu_link {
+  font-size: 1.6rem;
+  padding: 15px;
+  text-decoration: none;
+  color: #000000;
+}
+.collapseMenu_link:hover {
+  color: #9349de;
+  background-color: #00000024;
+}
+.collapseMenu_closeLink {
+  padding-top: 20px;
+}
+.collapseMenu_body {
+  display: flex;
+  flex-direction: column;
+}
+
 @media (max-width: 1500px) {
   .categories_column {
     width: 100%;
   }
 }
 
-@media (max-width: 1300px) {
-  .dropDownToggle_profile h3 {
-    font-size: 1.6rem;
-  }
-  .dropDownToggle_profile h4 {
-    font-size: 1.2rem;
-  }
+@media (max-width: 1400px) {
   .categories_column span {
     font-size: 1.4rem;
   }
@@ -483,5 +517,15 @@
     width: 18px;
     height: 0.2px;
     margin: 5px 0;
+  }
+}
+@media (max-width: 767px) {
+  .button_create_listing {
+    position: fixed;
+    margin: auto;
+    bottom: 5%;
+    left: 0;
+    right: 0;
+    background-color: #6318af;
   }
 }

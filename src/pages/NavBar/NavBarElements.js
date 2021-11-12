@@ -14,6 +14,11 @@ import {
   DropdownItem,
   Form,
   NavbarToggler,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
 } from "reactstrap";
 
 import search_icon from "../../assets/img/search_icon.svg";
@@ -31,9 +36,9 @@ export const SearchInput = (props) => {
           onClick={props.toggleNav}
           aria-controls="main-nav"
           aria-label="Toggle navigation"
-          className="d-lg d-lg-none"
+          className="d-xl d-xl-none"
         />
-        <span className="output_categories_span d-none d-lg-flex">All</span>
+        <span className="output_categories_span d-none d-xl-flex">All</span>
       </Col>
       {/* SEARCH INPUT */}
       <Col className="border-custom">
@@ -267,5 +272,89 @@ export const NotificationElement = () => {
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>
+  );
+};
+
+// NAVBAR COLAPSE MENU
+
+export const CollapseMenu = (props) => {
+  const [store, dispatch] = useContext(AppContext);
+
+  const getLetterForLogo = (props) => {
+    return `${store.user.firstName}`.charAt(0);
+  };
+  const letterLogo = getLetterForLogo();
+  //
+  return (
+    <Modal
+      centered
+      className="modal-fullscreen-md-down "
+      isOpen={props.open}
+      data-backdrop="false"
+    >
+      <ModalHeader
+        close={
+          <button
+            className="close close_button position-absolute top-0"
+            onClick={props.toggleNav}
+          >
+            ×
+          </button>
+        }
+        className="collapseMenu_closeArea"
+      ></ModalHeader>
+      <ModalBody className="collapseMenu_body" onClick={props.toggleNav}>
+        <section className="collapseMenu_header">
+          <div className="name_logo">
+            <div className="letter_logo">{letterLogo}</div>
+          </div>
+          <span>
+            {store.user.firstName} {store.user.lastName}
+          </span>
+        </section>
+        <div className="collapseMenu_linkHeader">Settings</div>
+        <section className="collapseMenu_body">
+          <Link className="collapseMenu_link" to="/home/account" tag={Link}>
+            Account Information
+          </Link>
+          <Link
+            className="collapseMenu_link"
+            to="/home/changepassword"
+            tag={Link}
+          >
+            Change Password
+          </Link>
+          <Link className="collapseMenu_link" to="/home/purchases" tag={Link}>
+            My purchases
+          </Link>
+          <Link className="collapseMenu_link" to="/home/mylistings" tag={Link}>
+            My Listings
+          </Link>
+          <Link
+            className="collapseMenu_link"
+            to="/home/changepassword"
+            tag={Link}
+          >
+            Notifications
+          </Link>
+
+          <div className="collapseMenu_linkHeader">Help</div>
+          <Link className="collapseMenu_link" to="/home/faq" tag={Link}>
+            FAQ
+          </Link>
+          <Link className="collapseMenu_link" to="/#">
+            Contact Us
+          </Link>
+          <Link
+            className="collapseMenu_link collapseMenu_closeLink"
+            to="/logout"
+            tag={Link}
+          >
+            Sign Out
+            <img src={exit_app} alt="/icon" id="exit_logo" />
+          </Link>
+        </section>
+      </ModalBody>
+    </Modal>
   );
 };

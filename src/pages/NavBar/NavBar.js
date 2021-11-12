@@ -15,6 +15,7 @@ import {
 } from "reactstrap";
 
 import {
+  CollapseMenu,
   NotificationElement,
   SearchInput,
   UserProfileSettings,
@@ -28,46 +29,53 @@ const NavBar = () => {
     // NAVBAR
     <div>
       <Navbar
-        expand="lg"
+        expand="xl"
         fixed="top"
         style={{ backgroundColor: "#6318AF" }}
         className="d-flex flex-column"
-        // color="dark"
         dark
       >
         <Container className="navbar_container align-items-start" fluid>
-          <Link to="/home" className="navbar-brand pt-4 me-4">
+          <Link to="/home" className="navbar-brand pt-4 me-4 d-none d-lg-flex">
             <img src={mainLogo} alt="/" />
           </Link>
-          <Col className="form-group ms-1 me-xl-5 me-2 col-xl-7 col-lg-7 ">
+          <Col className="form-group  me-4 me-2 col-xl-7 col-lg-8 col-md-9 col-12 ">
             <SearchInput toggleNav={toggleNav} />
             <Categories />
           </Col>
 
-          <Collapse navbar isOpen={open}>
+          <Collapse navbar>
             <Nav className="me-auto w-100 " navbar>
-              <Col className="pt-2 d-flex justify-content-between">
-                <NavItem>
+              <Col className="pt-2  d-flex justify-content-xl-evenly justify-content-center">
+                <NavItem className="">
                   <UserProfileSettings />
                 </NavItem>
-                <NavItem className="pb-5 d-xxl-flex d-none justify-content-start">
+                <NavItem className=" pt-2 d-xxl-flex d-none">
                   <NotificationElement />
-                </NavItem>
-              </Col>
-
-              <Col className="d-flex justify-content-xl-end">
-                <NavItem>
-                  <Link to="/home/create" className="button_create_listing">
-                    <span id="container">
-                      <span>+</span>
-                    </span>
-                    Create Listing
-                  </Link>
                 </NavItem>
               </Col>
             </Nav>
           </Collapse>
-          {/* </Row> */}
+          <Col>
+            <NavItem className="d-none d-md-flex justify-content-center pt-2">
+              <Link to="/home/create" className="button_create_listing">
+                <span id="container">
+                  <span>+</span>
+                </span>
+                Create Listing
+              </Link>
+            </NavItem>
+          </Col>
+
+          <NavItem className="d-md-none d-flex bottom-0">
+            <Link to="/home/create" className="button_create_listing ">
+              <span id="container">
+                <span>+</span>
+              </span>
+              Create Listing
+            </Link>
+          </NavItem>
+          {open && <CollapseMenu toggleNav={toggleNav} open={open} />}
         </Container>
       </Navbar>
     </div>
