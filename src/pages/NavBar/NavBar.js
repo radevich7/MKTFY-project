@@ -39,15 +39,14 @@ const NavBar = () => {
           <Link to="/home" className="navbar-brand pt-4 me-4">
             <img src={mainLogo} alt="/" />
           </Link>
-          <Col className="form-group ms-1 me-5 col-xl-7 col-lg-6 ">
+          <Col className="form-group ms-1 me-xl-5 me-2 col-xl-7 col-lg-7 ">
             <SearchInput toggleNav={toggleNav} />
-            {/* <Categories /> */}
             <Categories />
           </Col>
 
           <Collapse navbar isOpen={open}>
             <Nav className="me-auto w-100 " navbar>
-              <Col className="pt-1 d-flex justify-content-between">
+              <Col className="pt-2 d-flex justify-content-between">
                 <NavItem>
                   <UserProfileSettings />
                 </NavItem>

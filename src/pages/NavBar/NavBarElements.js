@@ -118,7 +118,7 @@ export const Categories = (props) => {
 export const UserProfileSettings = (props) => {
   const [store, dispatch] = useContext(AppContext);
 
-  const getLetterForLogo = () => {
+  const getLetterForLogo = (props) => {
     return `${store.user.firstName}`.charAt(0);
   };
   const letterLogo = getLetterForLogo();
