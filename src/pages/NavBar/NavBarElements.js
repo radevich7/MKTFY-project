@@ -23,6 +23,12 @@ import {
 
 import search_icon from "../../assets/img/search_icon.svg";
 import blackCaretDown from "../../assets/img/blackCaretDown.svg";
+import icon_car from "../../assets/icon_car.svg";
+import icon_computer from "../../assets/icon_computer.svg";
+import icon_deals from "../../assets/icon_deals.svg";
+import icon_furniture from "../../assets/icon_furniture.svg";
+import icon_realestate from "../../assets/icon_realestate.svg";
+import hambuger_icon_categories from "../../assets/hambuger_icon_categories.svg";
 
 export const SearchInput = (props) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -31,7 +37,7 @@ export const SearchInput = (props) => {
   return (
     <Row className="searchInput_container g-0">
       {/* BUTTON ALL */}
-      <Col sm="2" className="smth ">
+      <Col className="smth col-1 col-md-2">
         <NavbarToggler
           onClick={props.toggleNav}
           aria-controls="main-nav"
@@ -54,7 +60,7 @@ export const SearchInput = (props) => {
         </Form>
       </Col>
       {/* DROPDOWN CITY */}
-      <Col sm="2">
+      <Col className="col-2 d-flex flex-column">
         <Dropdown
           isOpen={dropdownOpen}
           toggle={toggle}
@@ -95,25 +101,37 @@ export const SearchInput = (props) => {
 
 export const Categories = (props) => {
   return (
-    <Col className="categories_column">
-      <span href="#" className="category_header">
-        <div className="hamburger_button">
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        Categories
-      </span>
-
-      <span href="#">Deals</span>
-
-      <span href="#">Cars & Vehicles </span>
-
-      <span href="#">Furniture</span>
-
-      <span href="#">Electronics</span>
-
-      <span href="#">Real Estate</span>
+    <Col className="categories_column ">
+      <div className="wrap_content scrool_effect">
+        <span href="#" className="category_header d-none d-md-flex">
+          <img
+            src={hambuger_icon_categories}
+            className="d-none d-md-flex pe-3"
+            alt="/"
+          />
+          Categories
+        </span>
+        <span href="#">
+          <img src={icon_deals} alt="/" />
+          Deals
+        </span>
+        <span href="#">
+          <img src={icon_car} alt="/" />
+          <span className="d-flex flex-row">Cars & Vehicles</span>
+        </span>
+        <span href="#">
+          <img src={icon_furniture} alt="/" />
+          Furniture
+        </span>
+        <span href="#">
+          <img src={icon_computer} alt="/" />
+          Electronics
+        </span>
+        <span href="#">
+          <img src={icon_realestate} alt="/" />
+          Real Estate
+        </span>
+      </div>
     </Col>
   );
 };

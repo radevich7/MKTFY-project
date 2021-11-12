@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
+  <g id="icon_car" transform="translate(-174.153 -68.058)">
+    <path id="Path_3" data-name="Path 3" d="M174.153,68.058h44v44h-44Z" fill="none"/>
+    <path id="Path_4" data-name="Path 4" d="M208.84,79.076a2.737,2.737,0,0,0-2.6-1.851H186.07a2.749,2.749,0,0,0-2.6,1.851l-3.814,10.982v14.667a1.834,1.834,0,0,0,1.834,1.833h1.833a1.833,1.833,0,0,0,1.833-1.833v-1.834h22v1.834a1.834,1.834,0,0,0,1.834,1.833h1.833a1.833,1.833,0,0,0,1.833-1.833V90.058Zm-22.128,1.815h18.865l1.98,5.7H184.732Zm22.275,18.334H183.32V90.058h25.667Z" fill="#ffba00"/>
+    <circle id="Ellipse_1" data-name="Ellipse 1" cx="2.75" cy="2.75" r="2.75" transform="translate(185.153 91.891)" fill="#ffba00"/>
+    <circle id="Ellipse_2" data-name="Ellipse 2" cx="2.75" cy="2.75" r="2.75" transform="translate(201.653 91.891)" fill="#ffba00"/>
+  </g>
+</svg>

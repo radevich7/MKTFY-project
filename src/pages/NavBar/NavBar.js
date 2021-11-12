@@ -47,7 +47,7 @@ const NavBar = () => {
           <Collapse navbar>
             <Nav className="me-auto w-100 " navbar>
               <Col className="pt-2  d-flex justify-content-xl-evenly justify-content-center">
-                <NavItem className="">
+                <NavItem>
                   <UserProfileSettings />
                 </NavItem>
                 <NavItem className=" pt-2 d-xxl-flex d-none">
