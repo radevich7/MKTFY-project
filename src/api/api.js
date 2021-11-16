@@ -87,6 +87,19 @@ export function GET(url) {
   return apiCall;
 }
 
+export const POSTFORMDATA = (url, data) => {
+  let header = getHeader("FORMDATA");
+  let apiCall = axios
+    .post(`${process.env.REACT_APP_API_URL}${url}`, data, header)
+    .then((res) => {
+      return success(res);
+    })
+    .catch((res) => {
+      return failed(res.response);
+    });
+  return apiCall;
+};
+
 //
 // useEffect(() => {
 //   const token = localStorage.getItem("Auth_token");

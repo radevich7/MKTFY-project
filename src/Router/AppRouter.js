@@ -22,7 +22,7 @@ import AppContext from "../store/app-context";
 
 const AppRouter = () => {
   const [store, dispatch] = useContext(AppContext);
-  console.log(store.authenticated);
+  // console.log(store.authenticated);
 
   const RequireAuth = ({ children }) => {
     if (!store.authenticated) {
@@ -35,6 +35,7 @@ const AppRouter = () => {
     let token = new URLSearchParams(props.location.hash.substr(1)).get(
       "access_token"
     );
+    console.log(props.location);
 
     useEffect(() => {
       if (token && token.length > 0) {

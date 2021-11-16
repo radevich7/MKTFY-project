@@ -1,5 +1,5 @@
 import "./CreatePasswordOverlay.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Form,
@@ -14,8 +14,9 @@ import Button from "../../reusableComponent/Button";
 import { FaEyeSlash, FaEye, FaCheckCircle } from "react-icons/fa";
 import auth0js from "auth0-js";
 import { Link } from "react-router-dom";
-import POST from "../../api/api";
+import { POST } from "../../api/api";
 const CreatePasswordOverlay = (props) => {
+  let url = "/api/profile";
   // AUTH0
   const webAuth = new auth0js.WebAuth({
     domain: process.env.REACT_APP_AUTH0_DOMAIN,
@@ -123,7 +124,9 @@ const CreatePasswordOverlay = (props) => {
     }
   };
   //Final DATA
-  const finalData = { ...props.signupData, password: passwordValue };
+  const signupData = props.signupData;
+
+  const finalData = { ...signupData, password: passwordValue };
 
   const formSubmitHanlder = (e) => {
     e.preventDefault();
@@ -137,8 +140,6 @@ const CreatePasswordOverlay = (props) => {
         if (err) return alert("Something went wrong: ");
 
         if (!err) {
-          // POST("/api/profile", { ...props.signupData });
-
           webAuth.login(
             {
               email: finalData.email,
@@ -157,24 +158,6 @@ const CreatePasswordOverlay = (props) => {
             }
           );
         }
-        // if (!err) {
-        //   webAuth.redirect.loginWithCredentials(
-        //     {
-        //       connection: process.env.REACT_APP_AUTH0_CONNECTION,
-        //       username: finalData.email,
-        //       password: finalData.password,
-        //       redirectUri: window.location.origin + "/login",
-        //       responseType: "token",
-        //       scope: "openid profile email",
-        //     },
-        //     (error) => {
-        //       return alert("Something went wrong");
-        //       // setLoginError(
-        //       //   <span className="error_message">{error.description}</span>
-        //       // );
-        //     }
-        //   );
-        // }
       }
     );
   };

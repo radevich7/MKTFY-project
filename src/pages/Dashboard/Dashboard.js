@@ -75,9 +75,9 @@ const Dashboard = () => {
 
   let url = "/api/Listing";
   useEffect(() => {
-    let isMounted = true;
+    // let isMounted = true;
     GET(url).then((res) => {
-      if (!res.failed && isMounted) {
+      if (!res.failed) {
         setDeals(res.data);
         console.log(res.data);
       } else {
@@ -85,7 +85,7 @@ const Dashboard = () => {
       }
     });
     return () => {
-      isMounted = false;
+      // isMounted = false;
     };
   }, []);
 
