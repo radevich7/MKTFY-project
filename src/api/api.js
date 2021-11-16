@@ -1,5 +1,4 @@
 import axios from "axios";
-const URL = "http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com";
 
 const authStr = `Bearer ${localStorage.getItem("Auth_token")}`;
 
@@ -31,22 +30,24 @@ let returnData = {
 };
 
 const failed = (res) => {
-  let messages = [];
+  // console.log(res);
+  // let messages = [];
   //LOGOUT IF UNAUTHERIZED
   if (res.status === 401) {
     // POS('/Accoutn/Refreshtoken',{refreshtoken: localstorage.get('refreshtoken')}).then(res => localstorage.setItem('Auth_token', res.data.authenitcationToken)).catch(error => window.location.replace("/logout"); )
     // window.location.replace("/logout");
     console.log("UNATHORIZED");
   }
-  for (const message in res.data) {
-    if (res.data[message].length > 0) {
-      messages.push(`${res.data[message]}`);
-    }
-  }
-  let uniquemessages = [...new Set(messages)];
+  // for (const message in res.data) {
+  //   if (res.data[message].length > 0) {
+  //     messages.push(`${res.data[message]}`);
+  //   }
+  // }
+  // let uniquemessages = [...new Set(messages)];
+
   returnData.failed = true;
   returnData.code = res.status;
-  returnData.message = uniquemessages;
+  returnData.message = res.statusText;
   returnData.data = res.data;
   return returnData;
 };
@@ -72,17 +73,35 @@ export function POST(url, data) {
     });
   return apiCall;
 }
-export default POST;
 
 export function GET(url) {
   let header = getHeader();
   let apiCall = axios
     .get(`${process.env.REACT_APP_API_URL}${url}`, header)
     .then((res) => {
-      return console.log(res);
+      return success(res);
     })
     .catch((res) => {
       return failed(res.response);
     });
   return apiCall;
 }
+
+//
+// useEffect(() => {
+//   const token = localStorage.getItem("Auth_token");
+
+//   axios
+//     .get(
+//       "http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/api/Listing",
+//       {
+//         headers: {
+//           Accept: "*/*",
+//           "Content-type": "application/json",
+//           Authorization: `Bearer ${token}`,
+//         },
+//       }
+//     )
+//     .then((res) => console.log(res))
+//     .catch((err) => console.error(err));
+// }, []);

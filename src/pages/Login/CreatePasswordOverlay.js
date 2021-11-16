@@ -137,7 +137,7 @@ const CreatePasswordOverlay = (props) => {
         if (err) return alert("Something went wrong: ");
 
         if (!err) {
-          POST("/api/profile", { ...props.signupData });
+          // POST("/api/profile", { ...props.signupData });
 
           webAuth.login(
             {

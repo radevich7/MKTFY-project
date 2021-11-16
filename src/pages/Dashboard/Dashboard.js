@@ -9,7 +9,7 @@ import iwatch from "../../assets/imagesForDahsboard/iwatch.webp";
 import playstation from "../../assets/imagesForDahsboard/playstation.png";
 import samsung from "../../assets/imagesForDahsboard/samsung.webp";
 import "./Dashboard.css";
-import axios from "axios";
+import { GET } from "../../api/api";
 
 const dummy_data = [
   {
@@ -72,26 +72,28 @@ const dummy_data = [
 
 const Dashboard = () => {
   const [deals, setDeals] = useState([]);
-  // useEffect(() => {
-  //   const AuthStr = "Bearer ".concat(localStorage.getItem("Auth_token"));
-  //   console.log(AuthStr);
-  //   axios
-  //     .get(
-  //       "http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/api/Listing",
-  //       {
-  //         Accept: "*/*",
-  //         "Content-type": "application/json",
-  //         Authorization: AuthStr,
-  //       }
-  //     )
-  //     .then((res) => console.log(res))
-  //     .catch((err) => console.error(err));
-  // }, []);
+
+  let url = "/api/Listing";
+  useEffect(() => {
+    let isMounted = true;
+    GET(url).then((res) => {
+      if (!res.failed && isMounted) {
+        setDeals(res.data);
+        console.log(res.data);
+      } else {
+        // show message error to the user
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   // Deals for the deals section
 
-  useEffect(() => {
-    setDeals(dummy_data);
-  }, []);
+  // useEffect(() => {
+  //   setDeals(dummy_data);
+  // }, []);
 
   // deals for the categories section
   const [categoriesDeals, setcategoriesDeals] = useState([]);

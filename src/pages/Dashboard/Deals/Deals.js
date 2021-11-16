@@ -92,13 +92,13 @@ const Deals = (props) => {
                           <div className="image_deals_container">
                             <CardImg
                               top
-                              src={item.image}
-                              alt={`The image shows ${item.title}`}
+                              src={item.images[0].url}
+                              alt={`The image shows ${item.product}`}
                               className="image_deals"
                             />
                           </div>
                           <CardTitle tag="h5" className="deals_title">
-                            {item.title}
+                            {item.product}
                           </CardTitle>
                           <CardSubtitle tag="h6" className="deals_price">
                             $ {item.price.toFixed(2)}
