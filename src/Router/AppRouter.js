@@ -25,10 +25,10 @@ import axios from "axios";
 const AppRouter = () => {
   const [store, dispatch] = useContext(AppContext);
   // console.log(store.authenticated);
-  let history = useHistory();
+
   const RequireAuth = ({ children }) => {
     if (!store.authenticated) {
-      return <Redirect to="/" />;
+      // return <Redirect to={"/"} />;
     }
     return children;
   };
@@ -43,9 +43,6 @@ const AppRouter = () => {
         localStorage.setItem("Auth_token", token);
 
         dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
-        // props.store.setStore((prevState) => ({
-        //   ...prevState,
-        //   authenticated: true,
       }
     }, [token]);
     return <Redirect to="/home" />;
@@ -58,7 +55,7 @@ const AppRouter = () => {
     useEffect(() => {
       dispatch({ type: "SET_AUTHENTICATED", authenticated: false });
     }, []);
-    return <Redirect to="/" />;
+    return <Redirect to={"/"} />;
   };
 
   // SIGNUP LOGIC
@@ -76,7 +73,7 @@ const AppRouter = () => {
     let payload = JSON.parse(jsonPayload);
     return payload.sub;
   }
-
+  console.log(store.signUpData);
   const SignUpLogic = (props) => {
     let token = new URLSearchParams(props.location.hash.substr(1)).get(
       "access_token"
@@ -85,7 +82,7 @@ const AppRouter = () => {
     console.log(store.signUpData);
 
     let data = { ...store.signUpData, id: auth_id };
-    console.log(data);
+
     console.log("data", data);
     let url = "/api/profile";
 
@@ -94,18 +91,18 @@ const AppRouter = () => {
         localStorage.setItem("Auth_token", token);
         dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
 
-        const authStr = `Bearer ${localStorage.getItem("Auth_token")}`;
+        // const authStr = `Bearer ${localStorage.getItem("Auth_token")}`;
 
         axios.post(`${process.env.REACT_APP_API_URL}${url}`, data, {
           headers: {
             Accept: "*/*",
             "Content-Type": "application/json",
-            Authorization: authStr,
+            Authorization: `Bearer ${token}`,
           },
         });
       }
     }, [token]);
-    return <Redirect to="/home" />;
+    return <Redirect to={"/home"} />;
     // return history.push("/home");
   };
 

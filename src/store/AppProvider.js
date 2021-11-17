@@ -32,11 +32,14 @@ const AppReducer = (state, action) => {
 
 const AppProvider = (props) => {
   const [store, dispatch] = useReducer(AppReducer, initialState);
-  console.log(store.signUpData);
+  let token = localStorage.getItem("Auth_token");
+  console.log(token);
   useEffect(() => {
-    if (localStorage.getItem("Auth_token")) {
-      // Axios call to back to get userInfo
-
+    if (token) {
+      dispatch({
+        type: "SET_AUTHENTICATED",
+        authenticated: true,
+      });
       dispatch({
         type: "SET_USER",
         user: {

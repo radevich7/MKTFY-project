@@ -137,6 +137,7 @@ const SignUpFormOverlay = (props) => {
       props.toggle();
     }
     const personObject = {
+      // id: `${(Math.random() + 1).toString(36).substring(7)}`,
       email: emailValue,
       firstName: firstNameValue,
       lastName: lastNameValue,
@@ -147,7 +148,7 @@ const SignUpFormOverlay = (props) => {
       country: countryValue,
     };
 
-    dispatch({ type: "SET_SIGNUPDATA", signUpData: { ...personObject } });
+    dispatch({ type: "SET_SIGNUPDATA", signUpData: personObject });
 
     props.setSignupData(personObject);
     resetForm();
