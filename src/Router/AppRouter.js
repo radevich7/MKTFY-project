@@ -17,16 +17,18 @@ import CreateListing from "../pages/CreateListing/CreateListing";
 import MyListings from "../pages/MyListings/MyListings";
 import Faq from "../pages/TermsFaqContactUs/Faq";
 import { useContext } from "react";
-import ProtectedRoute from "../reusableComponent/ProtectedRoute";
+import { useHistory } from "react-router";
 import AppContext from "../store/app-context";
+import { POST } from "../api/api";
+import axios from "axios";
 
 const AppRouter = () => {
   const [store, dispatch] = useContext(AppContext);
   // console.log(store.authenticated);
-
+  let history = useHistory();
   const RequireAuth = ({ children }) => {
     if (!store.authenticated) {
-      // return <Redirect to={"/"} />;
+      return <Redirect to="/" />;
     }
     return children;
   };
@@ -35,7 +37,6 @@ const AppRouter = () => {
     let token = new URLSearchParams(props.location.hash.substr(1)).get(
       "access_token"
     );
-    console.log(props.location);
 
     useEffect(() => {
       if (token && token.length > 0) {
@@ -46,8 +47,8 @@ const AppRouter = () => {
         //   ...prevState,
         //   authenticated: true,
       }
-    }, []);
-    return <Redirect to={"/home"} />;
+    }, [token]);
+    return <Redirect to="/home" />;
   };
 
   const LogoutLogic = () => {
@@ -57,7 +58,55 @@ const AppRouter = () => {
     useEffect(() => {
       dispatch({ type: "SET_AUTHENTICATED", authenticated: false });
     }, []);
-    return <Redirect to={"/"} />;
+    return <Redirect to="/" />;
+  };
+
+  // SIGNUP LOGIC
+  function parseJwt(token) {
+    var base64Url = token.split(".")[1];
+    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    var jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+    let payload = JSON.parse(jsonPayload);
+    return payload.sub;
+  }
+
+  const SignUpLogic = (props) => {
+    let token = new URLSearchParams(props.location.hash.substr(1)).get(
+      "access_token"
+    );
+    let auth_id = parseJwt(token);
+    console.log(store.signUpData);
+
+    let data = { ...store.signUpData, id: auth_id };
+    console.log(data);
+    console.log("data", data);
+    let url = "/api/profile";
+
+    useEffect(() => {
+      if (token && token.length > 0) {
+        localStorage.setItem("Auth_token", token);
+        dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
+
+        const authStr = `Bearer ${localStorage.getItem("Auth_token")}`;
+
+        axios.post(`${process.env.REACT_APP_API_URL}${url}`, data, {
+          headers: {
+            Accept: "*/*",
+            "Content-Type": "application/json",
+            Authorization: authStr,
+          },
+        });
+      }
+    }, [token]);
+    return <Redirect to="/home" />;
+    // return history.push("/home");
   };
 
   return (
@@ -67,6 +116,11 @@ const AppRouter = () => {
           path="/login"
           exact
           render={(props) => <LoginLogic {...props} />}
+        />
+        <Route
+          path="/signup"
+          exact
+          render={(props) => <SignUpLogic {...props} />}
         />
         <Route path="/" exact render={(props) => <Login {...props} />} />
         <Route

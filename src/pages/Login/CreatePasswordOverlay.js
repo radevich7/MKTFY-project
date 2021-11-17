@@ -14,9 +14,8 @@ import Button from "../../reusableComponent/Button";
 import { FaEyeSlash, FaEye, FaCheckCircle } from "react-icons/fa";
 import auth0js from "auth0-js";
 import { Link } from "react-router-dom";
-import { POST } from "../../api/api";
+
 const CreatePasswordOverlay = (props) => {
-  let url = "/api/profile";
   // AUTH0
   const webAuth = new auth0js.WebAuth({
     domain: process.env.REACT_APP_AUTH0_DOMAIN,
@@ -146,7 +145,7 @@ const CreatePasswordOverlay = (props) => {
               password: finalData.password,
               realm: "Username-Password-Authentication",
               responseType: "token",
-              redirectUri: window.location.origin + "/login",
+              redirectUri: window.location.origin + "/signup",
               audience: "http://mktfy.com",
             },
             (error) => {

@@ -1,18 +1,21 @@
 import AppContext from "./app-context";
 import { useEffect, useReducer } from "react";
-import { Redirect } from "react-router-dom";
+
 // import GET from "../api/api";
 const initialState = {
   loading: false,
   authenticated: false,
   user: [],
   faq: [],
+  signUpData: [],
 };
 
 const AppReducer = (state, action) => {
   switch (action.type) {
     case "SET_LOADING":
       return { ...state, loading: action.loading };
+    case "SET_SIGNUPDATA":
+      return { ...state, signUpData: action.signUpData };
     case "SET_AUTHENTICATED": {
       return { ...state, authenticated: action.authenticated };
     }
@@ -22,18 +25,18 @@ const AppReducer = (state, action) => {
     }
     case "SET_FAQ":
       return { ...state, faq: action.faq };
+    default:
+      return initialState;
   }
-
-  return initialState;
 };
 
 const AppProvider = (props) => {
   const [store, dispatch] = useReducer(AppReducer, initialState);
-
+  console.log(store.signUpData);
   useEffect(() => {
     if (localStorage.getItem("Auth_token")) {
       // Axios call to back to get userInfo
-      dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
+
       dispatch({
         type: "SET_USER",
         user: {

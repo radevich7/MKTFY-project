@@ -14,8 +14,12 @@ import {
   ModalHeader,
   ModalBody,
 } from "reactstrap";
+import AppContext from "../../store/app-context";
+import { useContext } from "react";
 
 const SignUpFormOverlay = (props) => {
+  const [store, dispatch] = useContext(AppContext);
+
   const [valuePhone, setValuePhone] = useState(); //for international input to work
   const phoneInputRef = useRef();
 
@@ -133,7 +137,6 @@ const SignUpFormOverlay = (props) => {
       props.toggle();
     }
     const personObject = {
-      id: `${(Math.random() + 1).toString(36).substring(7)}`,
       email: emailValue,
       firstName: firstNameValue,
       lastName: lastNameValue,
@@ -143,6 +146,9 @@ const SignUpFormOverlay = (props) => {
       province: provinceValue,
       country: countryValue,
     };
+
+    dispatch({ type: "SET_SIGNUPDATA", signUpData: { ...personObject } });
+
     props.setSignupData(personObject);
     resetForm();
     // console.log(personObject.id);

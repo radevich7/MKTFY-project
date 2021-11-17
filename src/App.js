@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./assets/mktfy.css";
 import AppRouter from "./Router/AppRouter";
 import "./App.css";

@@ -22,6 +22,10 @@ const Deals = (props) => {
   let sliderClasses = "scroll_effect";
 
   useEffect(() => {
+    // console.log(props.deals);
+  }, [props.deals]);
+
+  useEffect(() => {
     let currentSliderRef = sliderRef.current;
     //MouseDown
     sliderRef.current.addEventListener("mousedown", handleMouseDown);

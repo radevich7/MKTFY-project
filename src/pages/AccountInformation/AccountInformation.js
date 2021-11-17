@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import AppContext from "../../store/app-context";
 import { Link } from "react-router-dom";
@@ -7,7 +7,7 @@ import Button from "..//../reusableComponent/Button";
 import PhoneInput from "react-phone-number-input/input";
 import "./AccountInformation.css";
 import { useState, useRef } from "react";
-import axios from "axios";
+
 import {
   Col,
   Row,
@@ -56,7 +56,7 @@ const AccountInformation = (props) => {
   };
   // console.log(userDataUpdated);
 
-  const authStr = `Bearer ${localStorage.getItem("Auth_token")}`;
+  // const authStr = `Bearer ${localStorage.getItem("Auth_token")}`;
   // useEffect(() => {
   //   axios
   //     .get(

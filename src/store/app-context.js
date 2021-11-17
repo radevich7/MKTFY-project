@@ -5,6 +5,7 @@ const AppContext = React.createContext({
   authenticated: false,
   user: [],
   faq: [],
+  signUpData: [],
 });
 
 export default AppContext;

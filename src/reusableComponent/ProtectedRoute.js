@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import AppContext from "../store/app-context";
 
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const [store, dispatch] = useContext(AppContext);
+  const [store] = useContext(AppContext);
   console.log(store.authenticated);
   return (
     <Route
