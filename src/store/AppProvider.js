@@ -55,18 +55,20 @@ const AppProvider = (props) => {
     return payload.sub;
   }
   useEffect(() => {
-    const user_id = parseJwt(token);
     const urlListing = "/api/Listing";
     const urlProfile = `/api/profile/{id}`;
-    console.log(user_id);
+    const urlFAQ = `/api/FAQ`;
 
     if (token) {
+      const user_id = parseJwt(token);
+      console.log(user_id);
       GET(urlListing).then((res) =>
         dispatch({ type: "SET_ALL_LISTINGS", allListings: res.data })
       );
       GET(urlProfile).then((res) =>
         dispatch({ type: "SET_USER", user: res.data })
       );
+      GET(urlFAQ).then((res) => dispatch({ type: "SET_FAQ", faq: res.data }));
 
       dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
     }
