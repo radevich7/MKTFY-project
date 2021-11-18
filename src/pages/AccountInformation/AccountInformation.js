@@ -7,7 +7,7 @@ import Button from "..//../reusableComponent/Button";
 import PhoneInput from "react-phone-number-input/input";
 import "./AccountInformation.css";
 import { useState, useRef } from "react";
-
+import { PUT } from "../../api/api";
 import {
   Col,
   Row,
@@ -34,55 +34,34 @@ const AccountInformation = (props) => {
   const [emailUpdated, setEmailUpdated] = useState(store.user.email);
   const [phoneUpdated, setPhoneUpdated] = useState(store.user.phone);
   const [defaultPhoneValue, setDefaultPhoneValue] = useState("");
-  const [addressUpdated, setAddressUpdated] = useState(store.user.address);
+  const [addressUpdated, setAddressUpdated] = useState(
+    store.user.streetAddress
+  );
   const [cityUpdated, setCityUpdated] = useState(store.user.city);
   const [provinceUpdated, setProvinceUpdated] = useState(store.user.province);
   const [countryUpdated, setCountryUpdated] = useState(store.user.country);
 
-  const phonePlaceholder = `${store.user.phone.slice(
-    2,
-    5
-  )} ${store.user.phone.slice(5, 8)} - ${store.user.phone.slice(8)}`;
+  const phonePlaceholder = store.user.phone && store.user.phone.slice(2);
 
   const userDataUpdated = {
+    id: store.user.id,
     firstName: firstNameUpdated,
     lastName: lastNameUpdated,
     email: emailUpdated,
     phone: !defaultPhoneValue ? phoneUpdated : defaultPhoneValue,
-    address: addressUpdated,
+    streetAddress: addressUpdated,
     city: cityUpdated,
     province: provinceUpdated,
     country: countryUpdated,
   };
-  // console.log(userDataUpdated);
-
-  // const authStr = `Bearer ${localStorage.getItem("Auth_token")}`;
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       `http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/api/Listing`,
-  //       {
-  //         Accept: "*/*",
-  //         "Content-Type": "application/json",
-  //         Authorization: authStr,
-  //       }
-  //     )
-  //     .then((res) => console.log(res));
-  // }, []);
-
   const submitFormHandler = (e) => {
     e.preventDefault();
+    let url = "/api/profile";
+    PUT(url, userDataUpdated).then((res) => {
+      dispatch({ type: "SET_USER", user: res.data });
+    });
     dispatch({ type: "SET_USER", user: { ...userDataUpdated } });
     history.push("/home");
-    // axios
-    //   .put("url", userDataUpdated)
-    //   .then((res) => {
-    //     props.store.setStore((prevState) => ({
-    //       ...prevState,
-    //       userData: userDataUpdated,
-    //     }));
-    //   })
-    //   .catch((err) => alert(err));
   };
 
   return (

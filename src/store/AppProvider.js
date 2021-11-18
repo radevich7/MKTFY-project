@@ -55,12 +55,12 @@ const AppProvider = (props) => {
     return payload.sub;
   }
   useEffect(() => {
-    const urlListing = "/api/Listing";
-    const urlProfile = `/api/profile/{id}`;
-    const urlFAQ = `/api/FAQ`;
-
     if (token) {
       const user_id = parseJwt(token);
+      const urlListing = "/api/Listing";
+      const urlProfile = `/api/profile/${user_id}`;
+      const urlFAQ = `/api/FAQ`;
+
       console.log(user_id);
       GET(urlListing).then((res) =>
         dispatch({ type: "SET_ALL_LISTINGS", allListings: res.data })

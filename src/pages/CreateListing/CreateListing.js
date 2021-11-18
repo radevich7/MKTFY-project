@@ -27,20 +27,6 @@ import CustomSelect from "../../reusableComponent/CustomSelect";
 const CreateListing = () => {
   const history = useHistory();
 
-  // State managment for toggling of the dropdown menus
-  const [dropdownOpenCategories, setDropdownOpenCategories] = useState(false);
-  const toggleCategories = (e) => {
-    setDropdownOpenCategories((prevState) => !prevState);
-  };
-  const [dropdownOpenCondition, setDropdownOpenCondition] = useState(false);
-  const toggleCondition = () =>
-    setDropdownOpenCondition((prevState) => !prevState);
-  const [dropdownOpenCity, setDropdownOpenCity] = useState(false);
-  const toggleCity = () => setDropdownOpenCity((prevState) => !prevState);
-  const [dropdownOpenProvince, setDropdownOpenProvince] = useState(false);
-  const toggleProvince = () =>
-    setDropdownOpenProvince((prevState) => !prevState);
-
   const [uploadImgModal, setUploadImgModal] = useState(false);
   const toggleUploadImg = () => setUploadImgModal(!uploadImgModal);
   // State managment for uploading images
@@ -59,19 +45,45 @@ const CreateListing = () => {
   };
 
   // VALIDATION OF THE FORM
-  const [productName, setProductName] = useState();
-  const [description, setDescription] = useState();
+  const [product, setProduct] = useState();
+  const [details, setDetails] = useState();
   const [category, setCategory] = useState();
+  const [categoryId, setCategoryId] = useState();
   const [condition, setCondition] = useState();
   const [price, setPrice] = useState();
   const [address, setAddress] = useState();
   const [city, setCity] = useState();
   const [province, setProvince] = useState();
-  const productNameHandler = (e) => {
-    setProductName(e.target.value);
+  const productHandler = (e) => {
+    setProduct(e.target.value);
   };
-  const descriptionHandler = (e) => {
-    setDescription(e.target.value);
+  console.log(category, categoryId);
+  const detailsHandler = (e) => {
+    setDetails(e.target.value);
+  };
+
+  const categoryHandler = (e) => {
+    switch (e) {
+      case "Cars & Vehicles":
+        setCategory("Cars & Vehicles");
+        setCategoryId(1);
+        break;
+      case "Furniture":
+        setCategory("Furniture");
+        setCategoryId(2);
+        break;
+      case "Electronics":
+        setCategory("Electronics");
+        setCategoryId(3);
+        break;
+      case "Real Estate":
+        setCategory("Real Estate");
+        setCategoryId(4);
+        break;
+      default:
+        setCategory("Select a category");
+        setCategoryId(0);
+    }
   };
 
   const priceHandler = (e) => {
@@ -85,8 +97,8 @@ const CreateListing = () => {
     e.preventDefault();
 
     const newListing = {
-      productName,
-      description,
+      product,
+      details,
       category,
       condition,
       price,
@@ -112,7 +124,6 @@ const CreateListing = () => {
   // options for the select input
 
   const categoryOptions = [
-    "Deals",
     "Cars & Vehicles",
     "Furniture",
     "Electronics",
@@ -224,7 +235,7 @@ const CreateListing = () => {
                             id="productName"
                             className="createListing_inputField"
                             placeholder="Enter product name"
-                            onBlur={productNameHandler}
+                            onBlur={productHandler}
                             required
                           />
                         </Row>
@@ -237,7 +248,7 @@ const CreateListing = () => {
                             className="createListing_inputField description"
                             placeholder="Enter description (max 250 characters)"
                             maxLength="250"
-                            onBlur={descriptionHandler}
+                            onBlur={detailsHandler}
                             required
                           />
                         </Row>
@@ -246,7 +257,7 @@ const CreateListing = () => {
                           <Label for="category">Category</Label>
                           <CustomSelect
                             options={categoryOptions}
-                            onSetValue={setCategory}
+                            onSetValue={categoryHandler}
                             value={category}
                           />
                         </Row>

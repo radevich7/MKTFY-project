@@ -86,6 +86,19 @@ export function GET(url) {
   return apiCall;
 }
 
+export function PUT(url, data) {
+  let header = getHeader();
+  let apiCall = axios
+    .put(`${process.env.REACT_APP_API_URL}${url}`, data, header)
+    .then((res) => {
+      return success(res);
+    })
+    .catch((res) => {
+      return failed(res.response);
+    });
+  return apiCall;
+}
+
 export const POSTFORMDATA = (url, data) => {
   let header = getHeader("FORMDATA");
   let apiCall = axios
@@ -98,64 +111,3 @@ export const POSTFORMDATA = (url, data) => {
     });
   return apiCall;
 };
-
-// export function getAllListings(url, token = false) {
-//   let header;
-//   if (token === true) {
-//     header = {
-//       Accept: "*/*",
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${token}`,
-//     };
-//   } else {
-//     header = getHeader();
-//   }
-
-//   let apiCall = axios
-//     .get(`${process.env.REACT_APP_API_URL}${url}`, header)
-//     .then((res) => {
-//       return success(res);
-//     })
-//     .catch((res) => {
-//       return failed(res.response);
-//     });
-//   return apiCall;
-// }
-
-//
-// useEffect(() => {
-//   const token = localStorage.getItem("Auth_token");
-
-//   axios
-//     .get(
-//       "http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/api/Listing",
-//       {
-//         headers: {
-//           Accept: "*/*",
-//           "Content-type": "application/json",
-//           Authorization: `Bearer ${token}`,
-//         },
-//       }
-//     )
-//     .then((res) => console.log(res))
-//     .catch((err) => console.error(err));
-// }, []);
-
-// export const getAllListings = (url, token) => {
-//   let authStr = `Bearer ${localStorage.getItem("Auth_token")}`;
-//   let apiCall = axios
-//     .get(`${process.env.REACT_APP_API_URL}${url}`, {
-//       headers: {
-//         Accept: "*/*",
-//         "Content-Type": "application/json",
-//         Authorization: authStr,
-//       },
-//     })
-//     .then((res) => {
-//       return success(res);
-//     })
-//     .catch((res) => {
-//       return failed(res.response);
-//     });
-//   return apiCall;
-// };
