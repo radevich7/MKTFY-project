@@ -1,6 +1,6 @@
 import "./CreatePasswordOverlay.css";
-import { useEffect, useState } from "react";
-
+import { useState, useContext } from "react";
+import AppContext from "../../store/app-context";
 import {
   Form,
   FormGroup,
@@ -16,6 +16,7 @@ import auth0js from "auth0-js";
 import { Link } from "react-router-dom";
 
 const CreatePasswordOverlay = (props) => {
+  const [store, dispatch] = useContext(AppContext);
   // AUTH0
   const webAuth = new auth0js.WebAuth({
     domain: process.env.REACT_APP_AUTH0_DOMAIN,
@@ -127,8 +128,13 @@ const CreatePasswordOverlay = (props) => {
 
   const finalData = { ...signupData, password: passwordValue };
 
+  //...
+
   const formSubmitHanlder = (e) => {
     e.preventDefault();
+
+    localStorage.setItem("signupData", JSON.stringify(signupData));
+
     webAuth.signup(
       {
         connection: process.env.REACT_APP_AUTH0_CONNECTION,
@@ -174,13 +180,33 @@ const CreatePasswordOverlay = (props) => {
     ? "characters_check valid"
     : "characters_check";
 
+  const closeModalHandler = () => {
+    props.toggle();
+    setPasswordValue();
+    setConfirmPasswordValue();
+    setConfirmPasswordError();
+    setNumberValueValidation(false);
+    setUpperCaseValidation(false);
+    setLengthValueValidation(false);
+    setCheckboxValue(true);
+    dispatch({ type: "SET_SIGNUPDATA", signUpData: [] });
+  };
+
   return (
     <Modal
       isOpen={props.modal}
       toggle={props.toggle}
       className="modal-lg modal-fullscreen-md-down"
     >
-      <ModalHeader toggle={props.toggle} className="createPassword_header">
+      <ModalHeader
+        toggle={props.toggle}
+        className="createPassword_header"
+        close={
+          <button className="close" onClick={closeModalHandler}>
+            ×
+          </button>
+        }
+      >
         Create Password
       </ModalHeader>
       <ModalBody className="createPassword_body">

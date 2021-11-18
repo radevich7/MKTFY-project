@@ -74,8 +74,21 @@ export function POST(url, data) {
   return apiCall;
 }
 
-export function GET(url) {
-  let header = getHeader();
+export function GET(url, token = false) {
+  console.log(token);
+  if (token !== true) {
+    var header = {
+      Accept: "*/*",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+    console.log(token);
+    console.log("default token");
+  } else {
+    var header = getHeader();
+    console.log("original token");
+  }
+
   let apiCall = axios
     .get(`${process.env.REACT_APP_API_URL}${url}`, header)
     .then((res) => {
@@ -100,6 +113,29 @@ export const POSTFORMDATA = (url, data) => {
   return apiCall;
 };
 
+// export function getAllListings(url, token = false) {
+//   let header;
+//   if (token === true) {
+//     header = {
+//       Accept: "*/*",
+//       "Content-Type": "application/json",
+//       Authorization: `Bearer ${token}`,
+//     };
+//   } else {
+//     header = getHeader();
+//   }
+
+//   let apiCall = axios
+//     .get(`${process.env.REACT_APP_API_URL}${url}`, header)
+//     .then((res) => {
+//       return success(res);
+//     })
+//     .catch((res) => {
+//       return failed(res.response);
+//     });
+//   return apiCall;
+// }
+
 //
 // useEffect(() => {
 //   const token = localStorage.getItem("Auth_token");
@@ -118,3 +154,16 @@ export const POSTFORMDATA = (url, data) => {
 //     .then((res) => console.log(res))
 //     .catch((err) => console.error(err));
 // }, []);
+
+// export const getAllListings = (url, token) => {
+//   let header = getHeader();
+//   let apiCall = axios
+//     .get(`${process.env.REACT_APP_API_URL}${url}`, header)
+//     .then((res) => {
+//       return success(res);
+//     })
+//     .catch((res) => {
+//       return failed(res.response);
+//     });
+//   return apiCall;
+// };

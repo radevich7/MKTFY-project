@@ -1,5 +1,7 @@
 import AppContext from "./app-context";
 import { useEffect, useReducer } from "react";
+import { GET } from "../api/api";
+import axios from "axios";
 
 // import GET from "../api/api";
 const initialState = {
@@ -8,6 +10,7 @@ const initialState = {
   user: [],
   faq: [],
   signUpData: [],
+  allListings: [],
 };
 
 const AppReducer = (state, action) => {
@@ -19,7 +22,9 @@ const AppReducer = (state, action) => {
     case "SET_AUTHENTICATED": {
       return { ...state, authenticated: action.authenticated };
     }
-
+    case "SET_ALL_LISTINGS": {
+      return { ...state, allListings: action.allListings };
+    }
     case "SET_USER": {
       return { ...state, user: action.user };
     }
@@ -33,13 +38,22 @@ const AppReducer = (state, action) => {
 const AppProvider = (props) => {
   const [store, dispatch] = useReducer(AppReducer, initialState);
   let token = localStorage.getItem("Auth_token");
-  console.log(token);
+
   useEffect(() => {
+    const url = "/api/Listing";
     if (token) {
-      dispatch({
-        type: "SET_AUTHENTICATED",
-        authenticated: true,
-      });
+      GET(url, token).then((res) => console.log(res));
+
+      // GET(url, token).then((res) => {
+      //   if (!res.failed) {
+      //     dispatch({ type: "SET_ALL_LISTINGS", allListings: res.data });
+      //   } else {
+      //     console.log(res);
+      //     // show message error to the user
+      //   }
+      // });
+
+      dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
       dispatch({
         type: "SET_USER",
         user: {
@@ -54,18 +68,7 @@ const AppProvider = (props) => {
         },
       });
     }
-  }, []);
-
-  // const RequireAuth = ({ children }) => {
-  //   // useEffect(() => {
-  //   // console.log(store.authenticated);
-  //   if (!store.authenticated) {
-  //     return <Redirect to={"/"} />;
-  //   }
-  //   // }, [store.authenticated]);
-
-  //   return children;
-  // };
+  }, [token]);
 
   return (
     <AppContext.Provider value={[store, dispatch]}>

@@ -148,11 +148,16 @@ const SignUpFormOverlay = (props) => {
       country: countryValue,
     };
 
-    dispatch({ type: "SET_SIGNUPDATA", signUpData: personObject });
+    // dispatch({ type: "SET_SIGNUPDATA", signUpData: personObject });
 
     props.setSignupData(personObject);
     resetForm();
     // console.log(personObject.id);
+  };
+  const closeModalHandler = () => {
+    props.toggle();
+    dispatch({ type: "SET_SIGNUPDATA", signUpData: [] });
+    setValuePhone();
   };
 
   return (
@@ -161,7 +166,15 @@ const SignUpFormOverlay = (props) => {
       toggle={props.toggle}
       className="signup_container modal-fullscreen-lg-down "
     >
-      <ModalHeader toggle={props.toggle} className="signUp_header">
+      <ModalHeader
+        toggle={props.toggle}
+        className="signUp_header"
+        close={
+          <button className="close" onClick={closeModalHandler}>
+            ×
+          </button>
+        }
+      >
         Welcome to MKTFY!
         <p>
           It’s nice to meet you. At MKTFY you are able to buy, sell and donate

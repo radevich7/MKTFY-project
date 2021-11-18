@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 import "./AppRouter.css";
 import NavBar from "../pages/NavBar/NavBar";
@@ -73,15 +73,18 @@ const AppRouter = () => {
     let payload = JSON.parse(jsonPayload);
     return payload.sub;
   }
-  console.log(store.signUpData);
+
+  let signUpData = JSON.parse(localStorage.getItem("signupData"));
+
   const SignUpLogic = (props) => {
     let token = new URLSearchParams(props.location.hash.substr(1)).get(
       "access_token"
     );
     let auth_id = parseJwt(token);
-    console.log(store.signUpData);
 
-    let data = { ...store.signUpData, id: auth_id };
+    let signUpData = JSON.parse(localStorage.getItem("signupData"));
+
+    let data = { ...signUpData, id: auth_id };
 
     console.log("data", data);
     let url = "/api/profile";
@@ -93,15 +96,35 @@ const AppRouter = () => {
 
         // const authStr = `Bearer ${localStorage.getItem("Auth_token")}`;
 
-        axios.post(`${process.env.REACT_APP_API_URL}${url}`, data, {
-          headers: {
-            Accept: "*/*",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const headers = {
+          Accept: "*/*",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        };
+
+        axios
+          .post(
+            "http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/api/profile",
+            data,
+            { headers: headers }
+          )
+          .then(function (response) {
+            console.log(response);
+
+            // delete local storage
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        // POST(url).then((res) => {
+        //   if (!res.failed) {
+        //     console.log(res.data);
+        //   } else {
+        //     console.log(res.data);
+        //   }
+        // });
       }
-    }, [token]);
+    }, []);
     return <Redirect to={"/home"} />;
     // return history.push("/home");
   };

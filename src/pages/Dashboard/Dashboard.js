@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Container, Row } from "reactstrap";
 import Footer from "./Footer/Footer";
 import Categories from "./Categories/Categories";
@@ -9,7 +9,8 @@ import iwatch from "../../assets/imagesForDahsboard/iwatch.webp";
 import playstation from "../../assets/imagesForDahsboard/playstation.png";
 import samsung from "../../assets/imagesForDahsboard/samsung.webp";
 import "./Dashboard.css";
-import { GET } from "../../api/api";
+
+import AppContext from "../../store/app-context";
 
 const dummy_data = [
   {
@@ -71,29 +72,13 @@ const dummy_data = [
 ];
 
 const Dashboard = () => {
+  const [store, dispatch] = useContext(AppContext);
+
+  // Deals
   const [deals, setDeals] = useState([]);
-
-  let url = "/api/Listing";
   useEffect(() => {
-    // let isMounted = true;
-    GET(url).then((res) => {
-      if (!res.failed) {
-        setDeals(res.data);
-        console.log(res.data);
-      } else {
-        // show message error to the user
-      }
-    });
-    return () => {
-      // isMounted = false;
-    };
+    setDeals(store.allListings);
   }, []);
-
-  // Deals for the deals section
-
-  // useEffect(() => {
-  //   setDeals(dummy_data);
-  // }, []);
 
   // deals for the categories section
   const [categoriesDeals, setcategoriesDeals] = useState([]);
