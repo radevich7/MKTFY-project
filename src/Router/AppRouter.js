@@ -33,6 +33,23 @@ const AppRouter = () => {
     return children;
   };
 
+  // Get ID from the TOKEN function
+  function parseJwt(token) {
+    var base64Url = token.split(".")[1];
+    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    var jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+    let payload = JSON.parse(jsonPayload);
+    return payload.sub;
+  }
+  //
+
   const LoginLogic = (props) => {
     let token = new URLSearchParams(props.location.hash.substr(1)).get(
       "access_token"
@@ -48,31 +65,7 @@ const AppRouter = () => {
     return <Redirect to="/home" />;
   };
 
-  const LogoutLogic = () => {
-    localStorage.removeItem("Auth_token");
-    const { logout } = useAuth0();
-    logout({ returnTo: window.location.origin });
-    useEffect(() => {
-      dispatch({ type: "SET_AUTHENTICATED", authenticated: false });
-    }, []);
-    return <Redirect to={"/"} />;
-  };
-
   // SIGNUP LOGIC
-  function parseJwt(token) {
-    var base64Url = token.split(".")[1];
-    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    var jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split("")
-        .map(function (c) {
-          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join("")
-    );
-    let payload = JSON.parse(jsonPayload);
-    return payload.sub;
-  }
 
   let signUpData = JSON.parse(localStorage.getItem("signupData"));
 
@@ -116,17 +109,21 @@ const AppRouter = () => {
           .catch(function (error) {
             console.log(error);
           });
-        // POST(url).then((res) => {
-        //   if (!res.failed) {
-        //     console.log(res.data);
-        //   } else {
-        //     console.log(res.data);
-        //   }
-        // });
       }
     }, []);
     return <Redirect to={"/home"} />;
     // return history.push("/home");
+  };
+
+  // Log Out Logic
+  const LogoutLogic = () => {
+    localStorage.removeItem("Auth_token");
+    const { logout } = useAuth0();
+    logout({ returnTo: window.location.origin });
+    useEffect(() => {
+      dispatch({ type: "SET_AUTHENTICATED", authenticated: false });
+    }, []);
+    return <Redirect to={"/"} />;
   };
 
   return (

@@ -39,34 +39,36 @@ const AppProvider = (props) => {
   const [store, dispatch] = useReducer(AppReducer, initialState);
   let token = localStorage.getItem("Auth_token");
 
+  // Get user ID from the token function
+  function parseJwt(token) {
+    var base64Url = token.split(".")[1];
+    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    var jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+    let payload = JSON.parse(jsonPayload);
+    return payload.sub;
+  }
   useEffect(() => {
-    const url = "/api/Listing";
-    if (token) {
-      GET(url, token).then((res) => console.log(res));
+    const user_id = parseJwt(token);
+    const urlListing = "/api/Listing";
+    const urlProfile = `/api/profile/{id}`;
+    console.log(user_id);
 
-      // GET(url, token).then((res) => {
-      //   if (!res.failed) {
-      //     dispatch({ type: "SET_ALL_LISTINGS", allListings: res.data });
-      //   } else {
-      //     console.log(res);
-      //     // show message error to the user
-      //   }
-      // });
+    if (token) {
+      GET(urlListing).then((res) =>
+        dispatch({ type: "SET_ALL_LISTINGS", allListings: res.data })
+      );
+      GET(urlProfile).then((res) =>
+        dispatch({ type: "SET_USER", user: res.data })
+      );
 
       dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
-      dispatch({
-        type: "SET_USER",
-        user: {
-          firstName: "Julian",
-          lastName: "Radevych",
-          email: "test@test.com",
-          phone: "+14033077577",
-          address: "28 Mahogany View",
-          city: "Calgary",
-          province: "AB",
-          country: "Canada",
-        },
-      });
     }
   }, [token]);
 

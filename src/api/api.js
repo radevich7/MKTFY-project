@@ -1,8 +1,7 @@
 import axios from "axios";
 
-const authStr = `Bearer ${localStorage.getItem("Auth_token")}`;
-
 const getHeader = (type) => {
+  const authStr = `Bearer ${localStorage.getItem("Auth_token")}`;
   if (type == "FORMDATA") {
     return {
       headers: {
@@ -74,21 +73,8 @@ export function POST(url, data) {
   return apiCall;
 }
 
-export function GET(url, token = false) {
-  console.log(token);
-  if (token !== true) {
-    var header = {
-      Accept: "*/*",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    };
-    console.log(token);
-    console.log("default token");
-  } else {
-    var header = getHeader();
-    console.log("original token");
-  }
-
+export function GET(url) {
+  let header = getHeader();
   let apiCall = axios
     .get(`${process.env.REACT_APP_API_URL}${url}`, header)
     .then((res) => {
@@ -156,9 +142,15 @@ export const POSTFORMDATA = (url, data) => {
 // }, []);
 
 // export const getAllListings = (url, token) => {
-//   let header = getHeader();
+//   let authStr = `Bearer ${localStorage.getItem("Auth_token")}`;
 //   let apiCall = axios
-//     .get(`${process.env.REACT_APP_API_URL}${url}`, header)
+//     .get(`${process.env.REACT_APP_API_URL}${url}`, {
+//       headers: {
+//         Accept: "*/*",
+//         "Content-Type": "application/json",
+//         Authorization: authStr,
+//       },
+//     })
 //     .then((res) => {
 //       return success(res);
 //     })
