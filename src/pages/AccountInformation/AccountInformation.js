@@ -56,9 +56,7 @@ const AccountInformation = (props) => {
       serEmailError(<p className="error">Email can not be changed</p>);
     }
   };
-  console.log(store.user.phone);
-  console.log(phoneUpdated);
-  console.log(defaultPhoneValue);
+
   const userDataUpdated = {
     id: store.user.id,
     firstName: firstNameUpdated,
@@ -74,14 +72,16 @@ const AccountInformation = (props) => {
   const submitFormHandler = (e) => {
     e.preventDefault();
 
-    PUT("/api/profile", userDataUpdated).then((res) => {
-      if (!res.failed) {
+    PUT("/api/profil", userDataUpdated).then((res) => {
+      console.log(res);
+      if (res.failed === false) {
         dispatch({ type: "SET_USER", user: res.data });
       } else {
-        console.log(res);
+        console.log("failed");
         // Show to the user that u can't done it
       }
     });
+
     serEmailError();
     history.push("/home");
   };

@@ -36,6 +36,7 @@ const failed = (res) => {
     //   // window.location.replace("/logout");
     console.log("UNATHORIZED");
   }
+
   for (const message in res.data) {
     if (res.data[message].length > 0) {
       messages.push(`${res.data[message]}`);
@@ -45,9 +46,9 @@ const failed = (res) => {
   let data = { ...returnData };
   data.failed = true;
   data.code = res.status;
-  data.message = uniquemessages;
+  data.message = uniquemessages.length > 0 ? uniquemessages : res.statusText;
   data.data = res.data;
-  return returnData;
+  return data;
 };
 const success = (res) => {
   let data = { ...returnData };
@@ -90,8 +91,10 @@ export function PUT(url, data) {
     .put(`${process.env.REACT_APP_API_URL}${url}`, data, header)
     .then((res) => {
       return success(res);
+      console.log("good");
     })
     .catch((res) => {
+      console.log("shit");
       return failed(res.response);
     });
   return apiCall;
