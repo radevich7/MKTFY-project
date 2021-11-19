@@ -43,10 +43,10 @@ const AccountInformation = (props) => {
   const [countryUpdated, setCountryUpdated] = useState(store.user.country);
 
   const phonePlaceholder = store.user.phone
-    ? `(${store.user.phone.slice(2, 5)}) ${store.user.phone.slice(
-        5,
-        8
-      )} - ${store.user.phone.slice(8)}`
+    ? `(${store.user.phone.slice(0, 3)}) ${store.user.phone.slice(
+        3,
+        6
+      )} - ${store.user.phone.slice(6)}`
     : ``;
 
   const emailHandler = (e) => {
@@ -56,13 +56,15 @@ const AccountInformation = (props) => {
       serEmailError(<p className="error">Email can not be changed</p>);
     }
   };
-
+  console.log(store.user.phone);
+  console.log(phoneUpdated);
+  console.log(defaultPhoneValue);
   const userDataUpdated = {
     id: store.user.id,
     firstName: firstNameUpdated,
     lastName: lastNameUpdated,
     email: emailUpdated,
-    phone: !defaultPhoneValue ? phoneUpdated.substring(2) : defaultPhoneValue,
+    phone: phoneUpdated ? defaultPhoneValue.substring(2) : store.user.phone,
     streetAddress: addressUpdated,
     city: cityUpdated,
     province: provinceUpdated,
