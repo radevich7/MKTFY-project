@@ -23,7 +23,7 @@ import camera from "../../assets/camera.svg";
 import UploadImgModal from "./UploadImgModal";
 import PreviewContent from "./PreviewContent";
 import CustomSelect from "../../reusableComponent/CustomSelect";
-import { POST } from "../../api/api";
+import { POSTFORMDATA, POST } from "../../api/api";
 
 const CreateListing = () => {
   const history = useHistory();
@@ -33,7 +33,6 @@ const CreateListing = () => {
   // State managment for uploading images
   const [uploadFile, setUploadFile] = useState(null);
   const [previewImages, setPreviewImages] = useState(null);
-  console.log(uploadFile, previewImages);
 
   const removeImage = (index) => {
     let previewimageClone = [...previewImages];
@@ -103,14 +102,34 @@ const CreateListing = () => {
     // province,
     region: city,
   };
+
+  console.log(uploadFile);
   const submitFormHandler = (e) => {
     e.preventDefault();
 
-    let fileData = new FormData();
+    let formData = new FormData();
     for (let i = 0; i < uploadFile.length; i++) {
-      fileData.append("File[]", uploadFile[i]);
+      formData.append("File[]", uploadFile[i]);
     }
-    console.log(fileData);
+    console.log([...formData]); // Think 2D array makes it more readable
+    let uploadedImages = [];
+    POSTFORMDATA("/api/Upload", formData).then((res) => {
+      if (res.failed === false) {
+        uploadedImages = res.data;
+
+        let data = {
+          ...newListing,
+          uploadIds: uploadedImages.flatMap((val) => Object.values(val)),
+        };
+        console.log(data);
+        POST("/api/Listing", data).then((res) => console.log(res));
+      } else {
+        // Handle error
+      }
+    });
+
+    console.log("SEND");
+
     // POST('/api/Upload', fileData)
     // AXIOS CALL.post (url, fileData).then(res=>{})
 

@@ -72,7 +72,7 @@ const AccountInformation = (props) => {
   const submitFormHandler = (e) => {
     e.preventDefault();
 
-    PUT("/api/profil", userDataUpdated).then((res) => {
+    PUT("/api/profile", userDataUpdated).then((res) => {
       console.log(res);
       if (res.failed === false) {
         dispatch({ type: "SET_USER", user: res.data });

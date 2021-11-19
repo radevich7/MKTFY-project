@@ -130,6 +130,7 @@ const SignUpFormOverlay = (props) => {
     resetCountryInput();
   };
   // Form Submit
+
   const submitFormHandler = (e) => {
     e.preventDefault();
     if (e) {
@@ -138,11 +139,10 @@ const SignUpFormOverlay = (props) => {
     }
     // phoneUpdated.substring(2)
     const personObject = {
-      // id: `${(Math.random() + 1).toString(36).substring(7)}`,
       email: emailValue,
       firstName: firstNameValue,
       lastName: lastNameValue,
-      phone: phoneValue.replace(/\s/g, "").slice(2),
+      phone: phoneValue.replace(/\s/g, "").substr(2),
       streetAddress: addressValue,
       city: cityValue,
       province: provinceValue,

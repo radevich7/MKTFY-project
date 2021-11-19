@@ -1,7 +1,6 @@
 import AppContext from "./app-context";
 import { useEffect, useReducer } from "react";
 import { GET } from "../api/api";
-import axios from "axios";
 
 // import GET from "../api/api";
 const initialState = {
@@ -38,7 +37,7 @@ const AppReducer = (state, action) => {
 const AppProvider = (props) => {
   const [store, dispatch] = useReducer(AppReducer, initialState);
   let token = localStorage.getItem("Auth_token");
-
+  console.log(store.allListings);
   // Get user ID from the token function
   function parseJwt(token) {
     var base64Url = token.split(".")[1];
@@ -61,7 +60,6 @@ const AppProvider = (props) => {
       const urlProfile = `/api/profile/${user_id}`;
       const urlFAQ = `/api/FAQ`;
 
-      console.log(user_id);
       GET(urlListing).then((res) =>
         dispatch({ type: "SET_ALL_LISTINGS", allListings: res.data })
       );

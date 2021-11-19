@@ -91,10 +91,8 @@ export function PUT(url, data) {
     .put(`${process.env.REACT_APP_API_URL}${url}`, data, header)
     .then((res) => {
       return success(res);
-      console.log("good");
     })
     .catch((res) => {
-      console.log("shit");
       return failed(res.response);
     });
   return apiCall;
@@ -104,6 +102,30 @@ export const POSTFORMDATA = (url, data) => {
   let header = getHeader("FORMDATA");
   let apiCall = axios
     .post(`${process.env.REACT_APP_API_URL}${url}`, data, header)
+    .then((res) => {
+      return success(res);
+    })
+    .catch((res) => {
+      return failed(res.response);
+    });
+  return apiCall;
+};
+export const DELETE = (url, data) => {
+  let header = getHeader();
+  let apiCall = axios
+    .delete(`${process.env.REACT_APP_API_URL}${url}`, data, header)
+    .then((res) => {
+      return success(res);
+    })
+    .catch((res) => {
+      return failed(res.response);
+    });
+  return apiCall;
+};
+export const PATCH = (url, data) => {
+  let header = getHeader();
+  let apiCall = axios
+    .patch(`${process.env.REACT_APP_API_URL}${url}`, data, header)
     .then((res) => {
       return success(res);
     })

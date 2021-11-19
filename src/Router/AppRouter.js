@@ -81,32 +81,13 @@ const AppRouter = () => {
         localStorage.setItem("Auth_token", token);
         dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
 
-        POST(process.env.PROFILE_URL, data)
-          .then((res) => console.log(res))
-          .catch((res) => console.log(res));
-
-        // const authStr = `Bearer ${localStorage.getItem("Auth_token")}`;
-
-        // const headers = {
-        //   Accept: "*/*",
-        //   "Content-Type": "application/json",
-        //   Authorization: `Bearer ${token}`,
-        // };
-
-        // axios
-        //   .post(
-        //     "http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/api/profile",
-        //     data,
-        //     { headers: headers }
-        //   )
-        //   .then(function (response) {
-        //     console.log(response);
-
-        //     // delete local storage
-        //   })
-        //   .catch(function (error) {
-        //     console.log(error);
-        //   });
+        POST("/api/profile", data).then((res) => {
+          if (res.failed === false) {
+            localStorage.removeItem("signupData");
+          } else {
+            // SHOW MESSAGE TO CONTACT US
+          }
+        });
       }
     }, []);
     return <Redirect to={"/home"} />;
