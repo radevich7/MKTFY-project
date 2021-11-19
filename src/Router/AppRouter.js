@@ -20,7 +20,6 @@ import { useContext } from "react";
 import { useHistory } from "react-router";
 import AppContext from "../store/app-context";
 import { POST } from "../api/api";
-import axios from "axios";
 
 const AppRouter = () => {
   const [store, dispatch] = useContext(AppContext);
@@ -67,48 +66,47 @@ const AppRouter = () => {
 
   // SIGNUP LOGIC
 
-  let signUpData = JSON.parse(localStorage.getItem("signupData"));
-
   const SignUpLogic = (props) => {
     let token = new URLSearchParams(props.location.hash.substr(1)).get(
       "access_token"
     );
-    let auth_id = parseJwt(token);
 
     let signUpData = JSON.parse(localStorage.getItem("signupData"));
+    let auth_id = parseJwt(token);
 
     let data = { ...signUpData, id: auth_id };
-
-    console.log("data", data);
-    let url = "/api/profile";
-
+    console.log(data);
     useEffect(() => {
       if (token && token.length > 0) {
         localStorage.setItem("Auth_token", token);
         dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
 
+        POST(process.env.PROFILE_URL, data)
+          .then((res) => console.log(res))
+          .catch((res) => console.log(res));
+
         // const authStr = `Bearer ${localStorage.getItem("Auth_token")}`;
 
-        const headers = {
-          Accept: "*/*",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        };
+        // const headers = {
+        //   Accept: "*/*",
+        //   "Content-Type": "application/json",
+        //   Authorization: `Bearer ${token}`,
+        // };
 
-        axios
-          .post(
-            "http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/api/profile",
-            data,
-            { headers: headers }
-          )
-          .then(function (response) {
-            console.log(response);
+        // axios
+        //   .post(
+        //     "http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/api/profile",
+        //     data,
+        //     { headers: headers }
+        //   )
+        //   .then(function (response) {
+        //     console.log(response);
 
-            // delete local storage
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        //     // delete local storage
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //   });
       }
     }, []);
     return <Redirect to={"/home"} />;

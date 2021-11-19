@@ -23,6 +23,7 @@ import camera from "../../assets/camera.svg";
 import UploadImgModal from "./UploadImgModal";
 import PreviewContent from "./PreviewContent";
 import CustomSelect from "../../reusableComponent/CustomSelect";
+import { POST } from "../../api/api";
 
 const CreateListing = () => {
   const history = useHistory();
@@ -57,7 +58,7 @@ const CreateListing = () => {
   const productHandler = (e) => {
     setProduct(e.target.value);
   };
-  console.log(category, categoryId);
+
   const detailsHandler = (e) => {
     setDetails(e.target.value);
   };
@@ -92,25 +93,25 @@ const CreateListing = () => {
   const addressHandler = (e) => {
     setAddress(e.target.value);
   };
-
+  const newListing = {
+    product,
+    details,
+    categoryId,
+    condition,
+    price,
+    // address,
+    // province,
+    region: city,
+  };
   const submitFormHandler = (e) => {
     e.preventDefault();
 
-    const newListing = {
-      product,
-      details,
-      category,
-      condition,
-      price,
-      address,
-      province,
-      city,
-    };
-    console.log(newListing);
-    // let fileData = new FormData();
-    // for (let i = 0; i < uploadFile.length; i++) {
-    //   fileData.append("File[]", uploadFile[i]);
-    // }
+    let fileData = new FormData();
+    for (let i = 0; i < uploadFile.length; i++) {
+      fileData.append("File[]", uploadFile[i]);
+    }
+    console.log(fileData);
+    // POST('/api/Upload', fileData)
     // AXIOS CALL.post (url, fileData).then(res=>{})
 
     // Reset the form
@@ -298,7 +299,7 @@ const CreateListing = () => {
                           />
                         </Row>
                         <Row>
-                          <Col lg="6" className="padding_rigth">
+                          <Col className="padding_rigth">
                             <Label for="category">City</Label>
                             <CustomSelect
                               options={cityOptions}
@@ -306,14 +307,14 @@ const CreateListing = () => {
                               value={city}
                             />
                           </Col>
-                          <Col lg="6" className="padding_left">
+                          {/* <Col lg="6" className="padding_left">
                             <Label for="province">Province</Label>
                             <CustomSelect
                               options={provinceOptions}
                               onSetValue={setProvince}
                               value={province}
                             />
-                          </Col>
+                          </Col> */}
                         </Row>
 
                         <Row>

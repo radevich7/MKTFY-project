@@ -136,12 +136,13 @@ const SignUpFormOverlay = (props) => {
       props.onOpenCreatePassword();
       props.toggle();
     }
+    // phoneUpdated.substring(2)
     const personObject = {
       // id: `${(Math.random() + 1).toString(36).substring(7)}`,
       email: emailValue,
       firstName: firstNameValue,
       lastName: lastNameValue,
-      phone: phoneValue,
+      phone: phoneValue.replace(/\s/g, "").slice(2),
       streetAddress: addressValue,
       city: cityValue,
       province: provinceValue,

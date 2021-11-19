@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import AppContext from "../../store/app-context";
 import { Link } from "react-router-dom";
@@ -32,6 +32,7 @@ const AccountInformation = (props) => {
   );
   const [lastNameUpdated, setLastNameUpdated] = useState(store.user.lastName);
   const [emailUpdated, setEmailUpdated] = useState(store.user.email);
+  const [emailError, serEmailError] = useState();
   const [phoneUpdated, setPhoneUpdated] = useState(store.user.phone);
   const [defaultPhoneValue, setDefaultPhoneValue] = useState("");
   const [addressUpdated, setAddressUpdated] = useState(
@@ -41,26 +42,45 @@ const AccountInformation = (props) => {
   const [provinceUpdated, setProvinceUpdated] = useState(store.user.province);
   const [countryUpdated, setCountryUpdated] = useState(store.user.country);
 
-  const phonePlaceholder = store.user.phone && store.user.phone.slice(2);
+  const phonePlaceholder = store.user.phone
+    ? `(${store.user.phone.slice(2, 5)}) ${store.user.phone.slice(
+        5,
+        8
+      )} - ${store.user.phone.slice(8)}`
+    : ``;
+
+  const emailHandler = (e) => {
+    if (e.target.value === store.user.email) {
+      serEmailError();
+    } else {
+      serEmailError(<p className="error">Email can not be changed</p>);
+    }
+  };
 
   const userDataUpdated = {
     id: store.user.id,
     firstName: firstNameUpdated,
     lastName: lastNameUpdated,
     email: emailUpdated,
-    phone: !defaultPhoneValue ? phoneUpdated : defaultPhoneValue,
+    phone: !defaultPhoneValue ? phoneUpdated.substring(2) : defaultPhoneValue,
     streetAddress: addressUpdated,
     city: cityUpdated,
     province: provinceUpdated,
     country: countryUpdated,
   };
+
   const submitFormHandler = (e) => {
     e.preventDefault();
-    let url = "/api/profile";
-    PUT(url, userDataUpdated).then((res) => {
-      dispatch({ type: "SET_USER", user: res.data });
+
+    PUT("/api/profile", userDataUpdated).then((res) => {
+      if (!res.failed) {
+        dispatch({ type: "SET_USER", user: res.data });
+      } else {
+        console.log(res);
+        // Show to the user that u can't done it
+      }
     });
-    dispatch({ type: "SET_USER", user: { ...userDataUpdated } });
+    serEmailError();
     history.push("/home");
   };
 
@@ -121,8 +141,9 @@ const AccountInformation = (props) => {
                       placeholder="Your email"
                       className="accountInformation_inputField"
                       defaultValue={emailUpdated}
-                      onChange={(e) => setEmailUpdated(e.target.value)}
+                      onChange={emailHandler}
                     />
+                    {emailError && emailError}
                   </FormGroup>
                 </Row>
                 <Row>

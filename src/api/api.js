@@ -29,28 +29,26 @@ let returnData = {
 };
 
 const failed = (res) => {
-  // console.log(res);
-  // let messages = [];
+  let messages = [];
   //LOGOUT IF UNAUTHERIZED
   if (res.status === 401) {
-    // POS('/Accoutn/Refreshtoken',{refreshtoken: localstorage.get('refreshtoken')}).then(res => localstorage.setItem('Auth_token', res.data.authenitcationToken)).catch(error => window.location.replace("/logout"); )
-    // window.location.replace("/logout");
+    //   // POS('/Accoutn/Refreshtoken',{refreshtoken: localstorage.get('refreshtoken')}).then(res => localstorage.setItem('Auth_token', res.data.authenitcationToken)).catch(error => window.location.replace("/logout"); )
+    //   // window.location.replace("/logout");
     console.log("UNATHORIZED");
   }
-  // for (const message in res.data) {
-  //   if (res.data[message].length > 0) {
-  //     messages.push(`${res.data[message]}`);
-  //   }
-  // }
-  // let uniquemessages = [...new Set(messages)];
-
-  returnData.failed = true;
-  returnData.code = res.status;
-  returnData.message = res.statusText;
-  returnData.data = res.data;
+  for (const message in res.data) {
+    if (res.data[message].length > 0) {
+      messages.push(`${res.data[message]}`);
+    }
+  }
+  let uniquemessages = [...new Set(messages)];
+  let data = { ...returnData };
+  data.failed = true;
+  data.code = res.status;
+  data.message = uniquemessages;
+  data.data = res.data;
   return returnData;
 };
-
 const success = (res) => {
   let data = { ...returnData };
   data.failed = false;
