@@ -77,7 +77,7 @@ const ListingCarousel = (props) => {
           <Row className="arrow">
             <IoIosArrowUp onClick={handleUpClick} />
           </Row>
-          <Row className="carousel__images d-none d-md-inline">
+          <Row className="carousel__images gx-0 d-none d-md-inline">
             {props.images &&
               props.images.map((image, index) => (
                 <div
