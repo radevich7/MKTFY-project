@@ -88,7 +88,7 @@ const Deals = (props) => {
                   <Col lg="2" key={item.id} className="column_deals">
                     <Link
                       style={{ textDecoration: "none" }}
-                      to={{ pathname: `/post/${item.id}`, data: item }}
+                      to={{ pathname: `/post/${item.id}` }}
                     >
                       <Card className="mt-0 border-0 ">
                         <CardBody className="deals_card p-0 border-0">

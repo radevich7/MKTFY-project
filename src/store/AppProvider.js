@@ -37,7 +37,7 @@ const AppReducer = (state, action) => {
 const AppProvider = (props) => {
   const [store, dispatch] = useReducer(AppReducer, initialState);
   let token = localStorage.getItem("Auth_token");
-  console.log(store.allListings);
+
   // Get user ID from the token function
   function parseJwt(token) {
     var base64Url = token.split(".")[1];
