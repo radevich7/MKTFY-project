@@ -5,28 +5,26 @@ import AppContext from "../../store/app-context";
 import { Link, useRouteMatch, useParams } from "react-router-dom";
 import Button from "../../reusableComponent/Button";
 import { Container, Row, Col, Card, CardBody, Carousel } from "reactstrap";
-import logo_listing_user from "../../assets/listing_logo.svg";
+
 import ListingCarousel from "./ListingCarousel";
 import { GET } from "../../api/api";
 import UseIsMountedRef from "../../reusableComponent/UseIsMountedRef";
 
 const Listing = (props) => {
   const [listing, setListing] = useState();
-  const [user, setUser] = useState([]);
+
   const useIsMountedRef = UseIsMountedRef();
   let match = useRouteMatch();
   const id = useParams();
   const listingId = Object.values(id).toString();
 
   useEffect(() => {
-    let mounted = true;
-
-    GET(`/api/Listing/${listingId}`).then((res) => {
+    GET(`/api/listing/${listingId}/seller`).then((res) => {
       if (!res.failed) {
         // useIsMountedRef used to check if component is actually mounted before performing a state update.
         if (useIsMountedRef.current) {
           setListing(res.data);
-          console.log(res.data.images);
+          console.log(res.data);
         }
       } else {
         // show to user mistake
@@ -34,19 +32,7 @@ const Listing = (props) => {
     });
   }, []);
 
-  const [item, setItem] = useState({
-    id: 1,
-    productName: "Microsoft Xbox One X 1TB Console",
-    description: `The world’s most powerful console. The most powerful
-  console ever, featuring 6 'Teraflops' of graphical
-  processing power, 'true' 4K gaming, and compatibility with
-  Xbox One games and accessories`,
-    price: 340,
-    firstName: "Matt",
-    lastName: "Smith",
-    numberOfListings: 2,
-    profileImageUrl: "",
-  });
+  const seller_logo = listing && listing.sellerFullName.slice(0, 1);
 
   return (
     <>
@@ -89,14 +75,13 @@ const Listing = (props) => {
                       <Col>
                         <div className="sellers_info">
                           <div className="seller_logo">
-                            <span>M</span>
+                            <span>{seller_logo}</span>
                           </div>
                           <span>
-                            <h4>{`${item.firstName} ${item.lastName}`} </h4>
+                            <h4>{listing.sellerFullName} </h4>
                             <div className="sellers_number_of_listings">
-                              <img src={logo_listing_user} alt="/" />
                               <div>
-                                <h4>{item.numberOfListings}</h4>
+                                <h4>{listing.sellerTotalNumListings}</h4>
                                 <h5>listings</h5>
                               </div>
                             </div>

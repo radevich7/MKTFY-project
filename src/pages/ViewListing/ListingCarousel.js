@@ -11,7 +11,6 @@ const ListingCarousel = (props) => {
   const [selectedImage, setSelectedImage] = useState(
     props.images[selectedImageIndex].url
   );
-  console.log(props.images);
 
   useEffect(() => {
     setSelectedImage(props.images[selectedImageIndex].url);
