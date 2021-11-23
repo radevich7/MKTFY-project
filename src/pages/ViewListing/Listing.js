@@ -12,6 +12,7 @@ import UseIsMountedRef from "../../reusableComponent/UseIsMountedRef";
 
 const Listing = (props) => {
   const [store, dispatch] = useContext(AppContext);
+  console.log(store);
   const something = store.choosenListing;
   console.log(something);
   const [listing, setListing] = useState();
@@ -28,7 +29,7 @@ const Listing = (props) => {
         // useIsMountedRef used to check if component is actually mounted before performing a state update.
         if (useIsMountedRef.current) {
           setListing(res.data);
-          // dispatch({ type: "SET_CHOOSEN_LISTING", choosenListing: listing });
+          // dispatch({ type: "SET_CHOOSEN_LISTING", choosenListing: res.data });
           console.log("running");
           console.log(res.data);
         }

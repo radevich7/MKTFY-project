@@ -1,5 +1,5 @@
 .terms_background {
-  background-image: url("/Users/Julian/PROJECT/mktfy_web_app/src/assets/imageTerms.png");
+  background-image: url("../../assets/imageTerms.png");
   height: 407px;
 }
 .terms_container {

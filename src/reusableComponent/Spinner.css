@@ -1,17 +1,90 @@
 .body_spinner {
   height: 100vh;
-  /* width: 100vw; */
   background-image: url("../assets/spinner_background.svg") !important;
   background-size: cover;
   background-repeat: no-repeat;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
+.done_icon {
+  font-size: 100px;
+  color: transparent;
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding-bottom: 20px;
+  animation: done_icon 3.5s linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+.spinner_text {
+  position: absolute;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: transparent;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -50px;
+  text-align: center;
+  animation: spinner_text 3.5s linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.lds-dual-ring {
+  /* display: inline-block; */
+  width: 218px;
+  height: 218px;
+  position: relative;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 218px;
+  height: 218px;
+  /* margin: 8px; */
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 3.5s linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    border-color: #fff;
+  }
+}
+@keyframes done_icon {
+  0% {
+    color: transparent;
+  }
+  100% {
+    color: #fff;
+  }
+}
+@keyframes spinner_text {
+  0% {
+    color: transparent;
+  }
+  100% {
+    color: #fff;
+  }
+}
+/* 
 .spinner {
-  width: 100px;
-  height: 100px;
+  width: 218px;
+  height: 218px;
   position: relative;
 }
 .spinner div {
@@ -19,21 +92,32 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  border: 10px solid transparent;
-  border-top-color: tomato;
-  border-radius: 50px;
-  animation: spinnerOne 1.2s linear infinite;
+  border: 8px solid transparent;
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation-name: spinnerOne;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
 }
 .spinner div:nth-child(2) {
-  border: 10px solid transparent;
-  border-bottom-color: tomato;
+  border: 8px solid transparent;
+  border-bottom-color: #ffffff;
   animation: spinnerTwo 1.2s linear infinite;
 }
-/* 
+.spinner div:nth-child(3) {
+  border: 8px solid transparent;
+  border-bottom-color: #ffffff;
+  animation: spinnerTwo 1.2s linear infinite;
+}
+.spinner div:nth-child(4) {
+  border: 8px solid transparent;
+  border-bottom-color: #ffffff;
+  animation: spinnerTwo 1.2s linear infinite;
+}
 @keyframes spinnerOne {
   0% {
     transform: rotate(0deg);
-    border-width: 10px;
+    border-width: 8px;
   }
   50% {
     transform: rotate(180deg);
@@ -41,10 +125,10 @@
   }
   100% {
     transform: rotate(360deg);
-    border-width: 10px;
+    border-width: 8px;
   }
-}
-
+} */
+/* 
 @keyframes spinnerTwo {
   0% {
     transform: rotate(0deg);
