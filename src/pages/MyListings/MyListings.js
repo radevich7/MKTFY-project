@@ -40,10 +40,9 @@ const MyListings = () => {
           <CardBody className="myListings_card">
             <Row>
               <Col lg="4" className="image_myListings">
-                {/* <img src={dummy_img} alt="/" /> */}
+                <img src={dummy_img} alt="/" />
               </Col>
               <Col className="details_myListings">
-                <h6>September 07 2020</h6>
                 <h5>Microsoft Xbox One X 1TB Console</h5>
                 <span>$ {(340).toFixed(2)}</span>
               </Col>
@@ -57,7 +56,6 @@ const MyListings = () => {
                 <img src={dummy_img} alt="/" />
               </Col>
               <Col className="details_myListings">
-                <h6>September 07 2020</h6>
                 <h5>Microsoft Xbox One X 1TB Console</h5>
                 <span>$ {(340).toFixed(2)}</span>
               </Col>
@@ -72,7 +70,6 @@ const MyListings = () => {
               <img src={dummy_img} alt="/" />
             </Col>
             <Col className="details_myListings">
-              <h6>September 07 2020</h6>
               <h5>Microsoft Xbox One X 1TB Console</h5>
               <span>$ {(340).toFixed(2)}</span>
             </Col>

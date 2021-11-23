@@ -53,7 +53,7 @@ const CreateListing = () => {
   const [price, setPrice] = useState();
   const [address, setAddress] = useState();
   const [city, setCity] = useState();
-  const [province, setProvince] = useState();
+  // const [province, setProvince] = useState();
   const productHandler = (e) => {
     setProduct(e.target.value);
   };
@@ -103,7 +103,6 @@ const CreateListing = () => {
     region: city,
   };
 
-  console.log(uploadFile);
   const submitFormHandler = (e) => {
     e.preventDefault();
 
@@ -130,15 +129,14 @@ const CreateListing = () => {
 
     console.log("SEND");
 
-    // POST('/api/Upload', fileData)
-    // AXIOS CALL.post (url, fileData).then(res=>{})
-
     // Reset the form
-    // e.target.reset();
-    // setCategory();
-    // setCondition();
-    // setCity();
-    // setProvince();
+    e.target.reset();
+    setCategory();
+    setCondition();
+    setCity();
+    setUploadFile(null);
+    setPreviewImages(null);
+    history.push("/home");
   };
 
   // options for the select input
@@ -254,8 +252,9 @@ const CreateListing = () => {
                             name="productName"
                             id="productName"
                             className="createListing_inputField"
-                            placeholder="Enter product name"
+                            placeholder="Enter product name (max 25 characters)"
                             onBlur={productHandler}
+                            maxlength="25"
                             required
                           />
                         </Row>
@@ -266,7 +265,7 @@ const CreateListing = () => {
                             name="description"
                             id="description"
                             className="createListing_inputField description"
-                            placeholder="Enter description (max 250 characters)"
+                            placeholder="Enter description "
                             maxLength="250"
                             onBlur={detailsHandler}
                             required

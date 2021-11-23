@@ -20,6 +20,7 @@ import { useContext } from "react";
 import { useHistory } from "react-router";
 import AppContext from "../store/app-context";
 import { POST } from "../api/api";
+import Spinner from "../reusableComponent/Spinner";
 
 const AppRouter = () => {
   const [store, dispatch] = useContext(AppContext);
@@ -129,11 +130,7 @@ const AppRouter = () => {
           exact
           render={(props) => <PrivacyPolicy {...props} />}
         />
-        {/* <Route
-          path="/form"
-          exact
-          render={(props) => < {...props} />}
-        /> */}
+        <Route path="/form" exact render={(props) => <Spinner />} />
 
         <RequireAuth>
           {store.authenticated && <NavBar />}
@@ -147,11 +144,9 @@ const AppRouter = () => {
             exact
             render={(props) => <Dashboard {...props} />}
           />
-          <Route
-            path="/post/:lisningId"
-            exact
-            render={(props) => <Listing {...props} />}
-          />
+          <Route path="/post/:lisningId" exact>
+            <Listing />
+          </Route>
           <Route
             path="/post/:lisningId/checkout"
             exact

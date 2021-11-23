@@ -11,12 +11,16 @@ import { GET } from "../../api/api";
 import UseIsMountedRef from "../../reusableComponent/UseIsMountedRef";
 
 const Listing = (props) => {
+  const [store, dispatch] = useContext(AppContext);
+  const something = store.choosenListing;
+  console.log(something);
   const [listing, setListing] = useState();
 
   const useIsMountedRef = UseIsMountedRef();
   let match = useRouteMatch();
   const id = useParams();
   const listingId = Object.values(id).toString();
+  console.log(useIsMountedRef.current);
 
   useEffect(() => {
     GET(`/api/listing/${listingId}/seller`).then((res) => {
@@ -24,6 +28,8 @@ const Listing = (props) => {
         // useIsMountedRef used to check if component is actually mounted before performing a state update.
         if (useIsMountedRef.current) {
           setListing(res.data);
+          // dispatch({ type: "SET_CHOOSEN_LISTING", choosenListing: listing });
+          console.log("running");
           console.log(res.data);
         }
       } else {

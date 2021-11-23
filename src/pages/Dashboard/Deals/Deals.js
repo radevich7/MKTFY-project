@@ -101,9 +101,7 @@ const Deals = (props) => {
                               className="image_deals"
                             />
                           </div>
-                          <CardTitle tag="h5" className="deals_title">
-                            {item.product}
-                          </CardTitle>
+                          <h5 className="deals_title">{item.product}</h5>
                           <CardSubtitle tag="h6" className="deals_price">
                             $ {item.price.toFixed(2)}
                           </CardSubtitle>
