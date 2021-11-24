@@ -20,7 +20,7 @@ import { useContext } from "react";
 import { useHistory } from "react-router";
 import AppContext from "../store/app-context";
 import { POST } from "../api/api";
-import Spinner from "../reusableComponent/Spinner";
+import { LoadingSpinner } from "../reusableComponent/Spinner";
 
 const AppRouter = () => {
   const [store, dispatch] = useContext(AppContext);
@@ -114,7 +114,7 @@ const AppRouter = () => {
         <Route path="/" exact component={Login} />
         <Route path="/terms&services" exact component={TermsOfService} />
         <Route path="/privacy" exact component={PrivacyPolicy} />
-        <Route path="/form" exact component={Spinner} />
+        <Route path="/form" exact component={LoadingSpinner} />
 
         <RequireAuth>
           {store.authenticated && <NavBar />}

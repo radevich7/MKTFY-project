@@ -1,5 +1,5 @@
 import AppContext from "./app-context";
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useRef } from "react";
 import { GET } from "../api/api";
 
 // import GET from "../api/api";
@@ -57,8 +57,9 @@ const AppProvider = (props) => {
     let payload = JSON.parse(jsonPayload);
     return payload.sub;
   }
+  const _isMounted = useRef(true);
   useEffect(() => {
-    if (token) {
+    if (token && _isMounted) {
       const user_id = parseJwt(token);
       const urlListing = "/api/Listing";
       const urlProfile = `/api/profile/${user_id}`;
@@ -74,6 +75,9 @@ const AppProvider = (props) => {
 
       dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
     }
+    return () => {
+      _isMounted.current = false;
+    };
   }, [token]);
 
   return (

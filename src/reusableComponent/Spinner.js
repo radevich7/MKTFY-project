@@ -1,5 +1,5 @@
 import "./Spinner.css";
-const Spinner = () => {
+const ConfirmSpinner = () => {
   return (
     <>
       <div className="body_spinner">
@@ -13,4 +13,8 @@ const Spinner = () => {
   );
 };
 
-export default Spinner;
+export default ConfirmSpinner;
+
+export const LoadingSpinner = () => {
+  return <div className="lds-dual-ring"></div>;
+};
