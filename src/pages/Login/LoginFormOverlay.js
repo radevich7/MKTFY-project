@@ -78,21 +78,6 @@ const LoginFormOverlay = (props) => {
       }
     );
 
-    // webAuth.redirect.loginWithCredentials(
-    //   {
-    //     connection: process.env.REACT_APP_AUTH0_CONNECTION,
-    //     username: enteredEmailValue,
-    //     password: enteredPasswordValue,
-    //     redirectUri: window.location.origin + "/login",
-    //     responseType: "token",
-    //     scope: "openid profile email",
-    //   },
-    //   (error) => {
-    //     setLoginError(
-    //       <span className="error_message">{error.description}</span>
-    //     );
-    //   }
-    // );
     resetPasswordInput();
     resetEmailInput();
   };

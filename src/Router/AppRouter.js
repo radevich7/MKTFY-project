@@ -50,8 +50,8 @@ const AppRouter = () => {
   }
   //
 
-  const LoginLogic = (props) => {
-    let token = new URLSearchParams(props.location.hash.substr(1)).get(
+  const LoginLogic = () => {
+    let token = new URLSearchParams(document.location.hash.substr(1)).get(
       "access_token"
     );
 
@@ -67,8 +67,8 @@ const AppRouter = () => {
 
   // SIGNUP LOGIC
 
-  const SignUpLogic = (props) => {
-    let token = new URLSearchParams(props.location.hash.substr(1)).get(
+  const SignUpLogic = () => {
+    let token = new URLSearchParams(document.location.hash.substr(1)).get(
       "access_token"
     );
 
@@ -76,7 +76,7 @@ const AppRouter = () => {
     let auth_id = parseJwt(token);
 
     let data = { ...signUpData, id: auth_id };
-    console.log(data);
+
     useEffect(() => {
       if (token && token.length > 0) {
         localStorage.setItem("Auth_token", token);
@@ -109,84 +109,33 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route
-          path="/login"
-          exact
-          render={(props) => <LoginLogic {...props} />}
-        />
-        <Route
-          path="/signup"
-          exact
-          render={(props) => <SignUpLogic {...props} />}
-        />
-        <Route path="/" exact render={(props) => <Login {...props} />} />
-        <Route
-          path="/terms&services"
-          exact
-          render={(props) => <TermsOfService {...props} />}
-        />
-        <Route
-          path="/privacy"
-          exact
-          render={(props) => <PrivacyPolicy {...props} />}
-        />
-        <Route path="/form" exact render={(props) => <Spinner />} />
+        <Route path="/login" exact component={LoginLogic} />
+        <Route path="/signup" exact component={SignUpLogic} />
+        <Route path="/" exact component={Login} />
+        <Route path="/terms&services" exact component={TermsOfService} />
+        <Route path="/privacy" exact component={PrivacyPolicy} />
+        <Route path="/form" exact component={Spinner} />
 
         <RequireAuth>
           {store.authenticated && <NavBar />}
-          <Route
-            path="/logout"
-            exact
-            render={(props) => <LogoutLogic {...props} />}
-          />
-          <Route
-            path="/home"
-            exact
-            render={(props) => <Dashboard {...props} />}
-          />
-          <Route path="/post/:lisningId" exact>
-            <Listing />
-          </Route>
-          <Route
-            path="/post/:lisningId/checkout"
-            exact
-            render={(props) => <Checkout {...props} />}
-          />
+          <Route path="/logout" exact component={LogoutLogic} />
+
+          <Route path="/home" exact component={Dashboard} />
+
+          <Route path="/post/:lisningId" exact component={Listing} />
+
+          <Route path="/post/:lisningId/checkout" exact component={Checkout} />
           <Route
             path="/post/:lisningId/checkout/pickupConfirmation"
             exact
-            render={(props) => <Pickup {...props} />}
+            component={Pickup}
           />
-          <Route
-            path="/home/account"
-            exact
-            render={(props) => <AccountInformation {...props} />}
-          />
-          <Route
-            path="/home/changepassword"
-            exact
-            render={(props) => <ChangePassword {...props} />}
-          />
-          <Route
-            path="/home/purchases"
-            exact
-            render={(props) => <Purchases {...props} />}
-          />
-          <Route
-            path="/home/create"
-            exact
-            render={(props) => <CreateListing {...props} />}
-          />
-          <Route
-            path="/home/mylistings"
-            exact
-            render={(props) => <MyListings {...props} />}
-          />
-          <Route
-            path="/home/faq"
-            exact
-            render={(props) => <Faq {...props} />}
-          />
+          <Route path="/home/account" exact component={AccountInformation} />
+          <Route path="/home/changepassword" exact component={ChangePassword} />
+          <Route path="/home/purchases" exact component={Purchases} />
+          <Route path="/home/create" exact component={CreateListing} />
+          <Route path="/home/mylistings" exact component={MyListings} />
+          <Route path="/home/faq" exact component={Faq} />
         </RequireAuth>
       </Switch>
     </BrowserRouter>
