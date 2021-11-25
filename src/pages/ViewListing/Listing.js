@@ -13,27 +13,20 @@ import { LoadingSpinner } from "../../reusableComponent/Spinner";
 
 const Listing = () => {
   const [store, dispatch] = useContext(AppContext);
+  console.log(store.choosenListing);
   const [listing, setListing] = useState();
 
   let match = useRouteMatch();
   const id = useParams();
   const listingId = Object.values(id).toString();
 
-  const _isMounted = useRef(true);
-  if (listing === true) {
-    dispatch({ type: "SET_CHOOSEN_LISTING", choosenListing: listing });
-  }
   useEffect(() => {
-    if (_isMounted) {
-      GET(`/api/listing/${listingId}/seller`).then((res) => {
-        if (res.failed === false) {
-          setListing(res.data);
-        }
-      });
-    }
-    return () => {
-      _isMounted.current = false;
-    };
+    GET(`/api/listing/${listingId}/seller`).then((res) => {
+      if (res.failed === false) {
+        setListing(res.data);
+        dispatch({ type: "SET_CHOOSEN_LISTING", choosenListing: res.data });
+      }
+    });
   }, []);
 
   const seller_logo = listing && listing.sellerFullName.slice(0, 1);

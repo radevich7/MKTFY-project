@@ -78,7 +78,7 @@ const Dashboard = () => {
   const [deals, setDeals] = useState([]);
   useEffect(() => {
     setDeals(store.allListings);
-  }, []);
+  }, [store]);
 
   // deals for the categories section
   const [categoriesDeals, setcategoriesDeals] = useState([]);

@@ -4,7 +4,6 @@ import { GET } from "../api/api";
 
 // import GET from "../api/api";
 const initialState = {
-  loading: false,
   authenticated: false,
   user: [],
   faq: [],
@@ -15,8 +14,6 @@ const initialState = {
 
 const AppReducer = (state, action) => {
   switch (action.type) {
-    case "SET_LOADING":
-      return { ...state, loading: action.loading };
     case "SET_SIGNUPDATA":
       return { ...state, signUpData: action.signUpData };
     case "SET_AUTHENTICATED": {
@@ -57,27 +54,22 @@ const AppProvider = (props) => {
     let payload = JSON.parse(jsonPayload);
     return payload.sub;
   }
-  const _isMounted = useRef(true);
+
   useEffect(() => {
-    if (token && _isMounted) {
+    if (token) {
+      dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
       const user_id = parseJwt(token);
       const urlListing = "/api/Listing";
       const urlProfile = `/api/profile/${user_id}`;
       const urlFAQ = `/api/FAQ`;
-
-      GET(urlListing).then((res) =>
-        dispatch({ type: "SET_ALL_LISTINGS", allListings: res.data })
+      Promise.all([GET(urlListing), GET(urlProfile), GET(urlFAQ)]).then(
+        (values) => {
+          dispatch({ type: "SET_ALL_LISTINGS", allListings: values[0].data });
+          dispatch({ type: "SET_USER", user: values[1].data });
+          dispatch({ type: "SET_FAQ", faq: values[2].data });
+        }
       );
-      GET(urlProfile).then((res) =>
-        dispatch({ type: "SET_USER", user: res.data })
-      );
-      GET(urlFAQ).then((res) => dispatch({ type: "SET_FAQ", faq: res.data }));
-
-      dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
     }
-    return () => {
-      _isMounted.current = false;
-    };
   }, [token]);
 
   return (

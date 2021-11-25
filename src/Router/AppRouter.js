@@ -24,14 +24,13 @@ import { LoadingSpinner } from "../reusableComponent/Spinner";
 
 const AppRouter = () => {
   const [store, dispatch] = useContext(AppContext);
-  // console.log(store.authenticated);
 
-  const RequireAuth = ({ children }) => {
-    if (!store.authenticated) {
-      // return <Redirect to={"/"} />;
-    }
-    return children;
-  };
+  // const RequireAuth = ({ children }) => {
+  //   if (!store.authenticated) {
+  //     // return <Redirect to={"/"} />;
+  //   }
+  //   return children;
+  // };
 
   // Get ID from the TOKEN function
   function parseJwt(token) {
@@ -108,6 +107,7 @@ const AppRouter = () => {
 
   return (
     <BrowserRouter>
+      <NavBar />
       <Switch>
         <Route path="/login" exact component={LoginLogic} />
         <Route path="/signup" exact component={SignUpLogic} />
@@ -116,27 +116,27 @@ const AppRouter = () => {
         <Route path="/privacy" exact component={PrivacyPolicy} />
         <Route path="/form" exact component={LoadingSpinner} />
 
-        <RequireAuth>
-          {store.authenticated && <NavBar />}
-          <Route path="/logout" exact component={LogoutLogic} />
+        {/* <RequireAuth> */}
 
-          <Route path="/home" exact component={Dashboard} />
+        <Route path="/logout" exact component={LogoutLogic} />
 
-          <Route path="/post/:lisningId" exact component={Listing} />
+        <Route path="/home" exact component={Dashboard} />
 
-          <Route path="/post/:lisningId/checkout" exact component={Checkout} />
-          <Route
-            path="/post/:lisningId/checkout/pickupConfirmation"
-            exact
-            component={Pickup}
-          />
-          <Route path="/home/account" exact component={AccountInformation} />
-          <Route path="/home/changepassword" exact component={ChangePassword} />
-          <Route path="/home/purchases" exact component={Purchases} />
-          <Route path="/home/create" exact component={CreateListing} />
-          <Route path="/home/mylistings" exact component={MyListings} />
-          <Route path="/home/faq" exact component={Faq} />
-        </RequireAuth>
+        <Route path="/post/:lisningId" exact component={Listing} />
+
+        <Route path="/post/:lisningId/checkout" exact component={Checkout} />
+        <Route
+          path="/post/:lisningId/checkout/pickupConfirmation"
+          exact
+          component={Pickup}
+        />
+        <Route path="/home/account" exact component={AccountInformation} />
+        <Route path="/home/changepassword" exact component={ChangePassword} />
+        <Route path="/home/purchases" exact component={Purchases} />
+        <Route path="/home/create" exact component={CreateListing} />
+        <Route path="/home/mylistings" exact component={MyListings} />
+        <Route path="/home/faq" exact component={Faq} />
+        {/* </RequireAuth> */}
       </Switch>
     </BrowserRouter>
   );
