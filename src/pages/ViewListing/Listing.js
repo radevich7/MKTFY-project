@@ -8,14 +8,13 @@ import { Container, Row, Col, Card, CardBody, Spinner } from "reactstrap";
 
 import ListingCarousel from "./ListingCarousel";
 import { GET } from "../../api/api";
-import UseIsMountedRef from "../../reusableComponent/UseIsMountedRef";
 import { LoadingSpinner } from "../../reusableComponent/Spinner";
 
 const Listing = () => {
   const [store, dispatch] = useContext(AppContext);
-  console.log(store.choosenListing);
+  console.log("running");
   const [listing, setListing] = useState();
-
+  console.log(listing);
   let match = useRouteMatch();
   const id = useParams();
   const listingId = Object.values(id).toString();
@@ -26,6 +25,7 @@ const Listing = () => {
       if (res.failed === false) {
         setListing(res.data);
         dispatch({ type: "SET_CHOOSEN_LISTING", choosenListing: res.data });
+        // localStorage.setItem("ChosenElement");
       }
     });
     return () => {

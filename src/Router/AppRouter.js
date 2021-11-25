@@ -101,6 +101,7 @@ const AppRouter = () => {
 
   return (
     <BrowserRouter>
+      {store.authenticated && <NavBar />}
       <Switch>
         <Route path="/login" exact component={LoginLogic} />
         <Route path="/signup" exact component={SignUpLogic} />
@@ -108,7 +109,7 @@ const AppRouter = () => {
         <Route path="/terms&services" exact component={TermsOfService} />
         <Route path="/privacy" exact component={PrivacyPolicy} />
         <Route path="/form" exact component={LoadingSpinner} />
-        {/* <NavBar /> */}
+
         <ProtectedRoute path="/logout" exact component={LogoutLogic} />
 
         <ProtectedRoute path="/home" exact component={Dashboard} />
