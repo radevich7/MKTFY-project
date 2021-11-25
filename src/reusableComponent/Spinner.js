@@ -1,19 +1,19 @@
 import "./Spinner.css";
-const ConfirmSpinner = () => {
+import { MdDone } from "react-icons/md";
+export const ConfirmSpinner = (props) => {
   return (
     <>
       <div className="body_spinner">
-        <div className="spinner">
-          <div></div>
-          <div></div>
+        <div className="lds-custom">
+          <h5 className="spinner_text">{props.children}</h5>
+        </div>
+        <div className="done_icon">
+          <MdDone />
         </div>
       </div>
-      ;
     </>
   );
 };
-
-export default ConfirmSpinner;
 
 export const LoadingSpinner = () => {
   return <div className="lds-dual-ring"></div>;

@@ -12,9 +12,9 @@ import { LoadingSpinner } from "../../reusableComponent/Spinner";
 
 const Listing = () => {
   const [store, dispatch] = useContext(AppContext);
-  console.log("running");
+
   const [listing, setListing] = useState();
-  console.log(listing);
+
   let match = useRouteMatch();
   const id = useParams();
   const listingId = Object.values(id).toString();

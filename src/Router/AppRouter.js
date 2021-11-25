@@ -20,7 +20,7 @@ import { useContext } from "react";
 
 import AppContext from "../store/app-context";
 import { POST } from "../api/api";
-import { LoadingSpinner } from "../reusableComponent/Spinner";
+import { ConfirmSpinner } from "../reusableComponent/Spinner";
 import ProtectedRoute from "../reusableComponent/ProtectedRoute";
 
 const AppRouter = () => {
@@ -108,7 +108,7 @@ const AppRouter = () => {
         <Route path="/" exact component={Login} />
         <Route path="/terms&services" exact component={TermsOfService} />
         <Route path="/privacy" exact component={PrivacyPolicy} />
-        <Route path="/form" exact component={LoadingSpinner} />
+        <Route path="/form" exact component={ConfirmSpinner} />
 
         <ProtectedRoute path="/logout" exact component={LogoutLogic} />
 
