@@ -1,5 +1,5 @@
 import "./Listing.css";
-import { useState, useContext, useEffect, useRef } from "react";
+import { useState, useContext, useEffect } from "react";
 import AppContext from "../../store/app-context";
 
 import { Link, useRouteMatch, useParams } from "react-router-dom";
@@ -21,12 +21,16 @@ const Listing = () => {
   const listingId = Object.values(id).toString();
 
   useEffect(() => {
+    let mount = true;
     GET(`/api/listing/${listingId}/seller`).then((res) => {
       if (res.failed === false) {
         setListing(res.data);
         dispatch({ type: "SET_CHOOSEN_LISTING", choosenListing: res.data });
       }
     });
+    return () => {
+      mount = false;
+    };
   }, []);
 
   const seller_logo = listing && listing.sellerFullName.slice(0, 1);

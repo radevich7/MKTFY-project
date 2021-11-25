@@ -17,20 +17,14 @@ import CreateListing from "../pages/CreateListing/CreateListing";
 import MyListings from "../pages/MyListings/MyListings";
 import Faq from "../pages/TermsFaqContactUs/Faq";
 import { useContext } from "react";
-import { useHistory } from "react-router";
+
 import AppContext from "../store/app-context";
 import { POST } from "../api/api";
 import { LoadingSpinner } from "../reusableComponent/Spinner";
+import ProtectedRoute from "../reusableComponent/ProtectedRoute";
 
 const AppRouter = () => {
   const [store, dispatch] = useContext(AppContext);
-
-  // const RequireAuth = ({ children }) => {
-  //   if (!store.authenticated) {
-  //     // return <Redirect to={"/"} />;
-  //   }
-  //   return children;
-  // };
 
   // Get ID from the TOKEN function
   function parseJwt(token) {
@@ -107,7 +101,6 @@ const AppRouter = () => {
 
   return (
     <BrowserRouter>
-      <NavBar />
       <Switch>
         <Route path="/login" exact component={LoginLogic} />
         <Route path="/signup" exact component={SignUpLogic} />
@@ -115,28 +108,38 @@ const AppRouter = () => {
         <Route path="/terms&services" exact component={TermsOfService} />
         <Route path="/privacy" exact component={PrivacyPolicy} />
         <Route path="/form" exact component={LoadingSpinner} />
+        {/* <NavBar /> */}
+        <ProtectedRoute path="/logout" exact component={LogoutLogic} />
 
-        {/* <RequireAuth> */}
+        <ProtectedRoute path="/home" exact component={Dashboard} />
 
-        <Route path="/logout" exact component={LogoutLogic} />
+        <ProtectedRoute path="/post/:lisningId" exact component={Listing} />
 
-        <Route path="/home" exact component={Dashboard} />
-
-        <Route path="/post/:lisningId" exact component={Listing} />
-
-        <Route path="/post/:lisningId/checkout" exact component={Checkout} />
-        <Route
+        <ProtectedRoute
+          path="/post/:lisningId/checkout"
+          exact
+          component={Checkout}
+        />
+        <ProtectedRoute
           path="/post/:lisningId/checkout/pickupConfirmation"
           exact
           component={Pickup}
         />
-        <Route path="/home/account" exact component={AccountInformation} />
-        <Route path="/home/changepassword" exact component={ChangePassword} />
-        <Route path="/home/purchases" exact component={Purchases} />
-        <Route path="/home/create" exact component={CreateListing} />
-        <Route path="/home/mylistings" exact component={MyListings} />
-        <Route path="/home/faq" exact component={Faq} />
-        {/* </RequireAuth> */}
+        <ProtectedRoute
+          path="/home/account"
+          exact
+          component={AccountInformation}
+        />
+        <ProtectedRoute
+          path="/home/changepassword"
+          exact
+          component={ChangePassword}
+        />
+        <ProtectedRoute path="/home/purchases" exact component={Purchases} />
+        <ProtectedRoute path="/home/create" exact component={CreateListing} />
+        <ProtectedRoute path="/home/mylistings" exact component={MyListings} />
+        <ProtectedRoute path="/home/faq" exact component={Faq} />
+        {/* BUILD NOT FOUND PAGE */}
       </Switch>
     </BrowserRouter>
   );
