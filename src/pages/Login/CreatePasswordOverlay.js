@@ -157,9 +157,6 @@ const CreatePasswordOverlay = (props) => {
             (error) => {
               console.log(error);
               return alert("Something went wrong");
-              // setLoginError(
-              //   <span className="error_message">{error.description}</span>
-              // );
             }
           );
         }
@@ -189,7 +186,6 @@ const CreatePasswordOverlay = (props) => {
     setUpperCaseValidation(false);
     setLengthValueValidation(false);
     setCheckboxValue(true);
-    dispatch({ type: "SET_SIGNUPDATA", signUpData: [] });
   };
 
   return (

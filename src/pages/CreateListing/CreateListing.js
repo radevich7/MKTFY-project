@@ -254,7 +254,7 @@ const CreateListing = () => {
                             className="createListing_inputField"
                             placeholder="Enter product name (max 25 characters)"
                             onBlur={productHandler}
-                            maxlength="25"
+                            maxLength="25"
                             required
                           />
                         </Row>

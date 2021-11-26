@@ -63,7 +63,6 @@ const AccountInformation = (props) => {
     console.log(userDataUpdated);
 
     PUT("/api/profile", userDataUpdated).then((res) => {
-      console.log(res);
       if (res.failed === false) {
         dispatch({ type: "SET_USER", user: res.data });
       } else {

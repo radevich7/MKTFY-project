@@ -20,21 +20,37 @@ export const ConfirmSpinner = () => {
     case "order":
       text = "ORDER PLACED";
       break;
+    case "accountcreated":
+      text = "ACCOUNT CREATED";
+      break;
+    case "error":
+      text = "Please contact customer support";
+      break;
     case "reset":
       text = "CHECK YOUR EMAIL FOR INSTRUCTIONS";
-      webAuth.changePassword(
-        {
-          connection: process.env.REACT_APP_AUTH0_CONNECTION,
-          email: store.user.email,
-        },
-        (err, resp) => {}
-      );
+      if (store.authenticated) {
+        webAuth.changePassword(
+          {
+            connection: process.env.REACT_APP_AUTH0_CONNECTION,
+            email: store.user.email,
+          },
+          (err, resp) => {}
+        );
+      }
 
       break;
   }
   useEffect(() => {
+    let mounter = true;
     setTimeout(() => {
-      history.push("/home");
+      if (store.authenticated) {
+        history.push("/home");
+      } else {
+        history.push("/");
+      }
+      return () => {
+        mounter = false;
+      };
     }, 3000);
   }, []);
   return (

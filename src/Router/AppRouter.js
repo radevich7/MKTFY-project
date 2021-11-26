@@ -64,6 +64,7 @@ const AppRouter = () => {
     let token = new URLSearchParams(document.location.hash.substr(1)).get(
       "access_token"
     );
+    localStorage.setItem("Auth_token", token);
 
     let signUpData = JSON.parse(localStorage.getItem("signupData"));
     let auth_id = parseJwt(token);
@@ -72,9 +73,7 @@ const AppRouter = () => {
 
     useEffect(() => {
       if (token && token.length > 0) {
-        localStorage.setItem("Auth_token", token);
         dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
-
         POST("/api/profile", data).then((res) => {
           if (res.failed === false) {
             localStorage.removeItem("signupData");
@@ -85,7 +84,6 @@ const AppRouter = () => {
       }
     }, []);
     return <Redirect to={"/home"} />;
-    // return history.push("/home");
   };
 
   // Log Out Logic
