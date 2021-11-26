@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 import "./AppRouter.css";
 import NavBar from "../pages/NavBar/NavBar";
@@ -101,46 +101,56 @@ const AppRouter = () => {
 
   return (
     <BrowserRouter>
-      {store.authenticated && <NavBar />}
       <Switch>
         <Route path="/login" exact component={LoginLogic} />
         <Route path="/signup" exact component={SignUpLogic} />
         <Route path="/" exact component={Login} />
         <Route path="/terms&services" exact component={TermsOfService} />
         <Route path="/privacy" exact component={PrivacyPolicy} />
-        <Route path="/form" exact component={ConfirmSpinner} />
-
-        <ProtectedRoute path="/logout" exact component={LogoutLogic} />
-
-        <ProtectedRoute path="/home" exact component={Dashboard} />
-
-        <ProtectedRoute path="/post/:lisningId" exact component={Listing} />
-
-        <ProtectedRoute
-          path="/post/:lisningId/checkout"
+        <Route
+          path="/post/:lisningId/checkout/pickupConfirmation/confirm"
           exact
-          component={Checkout}
+          component={ConfirmSpinner}
         />
-        <ProtectedRoute
-          path="/post/:lisningId/checkout/pickupConfirmation"
-          exact
-          component={Pickup}
-        />
-        <ProtectedRoute
-          path="/home/account"
-          exact
-          component={AccountInformation}
-        />
-        <ProtectedRoute
-          path="/home/changepassword"
-          exact
-          component={ChangePassword}
-        />
-        <ProtectedRoute path="/home/purchases" exact component={Purchases} />
-        <ProtectedRoute path="/home/create" exact component={CreateListing} />
-        <ProtectedRoute path="/home/mylistings" exact component={MyListings} />
-        <ProtectedRoute path="/home/faq" exact component={Faq} />
-        {/* BUILD NOT FOUND PAGE */}
+        <React.Fragment>
+          <NavBar />
+          <ProtectedRoute path="/logout" exact component={LogoutLogic} />
+
+          <ProtectedRoute path="/home" exact component={Dashboard} />
+
+          <ProtectedRoute path="/post/:lisningId" exact component={Listing} />
+
+          <ProtectedRoute
+            path="/post/:lisningId/checkout"
+            exact
+            component={Checkout}
+          />
+          <ProtectedRoute
+            path="/post/:lisningId/checkout/pickupConfirmation"
+            exact
+            component={Pickup}
+          />
+          <ProtectedRoute
+            path="/home/account"
+            exact
+            component={AccountInformation}
+          />
+          <ProtectedRoute
+            path="/home/changepassword"
+            exact
+            component={ChangePassword}
+          />
+          <ProtectedRoute path="/home/purchases" exact component={Purchases} />
+          <ProtectedRoute path="/home/create" exact component={CreateListing} />
+          <ProtectedRoute
+            path="/home/mylistings"
+            exact
+            component={MyListings}
+          />
+          <ProtectedRoute path="/home/faq" exact component={Faq} />
+          {/* BUILD NOT FOUND PAGE */}
+          <NavBar />
+        </React.Fragment>
       </Switch>
     </BrowserRouter>
   );

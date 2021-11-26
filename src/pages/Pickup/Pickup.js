@@ -1,24 +1,26 @@
-import { useContext, useEffect, useState } from "react";
-import { Link, useParams, Redirect } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams, Redirect, useHistory } from "react-router-dom";
 import Button from "../../reusableComponent/Button";
 import { Container, Card, CardBody, Row, Col } from "reactstrap";
-import "./Pickup.css";
 import { LoadingSpinner } from "../../reusableComponent/Spinner";
 import { GET } from "../../api/api";
+import "./Pickup.css";
 
 const Pickup = () => {
   const [listing, setLisiting] = useState(null);
+  let history = useHistory();
 
-  console.log(listing);
   const { lisningId } = useParams();
+  console.log(listing);
   useEffect(() => {
     GET(`/api/listing/${lisningId}/pickup`).then((res) =>
       setLisiting(res.data)
     );
   }, []);
+  console.log(history);
   const confirmHandler = () => {
-    console.log("click");
-    return <Redirect to={"/"} />;
+    history.push(`${history.location.pathname}/confirm`);
+    // return <Root.Screen options={{ headerShown: false }} />;
   };
 
   return (

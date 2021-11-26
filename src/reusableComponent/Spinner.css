@@ -6,9 +6,11 @@
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
-  display: flex;
+  display: grid;
+  padding-top: 18%;
+
   justify-content: center;
-  align-items: center;
+  top: 40%;
   position: relative;
 }
 
@@ -19,10 +21,11 @@
   left: 0;
   right: 0;
   text-align: center;
-  padding-bottom: 20px;
-  animation: done_icon 3.5s linear;
+  margin-top: 20px;
+  animation: done_icon 3s linear;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+  padding-top: 18%;
 }
 .spinner_text {
   position: absolute;
@@ -34,7 +37,7 @@
   right: 0;
   bottom: -50px;
   text-align: center;
-  animation: spinner_text 3.5s linear;
+  animation: spinner_text 3s linear;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
