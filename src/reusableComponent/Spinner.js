@@ -1,12 +1,37 @@
 import { useHistory, useParams } from "react-router-dom";
 import { MdDone } from "react-icons/md";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import auth0js from "auth0-js";
 import "./Spinner.css";
+import AppContext from "../store/app-context";
 
 export const ConfirmSpinner = () => {
+  const [store, dispatch] = useContext(AppContext);
   const history = useHistory();
-  const id = useParams();
-  const text = id ? "ORDER PLACED" : "";
+  const type = history.location.pathname.split("/").slice(-1).join("");
+  let text;
+
+  const webAuth = new auth0js.WebAuth({
+    domain: process.env.REACT_APP_AUTH0_DOMAIN,
+    clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
+  });
+
+  switch (type) {
+    case "order":
+      text = "ORDER PLACED";
+      break;
+    case "reset":
+      text = "CHECK YOUR EMAIL FOR INSTRUCTIONS";
+      webAuth.changePassword(
+        {
+          connection: process.env.REACT_APP_AUTH0_CONNECTION,
+          email: store.user.email,
+        },
+        (err, resp) => {}
+      );
+
+      break;
+  }
   useEffect(() => {
     setTimeout(() => {
       history.push("/home");

@@ -10,9 +10,9 @@ import {
   Input,
 } from "reactstrap";
 import { FaArrowLeft } from "react-icons/fa";
-
 import Button from "../../reusableComponent/Button";
 import auth0js from "auth0-js";
+
 const ForgetPasswordModal = (props) => {
   const webAuth = new auth0js.WebAuth({
     domain: process.env.REACT_APP_AUTH0_DOMAIN,

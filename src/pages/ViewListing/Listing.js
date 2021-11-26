@@ -11,7 +11,9 @@ import { GET } from "../../api/api";
 import { LoadingSpinner } from "../../reusableComponent/Spinner";
 
 const Listing = () => {
+  const [store, dispatch] = useContext(AppContext);
   const [listing, setListing] = useState(null);
+
   let match = useRouteMatch();
   const id = useParams();
   const listingId = Object.values(id).toString();
@@ -21,6 +23,7 @@ const Listing = () => {
     GET(`/api/listing/${listingId}/seller`).then((res) => {
       if (res.failed === false) {
         setListing(res.data);
+        dispatch({ type: "SET_CHOOSEN_LISTING", choosenListing: res.data });
       }
     });
     return () => {

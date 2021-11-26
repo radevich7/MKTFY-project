@@ -5,10 +5,12 @@ import { GET } from "../api/api";
 // import GET from "../api/api";
 const initialState = {
   authenticated: false,
+  loading: true,
   user: [],
   faq: [],
   signUpData: [],
   allListings: [],
+  choosenListing: [],
 };
 
 const AppReducer = (state, action) => {
@@ -18,8 +20,14 @@ const AppReducer = (state, action) => {
     case "SET_AUTHENTICATED": {
       return { ...state, authenticated: action.authenticated };
     }
+    case "SET_LOADING": {
+      return { ...state, loading: action.loading };
+    }
     case "SET_ALL_LISTINGS": {
       return { ...state, allListings: action.allListings };
+    }
+    case "SET_CHOOSEN_LISTING": {
+      return { ...state, choosenListing: action.choosenListing };
     }
     case "SET_USER": {
       return { ...state, user: action.user };
@@ -63,6 +71,7 @@ const AppProvider = (props) => {
           dispatch({ type: "SET_ALL_LISTINGS", allListings: values[0].data });
           dispatch({ type: "SET_USER", user: values[1].data });
           dispatch({ type: "SET_FAQ", faq: values[2].data });
+          dispatch({ type: "SET_LOADING", loading: false });
         }
       );
     }

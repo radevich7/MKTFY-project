@@ -186,7 +186,7 @@ export const UserProfileSettings = (props) => {
           </DropdownItem>
           <DropdownItem
             className="dropDownItem_profile"
-            to="/home/changepassword"
+            to="/success/reset"
             tag={Link}
           >
             Change Password

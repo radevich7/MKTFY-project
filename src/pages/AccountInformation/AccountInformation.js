@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import AppContext from "../../store/app-context";
 import { Link } from "react-router-dom";
-
+import { LoadingSpinner } from "../../reusableComponent/Spinner";
 import Button from "..//../reusableComponent/Button";
 import PhoneInput from "react-phone-number-input/input";
 import "./AccountInformation.css";
@@ -21,56 +21,46 @@ import {
 } from "reactstrap";
 
 const AccountInformation = (props) => {
-  const history = useHistory();
   const [store, dispatch] = useContext(AppContext);
+  const [user, setUser] = useState(null);
+  const history = useHistory();
+  useEffect(() => {
+    if (!store.loading) {
+      setUser(store.user);
+    }
+  }, [store.loading]);
 
-  const [valuePhone, setValuePhone] = useState(); //for international input to work
   const phoneInputRef = useRef();
+  const [firstNameUpdated, setFirstNameUpdated] = useState();
+  const [lastNameUpdated, setLastNameUpdated] = useState();
 
-  const [firstNameUpdated, setFirstNameUpdated] = useState(
-    store.user.firstName
-  );
-  const [lastNameUpdated, setLastNameUpdated] = useState(store.user.lastName);
-  const [emailUpdated, setEmailUpdated] = useState(store.user.email);
-  const [emailError, serEmailError] = useState();
-  const [phoneUpdated, setPhoneUpdated] = useState(store.user.phone);
-  const [defaultPhoneValue, setDefaultPhoneValue] = useState("");
-  const [addressUpdated, setAddressUpdated] = useState(
-    store.user.streetAddress
-  );
-  const [cityUpdated, setCityUpdated] = useState(store.user.city);
-  const [provinceUpdated, setProvinceUpdated] = useState(store.user.province);
-  const [countryUpdated, setCountryUpdated] = useState(store.user.country);
+  const [defaultPhoneValue, setDefaultPhoneValue] = useState();
+  const [addressUpdated, setAddressUpdated] = useState();
+  const [cityUpdated, setCityUpdated] = useState();
+  const [provinceUpdated, setProvinceUpdated] = useState();
+  const [countryUpdated, setCountryUpdated] = useState();
 
-  const phonePlaceholder = store.user.phone
-    ? `(${store.user.phone.slice(0, 3)}) ${store.user.phone.slice(
+  const phonePlaceholder = user
+    ? `(${user.phone.slice(0, 3)}) ${user.phone.slice(
         3,
         6
-      )} - ${store.user.phone.slice(6)}`
+      )} - ${user.phone.slice(6)}`
     : ``;
+  console.log(defaultPhoneValue);
 
-  const emailHandler = (e) => {
-    if (e.target.value === store.user.email) {
-      serEmailError();
-    } else {
-      serEmailError(<p className="error">Email can not be changed</p>);
-    }
-  };
-
-  const userDataUpdated = {
-    id: store.user.id,
-    firstName: firstNameUpdated,
-    lastName: lastNameUpdated,
-    // email: emailUpdated,
-    phone: phoneUpdated ? defaultPhoneValue.substring(2) : store.user.phone,
-    streetAddress: addressUpdated,
-    city: cityUpdated,
-    province: provinceUpdated,
-    country: countryUpdated,
-  };
-  console.log(userDataUpdated);
   const submitFormHandler = (e) => {
     e.preventDefault();
+    const userDataUpdated = {
+      id: user.id,
+      firstName: firstNameUpdated ? firstNameUpdated : user.firstName,
+      lastName: lastNameUpdated ? lastNameUpdated : user.lastName,
+      phone: defaultPhoneValue ? defaultPhoneValue.substring(2) : user.phone,
+      streetAddress: addressUpdated ? addressUpdated : user.streetAddress,
+      city: cityUpdated ? cityUpdated : user.city,
+      province: provinceUpdated ? provinceUpdated : user.province,
+      country: countryUpdated ? countryUpdated : user.country,
+    };
+    console.log(userDataUpdated);
 
     PUT("/api/profile", userDataUpdated).then((res) => {
       console.log(res);
@@ -82,177 +72,181 @@ const AccountInformation = (props) => {
       }
     });
 
-    serEmailError();
     history.push("/home");
   };
 
   return (
-    <Container fluid className="accountInformation_container">
-      <Card className="border_document_accountInformation">
-        <div className="page_path">
-          <Link to="/home" className="link_home">
-            <span>home</span>
-          </Link>
-          <span className="arrow_path"> {">"} </span>
-          <span>Account information</span>
-        </div>
-        <CardBody className="accountInformation_card">
-          <Form onSubmit={submitFormHandler}>
-            <Row>
-              {/* LEFT HALF */}
-              <Col lg="6">
-                <h5>Personal Information</h5>
+    <>
+      {!user ? (
+        <LoadingSpinner />
+      ) : (
+        <Container fluid className="accountInformation_container">
+          <Card className="border_document_accountInformation">
+            <div className="page_path">
+              <Link to="/home" className="link_home">
+                <span>home</span>
+              </Link>
+              <span className="arrow_path"> {">"} </span>
+              <span>Account information</span>
+            </div>
+            <CardBody className="accountInformation_card">
+              <Form onSubmit={submitFormHandler}>
                 <Row>
-                  <FormGroup>
-                    <Label for="firstName">First Name</Label>
+                  {/* LEFT HALF */}
+                  <Col lg="6">
+                    <h5>Personal Information</h5>
+                    <Row>
+                      <FormGroup>
+                        <Label for="firstName">First Name</Label>
 
-                    <Input
-                      type="text"
-                      name="firstName"
-                      id="firstName"
-                      placeholder="Your first name"
-                      className="accountInformation_inputField"
-                      defaultValue={firstNameUpdated}
-                      onChange={(e) => setFirstNameUpdated(e.target.value)}
-                    />
-                  </FormGroup>
-                </Row>
-                <Row>
-                  <FormGroup>
-                    <Label for="lastName">Last Name</Label>
+                        <Input
+                          type="text"
+                          name="firstName"
+                          id="firstName"
+                          placeholder="Your first name"
+                          className="accountInformation_inputField"
+                          defaultValue={user.firstName}
+                          onChange={(e) => setFirstNameUpdated(e.target.value)}
+                        />
+                      </FormGroup>
+                    </Row>
+                    <Row>
+                      <FormGroup>
+                        <Label for="lastName">Last Name</Label>
 
-                    <Input
-                      type="text"
-                      name="lastName"
-                      id="lastName"
-                      placeholder="Your last name"
-                      className="accountInformation_inputField"
-                      defaultValue={lastNameUpdated}
-                      onChange={(e) => setLastNameUpdated(e.target.value)}
-                    />
-                  </FormGroup>
-                </Row>
-                <Row>
-                  <FormGroup>
-                    <Label for="email">Email</Label>
+                        <Input
+                          type="text"
+                          name="lastName"
+                          id="lastName"
+                          placeholder="Your last name"
+                          className="accountInformation_inputField"
+                          defaultValue={user.lastName}
+                          onChange={(e) => setLastNameUpdated(e.target.value)}
+                        />
+                      </FormGroup>
+                    </Row>
+                    <Row>
+                      <FormGroup>
+                        <Label for="email">Email</Label>
 
-                    <Input
-                      type="email"
-                      name="email"
-                      id="email"
-                      placeholder="Your email"
-                      className="accountInformation_inputField"
-                      defaultValue={emailUpdated}
-                      onChange={emailHandler}
-                    />
-                    {emailError && emailError}
-                  </FormGroup>
-                </Row>
-                <Row>
-                  <FormGroup>
-                    <Label for="phone">Phone</Label>
-                    <div className="phoneInput_container">
-                      <PhoneInput
-                        country="US"
-                        international
-                        withCountryCallingCode
-                        className="accountInformation_inputField phone"
-                        value={defaultPhoneValue}
-                        onChange={(e) => setDefaultPhoneValue(e)}
-                        ref={phoneInputRef}
-                      />
-                      {!defaultPhoneValue && (
-                        <span
-                          className="accountInformation_phone_placeholder"
-                          onClick={() => phoneInputRef.current.focus()}
+                        <Input
+                          type="email"
+                          name="email"
+                          id="email"
+                          className="accountInformation_inputField"
+                          defaultValue={user.email}
+                          disabled
+                        />
+                      </FormGroup>
+                    </Row>
+                    <Row>
+                      <FormGroup>
+                        <Label for="phone">Phone</Label>
+                        <div className="phoneInput_container">
+                          <PhoneInput
+                            country="US"
+                            international
+                            withCountryCallingCode
+                            className="accountInformation_inputField phone"
+                            value={defaultPhoneValue}
+                            onChange={(e) => setDefaultPhoneValue(e)}
+                            ref={phoneInputRef}
+                            maxLength="15"
+                          />
+                          {!defaultPhoneValue && (
+                            <span
+                              className="accountInformation_phone_placeholder"
+                              onClick={() => phoneInputRef.current.focus()}
+                            >
+                              {phonePlaceholder}
+                            </span>
+                          )}
+                        </div>
+                      </FormGroup>
+                    </Row>
+                  </Col>
+
+                  {/* RIGHT HALF */}
+                  <Col lg="6">
+                    <h5>Address Information</h5>
+                    <Row>
+                      <FormGroup>
+                        <Label for="address">Street Address</Label>
+
+                        <Input
+                          type="text"
+                          name="address"
+                          id="address"
+                          className="accountInformation_inputField"
+                          defaultValue={user.streetAddress}
+                          onChange={(e) => setAddressUpdated(e.target.value)}
+                        />
+                      </FormGroup>
+                    </Row>
+                    <Row>
+                      <Col lg="6">
+                        <FormGroup>
+                          <Label for="city">City</Label>
+
+                          <Input
+                            type="text"
+                            name="city"
+                            id="city"
+                            className="accountInformation_inputField"
+                            defaultValue={user.city}
+                            onChange={(e) => setCityUpdated(e.target.value)}
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col lg="6">
+                        <FormGroup>
+                          <Label for="province">Province</Label>
+
+                          <Input
+                            type="text"
+                            name="province"
+                            id="province"
+                            placeholder="Your province"
+                            className="accountInformation_inputField"
+                            defaultValue={user.province}
+                            onChange={(e) => setProvinceUpdated(e.target.value)}
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row lg="2">
+                      <FormGroup>
+                        <Label for="country">Country</Label>
+
+                        <Input
+                          type="text"
+                          name="country"
+                          id="country"
+                          placeholder="Country name"
+                          className="accountInformation_inputField"
+                          defaultValue={user.country}
+                          onChange={(e) => setCountryUpdated(e.target.value)}
+                        />
+                      </FormGroup>
+                    </Row>
+                    <Row>
+                      <FormGroup>
+                        <Button
+                          className="accountInformation_button"
+                          onClick={submitFormHandler}
                         >
-                          {phonePlaceholder}
-                        </span>
-                      )}
-                    </div>
-                  </FormGroup>
-                </Row>
-              </Col>
-
-              {/* RIGHT HALF */}
-              <Col lg="6">
-                <h5>Address Information</h5>
-                <Row>
-                  <FormGroup>
-                    <Label for="address">Street Address</Label>
-
-                    <Input
-                      type="text"
-                      name="address"
-                      id="address"
-                      className="accountInformation_inputField"
-                      defaultValue={addressUpdated}
-                      onChange={(e) => setAddressUpdated(e.target.value)}
-                    />
-                  </FormGroup>
-                </Row>
-                <Row>
-                  <Col lg="6">
-                    <FormGroup>
-                      <Label for="city">City</Label>
-
-                      <Input
-                        type="text"
-                        name="city"
-                        id="city"
-                        className="accountInformation_inputField"
-                        defaultValue={cityUpdated}
-                        onChange={(e) => setCityUpdated(e.target.value)}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col lg="6">
-                    <FormGroup>
-                      <Label for="province">Province</Label>
-
-                      <Input
-                        type="text"
-                        name="province"
-                        id="province"
-                        placeholder="Your province"
-                        className="accountInformation_inputField"
-                        defaultValue={provinceUpdated}
-                        onChange={(e) => setProvinceUpdated(e.target.value)}
-                      />
-                    </FormGroup>
+                          Save
+                        </Button>
+                      </FormGroup>
+                    </Row>
                   </Col>
                 </Row>
-                <Row lg="2">
-                  <FormGroup>
-                    <Label for="country">Country</Label>
-
-                    <Input
-                      type="text"
-                      name="country"
-                      id="country"
-                      placeholder="Country name"
-                      className="accountInformation_inputField"
-                      defaultValue={countryUpdated}
-                      onChange={(e) => setCountryUpdated(e.target.value)}
-                    />
-                  </FormGroup>
-                </Row>
-                <Row>
-                  <FormGroup>
-                    <Button
-                      className="accountInformation_button"
-                      onClick={submitFormHandler}
-                    >
-                      Save
-                    </Button>
-                  </FormGroup>
-                </Row>
-              </Col>
-            </Row>
-          </Form>
-        </CardBody>
-      </Card>
-    </Container>
+              </Form>
+            </CardBody>
+          </Card>
+        </Container>
+      )}
+    </>
   );
 };
 

@@ -107,11 +107,7 @@ const AppRouter = () => {
         <Route path="/" exact component={Login} />
         <Route path="/terms&services" exact component={TermsOfService} />
         <Route path="/privacy" exact component={PrivacyPolicy} />
-        <Route
-          path="/post/:lisningId/checkout/pickupConfirmation/confirm"
-          exact
-          component={ConfirmSpinner}
-        />
+        <Route path="/success" component={ConfirmSpinner} />
         <React.Fragment>
           <NavBar />
           <ProtectedRoute path="/logout" exact component={LogoutLogic} />
@@ -134,11 +130,6 @@ const AppRouter = () => {
             path="/home/account"
             exact
             component={AccountInformation}
-          />
-          <ProtectedRoute
-            path="/home/changepassword"
-            exact
-            component={ChangePassword}
           />
           <ProtectedRoute path="/home/purchases" exact component={Purchases} />
           <ProtectedRoute path="/home/create" exact component={CreateListing} />
