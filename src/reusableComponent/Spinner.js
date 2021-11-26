@@ -9,7 +9,7 @@ export const ConfirmSpinner = () => {
   const text = id ? "ORDER PLACED" : "";
   useEffect(() => {
     setTimeout(() => {
-      history.goBack();
+      history.push("/home");
     }, 3000);
   }, []);
   return (

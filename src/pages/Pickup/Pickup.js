@@ -3,15 +3,15 @@ import { Link, useParams, Redirect, useHistory } from "react-router-dom";
 import Button from "../../reusableComponent/Button";
 import { Container, Card, CardBody, Row, Col } from "reactstrap";
 import { LoadingSpinner } from "../../reusableComponent/Spinner";
-import { GET } from "../../api/api";
+import { GET, PUT } from "../../api/api";
 import "./Pickup.css";
 
 const Pickup = () => {
   const [listing, setLisiting] = useState(null);
   let history = useHistory();
-
+  // STATUS OF THE LISTING, if pending don't show the butoon to buy.
   const { lisningId } = useParams();
-  console.log(listing);
+  console.log(lisningId);
   useEffect(() => {
     GET(`/api/listing/${lisningId}/pickup`).then((res) =>
       setLisiting(res.data)
@@ -19,6 +19,7 @@ const Pickup = () => {
   }, []);
   console.log(history);
   const confirmHandler = () => {
+    PUT(`/api/listing/${lisningId}/pending`).then((res) => console.log(res));
     history.push(`${history.location.pathname}/confirm`);
     // return <Root.Screen options={{ headerShown: false }} />;
   };
