@@ -25,7 +25,7 @@ import ProtectedRoute from "../reusableComponent/ProtectedRoute";
 
 const AppRouter = () => {
   const [store, dispatch] = useContext(AppContext);
-
+  // console.log("AppRouter rerender");
   // Get ID from the TOKEN function
   function parseJwt(token) {
     var base64Url = token.split(".")[1];

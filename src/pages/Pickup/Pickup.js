@@ -11,13 +11,13 @@ const Pickup = () => {
   let history = useHistory();
   // STATUS OF THE LISTING, if pending don't show the butoon to buy.
   const { lisningId } = useParams();
-  console.log(lisningId);
+  console.log(listing);
   useEffect(() => {
     GET(`/api/listing/${lisningId}/pickup`).then((res) =>
       setLisiting(res.data)
     );
   }, []);
-  console.log(history);
+
   const confirmHandler = () => {
     PUT(`/api/listing/${lisningId}/pending`).then((res) => console.log(res));
     history.push(`${history.location.pathname}/confirm`);

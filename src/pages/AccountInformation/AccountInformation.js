@@ -61,14 +61,14 @@ const AccountInformation = (props) => {
     id: store.user.id,
     firstName: firstNameUpdated,
     lastName: lastNameUpdated,
-    email: emailUpdated,
+    // email: emailUpdated,
     phone: phoneUpdated ? defaultPhoneValue.substring(2) : store.user.phone,
     streetAddress: addressUpdated,
     city: cityUpdated,
     province: provinceUpdated,
     country: countryUpdated,
   };
-
+  console.log(userDataUpdated);
   const submitFormHandler = (e) => {
     e.preventDefault();
 
