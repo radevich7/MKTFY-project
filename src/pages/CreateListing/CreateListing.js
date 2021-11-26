@@ -136,7 +136,7 @@ const CreateListing = () => {
     setCity();
     setUploadFile(null);
     setPreviewImages(null);
-    history.push("/home");
+    history.push("/success/createOffer");
   };
 
   // options for the select input
