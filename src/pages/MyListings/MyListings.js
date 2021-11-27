@@ -1,5 +1,4 @@
 import "./MyListings.css";
-
 import { Container, Card, CardBody, Row, Col } from "reactstrap";
 import dummy_img from "../../assets/imagesForDahsboard/playstation.png";
 import { GoPrimitiveDot } from "react-icons/go";
@@ -40,7 +39,7 @@ const MyListings = () => {
           <CardBody className="myListings_card">
             <Row>
               <Col lg="4" className="image_myListings">
-                <img src={dummy_img} alt="/" />
+                {/* <img src={dummy_img} alt="/" /> */}
               </Col>
               <Col className="details_myListings">
                 <h5>Microsoft Xbox One X 1TB Console</h5>
