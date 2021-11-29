@@ -11,6 +11,7 @@ const initialState = {
   signUpData: [],
   allListings: [],
   choosenListing: [],
+  electronics: [],
 };
 
 const AppReducer = (state, action) => {
@@ -26,6 +27,7 @@ const AppReducer = (state, action) => {
     case "SET_ALL_LISTINGS": {
       return { ...state, allListings: action.allListings };
     }
+
     case "SET_CHOOSEN_LISTING": {
       return { ...state, choosenListing: action.choosenListing };
     }
@@ -65,6 +67,7 @@ const AppProvider = (props) => {
       const user_id = parseJwt(token);
       const urlListing = "/api/Listing";
       const urlProfile = `/api/profile/${user_id}`;
+
       const urlFAQ = `/api/FAQ`;
       Promise.all([GET(urlListing), GET(urlProfile), GET(urlFAQ)]).then(
         (values) => {

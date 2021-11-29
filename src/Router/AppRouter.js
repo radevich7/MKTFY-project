@@ -9,7 +9,6 @@ import Pickup from "../pages/Pickup/Pickup";
 import Login from "../pages/Login/Login";
 import AccountInformation from "../pages/AccountInformation/AccountInformation";
 import { useAuth0 } from "@auth0/auth0-react";
-import ChangePassword from "../pages/ChangePassword/ChangePassword";
 import TermsOfService from "../pages/TermsFaqContactUs/TermsOfService";
 import Purchases from "../pages/Purchases/Purchases";
 import PrivacyPolicy from "../pages/TermsFaqContactUs/PrivacyPolicy";
@@ -22,6 +21,7 @@ import AppContext from "../store/app-context";
 import { POST } from "../api/api";
 import SuccessPage from "../pages/SuccessPage/SuccessPage";
 import ProtectedRoute from "../reusableComponent/ProtectedRoute";
+import MainPageContent from "../pages/MainPageContent/MainPageContent";
 
 const AppRouter = () => {
   const [store, dispatch] = useContext(AppContext);
@@ -111,6 +111,11 @@ const AppRouter = () => {
           <ProtectedRoute path="/logout" exact component={LogoutLogic} />
 
           <ProtectedRoute path="/home" exact component={Dashboard} />
+          <ProtectedRoute
+            path="/content/:categoryId"
+            exact
+            component={MainPageContent}
+          />
 
           <ProtectedRoute path="/post/:lisningId" exact component={Listing} />
 

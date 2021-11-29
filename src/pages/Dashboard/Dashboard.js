@@ -74,11 +74,16 @@ const dummy_data = [
 const Dashboard = () => {
   const [store, dispatch] = useContext(AppContext);
 
+  // console.log(store.allListings);
   // Deals
   const [deals, setDeals] = useState([]);
+  const [electronics, setElectronics] = useState([]);
+
   useEffect(() => {
     setDeals(store.allListings);
+    setElectronics(store.electronics);
   }, [store]);
+  console.log(deals);
 
   // deals for the categories section
   const [categoriesDeals, setcategoriesDeals] = useState([]);

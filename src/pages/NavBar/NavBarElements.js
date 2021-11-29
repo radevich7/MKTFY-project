@@ -103,34 +103,33 @@ export const Categories = (props) => {
   return (
     <Col className="categories_column ">
       <div className="wrap_content scrool_effect">
-        <span href="#" className="category_header d-none d-md-flex">
+        <Link to="#" className="category_header d-none d-md-flex nav-link">
           <img
             src={hambuger_icon_categories}
             className="d-none d-md-flex pe-3"
             alt="/"
           />
           Categories
-        </span>
-        <span href="#">
-          <img src={icon_deals} alt="/" />
+        </Link>
+        <Link to="#" className="nav-link">
+          {/* <img src={icon_deals} alt="/" /> */}
           Deals
-        </span>
-        <span href="#">
-          <img src={icon_car} alt="/" />
-          <span className="d-flex flex-row">Cars & Vehicles</span>
-        </span>
-        <span href="#">
-          <img src={icon_furniture} alt="/" />
+        </Link>
+        <Link to="/content/1" className="nav-link">
+          {/* <img src={icon_car} alt="/" /> */}
+          Cars & Vehicles
+        </Link>
+        <Link to="/content/2" className="nav-link">
           Furniture
-        </span>
-        <span href="#">
-          <img src={icon_computer} alt="/" />
+        </Link>
+        <Link to="/content/3" className="nav-link">
+          {/* <img src={icon_computer} alt="/" /> */}
           Electronics
-        </span>
-        <span href="#">
-          <img src={icon_realestate} alt="/" />
+        </Link>
+        <Link to="/content/4" className="nav-link">
+          {/* <img src={icon_realestate} alt="/" /> */}
           Real Estate
-        </span>
+        </Link>
       </div>
     </Col>
   );
