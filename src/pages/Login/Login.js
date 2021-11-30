@@ -39,6 +39,7 @@ const Login = () => {
       <CreatePasswordOverlay
         toggle={toggleCreatePassword}
         modal={modalCreatePassword}
+        toggleSignUp={toggleSignUp}
         signupData={signupData}
       />
       <ForgetPasswordModal

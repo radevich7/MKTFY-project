@@ -9,13 +9,16 @@ const useInput = (validateValue) => {
   const hasError = !valueIsValid && isTouched;
 
   const inputBlurHandlder = (event) => {
-    setEnteredValue(event.target.value);
     setIsTouched(true);
+  };
+  const inputOnChangeHandler = (event) => {
+    setEnteredValue(event.target.value);
   };
   const reset = () => {
     setEnteredValue("");
     setIsTouched(false);
   };
+
   const classes = hasError ? "login_inputField invalid" : "login_inputField";
 
   return {
@@ -25,6 +28,7 @@ const useInput = (validateValue) => {
     classes,
     inputBlurHandlder,
     reset,
+    inputOnChangeHandler,
   };
 };
 

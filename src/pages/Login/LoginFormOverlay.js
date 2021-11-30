@@ -28,6 +28,7 @@ const LoginFormOverlay = (props) => {
     classes: emailClasses,
     isValid: enteredEmailIsValid,
     hasError: emailInputHasError,
+    inputOnChangeHandler: emailOnChangeHandler,
     inputBlurHandlder: emailBlurHanlder,
     reset: resetEmailInput,
   } = useInput((value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
@@ -37,6 +38,7 @@ const LoginFormOverlay = (props) => {
     classes: passwordClasses,
     isValid: enteredPasswordIsValid,
     hasError: passwordInputHasError,
+    inputOnChangeHandler: passwordOnChangeHandler,
     inputBlurHandlder: passwordBlurHanlder,
     reset: resetPasswordInput,
   } = useInput((value) =>
@@ -88,13 +90,27 @@ const LoginFormOverlay = (props) => {
       props.toggle();
     }
   };
+  const closeModalHandler = (e) => {
+    resetPasswordInput();
+    resetEmailInput();
+    props.toggle();
+  };
+
   return (
     <Modal
       isOpen={props.modal}
       toggle={props.toggle}
       className="modal_container modal-lg modal-fullscreen-md-down"
     >
-      <ModalHeader toggle={props.toggle} className="login_header">
+      <ModalHeader
+        toggle={props.toggle}
+        className="login_header"
+        close={
+          <button className="close" onClick={closeModalHandler}>
+            ×
+          </button>
+        }
+      >
         Welcome Back!
       </ModalHeader>
       <ModalBody className="login_body">
@@ -106,6 +122,7 @@ const LoginFormOverlay = (props) => {
               name="email"
               placeholder="Your email"
               className={emailClasses}
+              onChange={emailOnChangeHandler}
               onBlur={emailBlurHanlder}
             />
             {emailInputHasError && (
@@ -121,6 +138,7 @@ const LoginFormOverlay = (props) => {
                 id="examplePassword"
                 placeholder="Your password"
                 className={passwordClasses}
+                onChange={passwordOnChangeHandler}
                 onBlur={passwordBlurHanlder}
               />
 
