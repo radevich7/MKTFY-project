@@ -69,14 +69,19 @@ const AppProvider = (props) => {
       const urlProfile = `/api/profile/${user_id}`;
 
       const urlFAQ = `/api/FAQ`;
-      Promise.all([GET(urlListing), GET(urlProfile), GET(urlFAQ)]).then(
-        (values) => {
+      Promise.all([GET(urlListing), GET(urlProfile), GET(urlFAQ)])
+        .then((values) => {
           dispatch({ type: "SET_ALL_LISTINGS", allListings: values[0].data });
           dispatch({ type: "SET_USER", user: values[1].data });
           dispatch({ type: "SET_FAQ", faq: values[2].data });
           dispatch({ type: "SET_LOADING", loading: false });
-        }
-      );
+        })
+        .catch((err) => {
+          if (err) {
+            localStorage.removeItem("Auth_token");
+            dispatch({ type: "SET_AUTHENTICATED", authenticated: false });
+          }
+        });
     }
   }, [token]);
 
