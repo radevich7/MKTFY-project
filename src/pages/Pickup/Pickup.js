@@ -15,7 +15,6 @@ const Pickup = () => {
   useEffect(() => {
     GET(`/api/listing/${lisningId}/pickup`).then((res) => {
       setLisiting(res.data);
-      console.log(res.data);
     });
   }, []);
 
@@ -23,7 +22,7 @@ const Pickup = () => {
     // PUT(`/api/listing/${lisningId}/pending`).then((res) => console.log(res));
     history.push(`/success/order`);
   };
-
+  console.log(listing);
   return (
     <>
       {!listing ? (
@@ -58,7 +57,7 @@ const Pickup = () => {
                 </Col>
                 <Col className="p-0 listing_details_information ">
                   <h5>{listing.product}</h5>
-                  <span>$ {(340).toFixed(2)}</span>
+                  <span>$ {listing.price.toFixed(2)}</span>
                 </Col>
               </Row>
 
@@ -70,7 +69,10 @@ const Pickup = () => {
                   </div>
                   <div className="sellers_info_details">
                     <h4>{listing.sellerName}</h4>
-                    <span>403-123-4567</span>
+                    <span>{`${listing.phone.slice(0, 3)}-${listing.phone.slice(
+                      3,
+                      6
+                    )}-${listing.phone.slice(6)}`}</span>
                   </div>
                 </div>
                 <p className="sellers_address">

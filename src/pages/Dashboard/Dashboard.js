@@ -8,6 +8,7 @@ import ipad from "../../assets/imagesForDahsboard/ipad.jpeg";
 import iwatch from "../../assets/imagesForDahsboard/iwatch.webp";
 import playstation from "../../assets/imagesForDahsboard/playstation.png";
 import samsung from "../../assets/imagesForDahsboard/samsung.webp";
+import { GET } from "../../api/api";
 import "./Dashboard.css";
 
 import AppContext from "../../store/app-context";
@@ -80,8 +81,11 @@ const Dashboard = () => {
   const [electronics, setElectronics] = useState([]);
 
   useEffect(() => {
-    setDeals(store.allListings);
-    setElectronics(store.electronics);
+    GET("/api/listing/category/deals?region=Calgary").then((res) =>
+      console.log(res)
+    );
+    // setDeals(store.allListings);
+    // setElectronics(store.electronics);
   }, [store]);
   console.log(deals);
 
