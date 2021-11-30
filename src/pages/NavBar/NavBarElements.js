@@ -222,7 +222,11 @@ export const UserProfileSettings = (props) => {
           >
             FAQ
           </DropdownItem>
-          <DropdownItem className="dropDownItem_profile">
+          <DropdownItem
+            className="dropDownItem_profile"
+            to="/contact"
+            tag={Link}
+          >
             Contact Us
           </DropdownItem>
           <DropdownItem

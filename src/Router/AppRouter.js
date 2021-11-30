@@ -22,6 +22,7 @@ import { POST } from "../api/api";
 import SuccessPage from "../pages/SuccessPage/SuccessPage";
 import ProtectedRoute from "../reusableComponent/ProtectedRoute";
 import MainPageContent from "../pages/MainPageContent/MainPageContent";
+import Contact from "../pages/Contact.js/Contact";
 
 const AppRouter = () => {
   const [store, dispatch] = useContext(AppContext);
@@ -143,6 +144,7 @@ const AppRouter = () => {
           />
           <ProtectedRoute path="/home/faq" exact component={Faq} />
           {/* BUILD NOT FOUND PAGE */}
+          <ProtectedRoute path="/contact" component={Contact} />
           <NavBar />
         </React.Fragment>
       </Switch>

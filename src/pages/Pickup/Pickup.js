@@ -13,13 +13,14 @@ const Pickup = () => {
   const { lisningId } = useParams();
 
   useEffect(() => {
-    GET(`/api/listing/${lisningId}/pickup`).then((res) =>
-      setLisiting(res.data)
-    );
+    GET(`/api/listing/${lisningId}/pickup`).then((res) => {
+      setLisiting(res.data);
+      console.log(res.data);
+    });
   }, []);
 
   const confirmHandler = () => {
-    PUT(`/api/listing/${lisningId}/pending`).then((res) => console.log(res));
+    // PUT(`/api/listing/${lisningId}/pending`).then((res) => console.log(res));
     history.push(`/success/order`);
   };
 
