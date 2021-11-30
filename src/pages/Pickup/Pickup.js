@@ -19,10 +19,15 @@ const Pickup = () => {
   }, []);
 
   const confirmHandler = () => {
-    // PUT(`/api/listing/${lisningId}/pending`).then((res) => console.log(res));
-    history.push(`/success/order`);
+    PUT(`/api/listing/${lisningId}/pending`).then((res) => {
+      if (!res.failed) {
+        history.push(`/success/order`);
+      } else {
+        alert("The problem occured, please try again");
+      }
+    });
   };
-  console.log(listing);
+
   return (
     <>
       {!listing ? (

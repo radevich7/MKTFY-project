@@ -84,7 +84,7 @@ const Dashboard = () => {
     GET("/api/listing/category/deals?region=Calgary").then((res) =>
       console.log(res)
     );
-    // setDeals(store.allListings);
+    setDeals(store.allListings);
     // setElectronics(store.electronics);
   }, [store]);
   console.log(deals);

@@ -98,8 +98,7 @@ const CreateListing = () => {
     categoryId,
     condition,
     price,
-    // address,
-    // province,
+    address,
     region: city,
   };
 
