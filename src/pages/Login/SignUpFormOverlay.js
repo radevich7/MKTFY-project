@@ -65,7 +65,6 @@ const SignUpFormOverlay = (props) => {
       );
     }
   };
-  console.log(phoneValue);
 
   // const {
   //   value: phoneValue,
@@ -170,13 +169,13 @@ const SignUpFormOverlay = (props) => {
       province: provinceValue,
       country: countryValue,
     };
-    console.log(personObject);
 
     props.setSignupData(personObject);
   };
   const closeModalHandler = () => {
     props.toggle();
     setValuePhone();
+
     resetForm();
   };
 

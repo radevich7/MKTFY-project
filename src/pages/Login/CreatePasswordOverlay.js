@@ -1,6 +1,6 @@
-import "./CreatePasswordOverlay.css";
-import { useState, useContext } from "react";
-import AppContext from "../../store/app-context";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Button from "../../reusableComponent/Button";
 import {
   Form,
   FormGroup,
@@ -10,14 +10,12 @@ import {
   Label,
   Input,
 } from "reactstrap";
-import Button from "../../reusableComponent/Button";
 import { FaEyeSlash, FaEye, FaCheckCircle } from "react-icons/fa";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import auth0js from "auth0-js";
-import { Link } from "react-router-dom";
+import "./CreatePasswordOverlay.css";
 
 const CreatePasswordOverlay = (props) => {
-  const [store, dispatch] = useContext(AppContext);
   // AUTH0
   const webAuth = new auth0js.WebAuth({
     domain: process.env.REACT_APP_AUTH0_DOMAIN,
@@ -42,6 +40,7 @@ const CreatePasswordOverlay = (props) => {
   const [upperCaseValidation, setUpperCaseValidation] = useState(false);
   const [lengthValueValidation, setLengthValueValidation] = useState(false);
 
+  // Password validation
   let handlePasswordValidation = (e) => {
     const value = e.target.value;
     const regexNumber = /\d/i;
@@ -75,28 +74,38 @@ const CreatePasswordOverlay = (props) => {
     }
   };
 
-  let disableLogin = true;
-
-  if (passwordValue && confirmPasswordValue && checkboxValue) {
-    disableLogin = false;
-  }
-
+  // Confirm password validation
   const handleConfirmPasswordValidation = (e) => {
     const value = e.target.value;
-    if (value === passwordValue) {
-      setConfirmPasswordValue(value);
-      setConfirmPasswordError();
-    } else {
-      setConfirmPasswordValue();
+    setConfirmPasswordValue(value);
+  };
+
+  // Cheking  if two password inputs are the same
+  useEffect(() => {
+    if (confirmPasswordValue !== passwordValue) {
       setConfirmPasswordError(
         <span className="error_message">Your password does not match</span>
       );
+    } else {
+      setConfirmPasswordError();
     }
-  };
+    if (!confirmPasswordValue) {
+      setConfirmPasswordError();
+    }
+  }, [confirmPasswordValue, passwordValue]);
+
   // Set error if password doesn't match
   const confirmPasswordClasses = confirmPasswordError
     ? "createPassword_inputField invalid"
     : "createPassword_inputField";
+
+  // Disabling the button
+  let disableLogin = true;
+  console.log(passwordValue, confirmPasswordValue, checkboxValue);
+  if (passwordValue && confirmPasswordValue && checkboxValue) {
+    disableLogin = false;
+  }
+  //
 
   // Eye icons logic
   const togglePasswordHandler = (e) => {
@@ -109,6 +118,8 @@ const CreatePasswordOverlay = (props) => {
   };
   const toggleConfirmPasswordHandler = (e) => {
     e.preventDefault();
+    console.log(e);
+    console.log("asds");
     if (confirmPasswordVisible === "password") {
       setConfirmPasswordVisible("text");
     } else {
@@ -124,12 +135,11 @@ const CreatePasswordOverlay = (props) => {
       setCheckboxValue(true);
     }
   };
+
   //Final DATA
   const signupData = props.signupData;
 
   const finalData = { ...signupData, password: passwordValue };
-
-  //...
 
   const formSubmitHanlder = (e) => {
     e.preventDefault();
@@ -181,8 +191,17 @@ const CreatePasswordOverlay = (props) => {
     ? "characters_check valid"
     : "characters_check";
 
-  const closeModalHandler = () => {
-    props.toggle();
+  const password_weak_class =
+    numberValueValidation || upperCaseValidation || lengthValueValidation
+      ? "weak"
+      : false;
+  const password_strong_class =
+    numberValueValidation && upperCaseValidation && lengthValueValidation
+      ? "strong"
+      : false;
+
+  // reset of the form function
+  const resetForm = () => {
     setPasswordValue();
     setConfirmPasswordValue();
     setConfirmPasswordError();
@@ -190,9 +209,15 @@ const CreatePasswordOverlay = (props) => {
     setUpperCaseValidation(false);
     setLengthValueValidation(false);
     setCheckboxValue(true);
-    dispatch({ type: "SET_SIGNUPDATA", signUpData: [] });
   };
+  // close button on the modal handler
+  const closeModalHandler = (e) => {
+    resetForm();
+    props.toggle();
+  };
+  // back button on the modal handler
   const backHandler = () => {
+    resetForm();
     props.toggle();
     props.toggleSignUp();
   };
@@ -224,7 +249,16 @@ const CreatePasswordOverlay = (props) => {
         </p>
         <Form onSubmit={formSubmitHanlder}>
           <FormGroup>
-            <Label for="password">Password</Label>
+            <Label for="password">
+              Password
+              <span
+                className={`password_strength ${password_weak_class} ${password_strong_class}`}
+              >
+                {password_weak_class && !password_strong_class && "Weak"}
+                {password_strong_class && "Strong"}
+              </span>
+            </Label>
+
             <div className="password_input_field">
               <Input
                 type={passwordVisible}
@@ -232,7 +266,7 @@ const CreatePasswordOverlay = (props) => {
                 id="password"
                 placeholder="Your password"
                 className="createPassword_inputField"
-                onBlur={handlePasswordValidation}
+                onChange={handlePasswordValidation}
               />
 
               <button
@@ -252,7 +286,7 @@ const CreatePasswordOverlay = (props) => {
                 id="confirmPassword"
                 placeholder="Your password"
                 className={confirmPasswordClasses}
-                onBlur={handleConfirmPasswordValidation}
+                onChange={handleConfirmPasswordValidation}
               />
               <button
                 className="password_eye_logo"
@@ -308,7 +342,6 @@ const CreatePasswordOverlay = (props) => {
           <div>
             <Button
               disabled={disableLogin}
-              // onClick={formSubmitHandler}
               className="createPassword_input_button"
             >
               Create Account
@@ -318,8 +351,6 @@ const CreatePasswordOverlay = (props) => {
       </ModalBody>
     </Modal>
   );
-  // </div>
-  // );
 };
 
 export default CreatePasswordOverlay;
