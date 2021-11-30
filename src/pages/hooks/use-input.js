@@ -18,6 +18,7 @@ const useInput = (validateValue) => {
     setEnteredValue("");
     setIsTouched(false);
   };
+
   const classes = hasError ? "login_inputField invalid" : "login_inputField";
 
   return {
