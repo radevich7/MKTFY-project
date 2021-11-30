@@ -9,19 +9,19 @@ import {
   Label,
   Input,
 } from "reactstrap";
+import { useHistory } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-
 import Button from "../../reusableComponent/Button";
 import auth0js from "auth0-js";
+
 const ForgetPasswordModal = (props) => {
   const webAuth = new auth0js.WebAuth({
     domain: process.env.REACT_APP_AUTH0_DOMAIN,
     clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
   });
-
   const [emailValue, setEmailValue] = useState();
   const [emailError, setEmailError] = useState();
-  const [isSuccess, setIsSuccess] = useState(false);
+  let history = useHistory();
 
   const handleEmailValidation = (e) => {
     const value = e.target.value;
@@ -59,33 +59,19 @@ const ForgetPasswordModal = (props) => {
       },
       function (err, resp) {
         if (err) {
-          console.log(err);
+          history.push(`/success/error`);
         } else {
           if (resp) {
-            setIsSuccess(true);
+            setEmailValue();
+            setEmailError();
+            history.push(`/success/reset`);
+
+            // props.toggle();
           }
         }
       }
     );
   };
-
-  const confirmationHandler = (e) => {
-    setIsSuccess(false);
-    setEmailValue();
-    setEmailError();
-    props.toggle();
-  };
-  const confirmationMessage = (
-    <div className="confirmation_card">
-      <p className="confirmation_text">
-        Please check your email inbox for a password recovery link. Don't forget
-        to check your spam folder.
-      </p>
-      <Button className="confirmation_button" onClick={confirmationHandler}>
-        OK
-      </Button>
-    </div>
-  );
 
   return (
     <Modal isOpen={props.modal} toggle={props.toggle} size="lg">
@@ -101,37 +87,34 @@ const ForgetPasswordModal = (props) => {
       >
         <FaArrowLeft />
       </div>
-      {isSuccess ? (
-        confirmationMessage
-      ) : (
-        <ModalBody className="forgetPassword_body">
-          <Form onSubmit={formSubmitHandler}>
-            <p className="forgotPassword_text">
-              It’s okay, these things happen. Please enter your email in the
-              field below. We will send you an email to reset your password.
-            </p>
-            <FormGroup>
-              <Label for="exampleEmail">Email</Label>
 
-              <Input
-                type="email"
-                name="email"
-                id="exampleEmail"
-                placeholder="Your email"
-                className={emailClasses}
-                onBlur={handleEmailValidation}
-              />
-              {emailError}
-            </FormGroup>
-            <Button
-              disabled={disableLogin}
-              className="forgetPassword_input_button"
-            >
-              Login
-            </Button>
-          </Form>
-        </ModalBody>
-      )}
+      <ModalBody className="forgetPassword_body">
+        <Form onSubmit={formSubmitHandler}>
+          <p className="forgotPassword_text">
+            It’s okay, these things happen. Please enter your email in the field
+            below. We will send you an email to reset your password.
+          </p>
+          <FormGroup>
+            <Label for="exampleEmail">Email</Label>
+
+            <Input
+              type="email"
+              name="email"
+              id="exampleEmail"
+              placeholder="Your email"
+              className={emailClasses}
+              onBlur={handleEmailValidation}
+            />
+            {emailError}
+          </FormGroup>
+          <Button
+            disabled={disableLogin}
+            className="forgetPassword_input_button"
+          >
+            Login
+          </Button>
+        </Form>
+      </ModalBody>
     </Modal>
   );
 };

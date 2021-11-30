@@ -1,9 +1,12 @@
+/* CONFIRM SPINNER */
+
 .body_spinner {
   height: 100vh;
   background-image: url("../assets/spinner_background.svg") !important;
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
+<<<<<<< HEAD
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,10 +89,36 @@
   width: 218px;
   height: 218px;
   position: relative;
+=======
+  display: grid;
+  padding-top: 18%;
+
+  justify-content: center;
+  top: 40%;
+  position: relative;
 }
-.spinner div {
-  box-sizing: border-box;
+
+.done_icon {
+  font-size: 100px;
+  color: transparent;
   position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin-top: 20px;
+  animation: done_icon 3s linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  padding-top: 18%;
+>>>>>>> feature/ApiConnect
+}
+.spinner_text {
+  position: absolute;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: transparent;
+  position: absolute;
+<<<<<<< HEAD
   width: 100%;
   height: 100%;
   border: 8px solid transparent;
@@ -130,16 +159,87 @@
 } */
 /* 
 @keyframes spinnerTwo {
+=======
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  text-align: center;
+  animation: spinner_text 3s linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.lds-custom {
+  /* display: inline-block; */
+  width: 218px;
+  height: 218px;
+  position: relative;
+}
+.lds-custom:after {
+  content: " ";
+  display: block;
+  width: 218px;
+  height: 218px;
+  /* margin: 8px; */
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-custom 3.5s linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+@keyframes lds-custom {
   0% {
     transform: rotate(0deg);
-    border-width: 1px;
-  }
-  50% {
-    transform: rotate(180deg);
-    border-width: 10px;
   }
   100% {
     transform: rotate(360deg);
-    border-width: 1px;
+    border-color: #fff;
   }
-} */
+}
+@keyframes done_icon {
+  0% {
+    color: transparent;
+  }
+  100% {
+    color: #fff;
+  }
+}
+@keyframes spinner_text {
+  0% {
+    color: transparent;
+  }
+  100% {
+    color: #fff;
+  }
+}
+
+/* LOADING SPINNER */
+.lds-dual-ring {
+  display: inline-block;
+  /* width: 200px; */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #6318af;
+  border-color: #6318af transparent #6318af transparent;
+  animation: lds-dual-ring 2s linear infinite;
+}
+@keyframes lds-dual-ring {
+>>>>>>> feature/ApiConnect
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

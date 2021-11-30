@@ -1,5 +1,6 @@
 .listing_container {
   padding-top: 312px;
+  height: 100vh;
 }
 
 .border_document_listing {
@@ -24,6 +25,7 @@
 
   /* margin-bottom: 5px; */
 }
+
 .item_details_button {
   width: 526px;
   box-shadow: none !important;

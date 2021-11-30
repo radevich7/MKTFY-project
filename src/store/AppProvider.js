@@ -1,30 +1,33 @@
 import AppContext from "./app-context";
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useRef } from "react";
 import { GET } from "../api/api";
 
 // import GET from "../api/api";
 const initialState = {
-  loading: false,
   authenticated: false,
+  loading: true,
   user: [],
   faq: [],
   signUpData: [],
   allListings: [],
   choosenListing: [],
+  electronics: [],
 };
 
 const AppReducer = (state, action) => {
   switch (action.type) {
-    case "SET_LOADING":
-      return { ...state, loading: action.loading };
     case "SET_SIGNUPDATA":
       return { ...state, signUpData: action.signUpData };
     case "SET_AUTHENTICATED": {
       return { ...state, authenticated: action.authenticated };
     }
+    case "SET_LOADING": {
+      return { ...state, loading: action.loading };
+    }
     case "SET_ALL_LISTINGS": {
       return { ...state, allListings: action.allListings };
     }
+
     case "SET_CHOOSEN_LISTING": {
       return { ...state, choosenListing: action.choosenListing };
     }
@@ -57,22 +60,28 @@ const AppProvider = (props) => {
     let payload = JSON.parse(jsonPayload);
     return payload.sub;
   }
+
   useEffect(() => {
     if (token) {
+      dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
       const user_id = parseJwt(token);
       const urlListing = "/api/Listing";
       const urlProfile = `/api/profile/${user_id}`;
+
       const urlFAQ = `/api/FAQ`;
-
-      GET(urlListing).then((res) =>
-        dispatch({ type: "SET_ALL_LISTINGS", allListings: res.data })
-      );
-      GET(urlProfile).then((res) =>
-        dispatch({ type: "SET_USER", user: res.data })
-      );
-      GET(urlFAQ).then((res) => dispatch({ type: "SET_FAQ", faq: res.data }));
-
-      dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
+      Promise.all([GET(urlListing), GET(urlProfile), GET(urlFAQ)])
+        .then((values) => {
+          dispatch({ type: "SET_ALL_LISTINGS", allListings: values[0].data });
+          dispatch({ type: "SET_USER", user: values[1].data });
+          dispatch({ type: "SET_FAQ", faq: values[2].data });
+          dispatch({ type: "SET_LOADING", loading: false });
+        })
+        .catch((err) => {
+          if (err) {
+            localStorage.removeItem("Auth_token");
+            dispatch({ type: "SET_AUTHENTICATED", authenticated: false });
+          }
+        });
     }
   }, [token]);
 

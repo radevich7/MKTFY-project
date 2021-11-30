@@ -1,0 +1,10 @@
+.mainContent_container {
+  padding-top: 221px;
+  height: 100vh;
+}
+
+.border_document_mainContent {
+  max-width: 1660px;
+  /* background-color: #ffffff; */
+  margin: auto;
+}

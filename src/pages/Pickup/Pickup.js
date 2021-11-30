@@ -1,67 +1,99 @@
-import "./Pickup.css";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams, Redirect, useHistory } from "react-router-dom";
 import Button from "../../reusableComponent/Button";
 import { Container, Card, CardBody, Row, Col } from "reactstrap";
-import dummy_img from "../../assets/imagesForDahsboard/playstation.png";
+import { LoadingSpinner } from "../../reusableComponent/Spinner";
+import { GET, PUT } from "../../api/api";
+import "./Pickup.css";
 
 const Pickup = () => {
+  const [listing, setLisiting] = useState(null);
+  let history = useHistory();
+  // STATUS OF THE LISTING, if pending don't show the butoon to buy.
   const { lisningId } = useParams();
 
-  return (
-    <Container fluid className="pickup_container">
-      <Card className="border_document_pickup ">
-        <div className="page_path">
-          <Link to="/home" className="link_home">
-            <span>home</span>
-          </Link>
-          <span className="arrow_path">{">"}</span>
-          <Link to={`/post/${lisningId}`} className="link_home">
-            <span>product listing</span>
-          </Link>
-          <span className="arrow_path"> {">"} </span>
-          <Link to={`/post/${lisningId}/checkout`} className="link_home">
-            <span>Checkout</span>
-          </Link>
-          <span className="arrow_path"> {">"} </span>
-          <span>Pickup Information</span>
-        </div>
-        <CardBody className="pickup_card ">
-          <h4>Pickup Information</h4>
-          <Row className="listing_details m-0">
-            <Col lg="6" className="listing_details_img">
-              <img
-                src={dummy_img}
-                alt="picture of the product.name"
-                style={{ height: "125px" }}
-              />
-            </Col>
-            <Col className="p-0 listing_details_information ">
-              <h5>Microsoft Xbox One X 1TB Console</h5>
-              <span>$ {(340).toFixed(2)}</span>
-            </Col>
-          </Row>
+  useEffect(() => {
+    GET(`/api/listing/${lisningId}/pickup`).then((res) => {
+      setLisiting(res.data);
+    });
+  }, []);
 
-          <div className="pickup_seller_information">
-            <div className="sellers_info">
-              <span className="pickup_text">Pick up</span>
-              <div className="seller_logo">
-                <span>M</span>
-              </div>
-              <div className="sellers_info_details">
-                <h4>Matt Smith</h4>
-                <span>403-123-4567</span>
-              </div>
+  const confirmHandler = () => {
+    PUT(`/api/listing/${lisningId}/pending`).then((res) => {
+      if (!res.failed) {
+        history.push(`/success/order`);
+      } else {
+        alert("The problem occured, please try again");
+      }
+    });
+  };
+
+  return (
+    <>
+      {!listing ? (
+        <LoadingSpinner />
+      ) : (
+        <Container fluid className="pickup_container">
+          <Card className="border_document_pickup ">
+            <div className="page_path">
+              <Link to="/home" className="link_home">
+                <span>home</span>
+              </Link>
+              <span className="arrow_path">{">"}</span>
+              <Link to={`/post/${lisningId}`} className="link_home">
+                <span>product listing</span>
+              </Link>
+              <span className="arrow_path"> {">"} </span>
+              <Link to={`/post/${lisningId}/checkout`} className="link_home">
+                <span>Checkout</span>
+              </Link>
+              <span className="arrow_path"> {">"} </span>
+              <span>Pickup Information</span>
             </div>
-            <p className="sellers_address">
-              Please pick up your purchase at <mark>12 12ave SW</mark>, Calgary,
-              Alberta
-            </p>
-          </div>
-          <Button className="contact_seller_button">Contact Seller</Button>
-          <Button className="confirm_button">Confirm</Button>
-        </CardBody>
-      </Card>
-    </Container>
+            <CardBody className="pickup_card ">
+              <h4>Pickup Information</h4>
+              <Row className="listing_details m-0">
+                <Col lg="6" className="listing_details_img">
+                  <img
+                    src={listing.imageUrl}
+                    className="card_image_pickUp"
+                    alt="picture of the product.name"
+                  />
+                </Col>
+                <Col className="p-0 listing_details_information ">
+                  <h5>{listing.product}</h5>
+                  <span>$ {listing.price.toFixed(2)}</span>
+                </Col>
+              </Row>
+
+              <div className="pickup_seller_information">
+                <div className="sellers_info">
+                  <span className="pickup_text">Pick up</span>
+                  <div className="seller_logo">
+                    <span>M</span>
+                  </div>
+                  <div className="sellers_info_details">
+                    <h4>{listing.sellerName}</h4>
+                    <span>{`${listing.phone.slice(0, 3)}-${listing.phone.slice(
+                      3,
+                      6
+                    )}-${listing.phone.slice(6)}`}</span>
+                  </div>
+                </div>
+                <p className="sellers_address">
+                  Please pick up your purchase at <mark>{listing.address}</mark>
+                  , {listing.region}, Alberta
+                </p>
+              </div>
+              <Button className="contact_seller_button">Contact Seller</Button>
+              <Button className="confirm_button" onClick={confirmHandler}>
+                Confirm
+              </Button>
+            </CardBody>
+          </Card>
+        </Container>
+      )}
+    </>
   );
 };
 

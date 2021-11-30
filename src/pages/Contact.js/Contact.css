@@ -1,0 +1,25 @@
+.contact_container {
+  height: 100vh;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+  padding-top: 312px;
+}
+.border_document_contact {
+  max-width: 1636px;
+  margin: 0 auto;
+  background-color: transparent;
+}
+.contact_us {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  font-size: 4.2rem;
+  color: #6318af;
+}
+.contact_us:hover {
+  color: #9b95a0;
+}

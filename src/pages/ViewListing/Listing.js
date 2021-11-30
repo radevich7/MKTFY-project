@@ -4,27 +4,31 @@ import AppContext from "../../store/app-context";
 
 import { Link, useRouteMatch, useParams } from "react-router-dom";
 import Button from "../../reusableComponent/Button";
-import { Container, Row, Col, Card, CardBody, Carousel } from "reactstrap";
+import { Container, Row, Col, Card, CardBody, Spinner } from "reactstrap";
 
 import ListingCarousel from "./ListingCarousel";
 import { GET } from "../../api/api";
-import UseIsMountedRef from "../../reusableComponent/UseIsMountedRef";
+import { LoadingSpinner } from "../../reusableComponent/Spinner";
 
-const Listing = (props) => {
+const Listing = () => {
   const [store, dispatch] = useContext(AppContext);
+<<<<<<< HEAD
   console.log(store);
   const something = store.choosenListing;
   console.log(something);
   const [listing, setListing] = useState();
+=======
+  const [listing, setListing] = useState(null);
+>>>>>>> feature/ApiConnect
 
-  const useIsMountedRef = UseIsMountedRef();
   let match = useRouteMatch();
   const id = useParams();
   const listingId = Object.values(id).toString();
-  console.log(useIsMountedRef.current);
 
   useEffect(() => {
+    let mount = true;
     GET(`/api/listing/${listingId}/seller`).then((res) => {
+<<<<<<< HEAD
       if (!res.failed) {
         // useIsMountedRef used to check if component is actually mounted before performing a state update.
         if (useIsMountedRef.current) {
@@ -35,15 +39,25 @@ const Listing = (props) => {
         }
       } else {
         // show to user mistake
+=======
+      if (res.failed === false) {
+        setListing(res.data);
+        dispatch({ type: "SET_CHOOSEN_LISTING", choosenListing: res.data });
+>>>>>>> feature/ApiConnect
       }
     });
+    return () => {
+      mount = false;
+    };
   }, []);
 
   const seller_logo = listing && listing.sellerFullName.slice(0, 1);
 
   return (
     <>
-      {listing && (
+      {!listing ? (
+        <LoadingSpinner />
+      ) : (
         <Container fluid className="listing_container">
           <Card className="border_document_listing">
             <div className="listingPage_path">

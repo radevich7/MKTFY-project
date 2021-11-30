@@ -1,0 +1,86 @@
+.body_spinner {
+  height: 100vh;
+  background-image: url("../../assets/spinner_background.svg") !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: grid;
+  padding-top: 18%;
+
+  justify-content: center;
+  top: 40%;
+  position: relative;
+}
+
+.done_icon {
+  font-size: 100px;
+  color: transparent;
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin-top: 20px;
+  animation: done_icon 3s linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  padding-top: 18%;
+}
+.spinner_text {
+  position: absolute;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: transparent;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -55px;
+  text-align: center;
+  animation: spinner_text 3s linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.lds-custom {
+  /* display: inline-block; */
+  width: 218px;
+  height: 218px;
+  position: relative;
+}
+.lds-custom:after {
+  content: " ";
+  display: block;
+  width: 218px;
+  height: 218px;
+  /* margin: 8px; */
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-custom 3.5s linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+@keyframes lds-custom {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    border-color: #fff;
+  }
+}
+@keyframes done_icon {
+  0% {
+    color: transparent;
+  }
+  100% {
+    color: #fff;
+  }
+}
+@keyframes spinner_text {
+  0% {
+    color: transparent;
+  }
+  100% {
+    color: #fff;
+  }
+}

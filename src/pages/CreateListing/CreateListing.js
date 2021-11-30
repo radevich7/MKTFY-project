@@ -98,8 +98,7 @@ const CreateListing = () => {
     categoryId,
     condition,
     price,
-    // address,
-    // province,
+    address,
     region: city,
   };
 
@@ -136,7 +135,7 @@ const CreateListing = () => {
     setCity();
     setUploadFile(null);
     setPreviewImages(null);
-    history.push("/home");
+    history.push("/success/createOffer");
   };
 
   // options for the select input
@@ -254,7 +253,7 @@ const CreateListing = () => {
                             className="createListing_inputField"
                             placeholder="Enter product name (max 25 characters)"
                             onBlur={productHandler}
-                            maxlength="25"
+                            maxLength="25"
                             required
                           />
                         </Row>

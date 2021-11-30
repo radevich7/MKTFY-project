@@ -1,12 +1,17 @@
-import "./MyListings.css";
-
+import { useState, useEffect } from "react";
 import { Container, Card, CardBody, Row, Col } from "reactstrap";
 import dummy_img from "../../assets/imagesForDahsboard/playstation.png";
 import { GoPrimitiveDot } from "react-icons/go";
-import { useState } from "react";
+import "./MyListings.css";
+
+import { GET } from "../../api/api";
 const MyListings = () => {
   const [activeItems, setActiveItems] = useState(true);
   const [soldItems, setSoldItems] = useState(false);
+
+  useEffect(() => {
+    GET("/api/mylisting/pending").then((res) => console.log(res));
+  }, []);
   const toggleActiveItems = () => {
     setActiveItems(true);
     setSoldItems(false);
@@ -40,7 +45,7 @@ const MyListings = () => {
           <CardBody className="myListings_card">
             <Row>
               <Col lg="4" className="image_myListings">
-                <img src={dummy_img} alt="/" />
+                {/* <img src={dummy_img} alt="/" /> */}
               </Col>
               <Col className="details_myListings">
                 <h5>Microsoft Xbox One X 1TB Console</h5>

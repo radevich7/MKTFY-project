@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import "./Spinner.css";
 import { MdDone } from "react-icons/md";
 const Spinner = (props) => {
@@ -13,6 +14,8 @@ const Spinner = (props) => {
       </div>
     </>
   );
+=======
+export const LoadingSpinner = () => {
+  return <div className="lds-dual-ring"></div>;
+>>>>>>> feature/ApiConnect
 };
-
-export default Spinner;

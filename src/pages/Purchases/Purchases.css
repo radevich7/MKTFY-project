@@ -1,7 +1,6 @@
 .purchases_container {
   height: 100vh;
-
-  background-image: url("/Users/Julian/PROJECT/mktfy_web_app/src/assets/imgBackgoundGreyWaves.svg");
+  background-image: url("../../assets/imgBackgoundGreyWaves.svg");
   background-attachment: fixed;
   background-position: 50% 50%;
   padding-top: 312px;
