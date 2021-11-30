@@ -206,8 +206,6 @@ const CreatePasswordOverlay = (props) => {
     setUpperCaseValidation(false);
     setLengthValueValidation(false);
     setCheckboxValue(true);
-<<<<<<< HEAD
-=======
   };
   // close button on the modal handler
   const closeModalHandler = (e) => {
@@ -219,7 +217,6 @@ const CreatePasswordOverlay = (props) => {
     resetForm();
     props.toggle();
     props.toggleSignUp();
->>>>>>> feature/UI
   };
 
   return (

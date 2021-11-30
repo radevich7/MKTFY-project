@@ -12,14 +12,7 @@ import { LoadingSpinner } from "../../reusableComponent/Spinner";
 
 const Listing = () => {
   const [store, dispatch] = useContext(AppContext);
-<<<<<<< HEAD
-  console.log(store);
-  const something = store.choosenListing;
-  console.log(something);
-  const [listing, setListing] = useState();
-=======
   const [listing, setListing] = useState(null);
->>>>>>> feature/ApiConnect
 
   let match = useRouteMatch();
   const id = useParams();
@@ -28,22 +21,9 @@ const Listing = () => {
   useEffect(() => {
     let mount = true;
     GET(`/api/listing/${listingId}/seller`).then((res) => {
-<<<<<<< HEAD
-      if (!res.failed) {
-        // useIsMountedRef used to check if component is actually mounted before performing a state update.
-        if (useIsMountedRef.current) {
-          setListing(res.data);
-          // dispatch({ type: "SET_CHOOSEN_LISTING", choosenListing: res.data });
-          console.log("running");
-          console.log(res.data);
-        }
-      } else {
-        // show to user mistake
-=======
       if (res.failed === false) {
         setListing(res.data);
         dispatch({ type: "SET_CHOOSEN_LISTING", choosenListing: res.data });
->>>>>>> feature/ApiConnect
       }
     });
     return () => {
