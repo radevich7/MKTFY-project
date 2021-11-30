@@ -87,7 +87,6 @@ const Dashboard = () => {
     setDeals(store.allListings);
     // setElectronics(store.electronics);
   }, [store]);
-  console.log(deals);
 
   // deals for the categories section
   const [categoriesDeals, setcategoriesDeals] = useState([]);

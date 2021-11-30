@@ -221,11 +221,3 @@ html {
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
-
-/* html {
-  font-size: 10px;
-} */
-/* 
-$grid-breakpoints: (
-  xxl: 1400px,
-); */
