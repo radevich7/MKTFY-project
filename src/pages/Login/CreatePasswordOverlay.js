@@ -12,6 +12,7 @@ import {
 } from "reactstrap";
 import Button from "../../reusableComponent/Button";
 import { FaEyeSlash, FaEye, FaCheckCircle } from "react-icons/fa";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import auth0js from "auth0-js";
 import { Link } from "react-router-dom";
 
@@ -191,6 +192,10 @@ const CreatePasswordOverlay = (props) => {
     setCheckboxValue(true);
     dispatch({ type: "SET_SIGNUPDATA", signUpData: [] });
   };
+  const backHandler = () => {
+    props.toggle();
+    props.toggleSignUp();
+  };
 
   return (
     <Modal
@@ -207,6 +212,9 @@ const CreatePasswordOverlay = (props) => {
           </button>
         }
       >
+        <button className="back_button" onClick={backHandler}>
+          <AiOutlineArrowLeft />
+        </button>
         Create Password
       </ModalHeader>
       <ModalBody className="createPassword_body">

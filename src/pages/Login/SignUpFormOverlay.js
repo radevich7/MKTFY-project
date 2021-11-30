@@ -14,13 +14,10 @@ import {
   ModalHeader,
   ModalBody,
 } from "reactstrap";
-import AppContext from "../../store/app-context";
-import { useContext } from "react";
 
 const SignUpFormOverlay = (props) => {
-  const [store, dispatch] = useContext(AppContext);
-
-  const [valuePhone, setValuePhone] = useState(); //for international input to work
+  const [phoneValue, setValuePhone] = useState(); //for international input to work
+  const [phoneError, setPhoneError] = useState();
   const phoneInputRef = useRef();
 
   // FIRST NAME
@@ -29,6 +26,7 @@ const SignUpFormOverlay = (props) => {
     classes: firstNameClasses,
     hasError: firstNameInputHasError,
     inputBlurHandlder: firstNameBlurHanlder,
+    inputOnChangeHandler: firstNameOnChangeHanlder,
     reset: resetFirstNameInput,
   } = useInput((value) => /^[a-z ,.'-]+$/i.test(value));
   // LastName
@@ -37,6 +35,7 @@ const SignUpFormOverlay = (props) => {
     classes: lastNameClasses,
     hasError: lastNameInputHasError,
     inputBlurHandlder: lastNameBlurHanlder,
+    inputOnChangeHandler: lastNameOnChangeHanlder,
     reset: resetLastNameInput,
   } = useInput((value) => /^[a-z ,.'-]+$/i.test(value));
 
@@ -46,18 +45,38 @@ const SignUpFormOverlay = (props) => {
     classes: emailClasses,
     hasError: emailInputHasError,
     inputBlurHandlder: emailBlurHanlder,
+    inputOnChangeHandler: emailOnChangeHanlder,
     reset: resetEmailInput,
   } = useInput((value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
   // Phone
-  const {
-    value: phoneValue,
-    hasError: phoneInputHasError,
-    inputBlurHandlder: phoneBlurHanlder,
-    reset: resetPhoneInput,
-  } = useInput((value) =>
-    /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/.test(value)
-  );
-  const phoneClasses = phoneInputHasError
+  const phoneValidation = (e) => {
+    const value = e.target.value;
+    const regex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
+    const isValid = regex.test(value);
+    if (isValid) {
+      setValuePhone(value);
+      setPhoneError();
+    } else {
+      setValuePhone();
+      setPhoneError(
+        <span className="signUp_error_message">
+          Please enter a valid phone number
+        </span>
+      );
+    }
+  };
+  console.log(phoneValue);
+
+  // const {
+  //   value: phoneValue,
+  //   hasError: phoneInputHasError,
+  //   inputBlurHandlder: phoneBlurHanlder,
+  //   inputOnChangeHandler: phoneOnChangeHanlder,
+  //   reset: resetPhoneInput,
+  // } = useInput((value) =>
+  //   /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/.test(value)
+  // );
+  const phoneClasses = phoneError
     ? "signUp_inputField form-control invalid"
     : "signUp_inputField form-control";
   // St
@@ -66,6 +85,7 @@ const SignUpFormOverlay = (props) => {
     classes: addressClasses,
     hasError: addressInputHasError,
     inputBlurHandlder: addressBlurHanlder,
+    inputOnChangeHandler: addressOnChangeHanlder,
     reset: resetAddressInput,
   } = useInput((value) => /^\s*[0-9a-zA-Z][0-9a-zA-Z '-]*$/.test(value));
 
@@ -74,6 +94,7 @@ const SignUpFormOverlay = (props) => {
     classes: cityClasses,
     hasError: cityInputHasError,
     inputBlurHandlder: cityBlurHanlder,
+    inputOnChangeHandler: cityOnChangeHanlder,
     reset: resetCityInput,
   } = useInput((value) => /[a-zA-Z]+(?:[ '-][a-zA-Z]+)*/.test(value));
 
@@ -82,6 +103,7 @@ const SignUpFormOverlay = (props) => {
     classes: provinceClasses,
     hasError: provinceInputHasError,
     inputBlurHandlder: provinceBlurHanlder,
+    inputOnChangeHandler: provinceOnChangeHanlder,
     reset: resetProvinceInput,
   } = useInput((value) => /[a-zA-Z]+(?:[ '-][a-zA-Z]+)*/.test(value));
 
@@ -90,6 +112,7 @@ const SignUpFormOverlay = (props) => {
     classes: countryClasses,
     hasError: countryInputHasError,
     inputBlurHandlder: countryBlurHanlder,
+    inputOnChangeHandler: countryOnChangeHanlder,
     reset: resetCountryInput,
   } = useInput((value) => /[a-zA-Z]+(?:[ '-][a-zA-Z]+)*/.test(value));
 
@@ -110,7 +133,7 @@ const SignUpFormOverlay = (props) => {
   !firstNameInputHasError &&
   !lastNameInputHasError &&
   !emailInputHasError &&
-  !phoneInputHasError &&
+  !phoneError &&
   !addressInputHasError &&
   !cityInputHasError &&
   !provinceInputHasError &&
@@ -123,7 +146,6 @@ const SignUpFormOverlay = (props) => {
     resetLastNameInput();
     resetEmailInput();
     setValuePhone();
-    resetPhoneInput();
     resetAddressInput();
     resetCityInput();
     resetProvinceInput();
@@ -134,11 +156,11 @@ const SignUpFormOverlay = (props) => {
   const submitFormHandler = (e) => {
     e.preventDefault();
     if (e) {
-      props.onOpenCreatePassword();
       props.toggle();
+      props.onOpenCreatePassword();
     }
     // phoneUpdated.substring(2)
-    const personObject = {
+    let personObject = {
       email: emailValue,
       firstName: firstNameValue,
       lastName: lastNameValue,
@@ -148,17 +170,14 @@ const SignUpFormOverlay = (props) => {
       province: provinceValue,
       country: countryValue,
     };
-
-    // dispatch({ type: "SET_SIGNUPDATA", signUpData: personObject });
+    console.log(personObject);
 
     props.setSignupData(personObject);
-    resetForm();
-    // console.log(personObject.id);
   };
   const closeModalHandler = () => {
     props.toggle();
-    dispatch({ type: "SET_SIGNUPDATA", signUpData: [] });
     setValuePhone();
+    resetForm();
   };
 
   return (
@@ -196,9 +215,11 @@ const SignUpFormOverlay = (props) => {
                     type="text"
                     name="firstName"
                     id="firstName"
+                    value={firstNameValue}
                     placeholder="Your first name"
                     className={firstNameClasses}
                     onBlur={firstNameBlurHanlder}
+                    onChange={firstNameOnChangeHanlder}
                   />
                   {firstNameInputHasError &&
                     errorMessage("Please enter valid first name")}
@@ -212,9 +233,11 @@ const SignUpFormOverlay = (props) => {
                     type="text"
                     name="lastName"
                     id="lastName"
+                    value={lastNameValue}
                     placeholder="Your last name"
                     className={lastNameClasses}
                     onBlur={lastNameBlurHanlder}
+                    onChange={lastNameOnChangeHanlder}
                   />
                   {lastNameInputHasError &&
                     errorMessage("Please enter valid last name")}
@@ -228,9 +251,11 @@ const SignUpFormOverlay = (props) => {
                     type="email"
                     name="email"
                     id="email"
+                    value={emailValue}
                     placeholder="Your email"
                     className={emailClasses}
                     onBlur={emailBlurHanlder}
+                    onChange={emailOnChangeHanlder}
                   />
                   {emailInputHasError &&
                     errorMessage(
@@ -247,12 +272,12 @@ const SignUpFormOverlay = (props) => {
                       international
                       withCountryCallingCode
                       className={phoneClasses}
-                      onBlur={phoneBlurHanlder}
-                      value={valuePhone}
+                      onBlur={phoneValidation}
+                      value={phoneValue}
                       onChange={setValuePhone}
                       ref={phoneInputRef}
                     />
-                    {!valuePhone && (
+                    {!phoneValue && (
                       <span
                         className="phone_placeholder"
                         onClick={() => phoneInputRef.current.focus()}
@@ -261,10 +286,7 @@ const SignUpFormOverlay = (props) => {
                       </span>
                     )}
                   </div>
-                  {phoneInputHasError &&
-                    errorMessage(
-                      "Please enter valid phone number ( 000-000-0000)"
-                    )}
+                  {phoneError && phoneError}
                 </FormGroup>
               </Row>
             </Col>
@@ -279,9 +301,11 @@ const SignUpFormOverlay = (props) => {
                     type="text"
                     name="address"
                     id="address"
+                    value={addressValue}
                     placeholder="Insert your address"
                     className={addressClasses}
                     onBlur={addressBlurHanlder}
+                    onChange={addressOnChangeHanlder}
                   />
                   {addressInputHasError &&
                     errorMessage("Please enter street address")}
@@ -296,9 +320,11 @@ const SignUpFormOverlay = (props) => {
                       type="text"
                       name="city"
                       id="city"
+                      value={cityValue}
                       placeholder="City name"
                       className={cityClasses}
                       onBlur={cityBlurHanlder}
+                      onChange={cityOnChangeHanlder}
                     />
                     {cityInputHasError && errorMessage("Please enter city")}
                   </FormGroup>
@@ -311,9 +337,11 @@ const SignUpFormOverlay = (props) => {
                       type="text"
                       name="province"
                       id="province"
+                      value={provinceValue}
                       placeholder="Your province"
                       className={provinceClasses}
                       onBlur={provinceBlurHanlder}
+                      onChange={provinceOnChangeHanlder}
                     />
                     {provinceInputHasError &&
                       errorMessage("Please enter province")}
@@ -330,7 +358,9 @@ const SignUpFormOverlay = (props) => {
                     id="country"
                     placeholder="Country name"
                     className={countryClasses}
+                    value={countryValue}
                     onBlur={countryBlurHanlder}
+                    onChange={countryOnChangeHanlder}
                   />
                   {countryInputHasError && errorMessage("Please enter country")}
                 </FormGroup>
@@ -340,7 +370,6 @@ const SignUpFormOverlay = (props) => {
                 <FormGroup>
                   <Button
                     className="signUp_next_button"
-                    // onClick={toggle}
                     disabled={disableLogin}
                   >
                     Next
