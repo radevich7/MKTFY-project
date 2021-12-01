@@ -25,11 +25,12 @@ import PreviewContent from "./PreviewContent";
 import CustomSelect from "../../reusableComponent/CustomSelect";
 import { POSTFORMDATA, POST } from "../../api/api";
 
-const CreateListing = () => {
+const CreateListing = (props) => {
   const history = useHistory();
-
+  // console.log(props.images);
   const [uploadImgModal, setUploadImgModal] = useState(false);
   const toggleUploadImg = () => setUploadImgModal(!uploadImgModal);
+
   // State managment for uploading images
   const [uploadFile, setUploadFile] = useState(null);
   const [previewImages, setPreviewImages] = useState(null);
@@ -150,7 +151,7 @@ const CreateListing = () => {
 
   const cityOptions = ["Calgary", "Brooks", "Red Deer"];
 
-  const provinceOptions = ["Alberta", "Manitoba", "Saskatchewan"];
+  // const provinceOptions = ["Alberta", "Manitoba", "Saskatchewan"];
 
   return (
     <Container fluid className="createListing_container">
@@ -324,27 +325,53 @@ const CreateListing = () => {
                               value={city}
                             />
                           </Col>
-                          {/* <Col lg="6" className="padding_left">
-                            <Label for="province">Province</Label>
-                            <CustomSelect
-                              options={provinceOptions}
-                              onSetValue={setProvince}
-                              value={province}
-                            />
-                          </Col> */}
                         </Row>
-
+                        {/* Based on the props, the buttons will be change either to create listing page or to update listing page */}
                         <Row>
-                          <Button className="postListing_button">
-                            Post your listing
-                          </Button>
+                          {props.updateButtons && (
+                            <Button
+                              className="save_button listing_button"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                console.log("save_button clicked");
+                              }}
+                              children={"Save changes"}
+                            />
+                          )}
+                          {!props.updateButtons && (
+                            <Button
+                              className="postListing_button listing_button"
+                              children={" Post your listing"}
+                            />
+                          )}
+                          {props.updateButtons && (
+                            <Button
+                              className="postListing_button listing_button"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                console.log("Confirm sold click");
+                              }}
+                              children={"Confirm sold"}
+                            />
+                          )}
 
-                          <Button
-                            className="cancel_button"
-                            onClick={() => history.push("/home")}
-                          >
-                            Cancel
-                          </Button>
+                          {!props.updateButtons && (
+                            <Button
+                              className="cancel_button listing_button"
+                              onClick={() => history.push("/home")}
+                              children={"Cancel"}
+                            />
+                          )}
+                          {props.updateButtons && (
+                            <Button
+                              className="cancel_button listing_button"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                console.log("cancel listing click");
+                              }}
+                              children={"Cancel listing"}
+                            />
+                          )}
                         </Row>
                       </CardBody>
                     </Card>

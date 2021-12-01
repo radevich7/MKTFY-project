@@ -99,7 +99,8 @@ div.card.product_details_createListing {
 
 .padding_rigth {
   padding-left: 0px;
-  padding-right: 5px;
+  padding-right: 0px;
+  margin-bottom: 12px;
 }
 
 .padding_left {
@@ -108,22 +109,24 @@ div.card.product_details_createListing {
 }
 
 /*     transform: translate3d(0px, 52px, 0px) */
-.postListing_button {
-  background-color: #6318af;
-  font-size: 1.4em;
+.listing_button {
+  font-size: 2em;
   font-weight: bold;
   box-shadow: none;
-  margin-top: 32px;
+  box-shadow: none;
+  margin-top: 20px;
+}
+.postListing_button {
+  background-color: #6318af;
 }
 .cancel_button {
   color: #969696;
-  font-size: 1.4em;
-  font-weight: bold;
-  box-shadow: none;
   background-color: #f8f8f8;
   border: 1px solid #969696;
-  box-shadow: none;
-  margin-top: 20px;
+}
+
+.save_button {
+  background-color: #ffba00;
 }
 
 /* add img ROW */
@@ -304,3 +307,5 @@ div p {
   color: rgb(180, 17, 17);
   font-size: 1.5rem;
 }
+
+/* Buttons */

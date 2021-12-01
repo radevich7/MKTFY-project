@@ -29,6 +29,7 @@ import SuccessPage from "../pages/SuccessPage/SuccessPage";
 import ProtectedRoute from "../reusableComponent/ProtectedRoute";
 import MainPageContent from "../pages/MainPageContent/MainPageContent";
 import Contact from "../pages/Contact.js/Contact";
+import UpdateListing from "../pages/CreateListing/UpdateListing";
 
 const AppRouter = () => {
   const [store, dispatch] = useContext(AppContext);
@@ -117,6 +118,7 @@ const AppRouter = () => {
         <Route path="/terms&services" exact component={TermsOfService} />
         <Route path="/privacy" exact component={PrivacyPolicy} />
         <Route path="/success" component={SuccessPage} />
+        <Route path="/form" component={UpdateListing} />
         <React.Fragment>
           <NavBar />
           <ProtectedRoute path="/logout" exact component={LogoutLogic} />
