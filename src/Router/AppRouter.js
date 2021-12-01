@@ -1,5 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import {
+  BrowserRouter,
+  Switch,
+  Redirect,
+  Route,
+  useHistory,
+} from "react-router-dom";
 import "./AppRouter.css";
 import NavBar from "../pages/NavBar/NavBar";
 import Dashboard from "../pages/Dashboard/Dashboard";
@@ -16,7 +22,7 @@ import CreateListing from "../pages/CreateListing/CreateListing";
 import MyListings from "../pages/MyListings/MyListings";
 import Faq from "../pages/TermsFaqContactUs/Faq";
 import { useContext } from "react";
-
+import jwt_decode from "jwt-decode";
 import AppContext from "../store/app-context";
 import { POST } from "../api/api";
 import SuccessPage from "../pages/SuccessPage/SuccessPage";
@@ -26,23 +32,25 @@ import Contact from "../pages/Contact.js/Contact";
 
 const AppRouter = () => {
   const [store, dispatch] = useContext(AppContext);
-  // console.log("AppRouter rerender");
-  // Get ID from the TOKEN function
-  function parseJwt(token) {
-    var base64Url = token.split(".")[1];
-    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    var jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split("")
-        .map(function (c) {
-          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join("")
-    );
-    let payload = JSON.parse(jsonPayload);
-    return payload.sub;
-  }
-  //
+  const history = useHistory();
+
+  // Log Out Logic
+  const LogoutLogic = () => {
+    localStorage.removeItem("Auth_token");
+    const { logout } = useAuth0();
+    logout({ returnTo: window.location.origin });
+    useEffect(() => {
+      dispatch({ type: "SET_AUTHENTICATED", authenticated: false });
+    }, []);
+    return <Redirect to={"/"} />;
+  };
+
+  // Token expiration time
+  const calculateRemainingTime = (expirationTime) => {
+    const currentTime = new Date().getTime();
+    const remainingDuration = expirationTime * 1000 - currentTime;
+    return remainingDuration;
+  };
 
   const LoginLogic = () => {
     let token = new URLSearchParams(document.location.hash.substr(1)).get(
@@ -52,8 +60,14 @@ const AppRouter = () => {
     useEffect(() => {
       if (token && token.length > 0) {
         localStorage.setItem("Auth_token", token);
-
         dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
+        //  Auto logout when expire token
+        const { exp } = jwt_decode(token);
+        const remainingTime = calculateRemainingTime(exp);
+        console.log(remainingTime);
+        setTimeout(() => {
+          history.push("/logout");
+        }, remainingTime);
       }
     }, [token]);
     return <Redirect to="/home" />;
@@ -68,9 +82,17 @@ const AppRouter = () => {
     localStorage.setItem("Auth_token", token);
 
     let signUpData = JSON.parse(localStorage.getItem("signupData"));
-    let auth_id = parseJwt(token);
+    const decode = jwt_decode(token);
+    let auth_id = decode.sub;
 
     let data = { ...signUpData, id: auth_id };
+
+    // auto logout logic when token will expire
+
+    const remainingTime = calculateRemainingTime(decode.exp);
+    setTimeout(() => {
+      history.push("/logout");
+    }, remainingTime);
 
     useEffect(() => {
       if (token && token.length > 0) {
@@ -85,17 +107,6 @@ const AppRouter = () => {
       }
     }, []);
     return <Redirect to={"/home"} />;
-  };
-
-  // Log Out Logic
-  const LogoutLogic = () => {
-    localStorage.removeItem("Auth_token");
-    const { logout } = useAuth0();
-    logout({ returnTo: window.location.origin });
-    useEffect(() => {
-      dispatch({ type: "SET_AUTHENTICATED", authenticated: false });
-    }, []);
-    return <Redirect to={"/"} />;
   };
 
   return (

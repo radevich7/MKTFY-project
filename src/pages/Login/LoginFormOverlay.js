@@ -32,7 +32,7 @@ const LoginFormOverlay = (props) => {
     inputBlurHandlder: emailBlurHanlder,
     reset: resetEmailInput,
   } = useInput((value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
-
+  console.log(enteredEmailValue);
   const {
     value: enteredPasswordValue,
     classes: passwordClasses,
@@ -93,6 +93,7 @@ const LoginFormOverlay = (props) => {
   const closeModalHandler = (e) => {
     resetPasswordInput();
     resetEmailInput();
+    setLoginError();
     props.toggle();
   };
 
@@ -124,6 +125,7 @@ const LoginFormOverlay = (props) => {
               className={emailClasses}
               onChange={emailOnChangeHandler}
               onBlur={emailBlurHanlder}
+              autoComplete="on"
             />
             {emailInputHasError && (
               <span className="error_message">Please enter a valid email</span>
@@ -140,6 +142,7 @@ const LoginFormOverlay = (props) => {
                 className={passwordClasses}
                 onChange={passwordOnChangeHandler}
                 onBlur={passwordBlurHanlder}
+                autoComplete="on"
               />
 
               <button

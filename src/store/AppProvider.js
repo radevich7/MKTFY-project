@@ -1,6 +1,8 @@
+import { useEffect, useReducer } from "react";
 import AppContext from "./app-context";
-import { useEffect, useReducer, useRef } from "react";
+
 import { GET } from "../api/api";
+import { useHistory } from "react-router";
 
 // import GET from "../api/api";
 const initialState = {
@@ -43,6 +45,7 @@ const AppReducer = (state, action) => {
 
 const AppProvider = (props) => {
   const [store, dispatch] = useReducer(AppReducer, initialState);
+  const history = useHistory();
   let token = localStorage.getItem("Auth_token");
 
   // Get user ID from the token function
@@ -60,6 +63,8 @@ const AppProvider = (props) => {
     let payload = JSON.parse(jsonPayload);
     return payload.sub;
   }
+
+  // Check for token expiration
 
   useEffect(() => {
     if (token) {
