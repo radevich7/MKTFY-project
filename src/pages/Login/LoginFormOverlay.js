@@ -79,9 +79,6 @@ const LoginFormOverlay = (props) => {
         );
       }
     );
-
-    resetPasswordInput();
-    resetEmailInput();
   };
 
   const forgotPasswordLinkHandler = (e) => {

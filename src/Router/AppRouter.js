@@ -33,7 +33,6 @@ import Contact from "../pages/Contact.js/Contact";
 const AppRouter = () => {
   const [store, dispatch] = useContext(AppContext);
   const history = useHistory();
-
   // Log Out Logic
   const LogoutLogic = () => {
     localStorage.removeItem("Auth_token");
@@ -52,7 +51,7 @@ const AppRouter = () => {
     return remainingDuration;
   };
 
-  const LoginLogic = () => {
+  const LoginLogic = (props) => {
     let token = new URLSearchParams(document.location.hash.substr(1)).get(
       "access_token"
     );
@@ -64,9 +63,9 @@ const AppRouter = () => {
         //  Auto logout when expire token
         const { exp } = jwt_decode(token);
         const remainingTime = calculateRemainingTime(exp);
-        console.log(remainingTime);
+
         setTimeout(() => {
-          history.push("/logout");
+          props.history.push("/logout");
         }, remainingTime);
       }
     }, [token]);
@@ -75,7 +74,7 @@ const AppRouter = () => {
 
   // SIGNUP LOGIC
 
-  const SignUpLogic = () => {
+  const SignUpLogic = (props) => {
     let token = new URLSearchParams(document.location.hash.substr(1)).get(
       "access_token"
     );
@@ -91,7 +90,7 @@ const AppRouter = () => {
 
     const remainingTime = calculateRemainingTime(decode.exp);
     setTimeout(() => {
-      history.push("/logout");
+      props.history.push("/logout");
     }, remainingTime);
 
     useEffect(() => {

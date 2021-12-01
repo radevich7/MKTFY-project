@@ -81,11 +81,10 @@ const Dashboard = () => {
   const [electronics, setElectronics] = useState([]);
 
   useEffect(() => {
-    GET("/api/listing/category/deals?region=Calgary").then((res) =>
-      console.log(res)
-    );
+    // GET("/api/listing/category/deals?region=Calgary").then((res) =>
+    //   console.log(res)
+    // );
     setDeals(store.allListings);
-    // setElectronics(store.electronics);
   }, [store]);
 
   // deals for the categories section
