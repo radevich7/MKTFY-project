@@ -150,8 +150,6 @@ const CreateListing = () => {
 
   const cityOptions = ["Calgary", "Brooks", "Red Deer"];
 
-  const provinceOptions = ["Alberta", "Manitoba", "Saskatchewan"];
-
   return (
     <Container fluid className="createListing_container">
       {/* MODAL */}
@@ -324,14 +322,6 @@ const CreateListing = () => {
                               value={city}
                             />
                           </Col>
-                          {/* <Col lg="6" className="padding_left">
-                            <Label for="province">Province</Label>
-                            <CustomSelect
-                              options={provinceOptions}
-                              onSetValue={setProvince}
-                              value={province}
-                            />
-                          </Col> */}
                         </Row>
 
                         <Row>

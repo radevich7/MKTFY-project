@@ -101,7 +101,7 @@ const CreatePasswordOverlay = (props) => {
 
   // Disabling the button
   let disableLogin = true;
-  console.log(passwordValue, confirmPasswordValue, checkboxValue);
+
   if (passwordValue && confirmPasswordValue && checkboxValue) {
     disableLogin = false;
   }
@@ -118,8 +118,7 @@ const CreatePasswordOverlay = (props) => {
   };
   const toggleConfirmPasswordHandler = (e) => {
     e.preventDefault();
-    console.log(e);
-    console.log("asds");
+
     if (confirmPasswordVisible === "password") {
       setConfirmPasswordVisible("text");
     } else {
@@ -166,7 +165,6 @@ const CreatePasswordOverlay = (props) => {
               audience: "http://mktfy.com",
             },
             (error) => {
-              console.log(error);
               return alert("Something went wrong");
             }
           );

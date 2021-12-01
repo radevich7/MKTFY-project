@@ -32,7 +32,7 @@ const LoginFormOverlay = (props) => {
     inputBlurHandlder: emailBlurHanlder,
     reset: resetEmailInput,
   } = useInput((value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
-  console.log(enteredEmailValue);
+
   const {
     value: enteredPasswordValue,
     classes: passwordClasses,

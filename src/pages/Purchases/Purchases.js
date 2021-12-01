@@ -10,6 +10,7 @@ const Purchases = () => {
   useEffect(() => {
     GET("/api/mypurchases").then((res) => {
       if (!res.failed) {
+        console.log(res.data);
         setPurhases(res.data);
       }
     });
