@@ -1,15 +1,11 @@
 .myListings_container {
-  height: 100vh;
-  background-image: url("../../assets/imgBackgoundGreyWaves.svg");
-  background-attachment: fixed;
-  background-position: 50% 50%;
   padding-top: 312px;
-  background-color: #f4f4f5;
 }
 .border_document_myListings {
   max-width: 1636px;
   margin: 0 auto;
   background-color: transparent;
+  height: 100vh;
 }
 
 .myListings_items {
@@ -25,65 +21,19 @@
   position: relative;
 }
 
-.sold_dot {
-  color: #ffba00;
-  position: absolute;
-  top: 25%;
-  left: -20%;
-  font-size: 14px;
-}
-
 .active {
   color: #6318af;
   border-bottom: 5px solid #9349de;
 }
 
-.myListings_card {
-  max-width: 808px;
-  background-color: #ffffff;
-  padding: 0;
-  margin: 0;
-  margin-bottom: 5px;
-}
-
-.border_document_myListings h2 {
-  font-size: 2rem;
-  font-weight: 600;
-  margin: 30px 0;
-}
-
-.image_myListings {
-  display: flex;
-  justify-content: center;
-  height: 215px;
-}
-.details_myListings {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.details_myListings h6 {
-  color: #000000;
-  font-size: 1.4rem;
-  font-weight: 300;
-}
-.details_myListings h5 {
+.product_name {
   font-size: 2rem;
   font-weight: 400;
+  color: #000000;
 }
-.details_myListings span {
-  display: inline-block;
+.product_price {
+  color: #000000;
+  font-size: 2rem;
+  font-weight: 600;
   color: #6318af;
-  font-size: 2em;
-  font-weight: bold;
-  margin-top: 12px;
-}
-.border_document_myListings h1 {
-  font-size: 4rem;
-  color: #4d4d4d;
-  margin-bottom: 15px;
-}
-.total_purchases {
-  font-size: 1.6rem;
-  margin-bottom: 30px;
 }

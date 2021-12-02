@@ -13,11 +13,8 @@ code {
 }
 html {
   font-size: 10px;
-  height: 100vh;
 }
 body {
-  width: 100vw;
-  /* height: 100%; */
   font-size: 10px;
   background-image: url("./assets/imgBackgoundGreyWaves.svg");
   background-attachment: fixed;

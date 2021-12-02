@@ -6,11 +6,11 @@ import { useEffect, useState } from "react";
 
 const Purchases = () => {
   const [purhases, setPurhases] = useState(null);
-  console.log(purhases);
+  // console.log(purhases);
   useEffect(() => {
     GET("/api/mypurchases").then((res) => {
       if (!res.failed) {
-        console.log(res.data);
+        // console.log(res.data);
         setPurhases(res.data);
       }
     });
