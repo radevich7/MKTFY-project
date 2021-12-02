@@ -1,11 +1,9 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Button from "../../reusableComponent/Button";
 import { Link } from "react-router-dom";
-
 import {
   Container,
-  Dropdown,
   Row,
   Col,
   Card,
@@ -14,9 +12,6 @@ import {
   FormGroup,
   Label,
   Input,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
 } from "reactstrap";
 import "./CreateListing.css";
 import camera from "../../assets/camera.svg";
@@ -27,14 +22,19 @@ import { POSTFORMDATA, POST } from "../../api/api";
 
 const CreateListing = (props) => {
   const history = useHistory();
-  // console.log(props.images);
+  // Data only for the UpdateListing page
+  let data = props.data;
+
+  // Modal toggle
   const [uploadImgModal, setUploadImgModal] = useState(false);
   const toggleUploadImg = () => setUploadImgModal(!uploadImgModal);
 
   // State managment for uploading images
-  const [uploadFile, setUploadFile] = useState(null);
-  const [previewImages, setPreviewImages] = useState(null);
-
+  const [uploadFile, setUploadFile] = useState(props.imagesId);
+  const [previewImages, setPreviewImages] = useState(props.images);
+  console.log(uploadFile, "uploadFile");
+  console.log(previewImages, "previewImages");
+  // Removing images on click
   const removeImage = (index) => {
     let previewimageClone = [...previewImages];
     let uploadFileClone = [...uploadFile];
@@ -46,21 +46,34 @@ const CreateListing = (props) => {
   };
 
   // VALIDATION OF THE FORM
-  const [product, setProduct] = useState();
-  const [details, setDetails] = useState();
-  const [category, setCategory] = useState();
-  const [categoryId, setCategoryId] = useState();
-  const [condition, setCondition] = useState();
-  const [price, setPrice] = useState();
-  const [address, setAddress] = useState();
-  const [city, setCity] = useState();
-  // const [province, setProvince] = useState();
-  const productHandler = (e) => {
-    setProduct(e.target.value);
-  };
+  const [product, setProduct] = useState("");
+  const [details, setDetails] = useState("");
+  const [category, setCategory] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+  const [condition, setCondition] = useState("");
+  const [price, setPrice] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
 
-  const detailsHandler = (e) => {
-    setDetails(e.target.value);
+  // Setting initial data for the UpdateListing page
+  useEffect(() => {
+    if (data) {
+      setProduct(data.product);
+      setDetails(data.details);
+      setCategoryId(data.categoryId);
+      // Initializ category based on the number
+      setCategory(categoryName(data.categoryId));
+      setCondition(data.condition);
+      setPrice(data.price);
+      setAddress(data.address);
+      setCity(data.region);
+    }
+  }, [data]);
+  //  Get category from categoryOptions array
+  const categoryName = (id) => {
+    return categoryOptions
+      .filter((category) => category.id === 1)
+      .map((val) => val.category);
   };
 
   const categoryHandler = (e) => {
@@ -87,12 +100,6 @@ const CreateListing = (props) => {
     }
   };
 
-  const priceHandler = (e) => {
-    setPrice(e.target.value);
-  };
-  const addressHandler = (e) => {
-    setAddress(e.target.value);
-  };
   const newListing = {
     product,
     details,
@@ -103,6 +110,7 @@ const CreateListing = (props) => {
     region: city,
   };
 
+  //  CREATE A NEW LISTING SUBMIT HANDLER
   const submitFormHandler = (e) => {
     e.preventDefault();
 
@@ -120,7 +128,7 @@ const CreateListing = (props) => {
           ...newListing,
           uploadIds: uploadedImages.flatMap((val) => Object.values(val)),
         };
-        console.log(data);
+        // console.log(data);
         POST("/api/Listing", data).then((res) => console.log(res));
       } else {
         // Handle error
@@ -142,16 +150,56 @@ const CreateListing = (props) => {
   // options for the select input
 
   const categoryOptions = [
-    "Cars & Vehicles",
-    "Furniture",
-    "Electronics",
-    "Real Estate",
+    { id: 1, category: "Cars & Vehicles" },
+    { id: 2, category: "Furniture" },
+    { id: 3, category: "Electronics" },
+    { id: 4, category: "Real Estate" },
   ];
   const conditionOptions = ["New", "Used"];
 
   const cityOptions = ["Calgary", "Brooks", "Red Deer"];
 
-  // const provinceOptions = ["Alberta", "Manitoba", "Saskatchewan"];
+  // UPDATE A NEW LISTING SUBMIT HANDLER
+  const saveChangesHanler = (e) => {
+    e.preventDefault();
+    let newFiles = uploadFile.filter((val) => val.path);
+    let oldFiles = uploadFile.filter((val) => typeof val === "string");
+    let formData = new FormData();
+    for (let i = 0; i < newFiles.length; i++) {
+      formData.append("File[]", newFiles[i]);
+    }
+    console.log([...formData]); // Think 2D array makes it more readable
+    let uploadedImages = [];
+    POSTFORMDATA("/api/Upload", formData).then((res) => {
+      if (res.failed === false) {
+        uploadedImages = res.data;
+
+        let data = {
+          ...newListing,
+          uploadIds: [
+            ...uploadedImages.flatMap((val) => Object.values(val)),
+            ...oldFiles,
+          ],
+        };
+        console.log(data);
+        // POST("/api/Listing", data).then((res) => console.log(res));
+      } else {
+        // Handle error
+        console.log("error");
+      }
+    });
+
+    console.log("SEND");
+
+    // // Reset the form
+    // e.target.reset();
+    // setCategory();
+    // setCondition();
+    // setCity();
+    // setUploadFile(null);
+    // setPreviewImages(null);
+    // history.push("/success/createOffer");
+  };
 
   return (
     <Container fluid className="createListing_container">
@@ -249,25 +297,27 @@ const CreateListing = (props) => {
 
                           <Input
                             type="text"
+                            value={product}
                             name="productName"
                             id="productName"
                             className="createListing_inputField"
                             placeholder="Enter product name (max 25 characters)"
-                            onBlur={productHandler}
+                            onChange={(e) => setProduct(e.target.value)}
                             maxLength="25"
                             required
                           />
                         </Row>
                         <Row>
-                          <Label for="description">Description</Label>
+                          <Label for="details">Description</Label>
                           <Input
                             type="textarea"
-                            name="description"
-                            id="description"
+                            value={details}
+                            name="details"
+                            id="details"
                             className="createListing_inputField description"
-                            placeholder="Enter description "
+                            placeholder="Enter description"
                             maxLength="250"
-                            onBlur={detailsHandler}
+                            onChange={(e) => setDetails(e.target.value)}
                             required
                           />
                         </Row>
@@ -275,7 +325,9 @@ const CreateListing = (props) => {
                         <Row className="category">
                           <Label for="category">Category</Label>
                           <CustomSelect
-                            options={categoryOptions}
+                            options={categoryOptions.map(
+                              ({ category }) => category
+                            )}
                             onSetValue={categoryHandler}
                             value={category}
                           />
@@ -296,11 +348,12 @@ const CreateListing = (props) => {
                             <Input
                               type="number"
                               name="price"
+                              value={price}
                               id="price"
                               step="any"
                               className="createListing_inputField "
                               placeholder="Type the price"
-                              onBlur={priceHandler}
+                              onChange={(e) => setPrice(e.target.value)}
                             />
                           </Col>
                         </Row>
@@ -310,10 +363,11 @@ const CreateListing = (props) => {
                           <Input
                             type="text"
                             name="address"
+                            value={address}
                             id="address"
                             className="createListing_inputField"
                             placeholder="Enter address for pick up"
-                            onBlur={addressHandler}
+                            onChange={(e) => setAddress(e.target.value)}
                           />
                         </Row>
                         <Row>
@@ -331,10 +385,7 @@ const CreateListing = (props) => {
                           {props.updateButtons && (
                             <Button
                               className="save_button listing_button"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                console.log("save_button clicked");
-                              }}
+                              onClick={saveChangesHanler}
                               children={"Save changes"}
                             />
                           )}

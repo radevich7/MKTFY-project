@@ -3,7 +3,6 @@ import camera from "../../assets/camera.svg";
 import closeCircle from "../../assets/closeCircle.svg";
 const PreviewContent = (props) => {
   // Remove Image
-
   const emptyContent = (
     <Col>
       <div className="addPhoto_secondary" onClick={props.toggle}>
