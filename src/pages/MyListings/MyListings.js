@@ -1,16 +1,5 @@
 import { useState, useEffect, Fragment } from "react";
-import {
-  Container,
-  Card,
-  CardBody,
-  Row,
-  Col,
-  CardImg,
-  CardTitle,
-  CardText,
-  CardSubtitle,
-  CardGroup,
-} from "reactstrap";
+import { Container, CardBody, Row, Col, CardGroup } from "reactstrap";
 import dummy_img from "../../assets/imagesForDahsboard/playstation.png";
 import { GoPrimitiveDot } from "react-icons/go";
 
@@ -48,7 +37,6 @@ const MyListings = () => {
       }
     });
   }, []);
-  console.log(pending);
 
   const activeItemsClass = activeSold
     ? "myListings_items active"
@@ -58,20 +46,18 @@ const MyListings = () => {
     : "myListings_items sold_item";
 
   return (
-    <Fragment>
+    <Container fluid className="myListings_container">
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <Container fluid className="myListings_container">
-          <LoadingSpinner />
+        <Fragment>
           <div className="border_document_myListings">
-            <h1>My Listings</h1>
+            <h1 className="myListing_header">My Listings</h1>
             <div>
               <span className={activeItemsClass} onClick={toggleActiveSold}>
                 Active Items
               </span>
               <span className={soldItemsClass} onClick={toggleActiveSold}>
-                <GoPrimitiveDot className="sold_dot" />
                 Sold Items
               </span>
             </div>
@@ -84,6 +70,8 @@ const MyListings = () => {
                 {pending.map((listing) => {
                   return (
                     <MyListingCard
+                      key={listing.id}
+                      id={listing.id}
                       imageUrl={listing.imageUrl}
                       product={listing.product}
                       price={listing.price}
@@ -94,6 +82,8 @@ const MyListings = () => {
                 {listed.map((listing) => {
                   return (
                     <MyListingCard
+                      key={listing.id}
+                      id={listing.id}
                       imageUrl={listing.imageUrl}
                       product={listing.product}
                       price={listing.price}
@@ -105,22 +95,31 @@ const MyListings = () => {
 
             {/* SOLD ITEMS */}
             {!activeSold && (
-              <CardBody className="myListings_card">
-                <Row>
-                  <Col lg="4" className="image_myListings">
-                    <img src={dummy_img} alt="/" />
-                  </Col>
-                  <Col className="details_myListings">
-                    <h5>Microsoft Xbox One X 1TB Console</h5>
-                    <span>$ {(340).toFixed(2)}</span>
-                  </Col>
-                </Row>
-              </CardBody>
+              <CardGroup
+                className="d-flex flex-column"
+                style={{ maxWidth: "808px" }}
+              >
+                {sold.length > 0 ? (
+                  sold.map((listing) => {
+                    return (
+                      <MyListingCard
+                        key={listing.id}
+                        imageUrl={listing.imageUrl}
+                        product={listing.product}
+                        price={listing.price}
+                        id={listing.id}
+                      />
+                    );
+                  })
+                ) : (
+                  <p className="centered">You don't have any sold products</p>
+                )}
+              </CardGroup>
             )}
           </div>
-        </Container>
+        </Fragment>
       )}
-    </Fragment>
+    </Container>
   );
 };
 
