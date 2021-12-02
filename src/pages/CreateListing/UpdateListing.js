@@ -8,14 +8,14 @@ const UpdateListing = () => {
   const id = useParams();
   const listingId = Object.values(id).toString();
   console.log(listingId);
+
   useEffect(() => {
-    GET("/api/listing/234f0447-b223-4992-bf9c-c35b7b952200").then((res) => {
+    GET(`/api/listing/${listingId}`).then((res) => {
       if (!res.failed) {
         setData(res.data);
       }
     });
   }, []);
-  console.log(data);
 
   return (
     <React.Fragment>

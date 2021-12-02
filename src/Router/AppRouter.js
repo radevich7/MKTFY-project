@@ -118,7 +118,7 @@ const AppRouter = () => {
         <Route path="/terms&services" exact component={TermsOfService} />
         <Route path="/privacy" exact component={PrivacyPolicy} />
         <Route path="/success" component={SuccessPage} />
-        <Route path="/form" component={UpdateListing} />
+
         <React.Fragment>
           <NavBar />
           <ProtectedRoute path="/logout" exact component={LogoutLogic} />
@@ -149,6 +149,7 @@ const AppRouter = () => {
           />
           <ProtectedRoute path="/home/purchases" exact component={Purchases} />
           <ProtectedRoute path="/home/create" exact component={CreateListing} />
+          <Route path="/update/:lisningId" component={UpdateListing} />
           <ProtectedRoute
             path="/home/mylistings"
             exact

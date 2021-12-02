@@ -18,7 +18,7 @@ import camera from "../../assets/camera.svg";
 import UploadImgModal from "./UploadImgModal";
 import PreviewContent from "./PreviewContent";
 import CustomSelect from "../../reusableComponent/CustomSelect";
-import { POSTFORMDATA, POST } from "../../api/api";
+import { POSTFORMDATA, POST, PUT } from "../../api/api";
 
 const CreateListing = (props) => {
   const history = useHistory();
@@ -181,8 +181,10 @@ const CreateListing = (props) => {
             ...oldFiles,
           ],
         };
-        console.log(data);
-        // POST("/api/Listing", data).then((res) => console.log(res));
+
+        PUT(`/api/listing/${props.listingId}`, data).then((res) =>
+          console.log(res)
+        );
       } else {
         // Handle error
         console.log("error");
