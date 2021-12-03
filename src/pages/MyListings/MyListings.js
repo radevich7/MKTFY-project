@@ -44,7 +44,7 @@ const MyListings = () => {
   const soldItemsClass = !activeSold
     ? "myListings_items active sold_item"
     : "myListings_items sold_item";
-
+  console.log(listed);
   return (
     <Container fluid className="myListings_container">
       {loading ? (
@@ -75,22 +75,27 @@ const MyListings = () => {
                       imageUrl={listing.imageUrl}
                       product={listing.product}
                       price={listing.price}
-                      disabled={true}
+                      pending={true}
                     />
                   );
                 })}
                 <h2 className="mt-5 mb-5">AVAILABLE ITEMS</h2>
-                {listed.map((listing) => {
-                  return (
-                    <MyListingCard
-                      key={listing.id}
-                      id={listing.id}
-                      imageUrl={listing.imageUrl}
-                      product={listing.product}
-                      price={listing.price}
-                    />
-                  );
-                })}
+                {listed.length > 0 ? (
+                  listed.map((listing) => {
+                    return (
+                      <MyListingCard
+                        key={listing.id}
+                        id={listing.id}
+                        imageUrl={listing.imageUrl}
+                        product={listing.product}
+                        price={listing.price}
+                        listed={true}
+                      />
+                    );
+                  })
+                ) : (
+                  <p className="">You don't have any offers</p>
+                )}
               </CardGroup>
             )}
 
@@ -109,6 +114,7 @@ const MyListings = () => {
                         product={listing.product}
                         price={listing.price}
                         id={listing.id}
+                        sold={true}
                       />
                     );
                   })

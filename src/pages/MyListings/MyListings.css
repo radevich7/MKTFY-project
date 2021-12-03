@@ -50,3 +50,21 @@
   right: 0;
   text-align: center;
 }
+
+/* REUSABLE COMPONENT MyListingCARD.js*/
+.status_tag {
+  position: absolute;
+  top: 25px;
+  right: 35px;
+  font-size: 2rem;
+  border-radius: 4px;
+  padding: 0 4px;
+}
+.sold {
+  background-color: #6cc04b33;
+  color: #6cc04b;
+}
+.pending {
+  background-color: #9349de33;
+  color: #560f9f;
+}

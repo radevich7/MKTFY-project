@@ -7,17 +7,37 @@ import {
   CardTitle,
   CardSubtitle,
 } from "reactstrap";
+import "../pages/MyListings/MyListings.css";
 
 const MyListingCard = (props) => {
   return (
     <Link
       style={{ textDecoration: "none" }}
-      to={{
-        pathname: `/update`,
-        state: { listingId: `${props.id}`, disabled: true },
-      }}
+      to={
+        props.sold
+          ? "#"
+          : {
+              pathname: `/update`,
+              state: {
+                listingId: `${props.id}`,
+                listed: props.listed,
+                pending: props.pending,
+              },
+            }
+      }
     >
       <Card className="d-flex flex-row  mb-2">
+        <span
+          className={
+            props.sold
+              ? "status_tag sold"
+              : props.pending
+              ? "status_tag pending"
+              : ""
+          }
+        >
+          {props.sold ? "SALE CONFIRMED" : props.pending ? "PENDING STATE" : ""}
+        </span>
         <Col lg="5">
           <CardImg
             alt="Card image cap"

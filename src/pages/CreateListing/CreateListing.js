@@ -32,8 +32,8 @@ const CreateListing = (props) => {
   // State managment for uploading images
   const [uploadFile, setUploadFile] = useState(props.imagesId);
   const [previewImages, setPreviewImages] = useState(props.images);
-  console.log(uploadFile, "uploadFile");
-  console.log(previewImages, "previewImages");
+  // console.log(uploadFile, "uploadFile");
+  // console.log(previewImages, "previewImages");
   // Removing images on click
   const removeImage = (index) => {
     let previewimageClone = [...previewImages];
@@ -110,7 +110,7 @@ const CreateListing = (props) => {
     region: city,
   };
 
-  //  CREATE A NEW LISTING SUBMIT HANDLER
+  //  POST NEW LISTING BUTTON HANDLER
   const submitFormHandler = (e) => {
     e.preventDefault();
 
@@ -131,12 +131,11 @@ const CreateListing = (props) => {
         // console.log(data);
         POST("/api/Listing", data).then((res) => console.log(res));
       } else {
-        // Handle error
+        alert(
+          "Unfortunately, the offer can not be posted at this time, please try again later"
+        );
       }
     });
-
-    console.log("SEND");
-
     // Reset the form
     e.target.reset();
     setCategory();
@@ -159,7 +158,7 @@ const CreateListing = (props) => {
 
   const cityOptions = ["Calgary", "Brooks", "Red Deer"];
 
-  // UPDATE A NEW LISTING SUBMIT HANDLER
+  // SAVE CHANGES BUTTON HANDLER
   const saveChangesHanler = (e) => {
     e.preventDefault();
     let newFiles = uploadFile.filter((val) => val.path);
@@ -177,30 +176,37 @@ const CreateListing = (props) => {
         let data = {
           ...newListing,
           uploadIds: [
-            ...uploadedImages.flatMap((val) => Object.values(val)),
             ...oldFiles,
+            ...uploadedImages.flatMap((val) => Object.values(val)),
           ],
+          id: props.listingId,
         };
 
-        PUT(`/api/listing/${props.listingId}`, data).then((res) =>
-          console.log(res)
-        );
+        PUT(`/api/listing/${props.listingId}`, data).then((res) => {
+          if (!res.failed) {
+            history.push("/success/updateOffer");
+          } else {
+            alert("There is a problem associated with updating your offer");
+            history.push("/home");
+          }
+        });
       } else {
         // Handle error
-        console.log("error");
+        alert("Cannot download new images");
       }
     });
+  };
 
-    console.log("SEND");
-
-    // // Reset the form
-    // e.target.reset();
-    // setCategory();
-    // setCondition();
-    // setCity();
-    // setUploadFile(null);
-    // setPreviewImages(null);
-    // history.push("/success/createOffer");
+  // SOLD LISTING BUTTON HANDLER
+  const soldListingHandler = (e) => {
+    e.preventDefault();
+    PUT(`/api/listing/${props.listingId}/sold`).then((res) => {
+      if (!res.failed) {
+        history.push("/success/soldListing");
+      } else {
+        alert("There has  neem a problem, please contact customer service");
+      }
+    });
   };
 
   return (
@@ -229,7 +235,10 @@ const CreateListing = (props) => {
               <Col lg="4">
                 <Row className="h-100">
                   <Card className="p-0">
-                    <CardBody className="product_images_createListing">
+                    <CardBody
+                      className="product_images_createListing"
+                      style={{ pointerEvents: props.pending ? "none" : "" }}
+                    >
                       {uploadFile && previewImages.length > 0 ? (
                         // PREVIEW CONTENT
                         <PreviewContent
@@ -306,6 +315,7 @@ const CreateListing = (props) => {
                             placeholder="Enter product name (max 25 characters)"
                             onChange={(e) => setProduct(e.target.value)}
                             maxLength="25"
+                            disabled={props.pending}
                             required
                           />
                         </Row>
@@ -320,8 +330,8 @@ const CreateListing = (props) => {
                             placeholder="Enter description"
                             maxLength="250"
                             onChange={(e) => setDetails(e.target.value)}
+                            disabled={props.pending}
                             required
-                            // disabled={props.disabled}
                           />
                         </Row>
                         {/* CATEGORIES DROPDOWN */}
@@ -333,6 +343,7 @@ const CreateListing = (props) => {
                             )}
                             onSetValue={categoryHandler}
                             value={category}
+                            disabled={props.pending}
                           />
                         </Row>
                         {/* CONDITION DROPDOWN */}
@@ -343,6 +354,7 @@ const CreateListing = (props) => {
                               options={conditionOptions}
                               onSetValue={setCondition}
                               value={condition}
+                              disabled={props.pending}
                             />
                           </Col>
 
@@ -357,6 +369,7 @@ const CreateListing = (props) => {
                               className="createListing_inputField "
                               placeholder="Type the price"
                               onChange={(e) => setPrice(e.target.value)}
+                              disabled={props.pending}
                             />
                           </Col>
                         </Row>
@@ -371,6 +384,7 @@ const CreateListing = (props) => {
                             className="createListing_inputField"
                             placeholder="Enter address for pick up"
                             onChange={(e) => setAddress(e.target.value)}
+                            disabled={props.pending}
                           />
                         </Row>
                         <Row>
@@ -380,6 +394,7 @@ const CreateListing = (props) => {
                               options={cityOptions}
                               onSetValue={setCity}
                               value={city}
+                              disabled={props.pending}
                             />
                           </Col>
                         </Row>
@@ -390,6 +405,7 @@ const CreateListing = (props) => {
                               className="save_button listing_button"
                               onClick={saveChangesHanler}
                               children={"Save changes"}
+                              disabled={props.pending}
                             />
                           )}
                           {!props.updateButtons && (
@@ -398,13 +414,10 @@ const CreateListing = (props) => {
                               children={" Post your listing"}
                             />
                           )}
-                          {props.updateButtons && (
+                          {props.updateButtons && !props.listed && (
                             <Button
                               className="postListing_button listing_button"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                console.log("Confirm sold click");
-                              }}
+                              onClick={soldListingHandler}
                               children={"Confirm sold"}
                             />
                           )}
@@ -416,14 +429,24 @@ const CreateListing = (props) => {
                               children={"Cancel"}
                             />
                           )}
-                          {props.updateButtons && (
+                          {props.updateButtons && !props.pending && (
                             <Button
                               className="cancel_button listing_button"
                               onClick={(e) => {
                                 e.preventDefault();
                                 console.log("cancel listing click");
                               }}
-                              children={"Cancel listing"}
+                              children={"Delete listing"}
+                            />
+                          )}
+                          {props.pending && (
+                            <Button
+                              className="cancel_button listing_button"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                console.log("cancel sale");
+                              }}
+                              children={"Cancel Sale"}
                             />
                           )}
                         </Row>

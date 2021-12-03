@@ -8,7 +8,8 @@ const UpdateListing = () => {
   const location = useLocation();
 
   const listingId = location.state.listingId;
-  const disabled = location.state.disabled;
+  const pending = location.state.pending;
+  const listed = location.state.listed;
 
   useEffect(() => {
     GET(`/api/listing/${listingId}`).then((res) => {
@@ -27,7 +28,8 @@ const UpdateListing = () => {
           images={data.images.map(({ url }) => url)}
           imagesId={data.images.map(({ id }) => id)}
           listingId={listingId}
-          disabled={true}
+          pending={pending}
+          listed={listed}
         />
       )}
     </React.Fragment>

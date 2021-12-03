@@ -65,6 +65,7 @@ const AppProvider = (props) => {
         GET(urlFAQ),
         GET(myListings),
       ]).then((values) => {
+        // add funtionality to clear the local storage and return to login page
         // If values failed return to the home page and restart  else dispatch all of the functions
         dispatch({ type: "SET_ALL_LISTINGS", allListings: values[0].data });
         dispatch({ type: "SET_USER", user: values[1].data });

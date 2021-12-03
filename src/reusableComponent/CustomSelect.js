@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FaCaretDown } from "react-icons/fa";
 
-const Main = styled("div")`
-  font-family: sans-serif;
-  background: #f0f0f0;
-  height: 100vh;
-`;
+// const Main = styled("div")`
+//   font-family: sans-serif;
+//   background: #f0f0f0;
+//   height: 100vh;
+// `;
 
 const DropDownContainer = styled("div")`
   width: 100%;
@@ -63,19 +63,20 @@ const ListItem = styled("li")`
 
 export default function CustomSelect(props) {
   const [isOpen, setIsOpen] = useState(false);
-  // const [selectedOption, setSelectedOption] = useState();
 
   const toggling = () => setIsOpen(!isOpen);
-
+  const disabled = () => setIsOpen(false);
   const onOptionClicked = (value) => () => {
     props.onSetValue(value);
     setIsOpen(false);
-    // console.log(selectedOption);
   };
-  // console.log(selectedOption); //console log is asyncrhronus function so it will run before setState
+
   return (
     <DropDownContainer>
-      <DropDownHeader onClick={toggling}>
+      <DropDownHeader
+        onClick={!props.disabled ? toggling : disabled}
+        style={{ backgroundColor: !props.disabled ? "" : "#e9ecef" }}
+      >
         {props.value || "Select"}
 
         <span className="caret_custom">

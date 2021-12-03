@@ -29,6 +29,12 @@ const SuccessPage = () => {
     case "error":
       text = "Please contact customer support";
       break;
+    case "soldListing":
+      text = "OFFER SOLD";
+      break;
+    case "updateOffer":
+      text = "OFFER UPDATED";
+      break;
     case "reset":
       text = "CHECK YOUR EMAIL FOR INSTRUCTIONS";
       if (store.authenticated) {
