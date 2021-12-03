@@ -151,7 +151,7 @@ const AppRouter = () => {
           />
           <ProtectedRoute path="/home/purchases" exact component={Purchases} />
           <ProtectedRoute path="/home/create" exact component={CreateListing} />
-          <Route path="/update/:lisningId" component={UpdateListing} />
+          <Route path="/update" component={UpdateListing} />
           <ProtectedRoute
             path="/home/mylistings"
             exact

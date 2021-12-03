@@ -75,6 +75,7 @@ const MyListings = () => {
                       imageUrl={listing.imageUrl}
                       product={listing.product}
                       price={listing.price}
+                      disabled={true}
                     />
                   );
                 })}

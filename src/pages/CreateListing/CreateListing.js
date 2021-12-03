@@ -299,7 +299,7 @@ const CreateListing = (props) => {
 
                           <Input
                             type="text"
-                            value={product}
+                            defaultValue={product}
                             name="productName"
                             id="productName"
                             className="createListing_inputField"
@@ -313,7 +313,7 @@ const CreateListing = (props) => {
                           <Label for="details">Description</Label>
                           <Input
                             type="textarea"
-                            value={details}
+                            defaultValue={details}
                             name="details"
                             id="details"
                             className="createListing_inputField description"
@@ -321,6 +321,7 @@ const CreateListing = (props) => {
                             maxLength="250"
                             onChange={(e) => setDetails(e.target.value)}
                             required
+                            // disabled={props.disabled}
                           />
                         </Row>
                         {/* CATEGORIES DROPDOWN */}
@@ -350,7 +351,7 @@ const CreateListing = (props) => {
                             <Input
                               type="number"
                               name="price"
-                              value={price}
+                              defaultValue={price}
                               id="price"
                               step="any"
                               className="createListing_inputField "
@@ -365,7 +366,7 @@ const CreateListing = (props) => {
                           <Input
                             type="text"
                             name="address"
-                            value={address}
+                            defaultValue={address}
                             id="address"
                             className="createListing_inputField"
                             placeholder="Enter address for pick up"

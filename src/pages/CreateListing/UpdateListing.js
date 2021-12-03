@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import CreateListing from "./CreateListing";
 import { GET } from "../../api/api";
 
 const UpdateListing = () => {
   const [data, setData] = useState(null);
-  const id = useParams();
-  const listingId = Object.values(id).toString();
-  console.log(listingId);
+  const location = useLocation();
+
+  const listingId = location.state.listingId;
+  const disabled = location.state.disabled;
 
   useEffect(() => {
     GET(`/api/listing/${listingId}`).then((res) => {
@@ -26,6 +27,7 @@ const UpdateListing = () => {
           images={data.images.map(({ url }) => url)}
           imagesId={data.images.map(({ id }) => id)}
           listingId={listingId}
+          disabled={true}
         />
       )}
     </React.Fragment>

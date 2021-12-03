@@ -14,7 +14,7 @@ const MyListingCard = (props) => {
       style={{ textDecoration: "none" }}
       to={{
         pathname: `/update`,
-        state: { listingId: `${props.id}` },
+        state: { listingId: `${props.id}`, disabled: true },
       }}
     >
       <Card className="d-flex flex-row  mb-2">
