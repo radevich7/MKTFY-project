@@ -56,16 +56,21 @@ const AppProvider = (props) => {
 
       const urlListing = "/api/Listing";
       const urlProfile = `/api/profile/${user_id}`;
+      const myListings = "/api/mylisting";
 
       const urlFAQ = `/api/FAQ`;
-      Promise.all([GET(urlListing), GET(urlProfile), GET(urlFAQ)]).then(
-        (values) => {
-          dispatch({ type: "SET_ALL_LISTINGS", allListings: values[0].data });
-          dispatch({ type: "SET_USER", user: values[1].data });
-          dispatch({ type: "SET_FAQ", faq: values[2].data });
-          dispatch({ type: "SET_LOADING", loading: false });
-        }
-      );
+      Promise.all([
+        GET(urlListing),
+        GET(urlProfile),
+        GET(urlFAQ),
+        GET(myListings),
+      ]).then((values) => {
+        // If values failed return to the home page and restart  else dispatch all of the functions
+        dispatch({ type: "SET_ALL_LISTINGS", allListings: values[0].data });
+        dispatch({ type: "SET_USER", user: values[1].data });
+        dispatch({ type: "SET_FAQ", faq: values[2].data });
+        dispatch({ type: "SET_LOADING", loading: false });
+      });
     }
   }, [token]);
 

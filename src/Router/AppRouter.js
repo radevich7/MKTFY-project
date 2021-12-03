@@ -57,17 +57,18 @@ const AppRouter = () => {
       "access_token"
     );
 
+    //  Auto logout when expire token
+    const { exp } = jwt_decode(token);
+    const remainingTime = calculateRemainingTime(exp);
+
+    setTimeout(() => {
+      props.history.push("/logout");
+    }, remainingTime);
+
     useEffect(() => {
       if (token && token.length > 0) {
         localStorage.setItem("Auth_token", token);
         dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
-        //  Auto logout when expire token
-        const { exp } = jwt_decode(token);
-        const remainingTime = calculateRemainingTime(exp);
-
-        setTimeout(() => {
-          props.history.push("/logout");
-        }, remainingTime);
       }
     }, [token]);
     return <Redirect to="/home" />;
@@ -90,6 +91,7 @@ const AppRouter = () => {
     // auto logout logic when token will expire
 
     const remainingTime = calculateRemainingTime(decode.exp);
+
     setTimeout(() => {
       props.history.push("/logout");
     }, remainingTime);
