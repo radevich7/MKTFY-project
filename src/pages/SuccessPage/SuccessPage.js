@@ -32,6 +32,12 @@ const SuccessPage = () => {
     case "soldListing":
       text = "OFFER SOLD";
       break;
+    case "cancelOrder":
+      text = "ORDER CANCELED";
+      break;
+    case "deleteListing":
+      text = "OFFER DELETED";
+      break;
     case "updateOffer":
       text = "OFFER UPDATED";
       break;

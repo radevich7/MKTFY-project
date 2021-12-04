@@ -8,22 +8,44 @@ import "./Pickup.css";
 
 const Pickup = () => {
   const [listing, setLisiting] = useState(null);
-  let history = useHistory();
-  // STATUS OF THE LISTING, if pending don't show the butoon to buy.
+  const [purchased, setPurchased] = useState();
+  const [pendingItem, setPendingItem] = useState();
   const { lisningId } = useParams();
+  let history = useHistory();
+
+  // Passed through the router history the state to check if the item is sold in order to remove button from the UI
+
+  //
+
+  // STATUS OF THE LISTING, if pending don't show the butoon to buy.
 
   useEffect(() => {
+    if (history.location.state) {
+      setPurchased(history.location.state.purchased);
+      setPendingItem(history.location.state.pending);
+    }
     GET(`/api/listing/${lisningId}/pickup`).then((res) => {
       setLisiting(res.data);
     });
   }, []);
 
+  // COnfirm handler, sends PUT request to change status of the listing from 'listed' to 'pending'
   const confirmHandler = () => {
     PUT(`/api/listing/${lisningId}/pending`).then((res) => {
       if (!res.failed) {
         history.push(`/success/order`);
       } else {
         alert("The problem occured, please try again");
+      }
+    });
+  };
+
+  const cancelOrderHandler = () => {
+    PUT(`/api/listing/${lisningId}/listed`).then((res) => {
+      if (!res.failed) {
+        history.push(`/success/cancelOrder`);
+      } else {
+        alert("The problem occured, please try again later");
       }
     });
   };
@@ -57,7 +79,7 @@ const Pickup = () => {
                   <img
                     src={listing.imageUrl}
                     className="card_image_pickUp"
-                    alt="picture of the product.name"
+                    alt="picture of the product"
                   />
                 </Col>
                 <Col className="p-0 listing_details_information ">
@@ -85,10 +107,28 @@ const Pickup = () => {
                   , {listing.region}, Alberta
                 </p>
               </div>
-              <Button className="contact_seller_button">Contact Seller</Button>
-              <Button className="confirm_button" onClick={confirmHandler}>
-                Confirm
+              <Button
+                className={
+                  purchased
+                    ? "contact_seller_button soldStatus"
+                    : "contact_seller_button"
+                }
+              >
+                Contact Seller
               </Button>
+              {!purchased && (
+                <Button className="confirm_button" onClick={confirmHandler}>
+                  Confirm
+                </Button>
+              )}
+              {pendingItem && (
+                <Button
+                  className="confirm_button mt-5 mb-5"
+                  onClick={cancelOrderHandler}
+                >
+                  Cancel Order
+                </Button>
+              )}
             </CardBody>
           </Card>
         </Container>

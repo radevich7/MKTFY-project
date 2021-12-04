@@ -19,7 +19,9 @@ const MyListings = () => {
 
   useEffect(() => {
     GET("/api/mylisting").then((res) => {
-      if (!res.failed) {
+      console.log(res);
+      if (res.failed === false) {
+        console.log("running1");
         let pending = res.data.filter(
           (listing) => listing.transactionStatus === "pending"
         );
@@ -34,6 +36,8 @@ const MyListings = () => {
         );
         setSold(sold);
         setLoading(false);
+      } else {
+        console.log("nothing");
       }
     });
   }, []);
@@ -44,7 +48,7 @@ const MyListings = () => {
   const soldItemsClass = !activeSold
     ? "myListings_items active sold_item"
     : "myListings_items sold_item";
-  console.log(listed);
+
   return (
     <Container fluid className="myListings_container">
       {loading ? (

@@ -10,11 +10,39 @@ import {
 import "../pages/MyListings/MyListings.css";
 
 const MyListingCard = (props) => {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const date = new Date(props.dateSold + "Z");
+  let day = date.getDay().toString().padStart(2, "0");
+  let month = date.getMonth();
+  let monthLetters = months[month];
+  let year = date.getFullYear();
+
   return (
     <Link
       style={{ textDecoration: "none" }}
       to={
-        props.sold
+        props.purchased
+          ? {
+              pathname: `/post/${props.id}/checkout/pickupConfirmation`,
+              state: {
+                purchased: `${props.purchased}`,
+                pending: `${props.pending}`,
+              },
+            }
+          : props.sold
           ? "#"
           : {
               pathname: `/update`,
@@ -51,6 +79,9 @@ const MyListingCard = (props) => {
           className="d-flex flex-column justify-content-center"
           style={{ height: "214px" }}
         >
+          {props.dateSold && (
+            <span className="time_output">{`${monthLetters} ${day} ${year} `}</span>
+          )}
           <CardTitle tag="h5" className="product_name">
             {props.product}
           </CardTitle>

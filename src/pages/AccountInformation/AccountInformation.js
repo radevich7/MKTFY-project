@@ -46,7 +46,6 @@ const AccountInformation = (props) => {
         6
       )} - ${user.phone.slice(6)}`
     : ``;
-  console.log(defaultPhoneValue);
 
   const submitFormHandler = (e) => {
     e.preventDefault();

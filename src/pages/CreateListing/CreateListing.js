@@ -19,6 +19,7 @@ import UploadImgModal from "./UploadImgModal";
 import PreviewContent from "./PreviewContent";
 import CustomSelect from "../../reusableComponent/CustomSelect";
 import { POSTFORMDATA, POST, PUT } from "../../api/api";
+import ListingModal from "../../reusableComponent/ListingModal";
 
 const CreateListing = (props) => {
   const history = useHistory();
@@ -198,6 +199,7 @@ const CreateListing = (props) => {
   };
 
   // SOLD LISTING BUTTON HANDLER
+
   const soldListingHandler = (e) => {
     e.preventDefault();
     PUT(`/api/listing/${props.listingId}/sold`).then((res) => {
@@ -207,6 +209,11 @@ const CreateListing = (props) => {
         alert("There has  neem a problem, please contact customer service");
       }
     });
+  };
+  // DELETE LISTING BUTTON HANDLER
+  const [toggle, setToggle] = useState(false);
+  const deleteListingHandler = (e) => {
+    setToggle(!toggle);
   };
 
   return (
@@ -432,10 +439,7 @@ const CreateListing = (props) => {
                           {props.updateButtons && !props.pending && (
                             <Button
                               className="cancel_button listing_button"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                console.log("cancel listing click");
-                              }}
+                              onClick={deleteListingHandler}
                               children={"Delete listing"}
                             />
                           )}
@@ -449,6 +453,12 @@ const CreateListing = (props) => {
                               children={"Cancel Sale"}
                             />
                           )}
+                          {/* MODAL FOR CONFIRMATION OF DELETE LISTING */}
+                          <ListingModal
+                            toggle={toggle}
+                            modalHandler={deleteListingHandler}
+                            listingId={props.listingId}
+                          />
                         </Row>
                       </CardBody>
                     </Card>

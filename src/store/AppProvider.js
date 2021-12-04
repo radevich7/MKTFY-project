@@ -20,6 +20,7 @@ const AppReducer = (state, action) => {
   switch (action.type) {
     case "SET_SIGNUPDATA":
       return { ...state, signUpData: action.signUpData };
+
     case "SET_AUTHENTICATED": {
       return { ...state, authenticated: action.authenticated };
     }
@@ -54,24 +55,20 @@ const AppProvider = (props) => {
       let user_id = decode.sub;
       dispatch({ type: "SET_AUTHENTICATED", authenticated: true });
 
-      const urlListing = "/api/Listing";
+      const urlListing = "/api/listing/category/deals?region=Calgary";
       const urlProfile = `/api/profile/${user_id}`;
-      const myListings = "/api/mylisting";
 
       const urlFAQ = `/api/FAQ`;
-      Promise.all([
-        GET(urlListing),
-        GET(urlProfile),
-        GET(urlFAQ),
-        GET(myListings),
-      ]).then((values) => {
-        // add funtionality to clear the local storage and return to login page
-        // If values failed return to the home page and restart  else dispatch all of the functions
-        dispatch({ type: "SET_ALL_LISTINGS", allListings: values[0].data });
-        dispatch({ type: "SET_USER", user: values[1].data });
-        dispatch({ type: "SET_FAQ", faq: values[2].data });
-        dispatch({ type: "SET_LOADING", loading: false });
-      });
+      Promise.all([GET(urlListing), GET(urlProfile), GET(urlFAQ)]).then(
+        (values) => {
+          // add funtionality to clear the local storage and return to login page
+          // If values failed return to the home page and restart  else dispatch all of the functions
+          dispatch({ type: "SET_ALL_LISTINGS", allListings: values[0].data });
+          dispatch({ type: "SET_USER", user: values[1].data });
+          dispatch({ type: "SET_FAQ", faq: values[2].data });
+          dispatch({ type: "SET_LOADING", loading: false });
+        }
+      );
     }
   }, [token]);
 

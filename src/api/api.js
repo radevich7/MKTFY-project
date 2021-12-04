@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 const getHeader = (type) => {
   const authStr = `Bearer ${localStorage.getItem("Auth_token")}`;
@@ -33,8 +34,7 @@ const failed = (res) => {
   //LOGOUT IF UNAUTHERIZED
   if (res.status === 401) {
     //   // POS('/Accoutn/Refreshtoken',{refreshtoken: localstorage.get('refreshtoken')}).then(res => localstorage.setItem('Auth_token', res.data.authenitcationToken)).catch(error => window.location.replace("/logout"); )
-    //   // window.location.replace("/logout");
-    console.log("UNATHORIZED");
+    window.location.replace("/logout");
   }
 
   for (const message in res.data) {

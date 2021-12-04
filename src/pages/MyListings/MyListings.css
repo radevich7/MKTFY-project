@@ -68,3 +68,8 @@
   background-color: #9349de33;
   color: #560f9f;
 }
+.time_output {
+  color: black;
+  font-size: 1.4rem;
+  padding-bottom: 5px;
+}
