@@ -46,7 +46,9 @@ const Purchases = () => {
                     price={listing.price}
                     id={listing.id}
                     dateSold={listing.dateSold}
+                    getContactInfo={true}
                     purchased={true}
+                    pending={false}
                   />
                 );
               })}
@@ -60,8 +62,9 @@ const Purchases = () => {
                     price={listing.price}
                     id={listing.id}
                     dateSold={listing.dateSold}
-                    purchased={true}
+                    getContactInfo={true}
                     pending={true}
+                    purchased={false}
                   />
                 );
               })}

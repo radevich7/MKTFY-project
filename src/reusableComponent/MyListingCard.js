@@ -34,12 +34,13 @@ const MyListingCard = (props) => {
     <Link
       style={{ textDecoration: "none" }}
       to={
-        props.purchased
+        props.getContactInfo
           ? {
               pathname: `/post/${props.id}/checkout/pickupConfirmation`,
+
               state: {
-                purchased: `${props.purchased}`,
-                pending: `${props.pending}`,
+                purchased: props.purchased,
+                pending: props.pending,
               },
             }
           : props.sold

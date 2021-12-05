@@ -8,7 +8,7 @@ import "./Pickup.css";
 
 const Pickup = () => {
   const [listing, setLisiting] = useState(null);
-  const [purchased, setPurchased] = useState();
+  const [purchasedItem, setPurchasedItem] = useState();
   const [pendingItem, setPendingItem] = useState();
   const { lisningId } = useParams();
   let history = useHistory();
@@ -21,8 +21,8 @@ const Pickup = () => {
 
   useEffect(() => {
     if (history.location.state) {
-      setPurchased(history.location.state.purchased);
-      setPendingItem(history.location.state.pending);
+      setPurchasedItem(history.location.state.purchased === "true");
+      setPendingItem(history.location.state.pending === "true");
     }
     GET(`/api/listing/${lisningId}/pickup`).then((res) => {
       setLisiting(res.data);
@@ -72,6 +72,7 @@ const Pickup = () => {
               <span className="arrow_path"> {">"} </span>
               <span>Pickup Information</span>
             </div>
+
             <CardBody className="pickup_card ">
               <h4>Pickup Information</h4>
               <Row className="listing_details m-0">
@@ -109,25 +110,24 @@ const Pickup = () => {
               </div>
               <Button
                 className={
-                  purchased
+                  purchasedItem || pendingItem
                     ? "contact_seller_button soldStatus"
                     : "contact_seller_button"
                 }
               >
                 Contact Seller
               </Button>
-              {!purchased && (
+              {pendingItem && (
+                <Button className="confirm_button" onClick={confirmHandler}>
+                  Cancel Order
+                </Button>
+              )}
+              {purchasedItem || pendingItem ? (
                 <Button className="confirm_button" onClick={confirmHandler}>
                   Confirm
                 </Button>
-              )}
-              {pendingItem && (
-                <Button
-                  className="confirm_button mt-5 mb-5"
-                  onClick={cancelOrderHandler}
-                >
-                  Cancel Order
-                </Button>
+              ) : (
+                ""
               )}
             </CardBody>
           </Card>
