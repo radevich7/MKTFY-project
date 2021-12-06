@@ -4,6 +4,7 @@ import { Container, Card, CardBody, Row, Col } from "reactstrap";
 import Button from "../../reusableComponent/Button";
 import { GET } from "../../api/api";
 import { LoadingSpinner } from "../../reusableComponent/Spinner";
+import noimage from "../../assets/noimage.png";
 import "./Checkout.css";
 
 const Checkout = () => {
@@ -15,6 +16,7 @@ const Checkout = () => {
   useEffect(() => {
     let mount = true;
     GET(`/api/listing/${listingId}/seller`).then((res) => {
+      console.log(res.data);
       if (res.failed === false) {
         setListing(res.data);
       }
@@ -47,7 +49,11 @@ const Checkout = () => {
               <Row>
                 <Col className="listing_details_img">
                   <img
-                    src={listing.images[0].url}
+                    src={
+                      listing.images.length > 0
+                        ? listing.images[0].url
+                        : noimage
+                    }
                     alt="picture of the product.name"
                     className="card_image"
                   />

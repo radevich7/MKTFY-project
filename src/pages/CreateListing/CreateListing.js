@@ -114,7 +114,7 @@ const CreateListing = (props) => {
   //  POST NEW LISTING BUTTON HANDLER
   const submitFormHandler = (e) => {
     e.preventDefault();
-
+    let data;
     let formData = new FormData();
     for (let i = 0; i < uploadFile.length; i++) {
       formData.append("File[]", uploadFile[i]);
@@ -125,18 +125,19 @@ const CreateListing = (props) => {
       if (res.failed === false) {
         uploadedImages = res.data;
 
-        let data = {
+        data = {
           ...newListing,
           uploadIds: uploadedImages.flatMap((val) => Object.values(val)),
         };
-        // console.log(data);
-        POST("/api/Listing", data).then((res) => console.log(res));
+        console.log(data);
       } else {
         alert(
           "Unfortunately, the offer can not be posted at this time, please try again later"
         );
       }
     });
+    console.log(data);
+    // POST("/api/Listing", data).then((res) => console.log(res));
     // Reset the form
     e.target.reset();
     setCategory();
@@ -182,7 +183,7 @@ const CreateListing = (props) => {
           ],
           id: props.listingId,
         };
-
+        console.log(data);
         PUT(`/api/listing/${props.listingId}`, data).then((res) => {
           if (!res.failed) {
             history.push("/success/updateOffer");

@@ -4,14 +4,17 @@ import Button from "../../reusableComponent/Button";
 import { Container, Card, CardBody, Row, Col } from "reactstrap";
 import { LoadingSpinner } from "../../reusableComponent/Spinner";
 import { GET, PUT } from "../../api/api";
+import noimage from "../../assets/noimage.png";
 import "./Pickup.css";
 
 const Pickup = () => {
   const [listing, setLisiting] = useState(null);
   const [purchasedItem, setPurchasedItem] = useState();
   const [pendingItem, setPendingItem] = useState();
-  const { lisningId } = useParams();
+  const id = useParams();
+  const listingId = Object.values(id).toString();
   let history = useHistory();
+  console.log(listingId);
 
   // Passed through the router history the state to check if the item is sold in order to remove button from the UI
 
@@ -20,18 +23,18 @@ const Pickup = () => {
   // STATUS OF THE LISTING, if pending don't show the butoon to buy.
 
   useEffect(() => {
-    if (history.location.state) {
-      setPurchasedItem(history.location.state.purchased === "true");
-      setPendingItem(history.location.state.pending === "true");
-    }
-    GET(`/api/listing/${lisningId}/pickup`).then((res) => {
+    GET(`/api/listing/${listingId}/pickup`).then((res) => {
       setLisiting(res.data);
     });
+    // if (history.location.state) {
+    //   setPurchasedItem(history.location.state.purchased === "true");
+    //   setPendingItem(history.location.state.pending === "true");
+    // }
   }, []);
 
   // COnfirm handler, sends PUT request to change status of the listing from 'listed' to 'pending'
   const confirmHandler = () => {
-    PUT(`/api/listing/${lisningId}/pending`).then((res) => {
+    PUT(`/api/listing/${listingId}/pending`).then((res) => {
       if (!res.failed) {
         history.push(`/success/order`);
       } else {
@@ -41,7 +44,7 @@ const Pickup = () => {
   };
 
   const cancelOrderHandler = () => {
-    PUT(`/api/listing/${lisningId}/listed`).then((res) => {
+    PUT(`/api/listing/${listingId}/listed`).then((res) => {
       if (!res.failed) {
         history.push(`/success/cancelOrder`);
       } else {
@@ -62,11 +65,11 @@ const Pickup = () => {
                 <span>home</span>
               </Link>
               <span className="arrow_path">{">"}</span>
-              <Link to={`/post/${lisningId}`} className="link_home">
+              <Link to={`/post/${listingId}`} className="link_home">
                 <span>product listing</span>
               </Link>
               <span className="arrow_path"> {">"} </span>
-              <Link to={`/post/${lisningId}/checkout`} className="link_home">
+              <Link to={`/post/${listingId}/checkout`} className="link_home">
                 <span>Checkout</span>
               </Link>
               <span className="arrow_path"> {">"} </span>
@@ -78,7 +81,7 @@ const Pickup = () => {
               <Row className="listing_details m-0">
                 <Col lg="6" className="listing_details_img">
                   <img
-                    src={listing.imageUrl}
+                    src={listing.imageUrl ? listing.imageUrl : noimage}
                     className="card_image_pickUp"
                     alt="picture of the product"
                   />

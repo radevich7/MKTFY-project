@@ -2,18 +2,20 @@ import { useEffect, useRef, useState } from "react";
 import { Fragment } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Col, Row, Container } from "reactstrap";
-
+import noimage from "../../assets/noimage.png";
 import "./ListingCarousel.css";
 
 const ListingCarousel = (props) => {
   const carouselItemsRef = useRef();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const [selectedImage, setSelectedImage] = useState(
-    props.images[selectedImageIndex].url
-  );
+  const [selectedImage, setSelectedImage] = useState([]);
 
   useEffect(() => {
-    setSelectedImage(props.images[selectedImageIndex].url);
+    if (props.images.length > 0) {
+      setSelectedImage(props.images[selectedImageIndex].url);
+    } else {
+      setSelectedImage(noimage);
+    }
   }, [selectedImageIndex]);
 
   const handleSelectedImageChange = (index) => {

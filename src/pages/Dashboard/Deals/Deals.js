@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 
 import { Link } from "react-router-dom";
-
+import noimage from "../../../assets/noimage.png";
 import {
   Card,
   CardImg,
@@ -96,7 +96,11 @@ const Deals = (props) => {
                           <div className="image_deals_container">
                             <CardImg
                               top
-                              src={item.images[0].url}
+                              src={
+                                item.images.length > 0
+                                  ? item.images[0].url
+                                  : noimage
+                              }
                               alt={`The image shows ${item.product}`}
                               className="image_deals"
                             />

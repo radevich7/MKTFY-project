@@ -13,6 +13,7 @@ code {
 }
 html {
   font-size: 10px;
+  min-height: 100%;
 }
 body {
   font-size: 10px;

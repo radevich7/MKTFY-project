@@ -134,15 +134,15 @@ const AppRouter = () => {
             component={MainPageContent}
           />
 
-          <ProtectedRoute path="/post/:lisningId" exact component={Listing} />
+          <ProtectedRoute path="/post/:listingId" exact component={Listing} />
 
           <ProtectedRoute
-            path="/post/:lisningId/checkout"
+            path="/post/:listingId/checkout"
             exact
             component={Checkout}
           />
           <ProtectedRoute
-            path="/post/:lisningId/checkout/pickupConfirmation"
+            path="/post/:listingId/checkout/pickupConfirmation"
             exact
             component={Pickup}
           />
