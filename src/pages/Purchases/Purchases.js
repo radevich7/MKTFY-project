@@ -9,7 +9,7 @@ const Purchases = () => {
   const [loading, setLoading] = useState(true);
   const [purchased, setPurchased] = useState(null);
   const [pending, setPending] = useState(null);
-
+  console.log(pending);
   useEffect(() => {
     GET("/api/mypurchases").then((res) => {
       if (!res.failed) {

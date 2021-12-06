@@ -1,10 +1,10 @@
 .purchases_container {
   padding-top: 312px;
+  height: 100vh;
 }
 .border_document_purchases {
   max-width: 1636px;
   margin: 0 auto;
-  background-color: transparent;
 }
 .purchases_card {
   max-width: 808px;

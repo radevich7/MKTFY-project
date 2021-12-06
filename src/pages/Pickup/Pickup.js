@@ -8,31 +8,28 @@ import noimage from "../../assets/noimage.png";
 import "./Pickup.css";
 
 const Pickup = () => {
+  let history = useHistory();
   const [listing, setLisiting] = useState(null);
-  const [purchasedItem, setPurchasedItem] = useState();
-  const [pendingItem, setPendingItem] = useState();
+  // Check if status  is either purchased or pending, set states to value otherwise to null
+  const [purchasedItem, setPurchasedItem] = useState(
+    history.location.state ? history.location.state.purchased : null
+  );
+  const [pendingItem, setPendingItem] = useState(
+    history.location.state ? history.location.state.pending : null
+  );
+  // Getting id
   const id = useParams();
   const listingId = Object.values(id).toString();
-  let history = useHistory();
-  console.log(listingId);
 
-  // Passed through the router history the state to check if the item is sold in order to remove button from the UI
-
-  //
-
-  // STATUS OF THE LISTING, if pending don't show the butoon to buy.
-
+  // Making a call to get a listing from the backend
   useEffect(() => {
     GET(`/api/listing/${listingId}/pickup`).then((res) => {
       setLisiting(res.data);
     });
-    // if (history.location.state) {
-    //   setPurchasedItem(history.location.state.purchased === "true");
-    //   setPendingItem(history.location.state.pending === "true");
-    // }
   }, []);
 
-  // COnfirm handler, sends PUT request to change status of the listing from 'listed' to 'pending'
+  console.log(listing);
+  // Confirm handler, sends PUT request to change status of the listing from 'listed' to 'pending'
   const confirmHandler = () => {
     PUT(`/api/listing/${listingId}/pending`).then((res) => {
       if (!res.failed) {
@@ -43,15 +40,15 @@ const Pickup = () => {
     });
   };
 
-  const cancelOrderHandler = () => {
-    PUT(`/api/listing/${listingId}/listed`).then((res) => {
-      if (!res.failed) {
-        history.push(`/success/cancelOrder`);
-      } else {
-        alert("The problem occured, please try again later");
-      }
-    });
-  };
+  // const cancelOrderHandler = () => {
+  //   PUT(`/api/listing/${listingId}/listed`).then((res) => {
+  //     if (!res.failed) {
+  //       history.push(`/success/cancelOrder`);
+  //     } else {
+  //       alert("The problem occured, please try again later");
+  //     }
+  //   });
+  // };
 
   return (
     <>
@@ -60,21 +57,32 @@ const Pickup = () => {
       ) : (
         <Container fluid className="pickup_container">
           <Card className="border_document_pickup ">
-            <div className="page_path">
-              <Link to="/home" className="link_home">
-                <span>home</span>
-              </Link>
-              <span className="arrow_path">{">"}</span>
-              <Link to={`/post/${listingId}`} className="link_home">
-                <span>product listing</span>
-              </Link>
-              <span className="arrow_path"> {">"} </span>
-              <Link to={`/post/${listingId}/checkout`} className="link_home">
-                <span>Checkout</span>
-              </Link>
-              <span className="arrow_path"> {">"} </span>
-              <span>Pickup Information</span>
-            </div>
+            {purchasedItem || pendingItem ? (
+              <div className="page_path">
+                <Link to="/home/purchases" className="link_home">
+                  <span>My Purchase</span>
+                </Link>
+                <span className="arrow_path">{">"}</span>
+
+                <span>Pickup Information</span>
+              </div>
+            ) : (
+              <div className="page_path">
+                <Link to="/home" className="link_home">
+                  <span>home</span>
+                </Link>
+                <span className="arrow_path">{">"}</span>
+                <Link to={`/post/${listingId}`} className="link_home">
+                  <span>product listing</span>
+                </Link>
+                <span className="arrow_path"> {">"} </span>
+                <Link to={`/post/${listingId}/checkout`} className="link_home">
+                  <span>Checkout</span>
+                </Link>
+                <span className="arrow_path"> {">"} </span>
+                <span>Pickup Information</span>
+              </div>
+            )}
 
             <CardBody className="pickup_card ">
               <h4>Pickup Information</h4>
@@ -111,21 +119,13 @@ const Pickup = () => {
                   , {listing.region}, Alberta
                 </p>
               </div>
-              <Button
-                className={
-                  purchasedItem || pendingItem
-                    ? "contact_seller_button soldStatus"
-                    : "contact_seller_button"
-                }
-              >
-                Contact Seller
-              </Button>
-              {pendingItem && (
+              <Button className="contact_seller_button">Contact Seller</Button>
+              {/* {pendingItem && (
                 <Button className="confirm_button" onClick={confirmHandler}>
                   Cancel Order
                 </Button>
-              )}
-              {purchasedItem || pendingItem ? (
+              )} */}
+              {!purchasedItem && !pendingItem ? (
                 <Button className="confirm_button" onClick={confirmHandler}>
                   Confirm
                 </Button>

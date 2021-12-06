@@ -57,7 +57,7 @@
   width: 91.5%;
   margin: 0 auto;
   display: block;
-  margin-top: 64px;
+  margin-top: 108px;
   margin-bottom: 49px;
   background-color: #9349de33;
   box-shadow: none;
@@ -155,10 +155,6 @@ mark {
   height: 125px;
   object-fit: contain;
 }
-.soldStatus {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  margin-top: 74px;
-}
+
 @media (max-width: 1400px) {
 }
