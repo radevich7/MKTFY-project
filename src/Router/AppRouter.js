@@ -128,11 +128,7 @@ const AppRouter = () => {
           <ProtectedRoute path="/logout" exact component={LogoutLogic} />
 
           <ProtectedRoute path="/home" exact component={Dashboard} />
-          <ProtectedRoute
-            path="/content/:categoryId"
-            exact
-            component={MainPageContent}
-          />
+          <ProtectedRoute path="/content" exact component={MainPageContent} />
 
           <ProtectedRoute path="/post/:listingId" exact component={Listing} />
 

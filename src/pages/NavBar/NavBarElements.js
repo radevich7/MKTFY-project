@@ -1,8 +1,10 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import AppContext from "../../store/app-context";
 import gold_caret from "../../assets/img/gold_caret.svg";
 import exit_app from "../../assets/img/exit_to_app-24px.svg";
 import notification_bell from "../../assets/img/notification_bell_main.svg";
+import { IoMdSearch } from "react-icons/io";
 import { Link } from "react-router-dom";
 import {
   Row,
@@ -17,8 +19,8 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
-  Button,
+  InputGroupText,
+  InputGroup,
 } from "reactstrap";
 
 import search_icon from "../../assets/img/search_icon.svg";
@@ -29,10 +31,41 @@ import icon_deals from "../../assets/icon_deals.svg";
 import icon_furniture from "../../assets/icon_furniture.svg";
 import icon_realestate from "../../assets/icon_realestate.svg";
 import hambuger_icon_categories from "../../assets/hambuger_icon_categories.svg";
+import { GET } from "../../api/api";
 
 export const SearchInput = (props) => {
+  const [store, dispatch] = useContext(AppContext);
+  const history = useHistory();
+
+  const [searchInputValue, setSearchInputValue] = useState();
+  const [city, setCity] = useState("Calgary");
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
+
+  const searchInputHanlder = (e) => {
+    setSearchInputValue(e.target.value);
+  };
+
+  // const clear = (e) => {
+  //   setSearchInputValue();
+  // };
+  const submitSearchHandler = (e) => {
+    e.preventDefault();
+
+    GET(
+      `/api/listing/search?searchTerm=${searchInputValue}&region=${city}`
+    ).then((res) => {
+      if (!res.failed) {
+        dispatch({ type: "SET_SEARCH_LISTINGS", searchListings: res.data });
+
+        // Pushing to the content page and setting the state to search
+        history.push("/content/", { state: "search" });
+      } else {
+        alert("Something went wrong, please try again later");
+      }
+    });
+  };
 
   return (
     <Row className="searchInput_container g-0">
@@ -48,15 +81,21 @@ export const SearchInput = (props) => {
       </Col>
       {/* SEARCH INPUT */}
       <Col className="border-custom">
-        <Form>
-          {/* <img className="icon_style1" src={search_icon} alt="/" /> */}
-          <Input
-            type="search"
-            name="search"
-            id="exampleSearch"
-            placeholder="Search on MKTFY"
-            className="search_input"
-          />
+        <Form onSubmit={submitSearchHandler}>
+          <InputGroup>
+            <Input
+              type="search"
+              id="exampleSearch"
+              placeholder="Search on MKTFY"
+              className="search_input"
+              onChange={searchInputHanlder}
+              defaultValue={searchInputValue}
+            />
+
+            <InputGroupText className="search_icon">
+              <IoMdSearch style={{ cursor: "pointer" }} />
+            </InputGroupText>
+          </InputGroup>
         </Form>
       </Col>
       {/* DROPDOWN CITY */}

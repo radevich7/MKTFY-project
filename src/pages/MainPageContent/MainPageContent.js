@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { useParams, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import AppContext from "../../store/app-context";
 import "../MainPageContent/MainPageContent.css";
 
 import {
@@ -14,20 +15,32 @@ import {
 } from "reactstrap";
 import { GET } from "../../api/api";
 const MainPageContent = () => {
-  const [category, setCategory] = useState([]);
-  const id = useParams();
-  const listingId = Object.values(id).toString();
+  const [store, dispatch] = useContext(AppContext);
+  const history = useHistory();
+  const [listings, setListings] = useState([]);
+  // setting the page either to output result for search field or for categories
+  const [page, setPage] = useState(history.location.state.state);
+  // const urlCategories = `/api/listing/category/${listingId}`;
 
-  const url = `/api/listing/category/${listingId}`;
   useEffect(() => {
-    GET(url).then((res) => console.log(res));
-    // setCategory(store.allListings.filter((val) => val.categoryId == listingId));
-  }, [listingId]);
-  console.log(category);
+    if (page == "search") {
+      setListings(store.searchListings);
+    }
+    // GET(url).then((res) => console.log(res));
+  }, [store.searchListings]);
+  // const id = useParams();
+  // const listingId = Object.values(id).toString();
+
+  // const url = `/api/listing/category/${listingId}`;
+  // useEffect(() => {
+  //   GET(url).then((res) => console.log(res));
+  //   setCategory(store.allListings.filter((val) => val.categoryId == listingId));
+  // }, [listingId]);
+  // console.log(category);
   return (
     <Container fluid className="mainContent_container">
       <Row className="border_document_mainContent">
-        {category.map((item) => (
+        {listings.map((item) => (
           <Col lg="2" key={item.id} className="column_deals">
             <Link
               style={{ textDecoration: "none" }}

@@ -93,7 +93,6 @@ const Dashboard = () => {
     setcategoriesDeals(dummy_data.filter((val) => val.id < 4));
   }, []);
 
-  console.log(deals);
   return (
     <Container fluid className="dashboard_container">
       <Row className="border_document_dashboard row">

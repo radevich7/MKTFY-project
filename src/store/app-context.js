@@ -7,7 +7,7 @@ const AppContext = React.createContext({
   faq: [],
   signUpData: [],
   allListings: [],
-  choosenListing: [],
+  searchListings: [],
 });
 
 export default AppContext;

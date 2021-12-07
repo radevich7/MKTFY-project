@@ -414,13 +414,20 @@
   line-height: 0;
 }
 .search_input.form-control:focus {
-  box-shadow: 0 0 0 0.25rem rgb(99 24 175 / 25%);
+  box-shadow: none;
 }
 
 .search_input::placeholder {
   font-size: 1.4rem;
+  padding-left: 49px;
 }
-
+.search_icon {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  padding: 0;
+  margin-right: 30px;
+}
 /* NEw */
 
 /* Seatch INPUT COLUMN */
@@ -433,7 +440,6 @@
 }
 
 .search_input {
-  height: 20px;
   border: none;
   font-size: 1.6rem;
 }

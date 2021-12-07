@@ -12,7 +12,7 @@ const initialState = {
   faq: [],
   signUpData: [],
   allListings: [],
-  choosenListing: [],
+  searchListings: [],
   electronics: [],
 };
 
@@ -31,8 +31,8 @@ const AppReducer = (state, action) => {
       return { ...state, allListings: action.allListings };
     }
 
-    case "SET_CHOOSEN_LISTING": {
-      return { ...state, choosenListing: action.choosenListing };
+    case "SET_SEARCH_LISTINGS": {
+      return { ...state, searchListings: action.searchListings };
     }
     case "SET_USER": {
       return { ...state, user: action.user };
