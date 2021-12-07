@@ -72,7 +72,7 @@ const MyListingCard = (props) => {
             alt="Card image cap"
             src={props.imageUrl}
             top
-            style={{ height: "214px" }}
+            style={{ height: "214px", objectFit: "cover" }}
           />
         </Col>
 

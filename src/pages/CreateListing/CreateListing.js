@@ -133,15 +133,15 @@ const CreateListing = (props) => {
           ...newListing,
           uploadIds: uploadedImages.flatMap((val) => Object.values(val)),
         };
-        console.log(data);
+        // console.log(data);
+        POST("/api/Listing", data).then((res) => console.log(res));
       } else {
         alert(
           "Unfortunately, the offer can not be posted at this time, please try again later"
         );
       }
     });
-    console.log(data);
-    // POST("/api/Listing", data).then((res) => console.log(res));
+
     // Reset the form
     e.target.reset();
     setCategory();

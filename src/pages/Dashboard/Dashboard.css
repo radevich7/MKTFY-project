@@ -63,15 +63,10 @@ div.card {
   width: 236px;
 }
 
-.image_deals_container {
-  /* word-wrap: break-word; */
-  width: 100%;
-  height: 100%;
-}
 .image_deals {
   width: 100%;
   height: 235px;
-  object-fit: cover;
+  object-fit: contain;
   max-height: 235px;
   /* width: auto; */
   max-width: 236px;
