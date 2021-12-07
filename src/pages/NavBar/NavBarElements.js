@@ -58,7 +58,7 @@ export const SearchInput = (props) => {
     ).then((res) => {
       if (!res.failed) {
         dispatch({ type: "SET_SEARCH_LISTINGS", searchListings: res.data });
-
+        setSearchInputValue("");
         // Pushing to the content page and setting the state to search
         history.push("/content/", { state: "search" });
       } else {
