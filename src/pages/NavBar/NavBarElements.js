@@ -35,6 +35,7 @@ import { GET } from "../../api/api";
 
 export const SearchInput = (props) => {
   const [store, dispatch] = useContext(AppContext);
+
   const history = useHistory();
 
   const [searchInputValue, setSearchInputValue] = useState();
@@ -43,22 +44,22 @@ export const SearchInput = (props) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
-  const searchInputHanlder = (e) => {
-    setSearchInputValue(e.target.value);
-  };
-
-  // const clear = (e) => {
-  //   setSearchInputValue();
-  // };
   const submitSearchHandler = (e) => {
     e.preventDefault();
-
     GET(
       `/api/listing/search?searchTerm=${searchInputValue}&region=${city}`
     ).then((res) => {
+      console.log(res.data.length);
       if (!res.failed) {
-        dispatch({ type: "SET_SEARCH_LISTINGS", searchListings: res.data });
+        if (res.data.length > 0) {
+          dispatch({ type: "SET_SEARCH_LISTINGS", searchListings: res.data });
+        } else {
+          dispatch({ type: "SET_SEARCH_LISTINGS", searchListings: null });
+        }
+
         setSearchInputValue("");
+        e.target[0].value = "";
+
         // Pushing to the content page and setting the state to search
         history.push("/content/", { state: "search" });
       } else {
@@ -88,13 +89,14 @@ export const SearchInput = (props) => {
               id="exampleSearch"
               placeholder="Search on MKTFY"
               className="search_input"
-              onChange={searchInputHanlder}
+              onChange={(e) => setSearchInputValue(e.target.value)}
               defaultValue={searchInputValue}
+              required
             />
 
-            <InputGroupText className="search_icon">
+            <button className="search_icon">
               <IoMdSearch style={{ cursor: "pointer" }} />
-            </InputGroupText>
+            </button>
           </InputGroup>
         </Form>
       </Col>

@@ -428,6 +428,9 @@
   padding: 0;
   margin-right: 30px;
 }
+.search_icon:hover {
+  color: #6318af;
+}
 /* NEw */
 
 /* Seatch INPUT COLUMN */

@@ -90,25 +90,25 @@ const Deals = (props) => {
                       style={{ textDecoration: "none" }}
                       to={{ pathname: `/post/${item.id}` }}
                     >
-                      <Card className="mt-0 border-0 ">
-                        <CardBody className="deals_card p-0 border-0">
+                      <Card className="mt-0 border-0 deals_card">
+                        <CardImg
+                          top
+                          src={item.images[0].url}
+                          alt={`The image shows ${item.product}`}
+                          className="image_deals"
+                          top
+                          width="100%"
+                        />
+                        <CardBody className="p-0 deals_cardBody border-0 d-flex flex-column justify-content-between">
                           {/* Content of the card */}
-                          <div className="image_deals_container">
-                            <CardImg
-                              top
-                              src={
-                                item.images.length > 0
-                                  ? item.images[0].url
-                                  : noimage
-                              }
-                              alt={`The image shows ${item.product}`}
-                              className="image_deals"
-                            />
-                          </div>
-                          <h5 className="deals_title">{item.product}</h5>
+
+                          <CardTitle className="deals_title">
+                            {item.product}
+                          </CardTitle>
                           <CardSubtitle tag="h6" className="deals_price">
                             $ {item.price.toFixed(2)}
                           </CardSubtitle>
+
                           {/* end card */}
                         </CardBody>
                       </Card>
