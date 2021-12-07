@@ -24,6 +24,7 @@ const Pickup = () => {
   // Making a call to get a listing from the backend
   useEffect(() => {
     GET(`/api/listing/${listingId}/pickup`).then((res) => {
+      console.log(res.data);
       setLisiting(res.data);
     });
   }, []);

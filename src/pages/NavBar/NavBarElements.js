@@ -39,7 +39,6 @@ export const SearchInput = (props) => {
   const history = useHistory();
 
   const [searchInputValue, setSearchInputValue] = useState();
-  const [city, setCity] = useState("Calgary");
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -47,9 +46,8 @@ export const SearchInput = (props) => {
   const submitSearchHandler = (e) => {
     e.preventDefault();
     GET(
-      `/api/listing/search?searchTerm=${searchInputValue}&region=${city}`
+      `/api/listing/search?searchTerm=${searchInputValue}&region=${props.city}`
     ).then((res) => {
-      console.log(res.data.length);
       if (!res.failed) {
         if (res.data.length > 0) {
           dispatch({ type: "SET_SEARCH_LISTINGS", searchListings: res.data });
@@ -78,7 +76,9 @@ export const SearchInput = (props) => {
           aria-label="Toggle navigation"
           className="d-xl d-xl-none"
         />
-        <span className="output_categories_span d-none d-xl-flex">All</span>
+        <span className="output_categories_span d-none d-xl-flex">
+          {props.category}
+        </span>
       </Col>
       {/* SEARCH INPUT */}
       <Col className="border-custom">
@@ -111,14 +111,15 @@ export const SearchInput = (props) => {
             tag="span"
             data-toggle="dropdown"
             aria-expanded={dropdownOpen}
-            className="dropDownToggle_search_card"
+            className="dropDownToggle_search_card d-flex justify-content-center"
+            width="100%"
           >
-            <img src={blackCaretDown} alt="/" />
-            <h3>City</h3>
+            <img src={blackCaretDown} alt="/" className="caretDown" />
+
+            <h3>{props.city}</h3>
           </DropdownToggle>
           <DropdownMenu className="dropDownCustom_search_card arrow_city_search">
-            <div className="dropDown_search_input2">
-              <img src={search_icon} alt="/" className="icon_style2" />
+            <InputGroup className="dropDown_search_input2">
               <Input
                 type="search"
                 name="search"
@@ -126,11 +127,28 @@ export const SearchInput = (props) => {
                 placeholder="Search City"
                 className="searchInput_city"
               />
-            </div>
-
-            <DropdownItem className="dropDownItem">Brooks </DropdownItem>
-            <DropdownItem className="dropDownItem">Camrose</DropdownItem>
-            <DropdownItem className="dropDownItem">Calgary</DropdownItem>
+              <span className="dropdownSearch_icon">
+                <IoMdSearch style={{ cursor: "pointer" }} />
+              </span>
+            </InputGroup>
+            <DropdownItem
+              className="dropDownItem"
+              onClick={(e) => props.setCity("Brooks")}
+            >
+              Brooks
+            </DropdownItem>
+            <DropdownItem
+              className="dropDownItem"
+              onClick={(e) => props.setCity("Camrose")}
+            >
+              Camrose
+            </DropdownItem>
+            <DropdownItem
+              className="dropDownItem"
+              onClick={(e) => props.setCity("Calgary")}
+            >
+              Calgary
+            </DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </Col>
@@ -141,36 +159,87 @@ export const SearchInput = (props) => {
 // CATEGORIES  ELEMENT
 
 export const Categories = (props) => {
+  const [store, dispatch] = useContext(AppContext);
+  const history = useHistory();
+
+  const saveChanges = (category) => {
+    GET(`/api/listing/category/${category}?region=${props.city}`).then(
+      (res) => {
+        if (!res.failed) {
+          if (res.data.length > 0) {
+            dispatch({ type: "SET_SEARCH_LISTINGS", searchListings: res.data });
+          } else {
+            dispatch({ type: "SET_SEARCH_LISTINGS", searchListings: null });
+          }
+          // Pushing to the content page and setting the state to search
+          history.push("/content/", { state: "search" });
+        } else {
+          alert("Something went wrong, please try again later");
+        }
+      }
+    );
+  };
+
   return (
     <Col className="categories_column ">
       <div className="wrap_content scrool_effect">
-        <Link to="#" className="category_header d-none d-md-flex nav-link">
+        <span className="category_header d-none d-md-flex nav-link">
           <img
             src={hambuger_icon_categories}
             className="d-none d-md-flex pe-3"
             alt="/"
           />
           Categories
-        </Link>
-        <Link to="#" className="nav-link">
+        </span>
+        <span
+          className="nav-link"
+          onClick={(e) => {
+            saveChanges("deals");
+            props.setCategory("All");
+          }}
+        >
           {/* <img src={icon_deals} alt="/" /> */}
           Deals
-        </Link>
-        <Link to="/content/1" className="nav-link">
+        </span>
+        <span
+          className="nav-link"
+          onClick={(e) => {
+            saveChanges(1);
+            props.setCategory("Cars & Vehicles");
+          }}
+        >
           {/* <img src={icon_car} alt="/" /> */}
           Cars & Vehicles
-        </Link>
-        <Link to="/content/2" className="nav-link">
+        </span>
+        <span
+          className="nav-link"
+          onClick={(e) => {
+            saveChanges(2);
+            props.setCategory("Furniture");
+          }}
+        >
           Furniture
-        </Link>
-        <Link to="/content/3" className="nav-link">
+        </span>
+        <span
+          className="nav-link"
+          onClick={(e) => {
+            saveChanges(3);
+            props.setCategory("Electronics");
+          }}
+        >
           {/* <img src={icon_computer} alt="/" /> */}
           Electronics
-        </Link>
-        <Link to="/content/4" className="nav-link">
+        </span>
+        <span
+          className="nav-link"
+          onClick={(e) => {
+            saveChanges(4);
+            props.setCategory("Real Estate");
+          }}
+        >
           {/* <img src={icon_realestate} alt="/" /> */}
           Real Estate
-        </Link>
+        </span>
       </div>
     </Col>
   );

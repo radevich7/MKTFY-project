@@ -79,7 +79,7 @@
 }
 .dropDownCustom_search_card {
   width: 315px;
-  transform: translate3d(-24.7rem, 61px, 0px) !important;
+  transform: translate3d(-27rem, 61px, 0px) !important;
   box-shadow: 0px 3px 6px #00000029;
   opacity: 1;
   font-size: 1.4rem;
@@ -107,6 +107,12 @@
   padding: 0.8rem 1rem;
   position: relative;
   width: 100%;
+}
+
+.caretDown {
+  position: relative;
+  top: 45%;
+  /* left: 17px; */
 }
 .searchInput_city {
   height: 40px;
@@ -153,6 +159,7 @@
   color: #ffffff;
   font-size: 1.7rem;
   font-weight: 500;
+  cursor: pointer;
   /* margin: 12px 10px; */
 }
 .nav-link:hover {
@@ -427,6 +434,14 @@
   font-size: 2rem;
   padding: 0;
   margin-right: 30px;
+}
+.dropdownSearch_icon {
+  position: absolute;
+
+  font-size: 2rem;
+  padding: 0;
+  left: 30px;
+  top: 20%;
 }
 .search_icon:hover {
   color: #6318af;

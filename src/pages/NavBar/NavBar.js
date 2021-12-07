@@ -24,6 +24,8 @@ import { Categories } from "./NavBarElements";
 
 const NavBar = () => {
   const [open, setIsOpen] = useState(false);
+  const [city, setCity] = useState("Calgary");
+  const [category, setCategory] = useState("All");
   const toggleNav = () => setIsOpen((prevState) => !prevState);
   return (
     // NAVBAR
@@ -40,8 +42,17 @@ const NavBar = () => {
             <img src={mainLogo} alt="/" />
           </Link>
           <Col className="form-group  me-4 me-2 col-xl-7 col-lg-8 col-md-9 col-12 ">
-            <SearchInput toggleNav={toggleNav} />
-            <Categories />
+            <SearchInput
+              toggleNav={toggleNav}
+              setCity={setCity}
+              city={city}
+              category={category}
+            />
+            <Categories
+              city={city}
+              setCategory={setCategory}
+              category={category}
+            />
           </Col>
 
           <Collapse navbar>

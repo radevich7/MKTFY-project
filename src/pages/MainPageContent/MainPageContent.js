@@ -19,27 +19,16 @@ const MainPageContent = () => {
   const [store, dispatch] = useContext(AppContext);
   const history = useHistory();
   const [listings, setListings] = useState();
-  const [noFound, setNoFound] = useState();
   // setting the page either to output result for search field or for categories
   const [page, setPage] = useState(history.location.state.state);
-  // const urlCategories = `/api/listing/category/${listingId}`;
 
   console.log(store.searchListings);
   useEffect(() => {
     if (page == "search") {
       setListings(store.searchListings);
     }
-    // GET(url).then((res) => console.log(res));
   }, [store.searchListings]);
-  // const id = useParams();
-  // const listingId = Object.values(id).toString();
 
-  // const url = `/api/listing/category/${listingId}`;
-  // useEffect(() => {
-  //   GET(url).then((res) => console.log(res));
-  //   setCategory(store.allListings.filter((val) => val.categoryId == listingId));
-  // }, [listingId]);
-  // console.log(category);
   return (
     <Container fluid className="mainContent_container">
       <Row className="border_document_mainContent">
