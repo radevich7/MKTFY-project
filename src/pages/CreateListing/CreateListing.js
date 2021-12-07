@@ -114,6 +114,10 @@ const CreateListing = (props) => {
   //  POST NEW LISTING BUTTON HANDLER
   const submitFormHandler = (e) => {
     e.preventDefault();
+    if (!uploadFile) {
+      return alert("Please add an image to a page (min 1)");
+    }
+
     let data;
     let formData = new FormData();
     for (let i = 0; i < uploadFile.length; i++) {
@@ -163,6 +167,9 @@ const CreateListing = (props) => {
   // SAVE CHANGES BUTTON HANDLER
   const saveChangesHanler = (e) => {
     e.preventDefault();
+    if (!uploadFile) {
+      return alert("Please add an image to a page (min 1)");
+    }
     let newFiles = uploadFile.filter((val) => val.path);
     let oldFiles = uploadFile.filter((val) => typeof val === "string");
     let formData = new FormData();
