@@ -13,13 +13,19 @@ code {
 }
 html {
   font-size: 10px;
-  min-height: 100%;
+  height: 100%;
 }
 body {
+  min-height: 100%;
+
   font-size: 10px;
   background-image: url("./assets/imgBackgoundGreyWaves.svg");
   background-attachment: fixed;
   background-color: transparent;
   background-position: bottom;
   position: relative;
+}
+
+#root {
+  min-height: 100%;
 }

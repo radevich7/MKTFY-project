@@ -1,10 +1,5 @@
 .pickup_container {
-  height: 100vh;
-  background-image: url("../../assets/imgBackgoundGreyWaves.svg");
-  background-attachment: fixed;
-  background-position: 50% 50%;
   padding-top: 312px;
-  background-color: #f4f4f5;
 }
 .border_document_pickup {
   max-width: 1636px;

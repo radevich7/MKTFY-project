@@ -1,5 +1,4 @@
 .body_spinner {
-  height: 100vh;
   background-image: url("../../assets/spinner_background.svg") !important;
   background-size: cover;
   background-repeat: no-repeat;

@@ -1,9 +1,11 @@
 /* LOADING SPINNER */
 .lds-dual-ring {
-  display: inline-block;
+  display: flex;
   width: 200px;
   height: 200px;
-  /* height: 100vh; */
+  height: 100vh;
+  margin: auto;
+  align-items: center;
 }
 .lds-dual-ring:after {
   content: " ";

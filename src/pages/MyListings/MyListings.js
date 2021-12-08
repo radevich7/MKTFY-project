@@ -19,7 +19,6 @@ const MyListings = () => {
 
   useEffect(() => {
     GET("/api/mylisting").then((res) => {
-      console.log(res);
       if (res.failed === false) {
         console.log("running1");
         let pending = res.data.filter(
@@ -50,11 +49,11 @@ const MyListings = () => {
     : "myListings_items sold_item";
 
   return (
-    <Container fluid className="myListings_container">
+    <Fragment>
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <Fragment>
+        <Container fluid className="myListings_container">
           <div className="border_document_myListings">
             <h1 className="myListing_header">My Listings</h1>
             <div>
@@ -128,9 +127,9 @@ const MyListings = () => {
               </CardGroup>
             )}
           </div>
-        </Fragment>
+        </Container>
       )}
-    </Container>
+    </Fragment>
   );
 };
 
