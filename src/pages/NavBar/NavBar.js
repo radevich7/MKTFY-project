@@ -38,7 +38,11 @@ const NavBar = () => {
         dark
       >
         <Container className="navbar_container align-items-start" fluid>
-          <Link to="/home" className="navbar-brand pt-4 me-4 d-none d-lg-flex">
+          <Link
+            to="/home"
+            onClick={(e) => setCategory("All")}
+            className="navbar-brand pt-4 me-4 d-none d-lg-flex"
+          >
             <img src={mainLogo} alt="/" />
           </Link>
           <Col className="form-group  me-4 me-2 col-xl-7 col-lg-8 col-md-9 col-12 ">

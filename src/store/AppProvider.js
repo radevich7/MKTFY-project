@@ -12,7 +12,7 @@ const initialState = {
   faq: [],
   signUpData: [],
   allListings: [],
-  searchListings: null,
+  searchListings: [],
   electronics: [],
 };
 
