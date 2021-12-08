@@ -1,5 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Row } from "reactstrap";
+import { Link } from "react-router-dom";
+import {
+  Container,
+  Row,
+  CardImg,
+  Col,
+  Card,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+} from "reactstrap";
 import Footer from "./Footer/Footer";
 import Categories from "./Categories/Categories";
 import Banner from "./Banner/Banner";
@@ -53,13 +63,14 @@ const Dashboard = () => {
 
   return (
     <Container fluid className="dashboard_container">
-      <Row className="border_document_dashboard row">
+      <Row className="border_document_dashboard row d-none d-lg-flex">
         <Deals items={deals} />
 
         <Categories
           items={electronics}
           name={"Shop Electronics"}
           categoryId={3}
+          hide="d-none d-md-block"
         />
 
         <Categories
@@ -69,8 +80,13 @@ const Dashboard = () => {
           categoryId={2}
         />
 
-        <Deals items={deals} />
-        <Categories items={realEstate} name={"Real Estate"} categoryId={4} />
+        <Deals items={deals} hide="d-none d-md-block" />
+        <Categories
+          items={realEstate}
+          name={"Real Estate"}
+          hide="d-none d-md-block"
+          categoryId={4}
+        />
         <Categories
           items={cars}
           name={"Shop Cars & Vehicles"}
@@ -78,6 +94,37 @@ const Dashboard = () => {
           categoryId={1}
         />
         <Banner />
+      </Row>
+      <Row className="border_document_dashboard row d-flex justify-content-around d-lg-none ">
+        {deals.map((item) => (
+          <Col lg="2" key={item.id} className="column_deals">
+            <Link
+              style={{ textDecoration: "none" }}
+              to={{ pathname: `/post/${item.id}` }}
+            >
+              <Card className="mt-0 border-0 deals_card">
+                <CardImg
+                  top
+                  src={item.images[0].url}
+                  alt={`The image shows ${item.product}`}
+                  className="image_deals"
+                  top
+                  width="100%"
+                />
+                <CardBody className="p-0 deals_cardBody border-0 d-flex flex-column justify-content-between">
+                  {/* Content of the card */}
+
+                  <CardTitle className="deals_title">{item.product}</CardTitle>
+                  <CardSubtitle tag="h6" className="deals_price">
+                    $ {item.price.toFixed(2)}
+                  </CardSubtitle>
+
+                  {/* end card */}
+                </CardBody>
+              </Card>
+            </Link>
+          </Col>
+        ))}
       </Row>
       <Footer />
     </Container>

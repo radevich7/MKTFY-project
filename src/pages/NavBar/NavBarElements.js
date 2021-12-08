@@ -69,12 +69,12 @@ export const SearchInput = (props) => {
   return (
     <Row className="searchInput_container g-0">
       {/* BUTTON ALL */}
-      <Col className="smth col-1 col-md-2">
+      <Col className="smth col-2 ">
         <NavbarToggler
           onClick={props.toggleNav}
           aria-controls="main-nav"
           aria-label="Toggle navigation"
-          className="d-xl d-xl-none"
+          className="d-xl d-xl-none p-0"
         />
         <span className="output_categories_span d-none d-xl-flex">
           {props.category}
@@ -101,7 +101,7 @@ export const SearchInput = (props) => {
         </Form>
       </Col>
       {/* DROPDOWN CITY */}
-      <Col className="col-2 d-flex flex-column">
+      <Col className="col-2 d-flex flex-column city_toggle">
         <Dropdown
           isOpen={dropdownOpen}
           toggle={toggle}
@@ -111,10 +111,10 @@ export const SearchInput = (props) => {
             tag="span"
             data-toggle="dropdown"
             aria-expanded={dropdownOpen}
-            className="dropDownToggle_search_card d-flex justify-content-center"
+            className="dropDownToggle_search_card d-flex justify-content-center "
             width="100%"
           >
-            <img src={blackCaretDown} alt="/" className="caretDown" />
+            <img src={blackCaretDown} alt="/" className="caretDown ps-3" />
 
             <h3>{props.city}</h3>
           </DropdownToggle>
@@ -183,6 +183,9 @@ export const Categories = (props) => {
   return (
     <Col className="categories_column ">
       <div className="wrap_content scrool_effect">
+        <span className="d-flex d-md-none browseCategories_text">
+          Browse Categories
+        </span>
         <span className="category_header d-none d-md-flex nav-link">
           <img
             src={hambuger_icon_categories}
@@ -198,7 +201,7 @@ export const Categories = (props) => {
             props.setCategory("All");
           }}
         >
-          {/* <img src={icon_deals} alt="/" /> */}
+          <img src={icon_deals} className="d-md-none d-flex" alt="/" />
           Deals
         </span>
         <span
@@ -208,7 +211,7 @@ export const Categories = (props) => {
             props.setCategory("Cars & Vehicles");
           }}
         >
-          {/* <img src={icon_car} alt="/" /> */}
+          <img src={icon_car} alt="/" className="d-md-none d-flex" />
           Cars & Vehicles
         </span>
         <span
@@ -218,6 +221,8 @@ export const Categories = (props) => {
             props.setCategory("Furniture");
           }}
         >
+          {" "}
+          <img src={icon_furniture} alt="/" className="d-md-none d-flex" />
           Furniture
         </span>
         <span
@@ -227,7 +232,7 @@ export const Categories = (props) => {
             props.setCategory("Electronics");
           }}
         >
-          {/* <img src={icon_computer} alt="/" /> */}
+          <img src={icon_computer} alt="/" className="d-md-none d-flex" />
           Electronics
         </span>
         <span
@@ -237,7 +242,7 @@ export const Categories = (props) => {
             props.setCategory("Real Estate");
           }}
         >
-          {/* <img src={icon_realestate} alt="/" /> */}
+          <img src={icon_realestate} alt="/" className="d-md-none d-flex" />
           Real Estate
         </span>
       </div>

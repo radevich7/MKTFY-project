@@ -68,15 +68,12 @@ div.card {
   height: 235px;
   object-fit: contain;
   max-height: 235px;
-  /* width: auto; */
-  max-width: 236px;
   margin-bottom: 10px;
 }
 .deals_cardBody {
   font-weight: 300;
   color: #000000;
   max-height: 116px;
-  /* height: 116px; */
 }
 .deals_title {
   font-size: 1.7rem;
@@ -192,38 +189,69 @@ div.card {
     height: 400px;
   }
 }
-@media (max-width: 1000px) {
-  .banner {
-    height: 350px;
+
+@media (max-width: 795px) {
+  .column_deals {
+    width: 280px;
+    margin-bottom: 24px;
   }
-  .googlePlayLogo {
-    width: 130px;
+
+  .image_deals {
+    /* width: 100%; */
+    /* width: 280px; */
+
+    /* margin-bottom: 10px; */
   }
-  .appStoreLogo {
-    width: 130px;
+  .deals_card {
+    width: 280px;
   }
-  .banner_text {
+  /* .deals_cardBody {
+    max-height: 116px;
+  }
+  .deals_title {
+    font-size: 1.7rem;
+
+    height: 20px;
+    padding: 0px 14px 0px 21px;
+  }
+  .deals_price {
+    font-size: 2.1rem;
+    padding: 0px 14px 20px 21px;
+  } */
+}
+@media (max-width: 623px) {
+  .column_deals {
+    width: 150px;
+    margin: 10px;
+  }
+
+  .deals_card {
+    width: 150px;
+    height: 240px;
+  }
+  .deals_cardBody {
+    max-height: 80px;
+  }
+  .deals_title {
+    font-size: 1.2rem;
+  }
+  .image_deals {
+    height: 150px;
+    margin: 0;
+  }
+  .deals_price {
     font-size: 1.6rem;
   }
-  .banner_header {
-    font-size: 2.2rem;
-  }
 }
-@media (max-width: 768px) {
-  .banner {
-    height: 250px;
+@media (max-width: 357px) {
+  .column_deals {
+    width: 250px;
   }
-  .banner_text {
-    font-size: 1rem;
-    /* width: 80%; */
+  .image_deals {
+    height: 280px;
   }
-  .banner_header {
-    font-size: 2rem;
-  }
-  .googlePlayLogo {
-    width: 100px;
-  }
-  .appStoreLogo {
-    width: 100px;
+  .deals_card {
+    width: 250px;
+    height: 280px;
   }
 }

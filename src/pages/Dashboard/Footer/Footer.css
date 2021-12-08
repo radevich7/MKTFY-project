@@ -49,3 +49,9 @@ hr:not([size]) {
   margin-left: 15%;
   color: #888889;
 }
+
+@media (max-width: 992px) {
+  .footer_container {
+    height: 50px;
+  }
+}

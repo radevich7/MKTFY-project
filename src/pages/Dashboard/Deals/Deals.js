@@ -73,14 +73,14 @@ const Deals = (props) => {
 
   return (
     <React.Fragment>
-      <Col lg="12">
-        <Card>
+      <Col lg="12" className={props.hide}>
+        <Card className="dealsCard">
           <CardBody>
             <span className="container_title">Deals for you</span>
 
             <Row>
               <div
-                className={sliderClasses}
+                className={`${sliderClasses} dashboardListing`}
                 ref={sliderRef}
                 style={{ display: "flex" }}
               >

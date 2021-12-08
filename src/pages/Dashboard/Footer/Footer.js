@@ -6,8 +6,8 @@ import logo from "../../../assets/img/MKTFY_wordmark.svg";
 
 const Footer = () => {
   return (
-    <Container fluid className="footer_container">
-      <Row>
+    <Container fluid className="footer_container ">
+      <Row className="d-none d-lg-flex">
         <Col lg="3" className="footer_logo_container">
           <img src={logo} alt="logo of the MKTFY" />
           <span>

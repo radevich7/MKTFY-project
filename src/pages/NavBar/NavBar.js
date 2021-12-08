@@ -34,10 +34,10 @@ const NavBar = () => {
         expand="xl"
         fixed="top"
         style={{ backgroundColor: "#6318AF" }}
-        className="d-flex flex-column"
+        className="d-flex flex-column p-md-2 p-0"
         dark
       >
-        <Container className="navbar_container align-items-start" fluid>
+        <Container className="navbar_container align-items-start " fluid>
           <Link
             to="/home"
             onClick={(e) => setCategory("All")}
