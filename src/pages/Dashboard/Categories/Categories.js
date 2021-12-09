@@ -25,6 +25,7 @@ const Categories = (props) => {
       }
     );
   };
+  console.log("running cars");
   return (
     <React.Fragment>
       <Col className={`mb-4 mt-4 ${props.hide} xl-6 lg-12`}>
@@ -41,7 +42,6 @@ const Categories = (props) => {
                       src={item.image}
                       alt={`The image shows ${item.title}`}
                       className="image_deals"
-                      style={{}}
                     />
 
                     {/* end card */}

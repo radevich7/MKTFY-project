@@ -53,7 +53,6 @@ const Dashboard = () => {
     { id: 2, image: carImage2 },
     { id: 3, image: carImage3 },
   ];
-  console.log(electronics);
   // Deals
   const [deals, setDeals] = useState([]);
 
