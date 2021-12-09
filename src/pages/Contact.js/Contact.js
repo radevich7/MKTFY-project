@@ -18,7 +18,6 @@ const Contact = () => {
           <span>Contact Us</span>
         </div>
       </Card>
-
       <ButtonMailto label="Email Us" mailto="mailto:contact-us@mktfy.ca" />
     </Container>
   );

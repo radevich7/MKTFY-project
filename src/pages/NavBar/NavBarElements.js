@@ -172,7 +172,7 @@ export const Categories = (props) => {
             dispatch({ type: "SET_SEARCH_LISTINGS", searchListings: null });
           }
           // Pushing to the content page and setting the state to search
-          history.push("/content/", { state: "search" });
+          history.push("/content", { state: "search" });
         } else {
           alert("Something went wrong, please try again later");
         }
@@ -450,31 +450,27 @@ export const CollapseMenu = (props) => {
         </section>
         <div className="collapseMenu_linkHeader">Settings</div>
         <section className="collapseMenu_body">
-          <Link className="collapseMenu_link" to="/home/account" tag={Link}>
+          <Link className="collapseMenu_link" to="/home/account">
             Account Information
           </Link>
-          <Link
-            className="collapseMenu_link"
-            to="/home/changepassword"
-            tag={Link}
-          >
+          <Link className="collapseMenu_link" to="/success/reset">
             Change Password
           </Link>
-          <Link className="collapseMenu_link" to="/home/purchases" tag={Link}>
+          <Link className="collapseMenu_link" to="/home/purchases">
             My purchases
           </Link>
-          <Link className="collapseMenu_link" to="/home/mylistings" tag={Link}>
+          <Link className="collapseMenu_link" to="/home/mylistings">
             My Listings
           </Link>
-          <Link className="collapseMenu_link" to="/#" tag={Link}>
+          <Link className="collapseMenu_link" to="/#">
             Notifications
           </Link>
 
           <div className="collapseMenu_linkHeader">Help</div>
-          <Link className="collapseMenu_link" to="/home/faq" tag={Link}>
+          <Link className="collapseMenu_link" to="/home/faq">
             FAQ
           </Link>
-          <Link className="collapseMenu_link" to="/#">
+          <Link className="collapseMenu_link" to="/contact">
             Contact Us
           </Link>
           <Link

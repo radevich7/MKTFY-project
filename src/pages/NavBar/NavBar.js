@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./NavBar.css";
 import mainLogo from "../../assets/img/MKTFY_wordmark.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import {
   Navbar,
   NavbarToggler,
@@ -21,12 +21,29 @@ import {
   UserProfileSettings,
 } from "./NavBarElements";
 import { Categories } from "./NavBarElements";
+import { useEffect } from "react";
 
 const NavBar = () => {
   const [open, setIsOpen] = useState(false);
   const [city, setCity] = useState("Calgary");
   const [category, setCategory] = useState("All");
+  const [showButton, setShowButton] = useState(false);
   const toggleNav = () => setIsOpen((prevState) => !prevState);
+  let location = useLocation();
+
+  useEffect(() => {
+    console.log(location.pathname);
+    if (
+      location.pathname === "/home" ||
+      location.pathname === "/home/mylistings" ||
+      location.pathname === "/content"
+    ) {
+      setShowButton(true);
+    } else {
+      setShowButton(false);
+    }
+  }, [location]);
+
   return (
     // NAVBAR
     <div>
@@ -83,12 +100,14 @@ const NavBar = () => {
           </Col>
 
           <NavItem className="d-md-none d-flex bottom-0">
-            <Link to="/home/create" className="button_create_listing ">
-              <span id="container">
-                <span>+</span>
-              </span>
-              Create Listing
-            </Link>
+            {showButton && (
+              <Link to="/home/create" className="button_create_listing">
+                <span id="container">
+                  <span>+</span>
+                </span>
+                Create Listing
+              </Link>
+            )}
           </NavItem>
           {open && <CollapseMenu toggleNav={toggleNav} open={open} />}
         </Container>

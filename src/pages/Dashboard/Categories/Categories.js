@@ -18,7 +18,7 @@ const Categories = (props) => {
             dispatch({ type: "SET_SEARCH_LISTINGS", searchListings: null });
           }
           // Pushing to the content page and setting the state to search
-          history.push("/content/", { state: "search" });
+          history.push("/content", { state: "search" });
         } else {
           alert("Something went wrong, please try again later");
         }

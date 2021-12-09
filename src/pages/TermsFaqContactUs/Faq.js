@@ -28,7 +28,7 @@ const Faq = () => {
         </div>
         <h1>Frequently Asked Questions</h1>
         <Row className="faq_row_container">
-          <Col lg="4" className="faq_hints">
+          <Col lg="4" md="6" className="faq_hints">
             {store.faq.map((item) => (
               <Row key={item.id}>
                 <CardHeader
@@ -44,7 +44,7 @@ const Faq = () => {
             ))}
           </Col>
 
-          <Col lg="8" className="text_container">
+          <Col lg="8" md="6" className="text_container">
             {store.faq.map((item) => (
               <Collapse
                 key={item.id}
