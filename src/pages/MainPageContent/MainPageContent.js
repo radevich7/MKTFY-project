@@ -24,10 +24,8 @@ const MainPageContent = () => {
     //checking the state of the path, if its from search set Listings to the search ones
     if (history.location.state) {
       setListings(store.searchListings);
-    }
-    // When the user decides to refresh the page, I will redirect to the /home page, because the store values will be set to initial.
-    if (store.searchListings.length === 0) {
-      return history.push("/home");
+    } else {
+      setListings(store.allListings);
     }
   }, [store.searchListings]);
 
@@ -67,7 +65,7 @@ const MainPageContent = () => {
             </Col>
           ))
         ) : (
-          <p className="centered">`No result found`}</p>
+          <p className="centered">No result found</p>
         )}
       </Row>
     </Container>

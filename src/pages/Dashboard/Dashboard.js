@@ -64,7 +64,7 @@ const Dashboard = () => {
   return (
     <Container fluid className="dashboard_container">
       <Row className="border_document_dashboard row d-none d-lg-flex">
-        <Deals items={deals} />
+        <Deals items={deals.slice(0, 7)} />
 
         <Categories
           items={electronics}
@@ -80,7 +80,7 @@ const Dashboard = () => {
           categoryId={2}
         />
 
-        <Deals items={deals} hide="d-none d-md-block" />
+        <Deals items={deals.slice(-7)} hide="d-none d-md-block" />
         <Categories
           items={realEstate}
           name={"Real Estate"}

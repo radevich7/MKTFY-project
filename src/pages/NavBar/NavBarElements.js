@@ -69,7 +69,7 @@ export const SearchInput = (props) => {
   return (
     <Row className="searchInput_container g-0">
       {/* BUTTON ALL */}
-      <Col className="smth col-2 ">
+      <Col className="smth col-2 col-md-2">
         <NavbarToggler
           onClick={props.toggleNav}
           aria-controls="main-nav"
@@ -466,11 +466,7 @@ export const CollapseMenu = (props) => {
           <Link className="collapseMenu_link" to="/home/mylistings" tag={Link}>
             My Listings
           </Link>
-          <Link
-            className="collapseMenu_link"
-            to="/home/changepassword"
-            tag={Link}
-          >
+          <Link className="collapseMenu_link" to="/#" tag={Link}>
             Notifications
           </Link>
 
