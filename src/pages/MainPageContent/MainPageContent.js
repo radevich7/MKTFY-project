@@ -19,30 +19,21 @@ const MainPageContent = () => {
   const [store, dispatch] = useContext(AppContext);
   const history = useHistory();
   const [listings, setListings] = useState();
-  const [noFound, setNoFound] = useState();
-  // setting the page either to output result for search field or for categories
-  const [page, setPage] = useState(history.location.state.state);
-  // const urlCategories = `/api/listing/category/${listingId}`;
 
-  console.log(store.searchListings);
   useEffect(() => {
-    if (page == "search") {
+    //checking the state of the path, if its from search set Listings to the search ones
+    if (history.location.state) {
       setListings(store.searchListings);
     }
-    // GET(url).then((res) => console.log(res));
+    // When the user decides to refresh the page, I will redirect to the /home page, because the store values will be set to initial.
+    if (store.searchListings.length === 0) {
+      return history.push("/home");
+    }
   }, [store.searchListings]);
-  // const id = useParams();
-  // const listingId = Object.values(id).toString();
 
-  // const url = `/api/listing/category/${listingId}`;
-  // useEffect(() => {
-  //   GET(url).then((res) => console.log(res));
-  //   setCategory(store.allListings.filter((val) => val.categoryId == listingId));
-  // }, [listingId]);
-  // console.log(category);
   return (
     <Container fluid className="mainContent_container">
-      <Row className="border_document_mainContent  justify-content-lg-center justify-content-around">
+      <Row className="border_document_mainContent  justify-content-lg-start justify-content-around">
         {listings ? (
           listings.map((item) => (
             <Col lg="2" key={item.id} className="column_deals ">
