@@ -321,6 +321,21 @@ div p {
     padding: 32px 44px 62px 44px;
   }
 }
+@media (max-width: 992px) {
+  .uploadImg_container {
+    width: 400px;
+    margin-top: 15px;
+  }
+  .uploadImg_header .modal-title {
+    font-size: 2.5rem;
+  }
+  .chooseFiles_button {
+    padding: 0px 22px;
+  }
+  .uploadImg_body h2 {
+    font-size: 2.4rem;
+  }
+}
 @media (max-width: 576px) {
   .reviewPhoto_main {
     max-height: 320px;
@@ -336,5 +351,11 @@ div p {
   }
   .addPhoto_secondary {
     height: 70px;
+  }
+  .uploadImg_container {
+    width: 340px;
+  }
+  .uploadImg_body h2 {
+    font-size: 2rem;
   }
 }

@@ -63,8 +63,7 @@ const UploadImgModal = (props) => {
     <Modal
       isOpen={props.modal}
       toggle={props.toggle}
-      className="parent_modal"
-      size="lg"
+      className="parent_modal modal-lg modal-fullscreen-md-down"
     >
       <ModalHeader toggle={props.toggle} className="uploadImg_header">
         Upload Photo(s)
