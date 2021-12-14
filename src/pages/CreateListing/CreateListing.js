@@ -246,9 +246,9 @@ const CreateListing = (props) => {
         </div>
         <CardBody className="cardBody_createListing">
           <Form onSubmit={submitFormHandler}>
-            <Row className="w-100">
-              <Col lg="4">
-                <Row className="h-100">
+            <Row>
+              <Col className="col-12 col-xxl-4 col-lg-5">
+                <Row className="h-100 ">
                   <Card className="p-0">
                     <CardBody
                       className="product_images_createListing"

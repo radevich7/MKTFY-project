@@ -9,7 +9,7 @@
   background-color: transparent;
 }
 .cardBody_createListing {
-  width: 1448px;
+  /* width: 1448px; */
   max-width: 1448px;
   background-color: #f8f8f8;
   padding: 0;
@@ -309,4 +309,32 @@ div p {
   font-size: 1.5rem;
 }
 
-/* Buttons */
+@media (max-width: 1400px) {
+  .product_details_createListing {
+    background-color: #f8f8f8;
+    padding: 32px 152px 62px 44px;
+  }
+}
+@media (max-width: 1200px) {
+  .product_details_createListing {
+    background-color: #f8f8f8;
+    padding: 32px 44px 62px 44px;
+  }
+}
+@media (max-width: 576px) {
+  .reviewPhoto_main {
+    max-height: 320px;
+    border: 1px solid #7070704d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f7f7;
+    margin-bottom: 12px;
+
+    position: relative;
+  }
+  .addPhoto_secondary {
+    height: 70px;
+  }
+}
