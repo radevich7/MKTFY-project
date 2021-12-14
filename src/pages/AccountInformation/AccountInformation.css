@@ -59,7 +59,18 @@
 }
 
 @media (max-width: 992px) {
-  .accountInformation_container {
-    padding-top: 180px;
+  .accountInformation_card {
+    padding: 28px 78px 80px 78px;
+    border-radius: 10px;
+  }
+}
+@media (max-width: 576px) {
+  .accountInformation_card {
+    padding: 18px 38px 80px 38px;
+  }
+}
+@media (max-width: 420px) {
+  .accountInformation_card {
+    padding: 8px 8px 80px 8px;
   }
 }
