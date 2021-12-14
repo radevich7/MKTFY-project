@@ -55,26 +55,26 @@ const SuccessPage = () => {
 
       break;
   }
-  useEffect(() => {
-    let mounter = true;
-    setTimeout(() => {
-      if (store.authenticated) {
-        history.push("/home");
-      } else {
-        history.push("/");
-      }
-      return () => {
-        mounter = false;
-      };
-    }, 3000);
-  }, []);
+  // useEffect(() => {
+  //   let mounter = true;
+  //   setTimeout(() => {
+  //     if (store.authenticated) {
+  //       history.push("/home");
+  //     } else {
+  //       history.push("/");
+  //     }
+  //     return () => {
+  //       mounter = false;
+  //     };
+  //   }, 3000);
+  // }, []);
   return (
     <>
-      <div className="body_spinner">
+      <div className="body_spinner position-relative">
         <div className="lds-custom">
           <h5 className="spinner_text">{text}</h5>
         </div>
-        <div className="done_icon">
+        <div className="done_icon position-absolute top-50 start-50 translate-middle">
           <MdDone />
         </div>
       </div>

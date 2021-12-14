@@ -32,7 +32,6 @@ const NavBar = () => {
   let location = useLocation();
 
   useEffect(() => {
-    console.log(location.pathname);
     if (
       location.pathname === "/home" ||
       location.pathname === "/home/mylistings" ||

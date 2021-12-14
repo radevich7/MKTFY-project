@@ -555,6 +555,13 @@
   }
 }
 @media (max-width: 767px) {
+  .nav-link:hover {
+    color: #ffba00;
+  }
+  .nav-link:focus {
+    color: #ffba00;
+  }
+
   .button_create_listing {
     position: fixed;
     margin: auto;

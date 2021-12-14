@@ -64,7 +64,6 @@ div.card {
 }
 
 .image_deals {
-  width: 100%;
   height: 235px;
   object-fit: contain;
   max-height: 235px;

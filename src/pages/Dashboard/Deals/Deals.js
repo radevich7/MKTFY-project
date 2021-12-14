@@ -96,7 +96,6 @@ const Deals = (props) => {
                           src={item.images[0].url}
                           alt={`The image shows ${item.product}`}
                           className="image_deals"
-                          top
                           width="100%"
                         />
                         <CardBody className="p-0 deals_cardBody border-0 d-flex flex-column justify-content-between">

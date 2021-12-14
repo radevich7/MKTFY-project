@@ -4,28 +4,22 @@
   background-repeat: no-repeat;
   height: 100vh;
   display: grid;
-  padding-top: 18%;
-
   justify-content: center;
-  top: 40%;
+  align-content: center;
   position: relative;
 }
 
 .done_icon {
   font-size: 100px;
   color: transparent;
-  position: absolute;
-  left: 0;
-  right: 0;
   text-align: center;
-  margin-top: 20px;
   animation: done_icon 3s linear;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
-  padding-top: 18%;
 }
 .spinner_text {
   position: absolute;
+
   font-size: 1.8rem;
   font-weight: bold;
   color: transparent;
@@ -50,7 +44,6 @@
   display: block;
   width: 218px;
   height: 218px;
-  /* margin: 8px; */
   border-radius: 50%;
   border: 6px solid #fff;
   border-color: #fff transparent #fff transparent;
