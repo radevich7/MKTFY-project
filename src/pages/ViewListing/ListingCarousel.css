@@ -77,6 +77,11 @@
   color: #e5e2e2;
   padding-bottom: 30px;
 }
+@media (max-width: 1400px) {
+  .selected-image {
+    height: 400px;
+  }
+}
 @media (max-width: 992px) {
   .selected-image {
     margin-right: 14px;

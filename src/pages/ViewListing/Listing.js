@@ -46,7 +46,7 @@ const Listing = () => {
               <span>product listing</span>
             </div>
             <CardBody className="p-0">
-              <Row className="m-0 ">
+              <Row className="m-0 d-flex justify-content-lg-center">
                 {/* First column -carousel*/}
                 <Col className="p-0 col-xxl-6 col-xl-7 col-lg-8 col-12">
                   <ListingCarousel images={listing.images} />
@@ -54,9 +54,9 @@ const Listing = () => {
 
                 {/* Second column - item details*/}
 
-                <Col className="p-0 d-flex col-xxl-6 align-items-center">
-                  <Card className="item_details_card">
-                    <CardBody>
+                <Col className="p-0 col-xxl-6 col-12 ">
+                  <Card className="item_details_card ">
+                    <CardBody className="">
                       <h2 className="listing_product">{listing.product}</h2>
 
                       <p className="listing_price">$ {listing.price}</p>

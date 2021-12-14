@@ -97,6 +97,19 @@
 }
 @media (max-width: 992px) {
   .checkout_container {
-    padding-top: 180px;
+    padding-top: 250px;
+  }
+  .price_card span {
+    display: inline-block;
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #6318af;
+  }
+  .checkout_card h4 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #9349de;
+    margin-bottom: 22px;
+    padding-top: 44px;
   }
 }

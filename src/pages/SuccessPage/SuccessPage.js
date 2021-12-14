@@ -55,19 +55,19 @@ const SuccessPage = () => {
 
       break;
   }
-  // useEffect(() => {
-  //   let mounter = true;
-  //   setTimeout(() => {
-  //     if (store.authenticated) {
-  //       history.push("/home");
-  //     } else {
-  //       history.push("/");
-  //     }
-  //     return () => {
-  //       mounter = false;
-  //     };
-  //   }, 3000);
-  // }, []);
+  useEffect(() => {
+    let mounter = true;
+    setTimeout(() => {
+      if (store.authenticated) {
+        history.push("/home");
+      } else {
+        history.push("/");
+      }
+      return () => {
+        mounter = false;
+      };
+    }, 3000);
+  }, []);
   return (
     <>
       <div className="body_spinner position-relative">

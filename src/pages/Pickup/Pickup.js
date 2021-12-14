@@ -88,7 +88,7 @@ const Pickup = () => {
             <CardBody className="pickup_card ">
               <h4>Pickup Information</h4>
               <Row className="listing_details m-0">
-                <Col lg="6" className="listing_details_img">
+                <Col className="listing_details_img">
                   <img
                     src={listing.imageUrl ? listing.imageUrl : noimage}
                     className="card_image_pickUp"

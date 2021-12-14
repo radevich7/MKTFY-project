@@ -339,15 +339,6 @@ div p {
 @media (max-width: 576px) {
   .reviewPhoto_main {
     max-height: 320px;
-    border: 1px solid #7070704d;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #f7f7f7;
-    margin-bottom: 12px;
-
-    position: relative;
   }
   .addPhoto_secondary {
     height: 70px;

@@ -27,6 +27,7 @@
 
 .item_details_button {
   width: 526px;
+
   box-shadow: none !important;
   background-color: #6318af;
   font-size: 20px;
@@ -106,9 +107,11 @@
   .listing_container {
     padding-top: 270px;
   }
-  .item_details_card {
-    padding-left: 52px;
-    padding-right: 25px;
+  .item_details_card .card-body {
+    margin: auto;
+  }
+  .item_details_card p {
+    max-width: 600px;
   }
 }
 @media (max-width: 1200px) {
@@ -121,5 +124,13 @@
   }
   .item_details_card h2 {
     font-size: 3.6rem;
+  }
+}
+@media (max-width: 576px) {
+  .item_details_button {
+    width: 280px;
+  }
+  .item_details_card .card-body {
+    text-align: center;
   }
 }
