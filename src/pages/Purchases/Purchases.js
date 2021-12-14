@@ -23,9 +23,7 @@ const Purchases = () => {
         setPurchased(purchased);
         setLoading(false);
       }
-      // totalItems = purchased.length + pending.length;
     });
-    // console.log(purchased.length + pending.length);
   }, []);
 
   return (

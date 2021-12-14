@@ -67,19 +67,16 @@ const MyListingCard = (props) => {
         >
           {props.sold ? "SALE CONFIRMED" : props.pending ? "PENDING STATE" : ""}
         </span>
-        <Col lg="5">
+        <Col className="col-5 col-md-5">
           <CardImg
             alt="Card image cap"
             src={props.imageUrl}
             top
-            style={{ height: "214px", objectFit: "cover" }}
+            className="listingCard_image"
           />
         </Col>
 
-        <CardBody
-          className="d-flex flex-column justify-content-center"
-          style={{ height: "214px" }}
-        >
+        <CardBody className="d-flex flex-column justify-content-center">
           {props.dateSold && (
             <span className="time_output">{`${monthLetters} ${day} ${year} `}</span>
           )}
