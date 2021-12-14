@@ -30,11 +30,15 @@ const MainPageContent = () => {
   }, [store.searchListings]);
 
   return (
-    <Container fluid className="mainContent_container">
-      <Row className="border_document_mainContent  justify-content-lg-start justify-content-around">
+    <Container fluid className="mainContent_container ">
+      <Row className="border_document_mainContent  justify-content-center justify-content-sm-between">
         {listings ? (
           listings.map((item) => (
-            <Col lg="2" key={item.id} className="column_deals ">
+            <Col
+              lg="2"
+              key={item.id}
+              className="column_deals d-flex justify-content-center "
+            >
               <Link
                 style={{ textDecoration: "none" }}
                 to={{ pathname: `/post/${item.id}` }}

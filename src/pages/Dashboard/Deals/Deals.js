@@ -85,7 +85,7 @@ const Deals = (props) => {
                 style={{ display: "flex" }}
               >
                 {props.items.map((item) => (
-                  <Col lg="2" key={item.id} className="column_deals">
+                  <Col lg="2" key={item.id} className="column_deals ">
                     <Link
                       style={{ textDecoration: "none" }}
                       to={{ pathname: `/post/${item.id}` }}
