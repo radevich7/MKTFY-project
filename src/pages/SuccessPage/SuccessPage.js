@@ -1,8 +1,9 @@
+import { useHistory } from "react-router-dom";
 import AppContext from "../../store/app-context";
-import { useHistory, useParams } from "react-router-dom";
+import auth0js from "auth0-js";
+
 import { MdDone } from "react-icons/md";
 import { useContext, useEffect } from "react";
-import auth0js from "auth0-js";
 import "./SuccessPage.css";
 
 const SuccessPage = () => {
@@ -11,11 +12,13 @@ const SuccessPage = () => {
   const type = history.location.pathname.split("/").slice(-1).join("");
   let text;
 
+  // AUTH0 OBJECT
   const webAuth = new auth0js.WebAuth({
     domain: process.env.REACT_APP_AUTH0_DOMAIN,
     clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
   });
 
+  // CHECKING THE TYPE OF REQUEST AND SETING THE TEXT OF THE MESSAGE
   switch (type) {
     case "order":
       text = "ORDER PLACED";
@@ -55,6 +58,8 @@ const SuccessPage = () => {
 
       break;
   }
+
+  // PUSHING TO NEW PAGE
   useEffect(() => {
     let mounter = true;
     setTimeout(() => {

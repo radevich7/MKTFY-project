@@ -47,6 +47,7 @@ const AppReducer = (state, action) => {
 const AppProvider = (props) => {
   const [store, dispatch] = useReducer(AppReducer, initialState);
   let token = localStorage.getItem("Auth_token");
+  const history = useHistory();
 
   useEffect(() => {
     if (token) {
@@ -61,8 +62,13 @@ const AppProvider = (props) => {
       const urlFAQ = `/api/FAQ`;
       Promise.all([GET(urlListing), GET(urlProfile), GET(urlFAQ)]).then(
         (values) => {
-          // add funtionality to clear the local storage and return to login page
-          // If values failed return to the home page and restart  else dispatch all of the functions
+          // if values isn't valid, sign_out the user
+          if (!values) {
+            alert(
+              "Ooooppss, something went wrong, please contact customer support service"
+            );
+            return history.push("/logout");
+          }
           dispatch({ type: "SET_ALL_LISTINGS", allListings: values[0].data });
           dispatch({ type: "SET_USER", user: values[1].data });
           dispatch({ type: "SET_FAQ", faq: values[2].data });

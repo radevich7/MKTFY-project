@@ -1,13 +1,9 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import AppContext from "../../store/app-context";
 import { Link } from "react-router-dom";
-import { LoadingSpinner } from "../../reusableComponent/Spinner";
-import Button from "..//../reusableComponent/Button";
-import PhoneInput from "react-phone-number-input/input";
-import "./AccountInformation.css";
-import { useState, useRef } from "react";
 import { PUT } from "../../api/api";
+import AppContext from "../../store/app-context";
+import "./AccountInformation.css";
 import {
   Col,
   Row,
@@ -19,27 +15,33 @@ import {
   Card,
   CardBody,
 } from "reactstrap";
+// REUSABLE COMPONENTS
+import Button from "..//../reusableComponent/Button";
+import PhoneInput from "react-phone-number-input/input";
+import { LoadingSpinner } from "../../reusableComponent/Spinner";
 
 const AccountInformation = (props) => {
   const [store, dispatch] = useContext(AppContext);
   const [user, setUser] = useState(null);
   const history = useHistory();
+  // SETTING THE USER FROM THE CONTEXT STORE
   useEffect(() => {
     if (!store.loading) {
       setUser(store.user);
     }
   }, [store.loading]);
 
+  // INITIAL VALUES OF THE INPUTS
   const phoneInputRef = useRef();
   const [firstNameUpdated, setFirstNameUpdated] = useState();
   const [lastNameUpdated, setLastNameUpdated] = useState();
-
   const [defaultPhoneValue, setDefaultPhoneValue] = useState();
   const [addressUpdated, setAddressUpdated] = useState();
   const [cityUpdated, setCityUpdated] = useState();
   const [provinceUpdated, setProvinceUpdated] = useState();
   const [countryUpdated, setCountryUpdated] = useState();
 
+  // PLACEHOLDER FOR THE INTERNATIONAL PHONE INPUT
   const phonePlaceholder = user
     ? `(${user.phone.slice(0, 3)}) ${user.phone.slice(
         3,
@@ -47,6 +49,7 @@ const AccountInformation = (props) => {
       )} - ${user.phone.slice(6)}`
     : ``;
 
+  // UPDATING USER INFORMATION
   const submitFormHandler = (e) => {
     e.preventDefault();
     const userDataUpdated = {
@@ -59,17 +62,13 @@ const AccountInformation = (props) => {
       province: provinceUpdated ? provinceUpdated : user.province,
       country: countryUpdated ? countryUpdated : user.country,
     };
-    console.log(userDataUpdated);
-
     PUT("/api/profile", userDataUpdated).then((res) => {
       if (res.failed === false) {
         dispatch({ type: "SET_USER", user: res.data });
       } else {
-        console.log("failed");
-        // Show to the user that u can't done it
+        alert("Something went wrong, please contact help center");
       }
     });
-
     history.push("/home");
   };
 

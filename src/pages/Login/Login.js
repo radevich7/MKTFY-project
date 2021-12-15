@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
-
+import { useState } from "react";
 import { Container, Card } from "reactstrap";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../../assets/login_page/logo.svg";
-import Button from "../../reusableComponent/Button";
 import "./Login.css";
+// COMPONENTS
+import Button from "../../reusableComponent/Button";
 import LoginFormOverlay from "./LoginFormOverlay";
 import SignUpFormOverlay from "./SignUpFormOverlay";
 import CreatePasswordOverlay from "./CreatePasswordOverlay";

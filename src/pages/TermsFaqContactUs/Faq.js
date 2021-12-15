@@ -1,3 +1,7 @@
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import AppContext from "../../store/app-context";
+
 import {
   Collapse,
   CardBody,
@@ -7,13 +11,10 @@ import {
   Col,
   Row,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-import React, { useState, useContext } from "react";
-import AppContext from "../../store/app-context";
 import { FaCaretRight } from "react-icons/fa";
+
 const Faq = () => {
   const [store, dispatch] = useContext(AppContext);
-  console.log(store.faq);
   const [toggleQuestion, setToggequestion] = useState();
 
   return (

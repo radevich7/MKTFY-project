@@ -1,7 +1,5 @@
 import React, { useRef, useEffect } from "react";
-
 import { Link } from "react-router-dom";
-import noimage from "../../../assets/noimage.png";
 import {
   Card,
   CardImg,

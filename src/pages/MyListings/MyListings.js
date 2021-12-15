@@ -1,7 +1,7 @@
 import { useState, useEffect, Fragment } from "react";
 import { Container, CardBody, Row, Col, CardGroup } from "reactstrap";
-import dummy_img from "../../assets/imagesForDahsboard/playstation.png";
-import { GoPrimitiveDot } from "react-icons/go";
+// import dummy_img from "../../assets/imagesForDahsboard/playstation.png";
+// import { GoPrimitiveDot } from "react-icons/go";
 
 import "./MyListings.css";
 import { LoadingSpinner } from "../../reusableComponent/Spinner";

@@ -66,15 +66,6 @@ const SignUpFormOverlay = (props) => {
     }
   };
 
-  // const {
-  //   value: phoneValue,
-  //   hasError: phoneInputHasError,
-  //   inputBlurHandlder: phoneBlurHanlder,
-  //   inputOnChangeHandler: phoneOnChangeHanlder,
-  //   reset: resetPhoneInput,
-  // } = useInput((value) =>
-  //   /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/.test(value)
-  // );
   const phoneClasses = phoneError
     ? "signUp_inputField form-control invalid"
     : "signUp_inputField form-control";

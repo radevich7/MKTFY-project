@@ -1,11 +1,8 @@
-import { useState, useContext, useRef, useEffect } from "react";
+import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import AppContext from "../../store/app-context";
-import gold_caret from "../../assets/img/gold_caret.svg";
-import exit_app from "../../assets/img/exit_to_app-24px.svg";
-import notification_bell from "../../assets/img/notification_bell_main.svg";
-import { IoMdSearch } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { GET } from "../../api/api";
 import {
   Row,
   Col,
@@ -19,11 +16,13 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  InputGroupText,
   InputGroup,
 } from "reactstrap";
-
-import search_icon from "../../assets/img/search_icon.svg";
+// ICONS
+import gold_caret from "../../assets/img/gold_caret.svg";
+import exit_app from "../../assets/img/exit_to_app-24px.svg";
+import notification_bell from "../../assets/img/notification_bell_main.svg";
+import { IoMdSearch } from "react-icons/io";
 import blackCaretDown from "../../assets/img/blackCaretDown.svg";
 import icon_car from "../../assets/icon_car.svg";
 import icon_computer from "../../assets/icon_computer.svg";
@@ -31,8 +30,8 @@ import icon_deals from "../../assets/icon_deals.svg";
 import icon_furniture from "../../assets/icon_furniture.svg";
 import icon_realestate from "../../assets/icon_realestate.svg";
 import hambuger_icon_categories from "../../assets/hambuger_icon_categories.svg";
-import { GET } from "../../api/api";
 
+// SEARCH FIELD
 export const SearchInput = (props) => {
   const [store, dispatch] = useContext(AppContext);
 

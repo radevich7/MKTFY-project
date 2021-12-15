@@ -31,7 +31,7 @@ const MainPageContent = () => {
 
   return (
     <Container fluid className="mainContent_container ">
-      <Row className="border_document_mainContent  justify-content-center justify-content-sm-between">
+      <Row className="border_document_mainContent  justify-content-center justify-content-sm-between justify-content-lg-start">
         {listings ? (
           listings.map((item) => (
             <Col

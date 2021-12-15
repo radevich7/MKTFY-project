@@ -2,12 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FaCaretDown } from "react-icons/fa";
 
-// const Main = styled("div")`
-//   font-family: sans-serif;
-//   background: #f0f0f0;
-//   height: 100vh;
-// `;
-
 const DropDownContainer = styled("div")`
   width: 100%;
   margin: 0 auto;

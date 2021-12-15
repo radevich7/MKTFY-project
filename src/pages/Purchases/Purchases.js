@@ -1,15 +1,17 @@
 import { useEffect, useState, Fragment } from "react";
 import { Container, CardGroup } from "reactstrap";
 import { GET } from "../../api/api";
+import "./Purchases.css";
+// COMPONENTS
 import { LoadingSpinner } from "../../reusableComponent/Spinner";
 import MyListingCard from "../../reusableComponent/MyListingCard";
-import "./Purchases.css";
 
 const Purchases = () => {
   const [loading, setLoading] = useState(true);
   const [purchased, setPurchased] = useState(null);
   const [pending, setPending] = useState(null);
 
+  // GETIING ALL LISITNG THAT HAS PENDING OR SOLD STATUSES
   useEffect(() => {
     GET("/api/mypurchases").then((res) => {
       if (!res.failed) {

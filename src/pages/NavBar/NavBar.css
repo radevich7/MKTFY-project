@@ -129,13 +129,7 @@
 }
 
 /* Category LINKS */
-/* .categories_container {
-  margin-right: 0;
-  margin-left: 0;
 
-  background-color: rgb(233, 232, 232);
-  width: 1360px;
-} */
 .categories_column {
   display: flex;
   justify-content: space-a;
@@ -153,7 +147,6 @@
   color: #ffffff;
   font-size: 1.7rem;
   font-weight: 500;
-  /* text-decoration: blueviolet; */
 }
 .nav-link {
   color: #ffffff;
@@ -259,7 +252,6 @@
 #exit_logo {
   position: absolute;
   right: 14px;
-  /* bottom: 0; */
 }
 
 .dropdown-item:active {
@@ -454,7 +446,6 @@
   border-radius: 8px;
   padding-top: 15px;
   padding-bottom: 15px;
-  /* margin-bottom: 24px; */
 }
 
 .search_input {

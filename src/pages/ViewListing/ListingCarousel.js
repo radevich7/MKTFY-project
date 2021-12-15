@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import { Fragment } from "react";
+import { useEffect, useRef, useState, Fragment } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Col, Row, Container } from "reactstrap";
 import noimage from "../../assets/noimage.png";
@@ -10,6 +9,7 @@ const ListingCarousel = (props) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [selectedImage, setSelectedImage] = useState([]);
 
+  // SETTING IMAGES
   useEffect(() => {
     if (props.images.length > 0) {
       setSelectedImage(props.images[selectedImageIndex].url);
@@ -52,11 +52,6 @@ const ListingCarousel = (props) => {
         });
       }
     }
-    // imageRef.current.scrollIntoView();
-    // scrollImageView.current.scrollIntoView();
-    // scrollIntoView();
-
-    //
   };
   const handleDownClick = () => {
     if (props.images.length > 0 && props.images) {
@@ -66,9 +61,6 @@ const ListingCarousel = (props) => {
       }
       handleSelectedImageChange(newIndex);
     }
-
-    // scrollImageView.current.scrollIntoView();
-    // scrollToMyRef();
   };
 
   return (
@@ -82,7 +74,6 @@ const ListingCarousel = (props) => {
             {props.images &&
               props.images.map((image, index) => (
                 <div
-                  // onClick={() => handleSelectedImageChange(idx)}
                   style={{ backgroundImage: `url(${image.url})` }}
                   key={image.id}
                   src={image.url}

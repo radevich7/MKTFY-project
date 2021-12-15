@@ -25,14 +25,13 @@ div.card {
   overflow-y: hidden;
   white-space: wrap;
   transition: all 1s;
-  /* transform: scale(0.98); */
+
   will-change: transform;
   user-select: none;
   cursor: pointer;
   /* margin: 0; */
 }
 .scroll_effect.active {
-  /* background: rgba(255, 255, 255, 0.3); */
   cursor: grabbing;
   cursor: -webkit-grabbing;
   transform: scale(1);
@@ -54,10 +53,6 @@ div.card {
   box-shadow: 0px 4px 15px #00000024;
 }
 
-/* .row > * {
-  padding-right: 0;
-  padding-left: 0;
-} */
 .column_deals {
   margin: 24px 12px 48px 12px;
   width: 236px;
@@ -85,7 +80,6 @@ div.card {
   font-size: 2.1rem;
   font-weight: bold;
   padding: 0px 14px 20px 21px;
-  /* margin: 20px 21px 20px 14px; */
 }
 
 /* Categories */
@@ -103,10 +97,6 @@ div.card {
   display: flex;
   justify-content: space-around;
 }
-
-/*  */
-/*  */
-/*  */
 
 .explore_link_button {
   display: flex;
@@ -195,28 +185,9 @@ div.card {
     margin-bottom: 24px;
   }
 
-  .image_deals {
-    /* width: 100%; */
-    /* width: 280px; */
-
-    /* margin-bottom: 10px; */
-  }
   .deals_card {
     width: 280px;
   }
-  /* .deals_cardBody {
-    max-height: 116px;
-  }
-  .deals_title {
-    font-size: 1.7rem;
-
-    height: 20px;
-    padding: 0px 14px 0px 21px;
-  }
-  .deals_price {
-    font-size: 2.1rem;
-    padding: 0px 14px 20px 21px;
-  } */
 }
 @media (max-width: 623px) {
   .column_deals {

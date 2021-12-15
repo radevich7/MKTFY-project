@@ -1,6 +1,6 @@
 import axios from "axios";
-import { Redirect } from "react-router-dom";
 
+// HEADER
 const getHeader = (type) => {
   const authStr = `Bearer ${localStorage.getItem("Auth_token")}`;
   if (type == "FORMDATA") {
@@ -29,11 +29,11 @@ let returnData = {
   data: {},
 };
 
+// FAILED CASE
 const failed = (res) => {
   let messages = [];
   //LOGOUT IF UNAUTHERIZED
   if (res.status === 401) {
-    //   // POS('/Accoutn/Refreshtoken',{refreshtoken: localstorage.get('refreshtoken')}).then(res => localstorage.setItem('Auth_token', res.data.authenitcationToken)).catch(error => window.location.replace("/logout"); )
     window.location.replace("/logout");
   }
 
@@ -50,6 +50,8 @@ const failed = (res) => {
   data.data = res.data;
   return data;
 };
+
+// SUCCESS CASE
 const success = (res) => {
   let data = { ...returnData };
   data.failed = false;
@@ -58,6 +60,8 @@ const success = (res) => {
   data.data = res.data;
   return data;
 };
+
+// POST REQUEST
 
 export function POST(url, data) {
   let header = getHeader();
@@ -71,6 +75,7 @@ export function POST(url, data) {
     });
   return apiCall;
 }
+// GET REQUEST
 
 export function GET(url) {
   let header = getHeader();
@@ -85,6 +90,8 @@ export function GET(url) {
   return apiCall;
 }
 
+// PUT REQUEST
+
 export function PUT(url, data) {
   let header = getHeader();
   let apiCall = axios
@@ -98,6 +105,7 @@ export function PUT(url, data) {
   return apiCall;
 }
 
+// POSTFORMDATA REQUEST
 export const POSTFORMDATA = (url, data) => {
   let header = getHeader("FORMDATA");
   let apiCall = axios
@@ -110,6 +118,8 @@ export const POSTFORMDATA = (url, data) => {
     });
   return apiCall;
 };
+
+// DELETE REQUEST
 export const DELETE = (url, data) => {
   let header = getHeader();
   let apiCall = axios
@@ -122,6 +132,7 @@ export const DELETE = (url, data) => {
     });
   return apiCall;
 };
+// PATCH REQUEST
 export const PATCH = (url, data) => {
   let header = getHeader();
   let apiCall = axios

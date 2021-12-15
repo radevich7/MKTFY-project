@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import AppContext from "../../../store/app-context";
 import { Card, CardImg, CardBody, Col, Row } from "reactstrap";
 import { GET } from "../../../api/api";
 import "../Dashboard.css";
+
 const Categories = (props) => {
   const [store, dispatch] = useContext(AppContext);
   const history = useHistory();
 
+  // BY CLICK ON THE CATEGORY SETTING CONTEXT STORE TO THE CHOSEN CATEGORY
   const categoryHandler = (category) => {
     GET(`/api/listing/category/${category}?region=${store.user.city}`).then(
       (res) => {

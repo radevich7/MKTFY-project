@@ -1,9 +1,8 @@
-import "./LegalDocuments.css";
 import { Container, Card, CardBody } from "reactstrap";
-// import { FaArrowLeft } from "react-icons/fa";
+import "./LegalDocuments.css";
 import logo from "../../assets/login_page/logo.svg";
 
-const PrivacyPolicy = (props) => {
+const PrivacyPolicy = () => {
   return (
     <Container fluid className="terms_container">
       <div className="terms_background">
@@ -11,9 +10,6 @@ const PrivacyPolicy = (props) => {
       </div>
       <Card className="terms_card">
         <CardBody className="privacy_cardBody">
-          {/* <div className="backArrow_terms">
-            <FaArrowLeft />
-          </div> */}
           <h1>MKTFY Privacy Policy</h1>
           <p>
             Privacy is the ability of an individual or group to seclude

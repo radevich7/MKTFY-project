@@ -1,5 +1,6 @@
-import "./ForgetPasswordModal.css";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import auth0js from "auth0-js";
 import {
   Form,
   FormGroup,
@@ -9,12 +10,13 @@ import {
   Label,
   Input,
 } from "reactstrap";
-import { useHistory } from "react-router-dom";
+
 import { FaArrowLeft } from "react-icons/fa";
+import "./ForgetPasswordModal.css";
 import Button from "../../reusableComponent/Button";
-import auth0js from "auth0-js";
 
 const ForgetPasswordModal = (props) => {
+  // AUTHO
   const webAuth = new auth0js.WebAuth({
     domain: process.env.REACT_APP_AUTH0_DOMAIN,
     clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
@@ -23,6 +25,7 @@ const ForgetPasswordModal = (props) => {
   const [emailError, setEmailError] = useState();
   let history = useHistory();
 
+  // EMAIL VALIDATION
   const handleEmailValidation = (e) => {
     const value = e.target.value;
 
@@ -49,6 +52,7 @@ const ForgetPasswordModal = (props) => {
     disableLogin = false;
   }
 
+  // SUBMITING REQUEST TO AUTH0 TO CHANGE PASSWORD
   const formSubmitHandler = (e) => {
     e.preventDefault();
 
@@ -65,8 +69,6 @@ const ForgetPasswordModal = (props) => {
             setEmailValue();
             setEmailError();
             history.push(`/success/reset`);
-
-            // props.toggle();
           }
         }
       }

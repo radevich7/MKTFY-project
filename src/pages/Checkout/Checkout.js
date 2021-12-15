@@ -1,24 +1,26 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, useRouteMatch } from "react-router-dom";
 import { Container, Card, CardBody, Row, Col } from "reactstrap";
-import Button from "../../reusableComponent/Button";
 import { GET } from "../../api/api";
-import { LoadingSpinner } from "../../reusableComponent/Spinner";
-import noimage from "../../assets/noimage.png";
 import "./Checkout.css";
+import { LoadingSpinner } from "../../reusableComponent/Spinner";
+import Button from "../../reusableComponent/Button";
 
 const Checkout = () => {
   const [listing, setListing] = useState(null);
   let match = useRouteMatch();
+  // GETTING ID OF THE LISTING FROM TH PATH ROUTE
   const id = useParams();
   const listingId = Object.values(id).toString();
 
+  //GETTING THE LISTING FROM THE BACKEND AND SET IT FOR THE PAGE
   useEffect(() => {
     let mount = true;
     GET(`/api/listing/${listingId}/seller`).then((res) => {
-      console.log(res.data);
       if (res.failed === false) {
         setListing(res.data);
+      } else {
+        alert("Something went wrong, please contact help center");
       }
     });
     return () => {
@@ -49,11 +51,7 @@ const Checkout = () => {
               <Row>
                 <Col className="listing_details_img">
                   <img
-                    src={
-                      listing.images.length > 0
-                        ? listing.images[0].url
-                        : noimage
-                    }
+                    src={listing.images[0].url}
                     alt="picture of the product.name"
                     className="card_image"
                   />

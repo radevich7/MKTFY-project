@@ -1,22 +1,22 @@
-import "./Listing.css";
-import { useState, useContext, useEffect } from "react";
-import AppContext from "../../store/app-context";
-
+import { useState, useEffect } from "react";
 import { Link, useRouteMatch, useParams } from "react-router-dom";
-import Button from "../../reusableComponent/Button";
-import { Container, Row, Col, Card, CardBody, Spinner } from "reactstrap";
-
-import ListingCarousel from "./ListingCarousel";
 import { GET } from "../../api/api";
+import { Container, Row, Col, Card, CardBody } from "reactstrap";
+import "./Listing.css";
+
+// COMPONENTS
+import Button from "../../reusableComponent/Button";
+import ListingCarousel from "./ListingCarousel";
 import { LoadingSpinner } from "../../reusableComponent/Spinner";
 
 const Listing = () => {
   const [listing, setListing] = useState(null);
-
+  // GETTING ID FROM THE ROUTE PATH
   let match = useRouteMatch();
   const id = useParams();
   const listingId = Object.values(id).toString();
 
+  // GETTING LISTING FROM THE BACKEND API
   useEffect(() => {
     let mount = true;
     GET(`/api/listing/${listingId}/seller`).then((res) => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Button from "../../reusableComponent/Button";
+import auth0js from "auth0-js";
 import {
   Form,
   FormGroup,
@@ -12,7 +12,7 @@ import {
 } from "reactstrap";
 import { FaEyeSlash, FaEye, FaCheckCircle } from "react-icons/fa";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import auth0js from "auth0-js";
+import Button from "../../reusableComponent/Button";
 import "./CreatePasswordOverlay.css";
 
 const CreatePasswordOverlay = (props) => {

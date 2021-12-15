@@ -190,15 +190,16 @@ const CreateListing = (props) => {
           ],
           id: props.listingId,
         };
-        console.log(data);
-        PUT(`/api/listing/${props.listingId}`, data).then((res) => {
-          if (!res.failed) {
-            history.push("/success/updateOffer");
-          } else {
-            alert("There is a problem associated with updating your offer");
-            history.push("/home");
-          }
-        });
+        if (data.images) {
+          PUT(`/api/listing/${props.listingId}`, data).then((res) => {
+            if (!res.failed) {
+              history.push("/success/updateOffer");
+            } else {
+              alert("There is a problem associated with updating your offer");
+              history.push("/home");
+            }
+          });
+        } else alert("Please add minimum of 1 image to the listing!");
       } else {
         // Handle error
         alert("Cannot download new images");
@@ -221,6 +222,7 @@ const CreateListing = (props) => {
   // DELETE LISTING BUTTON HANDLER
   const [toggle, setToggle] = useState(false);
   const deleteListingHandler = (e) => {
+    e.preventDefault();
     setToggle(!toggle);
   };
 

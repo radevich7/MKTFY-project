@@ -5,11 +5,9 @@
 .border_document_createListing {
   max-width: 1636px;
   margin: 0 auto;
-  /* padding: 0px 352px 0 0; */
   background-color: transparent;
 }
 .cardBody_createListing {
-  /* width: 1448px; */
   max-width: 1448px;
   background-color: #f8f8f8;
   padding: 0;
@@ -65,8 +63,6 @@ div.card.product_details_createListing {
   position: absolute;
   top: 1.8em;
   right: 1em;
-  /* margin-left: 26em; */
-  /* vertical-align: 0; */
 }
 
 .createListing_dropdown.padddingText .dropdown-toggle::after {
@@ -109,7 +105,6 @@ div.card.product_details_createListing {
   padding-right: 0px;
 }
 
-/*     transform: translate3d(0px, 52px, 0px) */
 .listing_button {
   font-size: 2em;
   font-weight: bold;

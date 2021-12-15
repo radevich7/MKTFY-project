@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useParams, Redirect, useHistory } from "react-router-dom";
-import Button from "../../reusableComponent/Button";
 import { Container, Card, CardBody, Row, Col } from "reactstrap";
-import { LoadingSpinner } from "../../reusableComponent/Spinner";
 import { GET, PUT } from "../../api/api";
-import noimage from "../../assets/noimage.png";
 import "./Pickup.css";
+import noimage from "../../assets/noimage.png";
+// COMPONENTS
+import { LoadingSpinner } from "../../reusableComponent/Spinner";
+import Button from "../../reusableComponent/Button";
 
 const Pickup = () => {
   let history = useHistory();
@@ -24,12 +25,10 @@ const Pickup = () => {
   // Making a call to get a listing from the backend
   useEffect(() => {
     GET(`/api/listing/${listingId}/pickup`).then((res) => {
-      console.log(res.data);
       setLisiting(res.data);
     });
   }, []);
 
-  console.log(listing);
   // Confirm handler, sends PUT request to change status of the listing from 'listed' to 'pending'
   const confirmHandler = () => {
     PUT(`/api/listing/${listingId}/pending`).then((res) => {
@@ -40,16 +39,6 @@ const Pickup = () => {
       }
     });
   };
-
-  // const cancelOrderHandler = () => {
-  //   PUT(`/api/listing/${listingId}/listed`).then((res) => {
-  //     if (!res.failed) {
-  //       history.push(`/success/cancelOrder`);
-  //     } else {
-  //       alert("The problem occured, please try again later");
-  //     }
-  //   });
-  // };
 
   return (
     <>
@@ -121,11 +110,7 @@ const Pickup = () => {
                 </p>
               </div>
               <Button className="contact_seller_button">Contact Seller</Button>
-              {/* {pendingItem && (
-                <Button className="confirm_button" onClick={confirmHandler}>
-                  Cancel Order
-                </Button>
-              )} */}
+
               {!purchasedItem && !pendingItem ? (
                 <Button className="confirm_button" onClick={confirmHandler}>
                   Confirm

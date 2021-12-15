@@ -15,6 +15,7 @@ import { FaEyeSlash, FaEye } from "react-icons/fa";
 import auth0js from "auth0-js";
 
 const LoginFormOverlay = (props) => {
+  // AUTH0
   const webAuth = new auth0js.WebAuth({
     domain: process.env.REACT_APP_AUTH0_DOMAIN,
     clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,

@@ -6,8 +6,9 @@ import "./ListingModal.css";
 const ListingModal = (props) => {
   const history = useHistory();
   const cancelHandler = (e) => {
-    props.modalHandler();
+    history.goBack();
   };
+
   const confirmHandler = (e) => {
     e.preventDefault();
     PUT(`/api/listing/${props.listingId}/deleted`).then((res) => {
@@ -46,7 +47,7 @@ const ListingModal = (props) => {
             Cancel
           </Button>
           <Button
-            onClick={function noRefCheck() {}}
+            onClick={confirmHandler}
             className="listingModal_button confirm"
           >
             Yes

@@ -1,11 +1,9 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Card } from "reactstrap";
-import React from "react";
-
 import "./Contact.css";
 
 const Contact = () => {
-  const mailto = <a href="mailto:[email protected]"></a>;
   return (
     <Container fluid className="contact_container">
       <Card className="border_document_contact ">
@@ -26,6 +24,7 @@ const Contact = () => {
 export default Contact;
 
 export const ButtonMailto = ({ mailto, label }) => {
+  // BY CLICKING THE BUTTON, PAGE WILL REDIRECT OT SEND THE EMAIL
   return (
     <Link
       className="contact_us"

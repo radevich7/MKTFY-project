@@ -1,19 +1,9 @@
-import React, { useState } from "react";
-import "./NavBar.css";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Navbar, Collapse, NavItem, Nav, Container, Col } from "reactstrap";
 import mainLogo from "../../assets/img/MKTFY_wordmark.svg";
-import { Link, useLocation, useHistory } from "react-router-dom";
-import {
-  Navbar,
-  NavbarToggler,
-  Collapse,
-  NavItem,
-  Nav,
-  NavLink,
-  Container,
-  Row,
-  Col,
-} from "reactstrap";
-
+import "./NavBar.css";
+// IMPORT OF THE COMPONENTS
 import {
   CollapseMenu,
   NotificationElement,
@@ -21,7 +11,6 @@ import {
   UserProfileSettings,
 } from "./NavBarElements";
 import { Categories } from "./NavBarElements";
-import { useEffect } from "react";
 
 const NavBar = () => {
   const [open, setIsOpen] = useState(false);
@@ -31,6 +20,7 @@ const NavBar = () => {
   const toggleNav = () => setIsOpen((prevState) => !prevState);
   let location = useLocation();
 
+  // FOR LARGE AND DOWN SCREENS SHOWING CREATE LISTING BUTTON IN THE BOTTOM OF THE SCREEN
   useEffect(() => {
     if (
       location.pathname === "/home" ||
