@@ -28,7 +28,7 @@ import carImage1 from "../../assets/car1.jpeg";
 import carImage2 from "../../assets/car2.jpeg";
 import carImage3 from "../../assets/car3.jpeg";
 import "./Dashboard.css";
-import { Spinner } from "reactstrap";
+import { LoadingSpinner } from "../../reusableComponent/Spinner";
 import AppContext from "../../store/app-context";
 
 const Dashboard = () => {
@@ -79,7 +79,7 @@ const Dashboard = () => {
   return (
     <>
       {!deals ? (
-        <Spinner />
+        <LoadingSpinner />
       ) : (
         <Container fluid className="dashboard_container">
           <Row className="border_document_dashboard row d-none d-lg-flex">
