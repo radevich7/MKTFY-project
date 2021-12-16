@@ -69,10 +69,10 @@ const AppProvider = (props) => {
             );
             return history.push("/logout");
           }
-          dispatch({ type: "SET_ALL_LISTINGS", allListings: values[0].data });
           dispatch({ type: "SET_USER", user: values[1].data });
           dispatch({ type: "SET_FAQ", faq: values[2].data });
           dispatch({ type: "SET_LOADING", loading: false });
+          dispatch({ type: "SET_ALL_LISTINGS", allListings: values[0].data });
         }
       );
     }

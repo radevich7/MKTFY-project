@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
-import {
-  BrowserRouter,
-  Switch,
-  Redirect,
-  Route,
-  useHistory,
-} from "react-router-dom";
+import React, { useEffect, useContext } from "react";
+import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import jwt_decode from "jwt-decode";
+import { POST } from "../api/api";
+import { LoadingSpinner } from "../reusableComponent/Spinner";
 import "./AppRouter.css";
+// Components
 import NavBar from "../pages/NavBar/NavBar";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Listing from "../pages/ViewListing/Listing";
@@ -14,27 +13,22 @@ import Checkout from "../pages/Checkout/Checkout";
 import Pickup from "../pages/Pickup/Pickup";
 import Login from "../pages/Login/Login";
 import AccountInformation from "../pages/AccountInformation/AccountInformation";
-import { useAuth0 } from "@auth0/auth0-react";
 import TermsOfService from "../pages/TermsFaqContactUs/TermsOfService";
 import Purchases from "../pages/Purchases/Purchases";
 import PrivacyPolicy from "../pages/TermsFaqContactUs/PrivacyPolicy";
 import CreateListing from "../pages/CreateListing/CreateListing";
 import MyListings from "../pages/MyListings/MyListings";
 import Faq from "../pages/TermsFaqContactUs/Faq";
-import { useContext } from "react";
-import jwt_decode from "jwt-decode";
 import AppContext from "../store/app-context";
-import { POST } from "../api/api";
 import SuccessPage from "../pages/SuccessPage/SuccessPage";
 import ProtectedRoute from "../reusableComponent/ProtectedRoute";
 import MainPageContent from "../pages/MainPageContent/MainPageContent";
 import Contact from "../pages/Contact.js/Contact";
 import UpdateListing from "../pages/CreateListing/UpdateListing";
-import { LoadingSpinner } from "../reusableComponent/Spinner";
 
 const AppRouter = () => {
   const [store, dispatch] = useContext(AppContext);
-  const history = useHistory();
+
   // Log Out Logic
   const LogoutLogic = () => {
     localStorage.removeItem("Auth_token");

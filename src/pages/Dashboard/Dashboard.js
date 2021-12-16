@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
   Container,
@@ -34,35 +34,47 @@ import AppContext from "../../store/app-context";
 const Dashboard = () => {
   const [store, dispatch] = useContext(AppContext);
   // Deals
-  const [deals, setDeals] = useState([]);
-  console.log(deals);
+  const [deals, setDeals] = useState();
+
   useEffect(() => {
-    setDeals(store.allListings);
+    if (store.allListings.length > 0) {
+      setDeals(store.allListings);
+    }
   }, [store]);
 
   // Categories
-  let electronics = [
-    { id: 1, image: electronicsImage1 },
-    { id: 2, image: electronicsImage3 },
-    { id: 3, image: electronicsImage2 },
-  ];
-  let furniture = [
-    { id: 1, image: furnitureImage1 },
-    { id: 2, image: furnitureImage3 },
-    { id: 3, image: furnitureImage2 },
-  ];
-  let realEstate = [
-    { id: 1, image: realEstate1 },
-    { id: 2, image: realEstate2 },
-    { id: 3, image: realEstate3 },
-  ];
-  let cars = [
-    { id: 1, image: carImage1 },
-    { id: 2, image: carImage2 },
-    { id: 3, image: carImage3 },
-  ];
-
-  console.log(deals.map((item) => item.images[0]));
+  let electronics = useMemo(
+    () => [
+      { id: 1, image: electronicsImage1 },
+      { id: 2, image: electronicsImage3 },
+      { id: 3, image: electronicsImage2 },
+    ],
+    []
+  );
+  let furniture = useMemo(
+    () => [
+      { id: 1, image: furnitureImage1 },
+      { id: 2, image: furnitureImage3 },
+      { id: 3, image: furnitureImage2 },
+    ],
+    []
+  );
+  let realEstate = useMemo(
+    () => [
+      { id: 1, image: realEstate1 },
+      { id: 2, image: realEstate2 },
+      { id: 3, image: realEstate3 },
+    ],
+    []
+  );
+  let cars = useMemo(
+    () => [
+      { id: 1, image: carImage1 },
+      { id: 2, image: carImage2 },
+      { id: 3, image: carImage3 },
+    ],
+    []
+  );
 
   return (
     <>
@@ -75,30 +87,30 @@ const Dashboard = () => {
 
             <Categories
               items={electronics}
-              name={"Shop Electronics"}
-              categoryId={3}
+              name="Shop Electronics"
+              categoryId="3"
               hide="d-none d-md-block"
             />
 
             <Categories
               items={furniture}
-              name={"Shop Furniture"}
+              name="Shop Furniture"
               hide="d-none d-xl-block"
-              categoryId={2}
+              categoryId="2"
             />
 
             <Deals items={deals.slice(-7)} hide="d-none d-md-block" />
             <Categories
               items={realEstate}
-              name={"Real Estate"}
+              name="Real Estate"
               hide="d-none d-md-block"
-              categoryId={4}
+              categoryId="4"
             />
             <Categories
               items={cars}
-              name={"Shop Cars & Vehicles"}
+              name="Shop Cars & Vehicles"
               hide="d-none d-xl-block"
-              categoryId={1}
+              categoryId="1"
             />
             <Banner />
           </Row>

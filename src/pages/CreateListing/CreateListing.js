@@ -25,7 +25,7 @@ const CreateListing = (props) => {
   const history = useHistory();
   // Data only for the UpdateListing page
   let data = props.data;
-
+  console.log("running");
   // Modal toggle
   const [uploadImgModal, setUploadImgModal] = useState(false);
   const toggleUploadImg = () => setUploadImgModal(!uploadImgModal);

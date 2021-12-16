@@ -8,7 +8,6 @@ import "../Dashboard.css";
 const Categories = (props) => {
   const [store, dispatch] = useContext(AppContext);
   const history = useHistory();
-
   // BY CLICK ON THE CATEGORY SETTING CONTEXT STORE TO THE CHOSEN CATEGORY
   const categoryHandler = (category) => {
     GET(`/api/listing/category/${category}?region=${store.user.city}`).then(
@@ -27,7 +26,6 @@ const Categories = (props) => {
       }
     );
   };
-
   return (
     <React.Fragment>
       <Col className={`mb-4 mt-4 ${props.hide} xl-6 lg-12`}>
@@ -67,4 +65,4 @@ const Categories = (props) => {
   );
 };
 
-export default Categories;
+export default React.memo(Categories);

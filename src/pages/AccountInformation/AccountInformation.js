@@ -52,6 +52,7 @@ const AccountInformation = (props) => {
   // UPDATING USER INFORMATION
   const submitFormHandler = (e) => {
     e.preventDefault();
+
     const userDataUpdated = {
       id: user.id,
       firstName: firstNameUpdated ? firstNameUpdated : user.firstName,
