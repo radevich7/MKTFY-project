@@ -14,8 +14,8 @@ const DropDownHeader = styled("div")`
   // margin-bottom: 18px;
   padding: 14px 12px;
   border: 1px solid #e2e2e2;
-  font-weight: 300;
-  font-size: 1.6em;
+  font-weight: 400;
+  font-size: 1.4rem;
   color: #2a2e43;
   width: 100%;
   height: 54px;
@@ -39,7 +39,8 @@ const DropDownList = styled("ul")`
   border-radius: 4px;
   box-sizing: border-box;
   color: #000000;
-  font-size: 1.4em;
+
+  font-size: 1.4rem;
   &:first-child {
     padding-top: 0.8em;
   }

@@ -37,11 +37,13 @@ const Footer = () => {
             <Col lg="6">
               <Nav vertical>
                 <span className="footer_navlink_header">MKTFY</span>
-                <Link style={{ color: "#FFBA00" }} to="#">
+                <Link style={{ color: "#FFBA00" }} to="/contact">
                   Contact Us
                 </Link>
-                <Link to="#">+1 888 345 6789</Link>
-                <Link to="#">
+                <Link to="#" className="removePointer">
+                  +1 888 345 6789
+                </Link>
+                <Link to="#" className="removePointer">
                   Suite 9, 123 1st Street SW, Calgary, Alberta T2T 7F7
                 </Link>
               </Nav>

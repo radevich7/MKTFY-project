@@ -11,15 +11,26 @@ const ListingModal = (props) => {
 
   const confirmHandler = (e) => {
     e.preventDefault();
-    PUT(`/api/listing/${props.listingId}/deleted`).then((res) => {
-      if (!res.failed) {
-        history.push("/success/deleteListing");
-      } else {
-        alert("There has  neem a problem, please contact customer service");
-      }
-    });
+    if (props.delete) {
+      PUT(`/api/listing/${props.listingId}/deleted`).then((res) => {
+        if (!res.failed) {
+          history.push("/success/deleteListing");
+        } else {
+          alert("There has  been a problem, please contact customer service");
+        }
+      });
+    } else {
+      PUT(`/api/listing/${props.listingId}/cancelled`).then((res) => {
+        if (!res.failed) {
+          history.push("/success/listingCancel");
+        } else {
+          alert("There has  been a problem, please contact customer service");
+        }
+      });
+    }
   };
-
+  // cancelSale={true}
+  // delete={true}
   return (
     <div>
       <Modal
@@ -33,7 +44,8 @@ const ListingModal = (props) => {
         <ModalBody style={{ padding: "0px 47px" }}>
           <h1 className="listingModal_header">Heads Up!</h1>
           <p className="p-0 listingModal_text">
-            You are about to delete your listing. Are you sure?
+            You are about to {props.delete ? "delete" : "cancel"} your listing.
+            Are you sure?
           </p>
         </ModalBody>
         <ModalFooter

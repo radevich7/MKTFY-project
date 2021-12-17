@@ -25,7 +25,6 @@ const CreateListing = (props) => {
   const history = useHistory();
   // Data only for the UpdateListing page
   let data = props.data;
-  console.log("running");
   // Modal toggle
   const [uploadImgModal, setUploadImgModal] = useState(false);
   const toggleUploadImg = () => setUploadImgModal(!uploadImgModal);
@@ -33,8 +32,7 @@ const CreateListing = (props) => {
   // State managment for uploading images
   const [uploadFile, setUploadFile] = useState(props.imagesId);
   const [previewImages, setPreviewImages] = useState(props.images);
-  // console.log(uploadFile, "uploadFile");
-  // console.log(previewImages, "previewImages");
+
   // Removing images on click
   const removeImage = (index) => {
     let previewimageClone = [...previewImages];
@@ -55,7 +53,9 @@ const CreateListing = (props) => {
   const [price, setPrice] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
-
+  const [categoryError, setCategoryError] = useState(false);
+  const [cityError, setCityError] = useState(false);
+  const [conditionError, setConditionError] = useState(false);
   // Setting initial data for the UpdateListing page
   useEffect(() => {
     if (data) {
@@ -114,11 +114,28 @@ const CreateListing = (props) => {
   //  POST NEW LISTING BUTTON HANDLER
   const submitFormHandler = (e) => {
     e.preventDefault();
+    // CUSTOM SELECT VALIDATION
+    if (!newListing.categoryId) {
+      return setCategoryError(true);
+    } else {
+      setCategoryError(false);
+    }
+    if (!newListing.condition) {
+      return setConditionError(true);
+    } else {
+      setConditionError(false);
+    }
+    if (!newListing.region) {
+      return setCityError(true);
+    } else {
+      setCityError(false);
+    }
+
     if (!uploadFile) {
       return alert("Please add an image to a page (min 1)");
     }
 
-    let data;
+    let finalData;
     let formData = new FormData();
     for (let i = 0; i < uploadFile.length; i++) {
       formData.append("File[]", uploadFile[i]);
@@ -129,11 +146,11 @@ const CreateListing = (props) => {
       if (res.failed === false) {
         uploadedImages = res.data;
 
-        data = {
+        finalData = {
           ...newListing,
           uploadIds: uploadedImages.flatMap((val) => Object.values(val)),
         };
-        // console.log(data);
+        console.log(finalData);
         POST("/api/Listing", data).then((res) => console.log(res));
       } else {
         alert(
@@ -167,16 +184,14 @@ const CreateListing = (props) => {
   // SAVE CHANGES BUTTON HANDLER
   const saveChangesHanler = (e) => {
     e.preventDefault();
-    if (!uploadFile) {
-      return alert("Please add an image to a page (min 1)");
-    }
+
     let newFiles = uploadFile.filter((val) => val.path);
     let oldFiles = uploadFile.filter((val) => typeof val === "string");
     let formData = new FormData();
     for (let i = 0; i < newFiles.length; i++) {
       formData.append("File[]", newFiles[i]);
     }
-    console.log([...formData]); // Think 2D array makes it more readable
+    // console.log([...formData]); // Think 2D array makes it more readable
     let uploadedImages = [];
     POSTFORMDATA("/api/Upload", formData).then((res) => {
       if (res.failed === false) {
@@ -190,7 +205,14 @@ const CreateListing = (props) => {
           ],
           id: props.listingId,
         };
-        if (data.images) {
+        console.log(data);
+
+        const isEmptyValues = Object.values(data).every((el) => el);
+        // Checking for empty fields
+        if (!isEmptyValues) {
+          return alert("Please fill out all input fields");
+        }
+        if (data.uploadIds) {
           PUT(`/api/listing/${props.listingId}`, data).then((res) => {
             if (!res.failed) {
               history.push("/success/updateOffer");
@@ -221,7 +243,7 @@ const CreateListing = (props) => {
   };
   // DELETE LISTING BUTTON HANDLER
   const [toggle, setToggle] = useState(false);
-  const deleteListingHandler = (e) => {
+  const openModalHandler = (e) => {
     e.preventDefault();
     setToggle(!toggle);
   };
@@ -247,7 +269,7 @@ const CreateListing = (props) => {
           <span>product listing</span>
         </div>
         <CardBody className="cardBody_createListing">
-          <Form onSubmit={submitFormHandler}>
+          <Form onSubmit={submitFormHandler} className="needs-validation">
             <Row>
               <Col className="col-12 col-xxl-4 col-lg-5">
                 <Row className="h-100 ">
@@ -265,7 +287,7 @@ const CreateListing = (props) => {
                         />
                       ) : (
                         // PREVIEW CONTENT
-                        <FormGroup className="p-0" onClick={toggleUploadImg}>
+                        <div className="p-0" onClick={toggleUploadImg}>
                           <div className="addPhoto_main">
                             <img src={camera} alt="/" className="main_camera" />
                             <p>Choose or drag up to 5 photos</p>
@@ -308,7 +330,7 @@ const CreateListing = (props) => {
                               </div>
                             </Col>
                           </Row>
-                        </FormGroup>
+                        </div>
                       )}
                     </CardBody>
                   </Card>
@@ -319,9 +341,20 @@ const CreateListing = (props) => {
                 <Row w={100}>
                   <FormGroup className="p-0">
                     <Card className="p-0">
-                      <CardBody className="product_details_createListing">
-                        <Row>
-                          <Label for="productName">Product Name</Label>
+                      <CardBody className="product_details_createListing ">
+                        {props.updateButtons && (
+                          <div>
+                            <p className="update_requirment ">
+                              All the input fields has to be filled*
+                              <br />
+                              Otherwise we would use your previous data
+                            </p>
+                          </div>
+                        )}
+                        <Row className="position-relative">
+                          <Label for="productName">
+                            Product Name {props.updateButtons ? "*" : ""}
+                          </Label>
 
                           <Input
                             type="text"
@@ -336,8 +369,11 @@ const CreateListing = (props) => {
                             required
                           />
                         </Row>
+
                         <Row>
-                          <Label for="details">Description</Label>
+                          <Label for="details">
+                            Description {props.updateButtons ? "*" : ""}
+                          </Label>
                           <Input
                             type="textarea"
                             defaultValue={details}
@@ -353,7 +389,9 @@ const CreateListing = (props) => {
                         </Row>
                         {/* CATEGORIES DROPDOWN */}
                         <Row className="category">
-                          <Label for="category">Category</Label>
+                          <Label for="category">
+                            Category {props.updateButtons ? "*" : ""}
+                          </Label>
                           <CustomSelect
                             options={categoryOptions.map(
                               ({ category }) => category
@@ -362,24 +400,37 @@ const CreateListing = (props) => {
                             value={category}
                             disabled={props.pending}
                           />
+                          {categoryError && (
+                            <p className="inputError">Please choose category</p>
+                          )}
                         </Row>
                         {/* CONDITION DROPDOWN */}
                         <Row>
                           <Col lg="6" className="padding_rigth">
-                            <Label for="condition">Condition</Label>
+                            <Label for="condition">
+                              Condition {props.updateButtons ? "*" : ""}
+                            </Label>
                             <CustomSelect
                               options={conditionOptions}
                               onSetValue={setCondition}
                               value={condition}
                               disabled={props.pending}
                             />
+                            {conditionError && (
+                              <p className="inputError">
+                                Please choose condition of the listing
+                              </p>
+                            )}
                           </Col>
 
                           <Col lg="6" className="padding_left">
-                            <Label for="price">Price</Label>
+                            <Label for="price">
+                              Price {props.updateButtons ? "*" : ""}
+                            </Label>
                             <Input
                               type="number"
                               name="price"
+                              min={0}
                               defaultValue={price}
                               id="price"
                               step="any"
@@ -387,11 +438,14 @@ const CreateListing = (props) => {
                               placeholder="Type the price"
                               onChange={(e) => setPrice(e.target.value)}
                               disabled={props.pending}
+                              required
                             />
                           </Col>
                         </Row>
                         <Row>
-                          <Label for="address">Address</Label>
+                          <Label for="address">
+                            Address {props.updateButtons ? "*" : ""}
+                          </Label>
 
                           <Input
                             type="text"
@@ -402,17 +456,23 @@ const CreateListing = (props) => {
                             placeholder="Enter address for pick up"
                             onChange={(e) => setAddress(e.target.value)}
                             disabled={props.pending}
+                            required
                           />
                         </Row>
                         <Row>
                           <Col className="padding_rigth">
-                            <Label for="category">City</Label>
+                            <Label for="category">
+                              City {props.updateButtons ? "*" : ""}
+                            </Label>
                             <CustomSelect
                               options={cityOptions}
                               onSetValue={setCity}
                               value={city}
                               disabled={props.pending}
                             />
+                            {cityError && (
+                              <p className="inputError">Please choose city</p>
+                            )}
                           </Col>
                         </Row>
                         {/* Based on the props, the buttons will be change either to create listing page or to update listing page */}
@@ -447,28 +507,37 @@ const CreateListing = (props) => {
                             />
                           )}
                           {props.updateButtons && !props.pending && (
-                            <Button
-                              className="cancel_button listing_button"
-                              onClick={deleteListingHandler}
-                              children={"Delete listing"}
-                            />
+                            <>
+                              <Button
+                                className="cancel_button listing_button"
+                                onClick={openModalHandler}
+                                children={"Delete listing"}
+                              />
+                              <ListingModal
+                                toggle={toggle}
+                                modalHandler={openModalHandler}
+                                listingId={props.listingId}
+                                delete={true}
+                              />
+                            </>
                           )}
                           {props.pending && (
-                            <Button
-                              className="cancel_button listing_button"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                console.log("cancel sale");
-                              }}
-                              children={"Cancel Sale"}
-                            />
+                            <>
+                              <Button
+                                className="cancel_button listing_button"
+                                onClick={openModalHandler}
+                                children={"Cancel Sale"}
+                              />
+                              <ListingModal
+                                toggle={toggle}
+                                modalHandler={openModalHandler}
+                                listingId={props.listingId}
+                                cancelSale={true}
+                              />
+                            </>
                           )}
+
                           {/* MODAL FOR CONFIRMATION OF DELETE LISTING */}
-                          <ListingModal
-                            toggle={toggle}
-                            modalHandler={deleteListingHandler}
-                            listingId={props.listingId}
-                          />
                         </Row>
                       </CardBody>
                     </Card>

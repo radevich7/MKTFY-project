@@ -185,13 +185,20 @@ export const Categories = (props) => {
         <span className="d-flex d-md-none browseCategories_text">
           Browse Categories
         </span>
-        <span className="category_header d-none d-md-flex nav-link">
-          <img
-            src={hambuger_icon_categories}
-            className="d-none d-md-flex pe-3"
-            alt="/"
-          />
-          Categories
+        <span
+          className="category_header d-none d-md-flex nav-link"
+          onClick={() => history.push("/home")}
+        >
+          {props.name === "Categories" ? (
+            <img
+              src={hambuger_icon_categories}
+              className="d-none d-md-flex pe-3"
+              alt="/"
+            />
+          ) : (
+            ""
+          )}
+          {props.name}
         </span>
         <span
           className="nav-link"

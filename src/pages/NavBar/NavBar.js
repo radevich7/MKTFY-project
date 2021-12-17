@@ -17,6 +17,7 @@ const NavBar = () => {
   const [city, setCity] = useState("Calgary");
   const [category, setCategory] = useState("All");
   const [showButton, setShowButton] = useState(false);
+  const [addHomeLink, setAddHomeLink] = useState("Home");
   const toggleNav = () => setIsOpen((prevState) => !prevState);
   let location = useLocation();
 
@@ -30,6 +31,11 @@ const NavBar = () => {
       setShowButton(true);
     } else {
       setShowButton(false);
+    }
+    if (location.pathname === "/home") {
+      setAddHomeLink("Categories");
+    } else {
+      setAddHomeLink("Home");
     }
   }, [location]);
 
@@ -62,6 +68,7 @@ const NavBar = () => {
               city={city}
               setCategory={setCategory}
               category={category}
+              name={addHomeLink}
             />
           </Col>
 

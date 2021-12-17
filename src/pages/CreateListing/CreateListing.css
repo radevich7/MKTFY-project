@@ -30,7 +30,7 @@ div.card.product_details_createListing {
 }
 .createListing_inputField {
   height: 54px;
-  font-size: 1.4em;
+  font-size: 1.4rem;
   border: 1px solid #e2e2e2;
   margin-bottom: 18px;
 }
@@ -302,6 +302,22 @@ div p {
 .accepted_files {
   color: rgb(180, 17, 17);
   font-size: 1.5rem;
+}
+
+.inputError {
+  color: #d32222;
+  padding: 0;
+}
+.update_requirment {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  color: #d32222;
+  font-size: 1.2rem;
+}
+.errorStar {
+  position: absolute;
+  bottom: 50%;
 }
 
 @media (max-width: 1400px) {
