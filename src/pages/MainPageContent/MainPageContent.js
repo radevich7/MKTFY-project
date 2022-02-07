@@ -32,7 +32,7 @@ const MainPageContent = () => {
   return (
     <Container fluid className="mainContent_container">
       <Row
-        className="border_document_mainContent  justify-content-center
+        className="border_document_mainContent  justify-content-xl-start justify-content-center
       "
       >
         {listings ? (
@@ -40,7 +40,7 @@ const MainPageContent = () => {
             <Col
               lg="2"
               key={item.id}
-              className="column_deals d-flex justify-content-center "
+              className="column_deals d-flex justify-content-start  "
             >
               <Link
                 style={{ textDecoration: "none" }}

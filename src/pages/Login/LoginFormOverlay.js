@@ -76,7 +76,7 @@ const LoginFormOverlay = (props) => {
       },
       (error) => {
         setLoginError(
-          <span className="error_message">{error.description}</span>
+          <span className="error_message">Failed log in, please try again</span>
         );
       }
     );
@@ -128,7 +128,7 @@ const LoginFormOverlay = (props) => {
             {emailInputHasError && (
               <span className="error_message">Please enter a valid email</span>
             )}
-            {!emailInputHasError && !enteredEmailValue && (
+            {!emailInputHasError && (
               <span className="easy_login">
                 You can register your own user or use this test email to view
                 the app : visitor@test.com
@@ -162,7 +162,7 @@ const LoginFormOverlay = (props) => {
                 upperCase, 1 Number)
               </span>
             )}
-            {!passwordInputHasError && !enteredPasswordValue && (
+            {!passwordInputHasError && (
               <span className="easy_login">
                 {" "}
                 You can register your own user or use this test password to view
