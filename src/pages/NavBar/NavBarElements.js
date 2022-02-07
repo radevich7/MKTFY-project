@@ -366,56 +366,56 @@ export const UserProfileSettings = (props) => {
 
 // NOTIFICATION BELL ELEMENT
 
-export const NotificationElement = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const toggle = () => setDropdownOpen((prevState) => !prevState);
-  return (
-    <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-      <DropdownToggle
-        tag="span"
-        data-toggle="dropdown"
-        aria-expanded={dropdownOpen}
-      >
-        <img src={notification_bell} alt="/" id="notification_bell_logo" />
-      </DropdownToggle>
-      <DropdownMenu className="dropDownCustom_notification arrow_notification">
-        <DropdownItem header className="dropdown_notification_header">
-          News for you
-        </DropdownItem>
-        <DropdownItem className="notification_dropdown_item">
-          <div className="notification_brand_logo">
-            <span>MKTFY</span>
-          </div>
-          <div className="notification_message">
-            <span> Hey George, welcome to MKTFY</span>
-            <span style={{ fontSize: "12px" }}> September 02, 2020</span>
-          </div>
-        </DropdownItem>
-        <DropdownItem header className="dropdown_notification_header">
-          Previously Seen
-        </DropdownItem>
-        <DropdownItem className="notification_dropdown_item">
-          <div className="notification_brand_logo">
-            <span>MKTFY</span>
-          </div>
-          <div className="notification_message">
-            <span> Let's create your first offer!</span>
-            <span style={{ fontSize: "12px" }}>September 05, 2020</span>
-          </div>
-        </DropdownItem>
-        <DropdownItem className="notification_dropdown_item">
-          <div className="notification_brand_logo">
-            <span>MKTFY</span>
-          </div>
-          <div className="notification_message">
-            <span> Our Terms of Service has been updated</span>
-            <span style={{ fontSize: "12px" }}>September 03, 2020</span>
-          </div>
-        </DropdownItem>
-      </DropdownMenu>
-    </Dropdown>
-  );
-};
+// export const NotificationElement = () => {
+//   const [dropdownOpen, setDropdownOpen] = useState(false);
+//   const toggle = () => setDropdownOpen((prevState) => !prevState);
+//   return (
+//     <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+//       <DropdownToggle
+//         tag="span"
+//         data-toggle="dropdown"
+//         aria-expanded={dropdownOpen}
+//       >
+//         <img src={notification_bell} alt="/" id="notification_bell_logo" />
+//       </DropdownToggle>
+//       <DropdownMenu className="dropDownCustom_notification arrow_notification">
+//         <DropdownItem header className="dropdown_notification_header">
+//           News for you
+//         </DropdownItem>
+//         <DropdownItem className="notification_dropdown_item">
+//           <div className="notification_brand_logo">
+//             <span>MKTFY</span>
+//           </div>
+//           <div className="notification_message">
+//             <span> Hey George, welcome to MKTFY</span>
+//             <span style={{ fontSize: "12px" }}> September 02, 2020</span>
+//           </div>
+//         </DropdownItem>
+//         <DropdownItem header className="dropdown_notification_header">
+//           Previously Seen
+//         </DropdownItem>
+//         <DropdownItem className="notification_dropdown_item">
+//           <div className="notification_brand_logo">
+//             <span>MKTFY</span>
+//           </div>
+//           <div className="notification_message">
+//             <span> Let's create your first offer!</span>
+//             <span style={{ fontSize: "12px" }}>September 05, 2020</span>
+//           </div>
+//         </DropdownItem>
+//         <DropdownItem className="notification_dropdown_item">
+//           <div className="notification_brand_logo">
+//             <span>MKTFY</span>
+//           </div>
+//           <div className="notification_message">
+//             <span> Our Terms of Service has been updated</span>
+//             <span style={{ fontSize: "12px" }}>September 03, 2020</span>
+//           </div>
+//         </DropdownItem>
+//       </DropdownMenu>
+//     </Dropdown>
+//   );
+// };
 
 // NAVBAR COLAPSE MENU
 
@@ -467,9 +467,6 @@ export const CollapseMenu = (props) => {
           </Link>
           <Link className="collapseMenu_link" to="/home/mylistings">
             My Listings
-          </Link>
-          <Link className="collapseMenu_link" to="/#">
-            Notifications
           </Link>
 
           <div className="collapseMenu_linkHeader">Help</div>

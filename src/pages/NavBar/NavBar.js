@@ -6,7 +6,6 @@ import "./NavBar.css";
 // IMPORT OF THE COMPONENTS
 import {
   CollapseMenu,
-  NotificationElement,
   SearchInput,
   UserProfileSettings,
 } from "./NavBarElements";
@@ -55,7 +54,7 @@ const NavBar = () => {
             onClick={(e) => setCategory("All")}
             className="navbar-brand pt-4 me-4 d-none d-lg-flex"
           >
-            <img src={mainLogo} alt="/" />
+            <img src={mainLogo} alt="logo" />
           </Link>
           <Col className="form-group  me-4 me-2 col-xl-7 col-lg-8 col-md-9 col-12 ">
             <SearchInput
@@ -77,9 +76,6 @@ const NavBar = () => {
               <Col className="pt-2  d-flex justify-content-xl-evenly justify-content-center">
                 <NavItem>
                   <UserProfileSettings />
-                </NavItem>
-                <NavItem className=" pt-2 d-xxl-flex d-none">
-                  <NotificationElement />
                 </NavItem>
               </Col>
             </Nav>
