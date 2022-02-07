@@ -102,6 +102,12 @@ label {
   font-size: 1.4em;
   padding: 10px 0;
 }
+
+.easy_login {
+  color: #741dca;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
 @media (max-width: 992px) {
   .login_body {
     padding: 0 20px;

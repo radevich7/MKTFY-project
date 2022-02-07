@@ -128,14 +128,12 @@ const LoginFormOverlay = (props) => {
             {emailInputHasError && (
               <span className="error_message">Please enter a valid email</span>
             )}
-            {!emailInputHasError &&
-              !enteredEmailValue &&
-              !enteredPasswordValue && (
-                <span className="easy_login">
-                  You can register your own user or use this test email to view
-                  the app : visitor@test.com
-                </span>
-              )}
+            {!emailInputHasError && !enteredEmailValue && (
+              <span className="easy_login">
+                You can register your own user or use this test email to view
+                the app : visitor@test.com
+              </span>
+            )}
           </FormGroup>
           <FormGroup className="password_form_group">
             <Label for="examplePassword">Password</Label>
@@ -164,15 +162,13 @@ const LoginFormOverlay = (props) => {
                 upperCase, 1 Number)
               </span>
             )}
-            {!passwordInputHasError &&
-              !enteredEmailValue &&
-              !enteredPasswordValue && (
-                <span className="easy_password">
-                  {" "}
-                  You can register your own user or use this test password to
-                  view the app : test1Test
-                </span>
-              )}
+            {!passwordInputHasError && !enteredPasswordValue && (
+              <span className="easy_login">
+                {" "}
+                You can register your own user or use this test password to view
+                the app : test1Test
+              </span>
+            )}
             {loginError}
           </FormGroup>
           <p
