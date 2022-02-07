@@ -80,10 +80,11 @@ export function POST(url, data) {
 export function GET(url) {
   let header = getHeader();
   let apiCall = axios
-    .get(`${process.env.REACT_APP_API_URL}${url}`, header)
+    .get(`${url}`, header)
     .then((res) => {
       return success(res);
     })
+    // ${process.env.REACT_APP_API_URL}
     .catch((res) => {
       return failed(res.response);
     });
