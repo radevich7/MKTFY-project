@@ -1,6 +1,6 @@
 .login_container {
   height: 100vh;
-  background-image: url("/Users/Julian/PROJECT/mktfy_web_app/src/assets/login_page/background_begin.svg");
+  background-image: url("../../assets/login_page/background_begin.svg");
   background-size: cover;
   margin: 0 auto;
   display: flex;

@@ -30,9 +30,9 @@ const MainPageContent = () => {
   }, [store.searchListings]);
 
   return (
-    <Container fluid className="mainContent_container ">
+    <Container fluid className="mainContent_container">
       <Row
-        className="border_document_mainContent justify-content-center justify-content-sm-between 
+        className="border_document_mainContent  justify-content-center
       "
       >
         {listings ? (
