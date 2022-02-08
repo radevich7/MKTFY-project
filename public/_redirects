@@ -1,5 +1,7 @@
 
-/mktfy/* http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/:splat
+/mktfy/* http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com :splat
+
+
 /* /index.html 200
 
 
