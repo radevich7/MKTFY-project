@@ -131,13 +131,15 @@ const Dashboard = () => {
                       width="100%"
                     />
                     <CardBody className="p-0 deals_cardBody border-0 d-flex flex-column justify-content-between">
-                      Content of the card */}
+                      {/* Content of the card */}
+
                       <CardTitle className="deals_title">
                         {item.product}
                       </CardTitle>
                       <CardSubtitle tag="h6" className="deals_price">
                         $ {item.price.toFixed(2)}
                       </CardSubtitle>
+
                       {/* end card */}
                     </CardBody>
                   </Card>
