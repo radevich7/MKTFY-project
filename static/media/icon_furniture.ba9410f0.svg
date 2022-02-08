@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
+  <g id="icon_furniture" transform="translate(-252.153 -69.058)">
+    <g id="Group_8" data-name="Group 8">
+      <rect id="Rectangle_388" data-name="Rectangle 388" width="44" height="44" transform="translate(252.153 69.058)" fill="none"/>
+    </g>
+    <g id="Group_9" data-name="Group 9">
+      <path id="Path_7" data-name="Path 7" d="M292.487,91.058a3.678,3.678,0,0,0-3.667-3.667v-5.5a3.677,3.677,0,0,0-3.667-3.666h-22a3.677,3.677,0,0,0-3.666,3.666v5.5a3.678,3.678,0,0,0-3.667,3.667v9.167h2.438l1.229,3.666h1.833l1.228-3.666h23.229l1.21,3.666h1.833l1.228-3.666h2.439Zm-7.334-3.667h-9.166v-5.5h9.166Zm-22-5.5h9.167v5.5h-9.167Zm-3.666,9.167H288.82v5.5H259.487Z" fill="#ffba00"/>
+    </g>
+  </g>
+</svg>
