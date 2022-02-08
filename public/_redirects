@@ -1,13 +1,10 @@
-[[redirects]]
-  from = "/mktfy/*"
-  to = "http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/:splat"
-  status = 200
+
+/mktfy/* http://mktfy-env.eba-6nx34qxt.ca-central-1.elasticbeanstalk.com/:splat 200
 
 
-# SPA router support.
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+
+/* /index.html 200
+
+
 
 
