@@ -66,7 +66,7 @@ const success = (res) => {
 export function POST(url, data) {
   let header = getHeader();
   let apiCall = axios
-    .post(`${process.env.REACT_APP_API_URL}${url}`, data, header)
+    .post(`/mktfy/${url}`, data, header)
     .then((res) => {
       return success(res);
     })
@@ -80,7 +80,7 @@ export function POST(url, data) {
 export function GET(url) {
   let header = getHeader();
   let apiCall = axios
-    .get(`${process.env.REACT_APP_API_URL}${url}`, header)
+    .get(`/mktfy/${url}`, header)
     .then((res) => {
       return success(res);
     })
@@ -95,7 +95,7 @@ export function GET(url) {
 export function PUT(url, data) {
   let header = getHeader();
   let apiCall = axios
-    .put(`${process.env.REACT_APP_API_URL}${url}`, data, header)
+    .put(`/mktfy/${url}`, data, header)
     .then((res) => {
       return success(res);
     })
@@ -109,7 +109,7 @@ export function PUT(url, data) {
 export const POSTFORMDATA = (url, data) => {
   let header = getHeader("FORMDATA");
   let apiCall = axios
-    .post(`${process.env.REACT_APP_API_URL}${url}`, data, header)
+    .post(`/mktfy/${url}`, data, header)
     .then((res) => {
       return success(res);
     })
@@ -123,7 +123,7 @@ export const POSTFORMDATA = (url, data) => {
 export const DELETE = (url, data) => {
   let header = getHeader();
   let apiCall = axios
-    .delete(`${process.env.REACT_APP_API_URL}${url}`, data, header)
+    .delete(`/mktfy/${url}`, data, header)
     .then((res) => {
       return success(res);
     })
@@ -136,7 +136,7 @@ export const DELETE = (url, data) => {
 export const PATCH = (url, data) => {
   let header = getHeader();
   let apiCall = axios
-    .patch(`${process.env.REACT_APP_API_URL}${url}`, data, header)
+    .patch(`/mktfy/${url}`, data, header)
     .then((res) => {
       return success(res);
     })
