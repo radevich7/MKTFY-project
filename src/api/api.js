@@ -80,7 +80,7 @@ export function POST(url, data) {
 export function GET(url) {
   let header = getHeader();
   let apiCall = axios
-    .get(`${url}`, header)
+    .get(`/api/${url}`, header)
     .then((res) => {
       return success(res);
     })
